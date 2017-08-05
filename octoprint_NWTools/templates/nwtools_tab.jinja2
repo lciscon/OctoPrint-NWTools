@@ -1,0 +1,90 @@
+<table>
+<tr>
+<td>
+    <button class="btn btn-primary" data-bind="click: unloadPrint">{{ _('Unload<br/>Print') }}</button>
+    &nbsp;
+</td>
+    <button class="btn btn-primary" data-bind="click: lightsOn">{{ _('Turn On<br/>Lights') }}</button>
+&nbsp;
+<td>
+    <button class="btn btn-primary" data-bind="click: lightsOff">{{ _('Turn Off<br/>Lights') }}</button>
+</td>
+</tr>
+</table>
+</br>
+Printhead 1
+<div>
+    <button class="btn btn-primary" data-bind="click: preheat1">{{ _('Preheat<br/>Head') }}</button>
+    &nbsp;
+    <button class="btn btn-primary" data-bind="click: loadFilament1">{{ _('Load<br/>Filament') }}</button>
+&nbsp;
+    <button class="btn btn-primary" data-bind="click: unloadFilament1">{{ _('Unload<br/>Filament') }}</button>
+</div>
+</br>
+Printhead 2
+<div>
+    <button class="btn btn-primary" data-bind="click: preheat1">{{ _('Preheat<br/>Head') }}</button>
+    &nbsp;
+    <button class="btn btn-primary" data-bind="click: loadFilament2">{{ _('Load<br/>Filament') }}</button>
+&nbsp;
+    <button class="btn btn-primary" data-bind="click: unloadFilament2">{{ _('Unload<br/>Filament') }}</button>
+</div>
+</br>
+Calibration
+<div>
+    <button class="btn btn-primary" data-bind="click: autoCalibrate">{{ _('Auto<br/>Calibrate') }}</button>
+&nbsp;
+    <button class="btn btn-primary" data-bind="click: levelBed">{{ _('Bed<br/>Leveling') }}</button>
+&nbsp;
+    <button class="btn btn-primary" data-bind="click: resetBed">{{ _('Reset<br/>Leveling') }}</button>
+</div>
+
+<div id="action_trigger_dialog" class="modal hide">
+  <div class="modal-header">
+    <!--<a href="#" class="close" data-dismiss="modal" aria-hidden="true">&times;</a> Out for now-->
+    <h3><p class="action_trigger_title"></p></h3> <!-- trigger title variable -->
+  </div>
+  <div data-bind="template: { name: actionTriggerTemplate() }"></div>
+</div>
+<!-- Trigger Action Templates -->
+
+<!-- Door -->
+<script type="text/html" id="door_open">
+  <div class="modal-body">
+      <!-- Message variable goes here with extra stuff might have to split into seperate dialogs being called -->
+      <strong>The Xeed door is open, for safety reason we have paused the print!</strong> </br>
+      To resume the print please close the door.
+      To disable this feature go to Settings -> ActionTrigger and untick "Door detection".
+  </div>
+  <div class="modal-footer">
+    <a href="#" class="btn btn-warning action_trigger_dialog_acknowledge" aria-hidden="true">{{ _('I understand, let me access the controls') }}</a>
+  </div>
+</script>
+
+<!-- Filament -->
+<script type="text/html" id="preheating">
+  <div class="modal-footer">
+    <a href="#" class="btn btn-warning action_trigger_dialog_acknowledge" aria-hidden="true">{{ _('Cancel') }}</a>
+  </div>
+</script>
+
+
+<script type="text/html" id="loading">
+  <div class="modal-body">
+    <!-- Message variable goes here with extra stuff might have to split into seperate dialogs being called -->
+    Press OK once filament starts extruding from the nozzle.
+  </div>
+  <div class="modal-footer">
+    <a href="#" class="btn btn-warning action_trigger_dialog_acknowledge" aria-hidden="true">{{ _('OK') }}</a>
+  </div>
+</script>
+
+<script type="text/html" id="unloading">
+  <div class="modal-body">
+    <!-- Message variable goes here with extra stuff might have to split into seperate dialogs being called -->
+    Press OK once filament has finished unloading.
+  </div>
+  <div class="modal-footer">
+    <a href="#" class="btn btn-warning action_trigger_dialog_acknowledge" aria-hidden="true">{{ _('OK') }}</a>
+  </div>
+</script>
