@@ -1,6 +1,6 @@
 
-<table width="400">
-<col width="400">
+<table width="350">
+<col width="350">
 <col width="100">
 <col width="100">
 <tr>
@@ -11,10 +11,14 @@
     <button class="btn btn-primary" data-bind="click: lightsOn">{{ _('Turn On<br/>Lights') }}</button>
 &nbsp;
     <button class="btn btn-primary" data-bind="click: lightsOff">{{ _('Turn Off<br/>Lights') }}</button>
+&nbsp;
+    <button class="btn btn-primary" data-bind="click: levelBed">{{ _('Bed<br/>Leveling') }}</button>
+&nbsp;
+&nbsp;
 </td>
 </tr>
 </table>
-
+<br>
 <table width="600">
 <col width="225">
 <col width="50">
@@ -27,6 +31,7 @@
     <button class="btn btn-primary" data-bind="click: loadFilament1">{{ _('Load<br/>Filament') }}</button>
 &nbsp;
     <button class="btn btn-primary" data-bind="click: unloadFilament1">{{ _('Unload<br/>Filament') }}</button>
+&nbsp;
 </td>
 <td>
 </td>
@@ -37,27 +42,27 @@
     <button class="btn btn-primary" data-bind="click: loadFilament2">{{ _('Load<br/>Filament') }}</button>
 &nbsp;
     <button class="btn btn-primary" data-bind="click: unloadFilament2">{{ _('Unload<br/>Filament') }}</button>
+&nbsp;
 </td>
 </tr>
 </table>
-
-<table width="500">
-<col width="500">
+<br>
+<table width="600">
+<col width="600">
 <col width="100">
 <col width="100">
 <col width="100">
 <tr>
 <td>
-<h1>Calibration</h1>
+<h1>Calibration (Advanced)</h1>
         <button class="btn btn-primary" data-bind="click: calibrateSensor">{{ _('Calibrate<br/>Sensor') }}</button>
 &nbsp;
-        <button class="btn btn-primary" data-bind="click: levelBed">{{ _('Calibrate<br/>Deflection') }}</button>
+        <button class="btn btn-primary" data-bind="click: calibrateDeflection">{{ _('Calibrate<br/>Deflection') }}</button>
 &nbsp;
 	<button class="btn btn-primary" data-bind="click: autoCalibrate">{{ _('Adjust<br/>Bed Height') }}</button>
 &nbsp;
-	<button class="btn btn-primary" data-bind="click: levelBed">{{ _('Bed<br/>Leveling') }}</button>
+ 	<button class="btn btn-primary" data-bind="click: resetLeveling">{{ _('Reset<br/>Leveling') }}</button>
 &nbsp;
- 	<button class="btn btn-primary" data-bind="click: resetBed">{{ _('Reset<br/>Leveling') }}</button>
 </td>
 </tr>
 </table>
