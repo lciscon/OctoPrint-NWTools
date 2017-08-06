@@ -1,0 +1,3 @@
+[octoprint.plugin]
+NWTools = octoprint_NWTools
+
