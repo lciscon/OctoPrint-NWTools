@@ -1,68 +1,43 @@
-
-<table width="400">
-<col width="400">
-<col width="100">
-<col width="100">
+<table>
 <tr>
 <td>
-<h1>General</h1>
     <button class="btn btn-primary" data-bind="click: unloadPrint">{{ _('Unload<br/>Print') }}</button>
-&nbsp;&nbsp;
+    &nbsp;
+</td>
     <button class="btn btn-primary" data-bind="click: lightsOn">{{ _('Turn On<br/>Lights') }}</button>
 &nbsp;
+<td>
     <button class="btn btn-primary" data-bind="click: lightsOff">{{ _('Turn Off<br/>Lights') }}</button>
 </td>
 </tr>
 </table>
-
-<table width="600">
-<col width="225">
-<col width="50">
-<col width="225">
-<tr>
-<td>
-<h1>Printhead 1</h1>
+</br>
+Printhead 1
+<div>
     <button class="btn btn-primary" data-bind="click: preheat1">{{ _('Preheat<br/>Head') }}</button>
-&nbsp;
+    &nbsp;
     <button class="btn btn-primary" data-bind="click: loadFilament1">{{ _('Load<br/>Filament') }}</button>
 &nbsp;
     <button class="btn btn-primary" data-bind="click: unloadFilament1">{{ _('Unload<br/>Filament') }}</button>
-</td>
-<td>
-</td>
-<td>
-<h1>Printhead 2</h1>
-    <button class="btn btn-primary" data-bind="click: preheat2">{{ _('Preheat<br/>Head') }}</button>
-&nbsp;
+</div>
+</br>
+Printhead 2
+<div>
+    <button class="btn btn-primary" data-bind="click: preheat1">{{ _('Preheat<br/>Head') }}</button>
+    &nbsp;
     <button class="btn btn-primary" data-bind="click: loadFilament2">{{ _('Load<br/>Filament') }}</button>
 &nbsp;
     <button class="btn btn-primary" data-bind="click: unloadFilament2">{{ _('Unload<br/>Filament') }}</button>
-</td>
-</tr>
-</table>
-
-<table width="500">
-<col width="500">
-<col width="100">
-<col width="100">
-<col width="100">
-<tr>
-<td>
-<h1>Calibration</h1>
-        <button class="btn btn-primary" data-bind="click: calibrateSensor">{{ _('Calibrate<br/>Sensor') }}</button>
+</div>
+</br>
+Calibration
+<div>
+    <button class="btn btn-primary" data-bind="click: autoCalibrate">{{ _('Auto<br/>Calibrate') }}</button>
 &nbsp;
-        <button class="btn btn-primary" data-bind="click: levelBed">{{ _('Calibrate<br/>Deflection') }}</button>
+    <button class="btn btn-primary" data-bind="click: levelBed">{{ _('Bed<br/>Leveling') }}</button>
 &nbsp;
-	<button class="btn btn-primary" data-bind="click: autoCalibrate">{{ _('Adjust<br/>Bed Height') }}</button>
-&nbsp;
-	<button class="btn btn-primary" data-bind="click: levelBed">{{ _('Bed<br/>Leveling') }}</button>
-&nbsp;
- 	<button class="btn btn-primary" data-bind="click: resetBed">{{ _('Reset<br/>Leveling') }}</button>
-</td>
-</tr>
-</table>
-
-
+    <button class="btn btn-primary" data-bind="click: resetBed">{{ _('Reset<br/>Leveling') }}</button>
+</div>
 
 <div id="action_trigger_dialog" class="modal hide">
   <div class="modal-header">
