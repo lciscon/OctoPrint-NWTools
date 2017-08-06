@@ -10,17 +10,25 @@ from __future__ import absolute_import
 # Take a look at the documentation on what other plugin mixins are available.
 
 import octoprint.plugin
+import octoprint.printer
 
 class NwtoolsPlugin(octoprint.plugin.SettingsPlugin,
-                    octoprint.plugin.AssetPlugin,
-                    octoprint.plugin.TemplatePlugin):
+                   octoprint.plugin.StartupPlugin,
+                   octoprint.plugin.TemplatePlugin,
+		   octoprint.plugin.AssetPlugin,
+		   octoprint.printer.PrinterInterface):
 
-	##~~ SettingsPlugin mixin
+	def on_after_startup(self):
+    		self._logger.info("Hello World! (more: %s)" % self._settings.get(["url"]))
 
 	def get_settings_defaults(self):
-		return dict(
-			# put your plugin's default settings here
-		)
+		return dict(url="https://en.wikipedia.org/wiki/Hello_world")
+
+	def get_template_configs(self):
+    		return [
+   		     dict(type="navbar", custom_bindings=False),
+ 		     dict(type="settings", custom_bindings=False)
+    		]
 
 	##~~ AssetPlugin mixin
 
@@ -28,9 +36,9 @@ class NwtoolsPlugin(octoprint.plugin.SettingsPlugin,
 		# Define your plugin's asset files to automatically include in the
 		# core UI here.
 		return dict(
-			js=["js/NWTools.js"],
-			css=["css/NWTools.css"],
-			less=["less/NWTools.less"]
+			js=["js/nwtools.js"],
+			css=["css/nwtools.css"],
+			less=["less/nwtools.less"]
 		)
 
 	##~~ Softwareupdate hook
@@ -40,8 +48,8 @@ class NwtoolsPlugin(octoprint.plugin.SettingsPlugin,
 		# Plugin here. See https://github.com/foosel/OctoPrint/wiki/Plugin:-Software-Update
 		# for details.
 		return dict(
-			NWTools=dict(
-				displayName="Nwtools Plugin",
+			nwtools=dict(
+				displayName="NWTools",
 				displayVersion=self._plugin_version,
 
 				# version check: github repository
@@ -59,7 +67,8 @@ class NwtoolsPlugin(octoprint.plugin.SettingsPlugin,
 # If you want your plugin to be registered within OctoPrint under a different name than what you defined in setup.py
 # ("OctoPrint-PluginSkeleton"), you may define that here. Same goes for the other metadata derived from setup.py that
 # can be overwritten via __plugin_xyz__ control properties. See the documentation for that.
-__plugin_name__ = "Nwtools Plugin"
+__plugin_name__ = "NWTools"
+__plugin_implementation__ = NwtoolsPlugin()
 
 def __plugin_load__():
 	global __plugin_implementation__
