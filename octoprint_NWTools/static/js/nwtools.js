@@ -242,7 +242,7 @@ $(function() {
 	};
 
   self.setOffset = function () {
-    sendPrinterCommand('G32');
+    sendPrinterCommand('M671');
 	};
 
 

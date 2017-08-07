@@ -63,7 +63,11 @@
 &nbsp;
 	<button class="btn btn-primary" data-bind="click: autoCalibrate">{{ _('Adjust<br/>Bed Height') }}</button>
 &nbsp;
- 	<button class="btn btn-primary" data-bind="click: moveUp">{{ _('Reset<br/>Leveling') }}</button>
+ 	<button class="btn btn-primary" data-bind="click: moveUp">{{ _('^<br/> |') }}</button>
+&nbsp;
+   	<button class="btn btn-primary" data-bind="click: moveDown">{{ _(' | <br/>^') }}</button>
+&nbsp;
+    <button class="btn btn-primary" data-bind="click: setOffset">{{ _('Set<br/>Offset') }}</button>
 &nbsp;
 </td>
 </tr>
