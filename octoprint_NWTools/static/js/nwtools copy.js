@@ -20,7 +20,7 @@ $(function() {
       		$(".action_trigger_title", actionTriggerDialog).text(data.title);
       		$(".action_trigger_dialog_message", actionTriggerDialog).text(data.message);
       		actionTriggerDialogAck.unbind("click");
-		self.actionTriggerCallback = callback;
+		      self.actionTriggerCallback = callback;
 
       		actionTriggerDialogAck.bind("click", function (e) {
      		   e.preventDefault();
@@ -229,16 +229,60 @@ $(function() {
 	    self.preheat(0, self.autoCalibrateHeated);
 	};
 
+  self.moveUp = function() {
+    sendPrinterCommand('G93');
+    sendPrinterCommand('G0 Z-.025 F100');
+    sendPrinterCommand('G43');
+	};
+
+  self.moveDown = function() {
+    sendPrinterCommand('G93');
+    sendPrinterCommand('G0 Z.025 F100');
+    sendPrinterCommand('G43');
+	};
+
+  self.setOffset = function () {
+    sendPrinterCommand('M671');
+	};
+
+
 	self.levelBedHeated = function () {
-            sendPrinterCommand('G32');
+    sendPrinterCommand('G0 Z5 F300');
+    sendPrinterCommand('G28');
+    sendPrinterCommand('G0 X0 Y0 F5000');
+    sendPrinterCommand('G30 Q');
+    sendPrinterCommand('G0 Z2 F300');
+    sendPrinterCommand('G32');
 	};
 
 	self.levelBed = function() {
-            self.preheat(0, self.levelBedHeated);
+     self.preheat(0, self.levelBedHeated);
 	};
 
-	self.resetBed = function() {
-            sendPrinterCommand('M561');
+  self.calibrateDone = function () {
+      sendPrinterCommand('M511');
+	};
+
+
+  self.calibrateSensor = function() {
+    var messageType = "calibrating";
+    var messageData = {message:"", title:""};
+
+    sendPrinterCommand('M510');
+
+    self.tempCallback = callback;
+    messageData.title = "Calibrating...";
+    self.actionTriggerTemplate(messageType);
+    self.showActionTriggerDialog(messageData, null);
+  };
+
+  self.calibrateDeflection = function() {
+    sendPrinterCommand('G33');
+    sendPrinterCommand('M500');
+  };
+
+	self.resetLeveling = function() {
+    sendPrinterCommand('M561');
 	};
 
 
@@ -254,7 +298,7 @@ $(function() {
     // information to the global variable OCTOPRINT_VIEWMODELS
     OCTOPRINT_VIEWMODELS.push([
         // This is the constructor to call for instantiating the plugin
-        Nw300xViewModel,
+        NwtoolsViewModel,
 
         // This is a list of dependencies to inject into the plugin, the order which you request
         // here is the order in which the dependencies will be injected into your view model upon
@@ -262,6 +306,6 @@ $(function() {
         ["settingsViewModel", "controlViewModel"],
 
         // Finally, this is the list of selectors for all elements we want this view model to be bound to.
-        ["#tab_plugin_nw300x"]
+        ["#tab_plugin_nwtools"]
     ]);
 });
