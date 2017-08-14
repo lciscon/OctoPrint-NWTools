@@ -232,15 +232,15 @@ $(function() {
 	};
 
   self.moveUp = function() {
-    sendPrinterCommand('G93');
+    sendPrinterCommand('G91');
     sendPrinterCommand('G0 Z-.025 F100');
-    sendPrinterCommand('G43');
+    sendPrinterCommand('G90');
 	};
 
   self.moveDown = function() {
-    sendPrinterCommand('G93');
+    sendPrinterCommand('G91');
     sendPrinterCommand('G0 Z.025 F100');
-    sendPrinterCommand('G43');
+    sendPrinterCommand('G90');
 	};
 
   self.setOffset = function () {
