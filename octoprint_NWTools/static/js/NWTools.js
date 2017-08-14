@@ -221,7 +221,9 @@ $(function() {
 	self.autoCalibrateHeated = function () {
             sendPrinterCommand('G0 Z5 F300');
             sendPrinterCommand('G28');
+            sendPrinterCommand('G0 Z1');
             sendPrinterCommand('G0 X0 Y0  F5000');
+            sendPrinterCommand('M515');
             sendPrinterCommand('G30 Q');
 	};
 
@@ -243,6 +245,7 @@ $(function() {
 
   self.setOffset = function () {
     sendPrinterCommand('M671');
+    sendPrinterCommand('M516');
 	};
 
 
