@@ -228,7 +228,7 @@ $(function() {
       sendPrinterCommand('G90');
       sendPrinterCommand('G0 X0 Y0  F5000');
       sendPrinterCommand('M515');
-      sendPrinterCommand('G30 Q');
+      sendPrinterCommand('G30 Z0');
       sendPrinterCommand('G91');
 	};
 
@@ -249,18 +249,25 @@ $(function() {
 	};
 
   self.setOffset = function () {
-    sendPrinterCommand('G90');
     sendPrinterCommand('M671');
+    sendPrinterCommand('G91');
+    sendPrinterCommand('G0 Z2');
+    sendPrinterCommand('G90');
     sendPrinterCommand('M516');
 	};
 
 
 	self.levelBedHeated = function () {
+    sendPrinterCommand('G91');
     sendPrinterCommand('G0 Z5 F300');
     sendPrinterCommand('G28');
+    sendPrinterCommand('G0 Z1');
+    sendPrinterCommand('G90');
     sendPrinterCommand('G0 X0 Y0 F5000');
     sendPrinterCommand('G30 Q');
+    sendPrinterCommand('G91');
     sendPrinterCommand('G0 Z2 F300');
+    sendPrinterCommand('G90');
     sendPrinterCommand('G32');
 	};
 
