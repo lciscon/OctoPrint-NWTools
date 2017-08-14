@@ -270,10 +270,9 @@ $(function() {
 
     sendPrinterCommand('M510');
 
-    self.tempCallback = self.calibrateDone;
     messageData.title = "Calibrating...";
     self.actionTriggerTemplate(messageType);
-    self.showActionTriggerDialog(messageData, null);
+    self.showActionTriggerDialog(messageData, self.calibrateDone);
   };
 
   self.calibrateDeflection = function() {
