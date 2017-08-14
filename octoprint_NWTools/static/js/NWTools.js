@@ -9,6 +9,8 @@ $(function() {
 	self.targetTemp = 0;
 	self.currentTemp = 0;
 
+  self.autoCalibrating = 0;
+
     	self.actionTriggerTemplate = ko.observable(undefined);
 	    self.actionTriggerCallback = function () {
 	    };
@@ -219,31 +221,37 @@ $(function() {
 	};
 
 	self.autoCalibrateHeated = function () {
+    if (self.autoCalibrating == 1) {
             sendPrinterCommand('G0 Z5 F300');
             sendPrinterCommand('G28');
             sendPrinterCommand('G0 Z1');
             sendPrinterCommand('G0 X0 Y0  F5000');
             sendPrinterCommand('M515');
             sendPrinterCommand('G30 Q');
+            sendPrinterCommand('G91');
+            self.autoCalibrating = 0;
+    };
 	};
 
 	self.autoCalibrate = function() {
+      self.autoCalibrating = 1;
 	    self.preheat(0, self.autoCalibrateHeated);
 	};
 
   self.moveUp = function() {
-    sendPrinterCommand('G91');
-    sendPrinterCommand('G0 Z-.025 F100');
-    sendPrinterCommand('G90');
+//    sendPrinterCommand('G91');
+    sendPrinterCommand('G1 Z-.025 F100');
+//    sendPrinterCommand('G90');
 	};
 
   self.moveDown = function() {
-    sendPrinterCommand('G91');
-    sendPrinterCommand('G0 Z.025 F100');
-    sendPrinterCommand('G90');
+//    sendPrinterCommand('G91');
+    sendPrinterCommand('G1 Z.025 F100');
+//    sendPrinterCommand('G90');
 	};
 
   self.setOffset = function () {
+    sendPrinterCommand('G90');
     sendPrinterCommand('M671');
     sendPrinterCommand('M516');
 	};
