@@ -221,20 +221,18 @@ $(function() {
 	};
 
 	self.autoCalibrateHeated = function () {
-    if (self.autoCalibrating == 1) {
-            sendPrinterCommand('G0 Z5 F300');
-            sendPrinterCommand('G28');
-            sendPrinterCommand('G0 Z1');
-            sendPrinterCommand('G0 X0 Y0  F5000');
-            sendPrinterCommand('M515');
-            sendPrinterCommand('G30 Q');
-            sendPrinterCommand('G91');
-            self.autoCalibrating = 0;
-    };
+      sendPrinterCommand('G91');
+      sendPrinterCommand('G0 Z5 F300');
+      sendPrinterCommand('G28');
+      sendPrinterCommand('G0 Z1');
+      sendPrinterCommand('G90');
+      sendPrinterCommand('G0 X0 Y0  F5000');
+      sendPrinterCommand('M515');
+      sendPrinterCommand('G30 Q');
+      sendPrinterCommand('G91');
 	};
 
 	self.autoCalibrate = function() {
-      self.autoCalibrating = 1;
 	    self.preheat(0, self.autoCalibrateHeated);
 	};
 
