@@ -254,6 +254,7 @@ $(function() {
     sendPrinterCommand('G0 Z2');
     sendPrinterCommand('G90');
     sendPrinterCommand('M516');
+    sendPrinterCommand('M500');
 	};
 
 
