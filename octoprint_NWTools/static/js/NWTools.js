@@ -292,10 +292,36 @@ $(function() {
     self.showActionTriggerDialog(messageData, self.calibrateDone);
   };
 
-  self.calibrateDeflection = function() {
+  self.calibrateDeflectionDoit = function () {
+    sendPrinterCommand('M515');
     sendPrinterCommand('G33');
     sendPrinterCommand('M500');
+  }
+
+  self.calibrateDeflection = function() {
+    var messageType = "deflecting";
+    var messageData = {message:"", title:""};
+
+    messageData.title = "Calibrating Deflection...";
+    self.actionTriggerTemplate(messageType);
+    self.showActionTriggerDialog(messageData, self.calibrateDeflectionDoit);
   };
+
+
+  self.homePrintheadHeated = function() {
+    sendPrinterCommand('G91');
+    sendPrinterCommand('G0 Z5 F300');
+    sendPrinterCommand('G28');
+    sendPrinterCommand('G0 Z1');
+    sendPrinterCommand('G90');
+    sendPrinterCommand('G0 X0 Y0 F5000');
+    sendPrinterCommand('G30 Q');
+  };
+
+  self.homePrinthead = function() {
+      self.preheat(0, self.homePrintheadHeated);
+  };
+
 
 	self.resetLeveling = function() {
     sendPrinterCommand('M561');
