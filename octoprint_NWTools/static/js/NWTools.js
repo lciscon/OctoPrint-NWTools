@@ -295,6 +295,7 @@ $(function() {
   self.calibrateDeflectionDoit = function () {
     sendPrinterCommand('M515');
     sendPrinterCommand('G33');
+    sendPrinterCommand('M516');
     sendPrinterCommand('M500');
   }
 
@@ -317,6 +318,7 @@ $(function() {
     sendPrinterCommand('G0 X0 Y0 F5000');
     sendPrinterCommand('G30 Q');
     sendPrinterCommand('G0 Z0');
+    sendPrinterCommand('M516');
   };
 
   self.homePrinthead = function() {
