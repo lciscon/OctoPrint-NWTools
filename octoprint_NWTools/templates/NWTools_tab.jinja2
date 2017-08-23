@@ -4,13 +4,27 @@
 <tr>
 <td>
 <h1>General</h1>
+</td>
+<td>
+</td>
+</tr>
+</table>
+<table width="800">
+<col width="800">
+<tr>
+<td>
     <button class="btn btn-primary" data-bind="click: unloadPrint">{{ _('Unload<br/>Print') }}</button>
-&nbsp;&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
     <button class="btn btn-primary" data-bind="click: lightsOn">{{ _('Lights<br/>On') }}</button>
 &nbsp;
     <button class="btn btn-primary" data-bind="click: lightsOff">{{ _('Lights<br/>Off') }}</button>
 &nbsp;
-    <button class="btn btn-primary" data-bind="click: homePrinthead">{{ _('Home<br/>Head') }}</button>
+&nbsp;
+&nbsp;
+&nbsp;
+    <button class="btn btn-primary" data-bind="click: homePrinthead">{{ _('Home<br/>Printhead') }}</button>
 &nbsp;
     <button class="btn btn-primary" data-bind="click: levelBed">{{ _('Bed<br/>Leveling') }}</button>
 &nbsp;
@@ -55,22 +69,30 @@
 <tr>
 <td>
 <h1>Calibration (Advanced)</h1>
+</td>
+</tr>
+</table>
+<table width="900">
+<col width="900">
+<tr>
+<td>
         <button class="btn btn-primary" data-bind="click: calibrateSensor">{{ _('Calibrate<br/>Sensor') }}</button>
 &nbsp;
-	<button class="btn btn-primary" data-bind="click: autoCalibrate">{{ _('Adjust<br/>Home Offset') }}</button>
 &nbsp;
- 	<button class="btn btn-primary" data-bind="click: moveUp">{{ _('&nbsp;&nbsp;^&nbsp;&nbsp;<br/>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;') }}</button>
+        <button class="btn btn-primary" data-bind="click: autoCalibrate">{{ _('Adjust<br/>Home Offset') }}</button>
 &nbsp;
-   	<button class="btn btn-primary" data-bind="click: moveDown">{{ _('&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<br/>&nbsp;&nbsp;v&nbsp;&nbsp;') }}</button>
+        <button class="btn btn-primary" data-bind="click: moveUp">{{ _('&nbsp;&nbsp;^&nbsp;&nbsp;<br/>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;') }}</button>
+&nbsp;
+        <button class="btn btn-primary" data-bind="click: moveDown">{{ _('&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<br/>&nbsp;&nbsp;v&nbsp;&nbsp;') }}</button>
 &nbsp;
         <button class="btn btn-primary" data-bind="click: setOffset">{{ _('Set<br/>Offset') }}</button>
+&nbsp;
 &nbsp;
 <button class="btn btn-primary" data-bind="click: calibrateDeflection">{{ _('Calibrate<br/>Deflection') }}</button>
 &nbsp;
 </td>
 </tr>
 </table>
-
 
 
 <div id="action_trigger_dialog" class="modal hide">
