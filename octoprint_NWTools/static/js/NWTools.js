@@ -223,9 +223,9 @@ $(function() {
 	self.autoCalibrateHeated = function () {
       sendPrinterCommand('G91');
       sendPrinterCommand('G0 Z5 F300');
+      sendPrinterCommand('G90');
       sendPrinterCommand('G28');
       sendPrinterCommand('G0 Z1');
-      sendPrinterCommand('G90');
       sendPrinterCommand('G0 X0 Y0  F5000');
       sendPrinterCommand('M515');
       sendPrinterCommand('G30 Z0');
@@ -261,9 +261,9 @@ $(function() {
 	self.levelBedHeated = function () {
     sendPrinterCommand('G91');
     sendPrinterCommand('G0 Z5 F300');
+    sendPrinterCommand('G90');
     sendPrinterCommand('G28');
     sendPrinterCommand('G0 Z1');
-    sendPrinterCommand('G90');
     sendPrinterCommand('G0 X0 Y0 F5000');
     sendPrinterCommand('G30 Q');
     sendPrinterCommand('G91');
@@ -314,9 +314,9 @@ $(function() {
   self.homePrintheadHeated = function() {
     sendPrinterCommand('G91');
     sendPrinterCommand('G0 Z5 F300');
+    sendPrinterCommand('G90');
     sendPrinterCommand('G28');
     sendPrinterCommand('G0 Z1');
-    sendPrinterCommand('G90');
     sendPrinterCommand('G0 X0 Y0 F5000');
     sendPrinterCommand('G30 Q');
     sendPrinterCommand('G0 Z0');
