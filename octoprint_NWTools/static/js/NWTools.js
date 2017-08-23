@@ -221,14 +221,17 @@ $(function() {
 	};
 
 	self.autoCalibrateHeated = function () {
+      sendPrinterCommand('M400');
       sendPrinterCommand('G91');
       sendPrinterCommand('G0 Z5 F300');
       sendPrinterCommand('G90');
       sendPrinterCommand('G28');
       sendPrinterCommand('G0 Z1');
       sendPrinterCommand('G0 X0 Y0  F5000');
+      sendPrinterCommand('M400');
       sendPrinterCommand('M515');
       sendPrinterCommand('G30 Z0');
+      sendPrinterCommand('G0 Z1 F300');
       sendPrinterCommand('G91');
 	};
 
@@ -270,6 +273,7 @@ $(function() {
     sendPrinterCommand('M400');
     sendPrinterCommand('G30 Q');
     sendPrinterCommand('G0 Z2 F300');
+    sendPrinterCommand('M400');
     sendPrinterCommand('G32');
     sendPrinterCommand('M516');
     sendPrinterCommand('M500');
