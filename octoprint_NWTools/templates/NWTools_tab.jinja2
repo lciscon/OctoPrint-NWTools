@@ -79,13 +79,13 @@
 &nbsp;
         <button class="btn btn-primary" data-bind="click: autoCalibrate">{{ _('Adjust<br/>Home Offset') }}</button>
 &nbsp;
-        <button class="btn btn-primary" data-bind="click: moveUp">{{ _('<<') }}</button>
+        <button class="btn btn-primary" data-bind="click: moveUp">{{ _('&nbsp;&nbsp;<br/>&nbsp;&nbsp;&nbsp;&nbsp;<<&nbsp;&nbsp;') }}</button>
 &nbsp;
-        <button class="btn btn-primary" data-bind="click: moveUp">{{ _('<') }}</button>
+        <button class="btn btn-primary" data-bind="click: moveUp">{{ _('&nbsp;&nbsp;<br/>&nbsp;&nbsp;<&nbsp;&nbsp;') }}</button>
 &nbsp;
-        <button class="btn btn-primary" data-bind="click: moveDown">{{ _('>') }}</button>
+        <button class="btn btn-primary" data-bind="click: moveDown">{{ _('&nbsp;&nbsp;>&nbsp;&nbsp;') }}</button>
 &nbsp;
-        <button class="btn btn-primary" data-bind="click: moveDown">{{ _('>>') }}</button>
+        <button class="btn btn-primary" data-bind="click: moveDown">{{ _('&nbsp;&nbsp;>>&nbsp;&nbsp;') }}</button>
 &nbsp;
         <input style="width:8em;" name="textinput" type="text" data-bind="valueUpdate: 'afterkeyup',enterkey:calculateValues, enable: isOperational(), value: $root.c">
 &nbsp;
