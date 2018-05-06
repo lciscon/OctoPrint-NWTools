@@ -79,32 +79,25 @@
 Z Offset:
         <input style="width:8em;" name="textinput" type="text" data-bind="valueUpdate: 'afterkeyup',enterkey:calculateValues, enable: isOperational(), value: $root.c">
 &nbsp;
-        <button class="btn btn-primary" data-bind="click: moveUp">{{ _('&nbsp;&nbsp;&nbsp;&nbsp;<<&nbsp;&nbsp;') }}</button>
+        <button class="btn btn-primary" data-bind="click: moveUp">{{ _('&nbsp;&nbsp;<br/>&nbsp;&nbsp;&nbsp;&nbsp;<<&nbsp;&nbsp;<br/>') }}</button>
 &nbsp;
-        <button class="btn btn-primary" data-bind="click: moveUp">{{ _('&nbsp;&nbsp;<&nbsp;&nbsp;') }}</button>
+        <button class="btn btn-primary" data-bind="click: moveUp">{{ _('&nbsp;&nbsp;<br/>&nbsp;&nbsp;<&nbsp;&nbsp;<br/>') }}</button>
 &nbsp;
-        <button class="btn btn-primary" data-bind="click: moveDown">{{ _('&nbsp;&nbsp>&nbsp;&nbsp;') }}</button>
+        <button class="btn btn-primary" data-bind="click: moveDown">{{ _('&nbsp;&nbsp;<br/>&nbsp;&nbsp>&nbsp;&nbsp;<br/>') }}</button>
 &nbsp;
-        <button class="btn btn-primary" data-bind="click: moveDown">{{ _('&nbsp;&nbsp>>&nbsp;&nbsp;') }}</button>
+        <button class="btn btn-primary" data-bind="click: moveDown">{{ _('&nbsp;&nbsp;<br/>&nbsp;&nbsp>>&nbsp;&nbsp;<br/>') }}</button>
 &nbsp;
-
-<!--
-<button class="btn btn-primary" data-bind="click: moveUp">{{ _('&nbsp;&nbsp;^&nbsp;&nbsp;<br/>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;') }}</button>
-
-<div style="margin-top:1em;margin-left: 1.5em; float:left;">
-    <span style="float: left;font-size: 2em; margin-right: 0.2em;">c</span>
-    <input style="width:8em;" name="textinput" type="text" data-bind="valueUpdate: 'afterkeyup',enterkey:calculateValues, enable: isOperational(), value: $root.c">
-</div>
-
-        <button class="btn btn-primary" data-bind="click: setOffset">{{ _('Set<br/>Offset') }}</button>
--->
-
 &nbsp;
 </td>
 </tr>
 </table>
 <table width="900">
 <col width="900">
+<tr>
+<td>
+&nbsp;&nbsp;
+</td>
+</tr>
 <tr>
 <td>
 <button class="btn btn-primary" data-bind="click: autoCalibrate">{{ _('Calibrate<br/>Z Offset') }}</button>
