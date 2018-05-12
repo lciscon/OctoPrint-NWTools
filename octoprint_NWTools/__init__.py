@@ -31,15 +31,15 @@ class NwtoolsPlugin(octoprint.plugin.SettingsPlugin,
     		]
 
     def read_z_offset(comm, line, *args, **kwargs):
-        if "Z Offset" not in line:
-            return line
+#        if "Z Offset" not in line:
+#            return line
 
-        from octoprint.util.comm import parse_firmware_line
+#        from octoprint.util.comm import parse_firmware_line
 
         # Create a dict with all the keys/values returned by the M115 request
-        z_offset_data = parse_firmware_line(line)
+#        z_offset_data = parse_firmware_line(line)
 
-        logging.getLogger("octoprint.plugin." + __name__).info("Z Offset Detected: {machine}.".format(machine=z_offset_data[1]))
+#        logging.getLogger("octoprint.plugin." + __name__).info("Z Offset Detected: {machine}.".format(machine=z_offset_data[1]))
 
         return line
 
