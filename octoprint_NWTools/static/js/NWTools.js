@@ -1,19 +1,22 @@
 $(function() {
 
+    import logging
+
     function NWToolsViewModel(parameters) {
-        var self = this;
+      var self = this;
 
-        self.settings = parameters[0];
-        self.control = parameters[1];
+      self.settings = parameters[0];
+      self.control = parameters[1];
 
-	self.targetTemp = 0;
-	self.currentTemp = 0;
+	    self.targetTemp = 0;
+	    self.currentTemp = 0;
 
-  self.autoCalibrating = 0;
+      self.autoCalibrating = 0;
 
     	self.actionTriggerTemplate = ko.observable(undefined);
 	    self.actionTriggerCallback = function () {
 	    };
+
 
 	    self.showActionTriggerDialog = function (data, callback) {
       		var actionTriggerDialog = $("#action_trigger_dialog");
@@ -235,6 +238,33 @@ $(function() {
       sendPrinterCommand('G91');
 	};
 
+  self.loadZOffset() {
+    //query the printer for the current Z Offset
+    sendPrinterCommand('M505');
+    console.log('Loading Z Offset: ' + z_offset_data[1]);
+    return z_offset_data[1];
+  };
+
+  self.setZOffset() {
+
+  };
+
+  self.increaseZOffset1() {
+
+  };
+
+  self.increaseZOffset2() {
+
+  };
+
+  self.decreaseZOffset1() {
+
+  };
+
+  self.decreaseZOffset2() {
+
+  };
+
 	self.autoCalibrate = function() {
 	    self.preheat(0, self.autoCalibrateHeated);
 	};
@@ -343,6 +373,10 @@ $(function() {
         // gets called _after_ the settings have been retrieved from the OctoPrint backend and thus
         // the SettingsViewModel been properly populated.
         self.onBeforeBinding = function() {
+        }
+
+        self.onStartupComplete = function() {
+          self.loadZOffset();
         }
     }
 

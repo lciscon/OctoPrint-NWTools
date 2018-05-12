@@ -81,7 +81,7 @@
 <tr style="height:50px;" valign="middle" >
 <td>
 Z Offset:
-        <input style="width:8em;" valign="middle" name="textinput" type="text" data-bind="valueUpdate: 'afterkeyup',enterkey:calculateValues, enable: isOperational(), value: $root.c">
+        <input style="width:8em;" valign="middle" name="zoffsetinput" type="text" data-bind="text: loadZOffset, enterkey: setZOffset">
 &nbsp;
         <button style="height:50px;" class="btn btn-primary" data-bind="click: moveUp">{{ _('&nbsp;&nbsp;&nbsp;&nbsp;<<&nbsp;&nbsp;') }}</button>
 &nbsp;
@@ -92,6 +92,7 @@ Z Offset:
         <button style="height:50px;" class="btn btn-primary" data-bind="click: moveDown">{{ _('&nbsp;&nbsp>>&nbsp;&nbsp;') }}</button>
 &nbsp;
 &nbsp;
+<!--        <input style="width:8em;" valign="middle" name="textinput" type="text" data-bind="valueUpdate: 'afterkeyup',enterkey:calculateValues, enable: isOperational, value: $root.c"> -->
 </td>
 </tr>
 </table>
