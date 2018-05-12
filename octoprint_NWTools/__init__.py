@@ -11,6 +11,7 @@ from __future__ import absolute_import
 
 import octoprint.plugin
 import octoprint.printer
+import logging
 
 class NwtoolsPlugin(octoprint.plugin.SettingsPlugin,
                    octoprint.plugin.StartupPlugin,
@@ -29,19 +30,6 @@ class NwtoolsPlugin(octoprint.plugin.SettingsPlugin,
    		     dict(type="navbar", custom_bindings=False),
  		     dict(type="settings", custom_bindings=False)
     		]
-
-    def read_z_offset(comm, line, *args, **kwargs):
-#        if "Z Offset" not in line:
-#            return line
-
-#        from octoprint.util.comm import parse_firmware_line
-
-        # Create a dict with all the keys/values returned by the M115 request
-#        z_offset_data = parse_firmware_line(line)
-
-#        logging.getLogger("octoprint.plugin." + __name__).info("Z Offset Detected: {machine}.".format(machine=z_offset_data[1]))
-
-        return line
 
 	##~~ AssetPlugin mixin
 
@@ -76,6 +64,19 @@ class NwtoolsPlugin(octoprint.plugin.SettingsPlugin,
 			)
 		)
 
+    def detect_machine_type(comm, line, *args, **kwargs):
+        if "MACHINE_TYPE" not in line:
+            return line
+
+        from octoprint.util.comm import parse_firmware_line
+
+        # Create a dict with all the keys/values returned by the M115 request
+        printer_data = parse_firmware_line(line)
+
+        logging.getLogger("octoprint.plugin." + __name__).info("Machine type detected: {machine}.".format(machine=printer_data["MACHINE_TYPE"]))
+
+        return line
+
 
 # If you want your plugin to be registered within OctoPrint under a different name than what you defined in setup.py
 # ("OctoPrint-PluginSkeleton"), you may define that here. Same goes for the other metadata derived from setup.py that
@@ -90,5 +91,5 @@ def __plugin_load__():
 	global __plugin_hooks__
 	__plugin_hooks__ = {
 		"octoprint.plugin.softwareupdate.check_config": __plugin_implementation__.get_update_information,
-        "octoprint.comm.protocol.gcode.received": __plugin_implementation__.read_z_offset
+        "octoprint.comm.protocol.gcode.received": __plugin_implementation__.detect_machine_type
 	}
