@@ -17,7 +17,6 @@ $(function() {
 	    self.actionTriggerCallback = function () {
 	    };
 
-
 	    self.showActionTriggerDialog = function (data, callback) {
       		var actionTriggerDialog = $("#action_trigger_dialog");
       		var actionTriggerDialogAck = $(".action_trigger_dialog_acknowledge", actionTriggerDialog);
@@ -44,27 +43,10 @@ $(function() {
 
     	};
 
-    	function sleep (time) {
+  function sleep (time) {
  	    return new Promise((resolve) => setTimeout(resolve, time));
-	}
+	};
 
-
-  self.onDataUpdaterPluginMessage = function (plugin, zoffset_data) {
-        console.log('MSL: got itA!');
-  			if (plugin !== "NWTools") {
-  				return;
-  			}
-        console.log('MSL: got itB!');
-
-        console.log('MSL: got zoff1 ' + zoffset_data);
-
-  			if (zoffset_data) {
-  				if (zoffset_data.length > 0) {
-  				}
-  				return;
-  			}
-  			return;
-  		};
 
 	self.fromResponse = function (data) {
             console.log('MSL: got reply2 ' + data.tool0.actual);
@@ -386,6 +368,8 @@ $(function() {
 	};
 
 
+
+
         // This will get called before the HelloWorldViewModel gets bound to the DOM, but after its
         // dependencies have already been initialized. It is especially guaranteed that this method
         // gets called _after_ the settings have been retrieved from the OctoPrint backend and thus
@@ -396,6 +380,11 @@ $(function() {
         self.onStartupComplete = function() {
 //          self.loadZOffset();
         }
+
+        self.onDataUpdaterPluginMessage = function (plugin, zoffset_data) {
+              console.log('MSL: got itA!');
+        }
+
     }
 
     // This is how our plugin registers itself with the application, by adding some configuration
