@@ -53,7 +53,7 @@ $(function() {
   			if (plugin !== "NWTools") {
   				return;
   			}
-
+        console.log('MSL: got it2!');
         console.log('MSL: got it!');
 
         console.log('MSL: got zoff1 ' + zoffset_data);

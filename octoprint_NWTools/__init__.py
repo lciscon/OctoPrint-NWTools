@@ -68,8 +68,8 @@ class NwtoolsPlugin(octoprint.plugin.SettingsPlugin,
 		if "Offset" not in line:
 			return line
 
-		self._logger.info("Processing: %s" % line)
-		self._logger.info("Identifier: %s" % self._identifier)
+		self._logger.info("ProcessingsSs: %s" % line)
+		self._logger.info("IdentifierssS: %s" % self._identifier)
 
 		self._plugin_manager.send_plugin_message(self._identifier, dict(error=line.strip()))
 
