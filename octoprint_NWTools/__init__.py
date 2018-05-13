@@ -19,6 +19,9 @@ class NwtoolsPlugin(octoprint.plugin.SettingsPlugin,
 		   octoprint.plugin.AssetPlugin,
 		   octoprint.printer.PrinterInterface):
 
+    def detect_machine_type(comm, line, *args, **kwargs):
+    		self._logger.info("Hello World! (more: %s)" % self._settings.get(["url"]))
+
 	def on_after_startup(self):
     		self._logger.info("Hello World! (more: %s)" % self._settings.get(["url"]))
 
@@ -64,8 +67,6 @@ class NwtoolsPlugin(octoprint.plugin.SettingsPlugin,
 			)
 		)
 
-    def detect_machine_type(comm, line, *args, **kwargs):
-        return line
 
 #	def detect_machine_type(comm, line, *args, **kwargs):
 #        return line
