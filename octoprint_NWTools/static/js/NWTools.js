@@ -48,6 +48,24 @@ $(function() {
  	    return new Promise((resolve) => setTimeout(resolve, time));
 	}
 
+
+  self.onDataUpdaterPluginMessage = function (plugin, zoffset_data) {
+      console.log('MSL: got plugin ' + plugin);
+
+  			if (plugin !== "nwTools") {
+  				return;
+  			}
+
+        console.log('MSL: got zoff1 ' + zoffset_data);
+
+  			if (zoffset_data) {
+  				if (zoffset_data.length > 0) {
+  				}
+  				return;
+  			}
+  			return;
+  		};
+
 	self.fromResponse = function (data) {
             console.log('MSL: got reply2 ' + data.tool0.actual);
 	    self.currentTemp = parseFloat(data.tool0.actual);

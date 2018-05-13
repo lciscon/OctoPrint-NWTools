@@ -68,12 +68,7 @@ class NwtoolsPlugin(octoprint.plugin.SettingsPlugin,
 		if "Offset" not in line:
 			return line
 
-		from octoprint.util.comm import parse_firmware_line
-
-        # Create a dict with all the keys/values returned by the M115 request
-		z_offset_data = parse_firmware_line(line)
-
-#    	self._logger.info("Hello World! (more: %s)" % self._settings.get(["url"]))
+		self._plugin_manager.send_plugin_message(self._identifier, dict(error=line.strip()))
 
 		return line
 
