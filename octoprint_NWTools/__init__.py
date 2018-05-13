@@ -69,8 +69,7 @@ class NwtoolsPlugin(octoprint.plugin.SettingsPlugin,
 			return line
 
 		self._logger.info("Processings2: %s" % line)
-        line2 = "ZOffset=%s" % line.strip()
-		self._plugin_manager.send_plugin_message(self._identifier, dict(line2))
+		self._plugin_manager.send_plugin_message(self._identifier, dict(ZOffset=line))
 
 		return line
 
