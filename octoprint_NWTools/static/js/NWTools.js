@@ -382,7 +382,7 @@ $(function() {
         }
 
         self.onDataUpdaterPluginMessage = function (plugin, zoffset_data) {
-              console.log('MSL: got itA!');
+              console.log('MSL: got it!');
         }
 
     }
