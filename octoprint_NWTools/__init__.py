@@ -73,7 +73,7 @@ class NwtoolsPlugin(octoprint.plugin.SettingsPlugin,
         # Create a dict with all the keys/values returned by the M115 request
 		z_offset_data = parse_firmware_line(line)
 
-#        logging.getLogger("octoprint.plugin." + __name__).info("Z offset detected: {machine}.".format(machine=z_offset_data["Z Offset:"]))
+    	self._logger.info("Z Offset Value (more: %s)" % z_offset_data[0] % z_offset_data[1])
 
 		return line
 
