@@ -54,6 +54,8 @@ $(function() {
   				return;
   			}
 
+        console.log('MSL: got it!');
+
         console.log('MSL: got zoff1 ' + zoffset_data);
 
   			if (zoffset_data) {
