@@ -50,9 +50,7 @@ $(function() {
 
 
   self.onDataUpdaterPluginMessage = function (plugin, zoffset_data) {
-      console.log('MSL: got data ' + zoffset_data);
-
-  			if (plugin !== "nwTools") {
+  			if (plugin !== "Tools") {
   				return;
   			}
 

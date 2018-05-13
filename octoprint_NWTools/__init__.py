@@ -65,13 +65,11 @@ class NwtoolsPlugin(octoprint.plugin.SettingsPlugin,
 		)
 
 	def processGCODE(self, comm, line, *args, **kwargs):
-		self._logger.info("Received GCode (more: %s)" % line)
-
-
 		if "Offset" not in line:
 			return line
 
 		self._logger.info("Processing: %s" % line)
+		self._logger.info("Identifier: %s" % self._identifier)
 
 		self._plugin_manager.send_plugin_message(self._identifier, dict(error=line.strip()))
 
