@@ -65,57 +65,16 @@ class NwtoolsPlugin(octoprint.plugin.SettingsPlugin,
 		)
 
 	def processGCODE(self, comm, line, *args, **kwargs):
-		if self.processing and "ok" not in line and re.match(r"^((\d+\s)|(\|\s+)|(\[?\s?\+?\-?\d?\.\d+\]?\s*\,?)|(\s?\.\s*)|(NAN\,?))+$", line.strip()):
-			# new_line = re.sub(r"(\[ ?)+","",line.strip())
-			# new_line = re.sub(r"[\]NA\)\(]","",new_line)
-			# new_line = re.sub(r"( +)|\,","\t",new_line)
-			# new_line = re.sub(r"(\.\t)","\t",new_line)
-			# new_line = re.sub(r"\.$","",new_line)
-			# new_line = new_line.split("\t")
+        if "Z Offset" not in line:
+            return line
 
-			new_line = re.findall(r"(\+?\-?\d*\.\d*)",line)
+        from octoprint.util.comm import parse_firmware_line
 
-			if self._settings.get(["stripFirst"]):
-				new_line.pop(0)
-			if len(new_line) > 0:
-				if self._settings.get(["flipX"]):
-					new_line.reverse()
-				self.mesh.append(new_line)
-			return line
+        # Create a dict with all the keys/values returned by the M115 request
+        z_offset_data = parse_firmware_line(line)
 
-		if self.processing and "Home XYZ first" in line:
-			self._plugin_manager.send_plugin_message(self._identifier, dict(error=line.strip()))
-			self.processing = False
-			return line
+#        logging.getLogger("octoprint.plugin." + __name__).info("Z offset detected: {machine}.".format(machine=z_offset_data["Z Offset:"]))
 
-		if self.processing and "ok" in line and len(self.mesh) > 0:
-			octoprint_printer_profile = self._printer_profile_manager.get_current()
-			volume = octoprint_printer_profile["volume"]
-			custom_box = volume["custom_box"]
-			# see if we have a custom bounding box
-			if custom_box:
-				min_x = custom_box["x_min"]
-				max_x = custom_box["x_max"]
-				min_y = custom_box["y_min"]
-				max_y = custom_box["y_max"]
-				min_z = custom_box["z_min"]
-				max_z = custom_box["z_max"]
-			else:
-				min_x = 0
-				max_x = volume["width"]
-				min_y = 0
-				max_y = volume["depth"]
-				min_z = 0
-				max_z = volume["height"]
-			bed_type = octoprint_printer_profile["volume"]["formFactor"]
-
-			bed = dict(type=bed_type,x_min=min_x,x_max=max_x,y_min=min_y,y_max=max_y,z_min=min_z,z_max=max_z)
-
-			self.processing = False
-			if self._settings.get(["flipY"]):
-				self.mesh.reverse()
-			self._plugin_manager.send_plugin_message(self._identifier, dict(mesh=self.mesh,bed=bed))
-		
 		return line
 
 
