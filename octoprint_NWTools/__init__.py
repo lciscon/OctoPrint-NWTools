@@ -67,6 +67,9 @@ class NwtoolsPlugin(octoprint.plugin.SettingsPlugin,
     def detect_machine_type(comm, line, *args, **kwargs):
         return line
 
+#	def detect_machine_type(comm, line, *args, **kwargs):
+#        return line
+
 
 # If you want your plugin to be registered within OctoPrint under a different name than what you defined in setup.py
 # ("OctoPrint-PluginSkeleton"), you may define that here. Same goes for the other metadata derived from setup.py that
