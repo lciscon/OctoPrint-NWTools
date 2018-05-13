@@ -50,7 +50,7 @@ $(function() {
 
 
   self.onDataUpdaterPluginMessage = function (plugin, zoffset_data) {
-  			if (plugin !== "Tools") {
+  			if (plugin !== "NWTools") {
   				return;
   			}
 
