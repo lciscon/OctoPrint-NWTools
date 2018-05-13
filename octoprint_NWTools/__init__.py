@@ -19,9 +19,6 @@ class NwtoolsPlugin(octoprint.plugin.SettingsPlugin,
 		   octoprint.plugin.AssetPlugin,
 		   octoprint.printer.PrinterInterface):
 
-    def detect_machine_type(comm, line, *args, **kwargs):
-    		self._logger.info("Hello World! (more: %s)" % self._settings.get(["url"]))
-
 	def on_after_startup(self):
     		self._logger.info("Hello World! (more: %s)" % self._settings.get(["url"]))
 
@@ -67,6 +64,60 @@ class NwtoolsPlugin(octoprint.plugin.SettingsPlugin,
 			)
 		)
 
+	def processGCODE(self, comm, line, *args, **kwargs):
+		if self.processing and "ok" not in line and re.match(r"^((\d+\s)|(\|\s+)|(\[?\s?\+?\-?\d?\.\d+\]?\s*\,?)|(\s?\.\s*)|(NAN\,?))+$", line.strip()):
+			# new_line = re.sub(r"(\[ ?)+","",line.strip())
+			# new_line = re.sub(r"[\]NA\)\(]","",new_line)
+			# new_line = re.sub(r"( +)|\,","\t",new_line)
+			# new_line = re.sub(r"(\.\t)","\t",new_line)
+			# new_line = re.sub(r"\.$","",new_line)
+			# new_line = new_line.split("\t")
+
+			new_line = re.findall(r"(\+?\-?\d*\.\d*)",line)
+
+			if self._settings.get(["stripFirst"]):
+				new_line.pop(0)
+			if len(new_line) > 0:
+				if self._settings.get(["flipX"]):
+					new_line.reverse()
+				self.mesh.append(new_line)
+			return line
+
+		if self.processing and "Home XYZ first" in line:
+			self._plugin_manager.send_plugin_message(self._identifier, dict(error=line.strip()))
+			self.processing = False
+			return line
+
+		if self.processing and "ok" in line and len(self.mesh) > 0:
+			octoprint_printer_profile = self._printer_profile_manager.get_current()
+			volume = octoprint_printer_profile["volume"]
+			custom_box = volume["custom_box"]
+			# see if we have a custom bounding box
+			if custom_box:
+				min_x = custom_box["x_min"]
+				max_x = custom_box["x_max"]
+				min_y = custom_box["y_min"]
+				max_y = custom_box["y_max"]
+				min_z = custom_box["z_min"]
+				max_z = custom_box["z_max"]
+			else:
+				min_x = 0
+				max_x = volume["width"]
+				min_y = 0
+				max_y = volume["depth"]
+				min_z = 0
+				max_z = volume["height"]
+			bed_type = octoprint_printer_profile["volume"]["formFactor"]
+
+			bed = dict(type=bed_type,x_min=min_x,x_max=max_x,y_min=min_y,y_max=max_y,z_min=min_z,z_max=max_z)
+
+			self.processing = False
+			if self._settings.get(["flipY"]):
+				self.mesh.reverse()
+			self._plugin_manager.send_plugin_message(self._identifier, dict(mesh=self.mesh,bed=bed))
+		
+		return line
+
 
 #	def detect_machine_type(comm, line, *args, **kwargs):
 #        return line
@@ -78,6 +129,10 @@ class NwtoolsPlugin(octoprint.plugin.SettingsPlugin,
 __plugin_name__ = "Tools"
 __plugin_implementation__ = NwtoolsPlugin()
 
+def detect_machine_type(comm, line, *args, **kwargs):
+    return line
+
+
 def __plugin_load__():
 	global __plugin_implementation__
 	__plugin_implementation__ = NwtoolsPlugin()
@@ -85,5 +140,5 @@ def __plugin_load__():
 	global __plugin_hooks__
 	__plugin_hooks__ = {
 		"octoprint.plugin.softwareupdate.check_config": __plugin_implementation__.get_update_information,
-        "octoprint.comm.protocol.gcode.received": __plugin_implementation__.detect_machine_type
+		"octoprint.comm.protocol.gcode.received": __plugin_implementation__.processGCODE
 	}
