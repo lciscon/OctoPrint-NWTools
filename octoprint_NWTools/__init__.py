@@ -65,8 +65,8 @@ class NwtoolsPlugin(octoprint.plugin.SettingsPlugin,
 		)
 
 	def processGCODE(self, comm, line, *args, **kwargs):
-#		if "Z Offset" not in line:
-#			return line
+		if "Offset" not in line:
+			return line
 
 		from octoprint.util.comm import parse_firmware_line
 
