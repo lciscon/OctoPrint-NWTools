@@ -75,7 +75,7 @@ class NwtoolsPlugin(octoprint.plugin.SettingsPlugin,
 
 #        logging.getLogger("octoprint.plugin." + __name__).info("Z offset detected: {machine}.".format(machine=z_offset_data["Z Offset:"]))
 
-		return line
+        return line
 
 
 #	def detect_machine_type(comm, line, *args, **kwargs):
