@@ -394,7 +394,7 @@ $(function() {
         }
 
         self.onStartupComplete = function() {
-//          self.loadZOffset();
+          self.loadZOffset();
         }
 
     }
