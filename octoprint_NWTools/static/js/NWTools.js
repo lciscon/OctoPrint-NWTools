@@ -239,8 +239,7 @@ $(function() {
 	};
 
   self.fromZResponse = function (data) {
-            console.log('MSL: got reply2 ' + data.tool0.actual);
-	    self.currentTemp = parseFloat(data.tool0.actual);
+            console.log('MSL: got reply5 ' + data);
         };
 
 
