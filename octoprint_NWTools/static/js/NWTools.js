@@ -395,7 +395,7 @@ $(function() {
         };
 
         self.onEventConnected = function(payload) {
-          self.loadZOffset();
+//          self.loadZOffset();
         };
 
     }
