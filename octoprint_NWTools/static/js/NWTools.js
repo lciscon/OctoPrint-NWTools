@@ -62,21 +62,21 @@ $(function() {
             });
         };
 
-        self.onDataUpdaterPluginMessage = function (plugin, zoffset_data) {
-              console.log('MSL: got itA!');
-              if (plugin !== "NWTools") {
-                return;
-              }
 
-              console.log('MSL: got zoff1 ' + zoffset_data);
+        self.onDataUpdaterPluginMessage = function(plugin, data) {
+           console.log('ReceivedX '+plugin);
 
-              if (zoffset_data) {
-                if (zoffset_data.length > 0) {
+                if (plugin != "NWTools") {
+    				// console.log('Ignoring '+plugin);
+                    return;
                 }
-                return;
-              }
-              return;
-        }
+
+    			if(data.type == "popup") {
+    				 console.log(data.msg);
+    			} else {
+            console.log('MSL: got zoff1 ' + data.zoffset);
+          }
+    		}
 
 
 	function sendPrinterCommand (cmdstr) {

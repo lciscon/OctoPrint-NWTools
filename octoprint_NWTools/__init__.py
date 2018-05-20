@@ -70,12 +70,16 @@ class NwtoolsPlugin(octoprint.plugin.SettingsPlugin,
 		if "Marlin" not in line:
 			return line
 
-        __plugin_implementation__.setZOffsetDirect(line)
 		self._logger.info("Processings2: %s" % line)
-#		self._plugin_manager.send_plugin_message(self._identifier, dict(ZOffset=line))
+		self._plugin_manager.send_plugin_message(self._identifier, dict(zoffset=line))
+#		self._plugin_manager.send_plugin_message(self._identifier, dict(type="popup", msg=re.sub(r'^M117\s?', '', cmd)))
 
 		return line
 
+	def AlertM117(self, comm_instance, phase, cmd, cmd_type, gcode, *args, **kwargs):
+		if gcode and cmd.startswith("M117"):
+			self._plugin_manager.send_plugin_message(self._identifier, dict(type="popup", msg=re.sub(r'^M117\s?', '', cmd)))
+			return
 
 
 #	def detect_machine_type(comm, line, *args, **kwargs):
@@ -99,5 +103,6 @@ def __plugin_load__():
 	global __plugin_hooks__
 	__plugin_hooks__ = {
 		"octoprint.plugin.softwareupdate.check_config": __plugin_implementation__.get_update_information,
-		"octoprint.comm.protocol.gcode.received": __plugin_implementation__.processGCODE
+		"octoprint.comm.protocol.gcode.received": __plugin_implementation__.processGCODE,
+		"octoprint.comm.protocol.gcode.queuing": __plugin_implementation__.AlertM117
 	}
