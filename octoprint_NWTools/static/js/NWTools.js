@@ -263,7 +263,8 @@ $(function() {
     console.log('Loading Z Offset');
 
     //query the printer for the current Z Offset
-    sendPrinterCommand('M505');
+//    sendPrinterCommand('M505');
+    sendPrinterCommand('M115');
 //    console.log('Loading Z Offset: ' + z_offset_data[1]);
 //    return z_offset_data[1];
     $.ajax({
@@ -425,7 +426,8 @@ $(function() {
         // This is a list of dependencies to inject into the plugin, the order which you request
         // here is the order in which the dependencies will be injected into your view model upon
         // instantiation via the parameters argument
-        ["settingsViewModel", "controlViewModel"],
+        ["controlViewModel"],
+//        ["settingsViewModel", "controlViewModel"],
 
         // Finally, this is the list of selectors for all elements we want this view model to be bound to.
         ["#tab_plugin_NWTools"]

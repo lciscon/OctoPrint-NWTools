@@ -66,7 +66,8 @@ class NwtoolsPlugin(octoprint.plugin.SettingsPlugin,
 		)
 
 	def processGCODE(self, comm, line, *args, **kwargs):
-		if "Offset" not in line:
+#		if "Offset" not in line:
+		if "Marlin" not in line:
 			return line
 
 		self._logger.info("Processings2: %s" % line)
