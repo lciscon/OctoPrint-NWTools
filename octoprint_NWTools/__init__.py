@@ -74,25 +74,6 @@ class NwtoolsPlugin(octoprint.plugin.SettingsPlugin,
 
 		return line
 
-    def get_api_commands(self):
-        return dict(
-            command1=[],
-            command2=["some_parameter"]
-        )
-
-    def on_api_command(self, command, data):
-        import flask
-        if command == "command1":
-            parameter = "unset"
-            if "parameter" in data:
-                parameter = "set"
-            self._logger.info("command1 called, parameter is {parameter}".format(**locals()))
-        elif command == "command2":
-            self._logger.info("command2 called, some_parameter is {some_parameter}".format(**data))
-
-    def on_api_get(self, request):
-        return flask.jsonify(foo="bar")
-
 
 
 #	def detect_machine_type(comm, line, *args, **kwargs):
