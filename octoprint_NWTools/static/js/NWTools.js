@@ -1,18 +1,15 @@
 $(function() {
 
-    import logging
-    import re
-
     function NWToolsViewModel(parameters) {
-      var self = this;
+        var self = this;
 
-      self.settings = parameters[0];
-      self.control = parameters[1];
+        self.settings = parameters[0];
+        self.control = parameters[1];
 
-	    self.targetTemp = 0;
-	    self.currentTemp = 0;
+	self.targetTemp = 0;
+	self.currentTemp = 0;
 
-      self.autoCalibrating = 0;
+  self.autoCalibrating = 0;
 
     	self.actionTriggerTemplate = ko.observable(undefined);
 	    self.actionTriggerCallback = function () {
@@ -44,10 +41,9 @@ $(function() {
 
     	};
 
-  function sleep (time) {
+    	function sleep (time) {
  	    return new Promise((resolve) => setTimeout(resolve, time));
-	};
-
+	}
 
 	self.fromResponse = function (data) {
             console.log('MSL: got reply2 ' + data.tool0.actual);
@@ -62,22 +58,6 @@ $(function() {
                 success: self.fromResponse
             });
         };
-
-
-        self.onDataUpdaterPluginMessage = function(plugin, data) {
-           console.log('ReceivedX '+plugin);
-
-                if (plugin != "NWTools") {
-    				// console.log('Ignoring '+plugin);
-                    return;
-                }
-
-    			if(data.type == "popup") {
-    				 console.log(data.msg);
-    			} else {
-            console.log('MSL: got zoff1 ' + data.zoffset);
-          }
-    		}
 
 
 	function sendPrinterCommand (cmdstr) {
@@ -229,12 +209,10 @@ $(function() {
         };
 
 	self.lightsOn = function() {
-    console.log('Lights On');
 	    sendPrinterCommand('M5');
 	};
 
 	self.lightsOff = function() {
-    console.log('Lights Off');
             sendPrinterCommand('M3');
 	};
 
@@ -256,56 +234,6 @@ $(function() {
       sendPrinterCommand('G0 Z0.5 F300');
       sendPrinterCommand('G91');
 	};
-
-  self.fromZResponse = function (data) {
-            console.log('MSL: got reply5 ' + data);
-        };
-
-
-  self.loadZOffset() {
-    console.log('Loading Z Offset');
-
-    //query the printer for the current Z Offset
-//    sendPrinterCommand('M505');
-    sendPrinterCommand('M115');
-//    console.log('Loading Z Offset: ' + z_offset_data[1]);
-//    return z_offset_data[1];
-    $.ajax({
-        url: API_BASEURL + "plugins/NWTools",
-        type: "POST",
-        command: "command1",
-        dataType: "json",
-        success: self.fromZResponse
-    });
-
-  };
-
-  self.setZOffsetDirect(offsetval) {
-    self.preheat1();
-    console.log('Loading Z Offset Direct: ' + offsetval);
-  };
-
-  self.setZOffset() {
-    sendPrinterCommand('M670 O' + );
-    console.log('Loading Z Offset: ' + z_offset_data[1]);
-    return z_offset_data[1];
-  };
-
-  self.increaseZOffset1() {
-
-  };
-
-  self.increaseZOffset2() {
-
-  };
-
-  self.decreaseZOffset1() {
-
-  };
-
-  self.decreaseZOffset2() {
-
-  };
 
 	self.autoCalibrate = function() {
 	    self.preheat(0, self.autoCalibrateHeated);
@@ -410,19 +338,12 @@ $(function() {
 	};
 
 
-
-
         // This will get called before the HelloWorldViewModel gets bound to the DOM, but after its
         // dependencies have already been initialized. It is especially guaranteed that this method
         // gets called _after_ the settings have been retrieved from the OctoPrint backend and thus
         // the SettingsViewModel been properly populated.
         self.onBeforeBinding = function() {
-        };
-
-        self.onEventConnected = function(payload) {
-          self.loadZOffset();
-        };
-
+        }
     }
 
     // This is how our plugin registers itself with the application, by adding some configuration

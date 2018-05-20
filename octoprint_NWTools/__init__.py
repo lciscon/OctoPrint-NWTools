@@ -11,9 +11,6 @@ from __future__ import absolute_import
 
 import octoprint.plugin
 import octoprint.printer
-import octoprint.logging
-import flask
-import re
 
 class NwtoolsPlugin(octoprint.plugin.SettingsPlugin,
                    octoprint.plugin.StartupPlugin,
@@ -66,26 +63,6 @@ class NwtoolsPlugin(octoprint.plugin.SettingsPlugin,
 			)
 		)
 
-	def processGCODE(self, comm, line, *args, **kwargs):
-#		if "Offset" not in line:
-		if "Marlin" not in line:
-			return line
-
-		self._logger.info("Processings2: %s" % line)
-		self._plugin_manager.send_plugin_message(self._identifier, dict(zoffset=line))
-#		self._plugin_manager.send_plugin_message(self._identifier, dict(type="popup", msg=re.sub(r'^M117\s?', '', cmd)))
-
-		return line
-
-	def AlertM117(self, comm_instance, phase, cmd, cmd_type, gcode, *args, **kwargs):
-		if gcode and cmd.startswith("M117"):
-			self._plugin_manager.send_plugin_message(self._identifier, dict(type="popup", msg=re.sub(r'^M117\s?', '', cmd)))
-			return
-
-
-#	def detect_machine_type(comm, line, *args, **kwargs):
-#        return line
-
 
 # If you want your plugin to be registered within OctoPrint under a different name than what you defined in setup.py
 # ("OctoPrint-PluginSkeleton"), you may define that here. Same goes for the other metadata derived from setup.py that
@@ -93,17 +70,12 @@ class NwtoolsPlugin(octoprint.plugin.SettingsPlugin,
 __plugin_name__ = "Tools"
 __plugin_implementation__ = NwtoolsPlugin()
 
-def detect_machine_type(comm, line, *args, **kwargs):
-    return line
-
-
 def __plugin_load__():
 	global __plugin_implementation__
 	__plugin_implementation__ = NwtoolsPlugin()
 
 	global __plugin_hooks__
 	__plugin_hooks__ = {
-		"octoprint.plugin.softwareupdate.check_config": __plugin_implementation__.get_update_information,
-		"octoprint.comm.protocol.gcode.received": __plugin_implementation__.processGCODE,
-		"octoprint.comm.protocol.gcode.queuing": __plugin_implementation__.AlertM117
+		"octoprint.plugin.softwareupdate.check_config": __plugin_implementation__.get_update_information
 	}
+
