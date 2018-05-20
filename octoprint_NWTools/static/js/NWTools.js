@@ -229,10 +229,12 @@ $(function() {
         };
 
 	self.lightsOn = function() {
+    console.log('Lights On');
 	    sendPrinterCommand('M5');
 	};
 
 	self.lightsOff = function() {
+    console.log('Lights Off');
             sendPrinterCommand('M3');
 	};
 
