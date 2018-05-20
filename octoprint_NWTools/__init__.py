@@ -12,6 +12,7 @@ from __future__ import absolute_import
 import octoprint.plugin
 import octoprint.printer
 import octoprint.logging
+import flask
 
 class NwtoolsPlugin(octoprint.plugin.SettingsPlugin,
                    octoprint.plugin.StartupPlugin,
@@ -95,5 +96,4 @@ def __plugin_load__():
 	global __plugin_hooks__
 	__plugin_hooks__ = {
 		"octoprint.plugin.softwareupdate.check_config": __plugin_implementation__.get_update_information,
-		"octoprint.comm.protocol.gcode.received": __plugin_implementation__.processGCODE
 	}
