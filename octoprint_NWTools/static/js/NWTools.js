@@ -62,6 +62,22 @@ $(function() {
             });
         };
 
+        self.onDataUpdaterPluginMessage = function (plugin, zoffset_data) {
+              console.log('MSL: got itA!');
+              if (plugin !== "NWTools") {
+                return;
+              }
+
+              console.log('MSL: got zoff1 ' + zoffset_data);
+
+              if (zoffset_data) {
+                if (zoffset_data.length > 0) {
+                }
+                return;
+              }
+              return;
+        }
+
 
 	function sendPrinterCommand (cmdstr) {
 	   console.log('MSL: sending cmd: '+cmdstr);
@@ -395,7 +411,7 @@ $(function() {
         };
 
         self.onEventConnected = function(payload) {
-//          self.loadZOffset();
+          self.loadZOffset();
         };
 
     }
