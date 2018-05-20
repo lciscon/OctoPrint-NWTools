@@ -52,6 +52,7 @@ class NwtoolsPlugin(octoprint.plugin.SettingsPlugin,
         return flask.jsonify(foo="bar")
 
 
+
 	##~~ AssetPlugin mixin
 
 	def get_assets(self):
@@ -115,5 +116,6 @@ def __plugin_load__():
 
 	global __plugin_hooks__
 	__plugin_hooks__ = {
-        "octoprint.comm.protocol.gcode.received": __plugin_implementation__.processGCODE
+		"octoprint.plugin.softwareupdate.check_config": __plugin_implementation__.get_update_information,
+		"octoprint.comm.protocol.gcode.received": __plugin_implementation__.processGCODE
 	}
