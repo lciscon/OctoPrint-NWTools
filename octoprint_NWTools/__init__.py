@@ -70,8 +70,8 @@ class NwtoolsPlugin(octoprint.plugin.SettingsPlugin,
 		if "Marlin" not in line:
 			return line
 
-		self._logger.info("Processings2: %s" % line)
         __plugin_implementation__.setZOffsetDirect(line)
+		self._logger.info("Processings2: %s" % line)
 #		self._plugin_manager.send_plugin_message(self._identifier, dict(ZOffset=line))
 
 		return line
