@@ -277,6 +277,11 @@ $(function() {
 
   };
 
+  self.setZOffsetDirect(offsetval) {
+    self.preheat1();
+    console.log('Loading Z Offset Direct: ' + offsetval);
+  };
+
   self.setZOffset() {
     sendPrinterCommand('M670 O' + );
     console.log('Loading Z Offset: ' + z_offset_data[1]);
