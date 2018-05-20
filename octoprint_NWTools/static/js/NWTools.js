@@ -61,7 +61,7 @@ $(function() {
 
 
 	function sendPrinterCommand (cmdstr) {
-	   console.log('MSL: sending cmd: '+cmdstr);
+	   console.debug('MSL: sending cmd: '+cmdstr);
            self.control.sendCustomCommand({ command: cmdstr });
    	};
 
