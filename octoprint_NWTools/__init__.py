@@ -13,6 +13,7 @@ import octoprint.plugin
 import octoprint.printer
 import octoprint.logging
 import flask
+import re
 
 class NwtoolsPlugin(octoprint.plugin.SettingsPlugin,
                    octoprint.plugin.StartupPlugin,
