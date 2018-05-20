@@ -1,6 +1,7 @@
 $(function() {
 
     import logging
+    import re
 
     function NWToolsViewModel(parameters) {
       var self = this;
