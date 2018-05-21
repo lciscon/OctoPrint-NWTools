@@ -210,6 +210,7 @@ $(function() {
 
 	self.lightsOn = function() {
 	    sendPrinterCommand('M5');
+      self.preheat1(); //TESTTEST
 	};
 
 	self.lightsOff = function() {
