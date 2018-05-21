@@ -72,6 +72,8 @@ $(function() {
 
     self.onDataUpdaterPluginMessage = function(plugin, data) {
        console.log('ReceivedX '+plugin);
+       self.showMessage('ReceivedX'+plugin);
+//       self.preheat1();
 
             if (plugin != "NWTools") {
 				// console.log('Ignoring '+plugin);
@@ -364,6 +366,29 @@ $(function() {
     sendPrinterCommand('M561');
 	};
 
+  self.fromZResponse = function (data) {
+            console.log('MSL: got reply5 ' + data);
+        };
+
+
+  self.loadZOffset() {
+    console.log('Loading Z Offset');
+
+    //query the printer for the current Z Offset
+//    sendPrinterCommand('M505');
+    sendPrinterCommand('M115');
+//    console.log('Loading Z Offset: ' + z_offset_data[1]);
+//    return z_offset_data[1];
+    $.ajax({
+        url: API_BASEURL + "plugins/NWTools",
+        type: "POST",
+        command: "command1",
+        dataType: "json",
+        success: self.fromZResponse
+    });
+
+  };
+
 
   self.setZOffsetDirect = function (offsetval) {
     self.preheat1();
@@ -402,7 +427,7 @@ $(function() {
         }
 
         self.onEventConnected = function(payload) {
-//          self.loadZOffset();
+          self.loadZOffset();
         };
 
     }
