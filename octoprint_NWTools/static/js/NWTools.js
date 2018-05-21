@@ -1,18 +1,15 @@
 $(function() {
 
-  import logging;
-  import re;
-
     function NWToolsViewModel(parameters) {
         var self = this;
 
         self.settings = parameters[0];
         self.control = parameters[1];
 
-	self.targetTemp = 0;
-	self.currentTemp = 0;
+	      self.targetTemp = 0;
+	      self.currentTemp = 0;
 
-  self.autoCalibrating = 0;
+        self.autoCalibrating = 0;
 
     	self.actionTriggerTemplate = ko.observable(undefined);
 	    self.actionTriggerCallback = function () {
