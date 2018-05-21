@@ -387,33 +387,6 @@ $(function() {
 
   };
 
-  self.setZOffsetDirect(offsetval) {
-    self.preheat1();
-    console.log('Loading Z Offset Direct: ' + offsetval);
-  };
-
-  self.setZOffset() {
-    sendPrinterCommand('M670 O' + );
-//    console.log('Loading Z Offset: ' + z_offset_data[1]);
-//    return z_offset_data[1];
-  };
-
-  self.increaseZOffset1() {
-
-  };
-
-  self.increaseZOffset2() {
-
-  };
-
-  self.decreaseZOffset1() {
-
-  };
-
-  self.decreaseZOffset2() {
-
-  };
-
 
         // This will get called before the HelloWorldViewModel gets bound to the DOM, but after its
         // dependencies have already been initialized. It is especially guaranteed that this method
@@ -423,7 +396,6 @@ $(function() {
         }
 
         self.onEventConnected = function(payload) {
-          self.loadZOffset();
         };
 
     }
