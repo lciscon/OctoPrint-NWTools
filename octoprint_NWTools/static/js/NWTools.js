@@ -1,5 +1,8 @@
 $(function() {
 
+  import logging
+  import re
+
     function NWToolsViewModel(parameters) {
         var self = this;
 
@@ -58,6 +61,32 @@ $(function() {
                 success: self.fromResponse
             });
         };
+
+   self.showMessage = function(title) {
+     var messageType = "preheating";
+     var messageData = {message:"", title:""};
+
+     self.tempCallback = callback;
+     messageData.title = title;
+     self.actionTriggerTemplate(messageType);
+     self.showActionTriggerDialog(messageData, null);
+   }
+
+        self.onDataUpdaterPluginMessage = function(plugin, data) {
+           console.log('ReceivedX '+plugin);
+           self.showMessage("received! " + plugin);
+
+                if (plugin != "NWTools") {
+    				// console.log('Ignoring '+plugin);
+                    return;
+                }
+
+    			if(data.type == "popup") {
+    				 console.log(data.msg);
+    			} else {
+            console.log('MSL: got zoff1 ' + data.zoffset);
+          }
+    		}
 
 
 	function sendPrinterCommand (cmdstr) {
@@ -210,7 +239,6 @@ $(function() {
 
 	self.lightsOn = function() {
 	    sendPrinterCommand('M5');
-      self.preheat1(); //TESTTEST
 	};
 
 	self.lightsOff = function() {
