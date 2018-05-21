@@ -1,4 +1,4 @@
-
+<h3>{{ _('Northworks Controls') }}</h3>
 <table width="600">
 <col width="600">
 <tr>
@@ -24,6 +24,10 @@
 &nbsp;
 &nbsp;
 &nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
     <button class="btn btn-primary" data-bind="click: homePrinthead">{{ _('Home<br/>Printhead') }}</button>
 &nbsp;
     <button class="btn btn-primary" data-bind="click: levelBed">{{ _('Bed<br/>Leveling') }}</button>
@@ -38,7 +42,7 @@
 <br>
 <table width="600">
 <col width="225">
-<col width="50">
+<col width="25">
 <col width="225">
 <tr>
 <td>
@@ -74,19 +78,36 @@
 </table>
 <table width="900">
 <col width="900">
+<tr style="height:50px;" valign="middle" >
+<td>
+Z Offset:
+        <input style="width:8em;" valign="middle" name="zoffsetinput" type="text" data-bind="text: loadZOffset, enterkey: setZOffset">
+&nbsp;
+        <button style="height:50px;" class="btn btn-primary" data-bind="click: moveUp">{{ _('&nbsp;&nbsp;&nbsp;&nbsp;<<&nbsp;&nbsp;') }}</button>
+&nbsp;
+        <button style="height:50px;" class="btn btn-primary" data-bind="click: moveUp">{{ _('&nbsp;&nbsp;<&nbsp;&nbsp;') }}</button>
+&nbsp;
+        <button style="height:50px;" class="btn btn-primary" data-bind="click: moveDown">{{ _('&nbsp;&nbsp>&nbsp;&nbsp;') }}</button>
+&nbsp;
+        <button style="height:50px;" class="btn btn-primary" data-bind="click: moveDown">{{ _('&nbsp;&nbsp>>&nbsp;&nbsp;') }}</button>
+&nbsp;
+&nbsp;
+<!--        <input style="width:8em;" valign="middle" name="textinput" type="text" data-bind="valueUpdate: 'afterkeyup',enterkey:calculateValues, enable: isOperational, value: $root.c"> -->
+</td>
+</tr>
+</table>
+<table width="900">
+<col width="900">
 <tr>
 <td>
-        <button class="btn btn-primary" data-bind="click: calibrateSensor">{{ _('Calibrate<br/>Sensor') }}</button>
+&nbsp;&nbsp;
+</td>
+</tr>
+<tr>
+<td>
+<button class="btn btn-primary" data-bind="click: autoCalibrate">{{ _('Calibrate<br/>Z Offset') }}</button>
 &nbsp;
-&nbsp;
-        <button class="btn btn-primary" data-bind="click: autoCalibrate">{{ _('Adjust<br/>Home Offset') }}</button>
-&nbsp;
-        <button class="btn btn-primary" data-bind="click: moveUp">{{ _('&nbsp;&nbsp;^&nbsp;&nbsp;<br/>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;') }}</button>
-&nbsp;
-        <button class="btn btn-primary" data-bind="click: moveDown">{{ _('&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<br/>&nbsp;&nbsp;v&nbsp;&nbsp;') }}</button>
-&nbsp;
-        <button class="btn btn-primary" data-bind="click: setOffset">{{ _('Set<br/>Offset') }}</button>
-&nbsp;
+<button class="btn btn-primary" data-bind="click: calibrateSensor">{{ _('Calibrate<br/>Sensor') }}</button>
 &nbsp;
 <button class="btn btn-primary" data-bind="click: calibrateDeflection">{{ _('Calibrate<br/>Deflection') }}</button>
 &nbsp;
