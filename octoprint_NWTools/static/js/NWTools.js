@@ -59,6 +59,32 @@ $(function() {
             });
         };
 
+    self.showMessage = function(title) {
+      var messageType = "preheating";
+      var messageData = {message:"", title:""};
+
+      self.tempCallback = callback;
+      messageData.title = title;
+      self.actionTriggerTemplate(messageType);
+      self.showActionTriggerDialog(messageData, null);
+    }
+
+
+    self.onDataUpdaterPluginMessage = function(plugin, data) {
+       console.log('ReceivedX '+plugin);
+
+            if (plugin != "NWTools") {
+				// console.log('Ignoring '+plugin);
+                return;
+            }
+
+			if(data.type == "popup") {
+				 console.log(data.msg);
+			} else {
+        console.log('MSL: got zoff1 ' + data.zoffset);
+      }
+		}
+
 
 	function sendPrinterCommand (cmdstr) {
 	   console.debug('MSL: sending cmd: '+cmdstr);
@@ -338,6 +364,56 @@ $(function() {
     sendPrinterCommand('M561');
 	};
 
+  self.fromZResponse = function (data) {
+            console.log('MSL: got reply5 ' + data);
+        };
+
+
+  self.loadZOffset() {
+    console.log('Loading Z Offset');
+
+    //query the printer for the current Z Offset
+//    sendPrinterCommand('M505');
+    sendPrinterCommand('M115');
+//    console.log('Loading Z Offset: ' + z_offset_data[1]);
+//    return z_offset_data[1];
+    $.ajax({
+        url: API_BASEURL + "plugins/NWTools",
+        type: "POST",
+        command: "command1",
+        dataType: "json",
+        success: self.fromZResponse
+    });
+
+  };
+
+  self.setZOffsetDirect(offsetval) {
+    self.preheat1();
+    console.log('Loading Z Offset Direct: ' + offsetval);
+  };
+
+  self.setZOffset() {
+    sendPrinterCommand('M670 O' + );
+    console.log('Loading Z Offset: ' + z_offset_data[1]);
+    return z_offset_data[1];
+  };
+
+  self.increaseZOffset1() {
+
+  };
+
+  self.increaseZOffset2() {
+
+  };
+
+  self.decreaseZOffset1() {
+
+  };
+
+  self.decreaseZOffset2() {
+
+  };
+
 
         // This will get called before the HelloWorldViewModel gets bound to the DOM, but after its
         // dependencies have already been initialized. It is especially guaranteed that this method
@@ -345,6 +421,11 @@ $(function() {
         // the SettingsViewModel been properly populated.
         self.onBeforeBinding = function() {
         }
+
+        self.onEventConnected = function(payload) {
+          self.loadZOffset();
+        };
+
     }
 
     // This is how our plugin registers itself with the application, by adding some configuration
