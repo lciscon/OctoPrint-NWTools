@@ -371,7 +371,8 @@ $(function() {
   };
 
   self.setZOffset = function() {
-    sendPrinterCommand('M670 O' + );
+    sendPrinterCommand('M115');
+//    sendPrinterCommand('M670 O' + );
 //    console.log('Loading Z Offset: ' + z_offset_data[1]);
 //    return z_offset_data[1];
   };
