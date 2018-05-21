@@ -72,8 +72,6 @@ $(function() {
 
     self.onDataUpdaterPluginMessage = function(plugin, data) {
        console.log('ReceivedX '+plugin);
-       self.showMessage('ReceivedX'+plugin);
-//       self.preheat1();
 
             if (plugin != "NWTools") {
 				// console.log('Ignoring '+plugin);
