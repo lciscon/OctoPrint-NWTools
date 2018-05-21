@@ -365,6 +365,23 @@ $(function() {
 	};
 
 
+  self.fromZResponse = function (data2) {
+        console.log('MSL: got reply5 ');
+  };
+
+  self.loadZOffset() {
+    console.log('Loading Z Offset');
+    sendPrinterCommand('M115');
+
+//    $.ajax({
+//        url: API_BASEURL + "plugins/NWTools",
+//        type: "POST",
+//        command: "command1",
+//        dataType: "json",
+//        success: self.fromZResponse
+//    });
+  };
+
 
         // This will get called before the HelloWorldViewModel gets bound to the DOM, but after its
         // dependencies have already been initialized. It is especially guaranteed that this method
