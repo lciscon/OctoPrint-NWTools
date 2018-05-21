@@ -365,21 +365,54 @@ $(function() {
 	};
 
 
-  self.fromZResponse = function (data2) {
-        console.log('MSL: got reply5 ');
+  self.fromZResponse = function (data) {
+            console.log('MSL: got reply5 ' + data);
+        };
+
+
+  self.loadZOffset = function () {
+    console.log('Loading Z Offset');
+
+    //query the printer for the current Z Offset
+//    sendPrinterCommand('M505');
+    sendPrinterCommand('M115');
+//    console.log('Loading Z Offset: ' + z_offset_data[1]);
+//    return z_offset_data[1];
+    $.ajax({
+        url: API_BASEURL + "plugins/NWTools",
+        type: "POST",
+        command: "command1",
+        dataType: "json",
+        success: self.fromZResponse
+    });
+
   };
 
-  self.loadZOffset() {
-    console.log('Loading Z Offset');
-    sendPrinterCommand('M115');
+  self.setZOffsetDirect = function (offsetval) {
+    self.preheat1();
+    console.log('Loading Z Offset Direct: ' + offsetval);
+  };
 
-//    $.ajax({
-//        url: API_BASEURL + "plugins/NWTools",
-//        type: "POST",
-//        command: "command1",
-//        dataType: "json",
-//        success: self.fromZResponse
-//    });
+  self.setZOffset = function () {
+    sendPrinterCommand('M670 O' + );
+    console.log('Loading Z Offset: ' + z_offset_data[1]);
+    return z_offset_data[1];
+  };
+
+  self.increaseZOffset1 = function () {
+
+  };
+
+  self.increaseZOffset2 = function () {
+
+  };
+
+  self.decreaseZOffset1 = function () {
+
+  };
+
+  self.decreaseZOffset2 = function () {
+
   };
 
 
@@ -389,6 +422,10 @@ $(function() {
         // the SettingsViewModel been properly populated.
         self.onBeforeBinding = function() {
         }
+
+        self.onEventConnected = function(payload) {
+          self.loadZOffset();
+        };
 
     }
 
