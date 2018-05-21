@@ -393,25 +393,25 @@ $(function() {
     console.log('Loading Z Offset Direct: ' + offsetval);
   };
 
-  self.setZOffset = function () {
+  self.setZOffset = function() {
     sendPrinterCommand('M670 O' + );
-    console.log('Loading Z Offset: ' + z_offset_data[1]);
-    return z_offset_data[1];
+//    console.log('Loading Z Offset: ' + z_offset_data[1]);
+//    return z_offset_data[1];
   };
 
-  self.increaseZOffset1 = function () {
-
-  };
-
-  self.increaseZOffset2 = function () {
+  self.increaseZOffset1 = function() {
 
   };
 
-  self.decreaseZOffset1 = function () {
+  self.increaseZOffset2 = function() {
 
   };
 
-  self.decreaseZOffset2 = function () {
+  self.decreaseZOffset1 = function() {
+
+  };
+
+  self.decreaseZOffset2 = function() {
 
   };
 
