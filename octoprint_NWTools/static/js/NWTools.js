@@ -370,6 +370,26 @@ $(function() {
     console.log('Loading Z Offset Direct: ' + offsetval);
   };
 
+  self.fromZResponse = function (data) {
+              console.log('MSL: got reply5 ' + data);
+          };
+
+
+    self.loadZOffset = function () {
+      console.log('Loading Z Offset');
+
+      sendPrinterCommand('M115');
+      $.ajax({
+          url: API_BASEURL + "plugins/NWTools",
+          type: "POST",
+          command: "command1",
+          dataType: "json",
+          success: self.fromZResponse
+      });
+
+    };
+
+
   self.setZOffset = function() {
     sendPrinterCommand('M115');
 //    sendPrinterCommand('M670 O' + );
