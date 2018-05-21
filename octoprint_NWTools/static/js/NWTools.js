@@ -364,19 +364,15 @@ $(function() {
     sendPrinterCommand('M561');
 	};
 
-  self.fromZResponse = function (data) {
-        console.log('MSL: got reply5 ' + data);
-  };
 
+  self.fromZResponse = function (data) {
+        console.log('MSL: got reply5 ');
+  };
 
   self.loadZOffset() {
     console.log('Loading Z Offset');
-
-    //query the printer for the current Z Offset
-//    sendPrinterCommand('M505');
     sendPrinterCommand('M115');
-//    console.log('Loading Z Offset: ' + z_offset_data[1]);
-//    return z_offset_data[1];
+
     $.ajax({
         url: API_BASEURL + "plugins/NWTools",
         type: "POST",
@@ -384,7 +380,6 @@ $(function() {
         dataType: "json",
         success: self.fromZResponse
     });
-
   };
 
 
@@ -394,9 +389,6 @@ $(function() {
         // the SettingsViewModel been properly populated.
         self.onBeforeBinding = function() {
         }
-
-        self.onEventConnected = function(payload) {
-        };
 
     }
 
