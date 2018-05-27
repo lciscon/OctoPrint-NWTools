@@ -8,8 +8,26 @@ $(function() {
 
 	      self.targetTemp = 0;
 	      self.currentTemp = 0;
-
+		    self.autoClose = ko.observable();
         self.autoCalibrating = 0;
+        self.msgType = ko.observable();
+    		self.msgTypes = ko.observableArray([{
+    						name : 'Notice',
+    						value : 'notice'
+    					}, {
+    						name : 'Error',
+    						value : 'error'
+    					}, {
+    						name : 'Info',
+    						value : 'info'
+    					}, {
+    						name : 'Success',
+    						value : 'success'
+    					}, {
+    						name : 'Disabled',
+    						value : 'disabled'
+    					}
+    				]);
 
     	self.actionTriggerTemplate = ko.observable(undefined);
 	    self.actionTriggerCallback = function () {
@@ -71,9 +89,14 @@ $(function() {
 
 
     self.onDataUpdaterPluginMessage = function(plugin, data) {
-       console.log('ReceivedX '+plugin);
-       self.showMessage("ReceivedX");
+//       console.log('ReceivedX '+plugin);
 
+       new PNotify({
+         title: 'Pop Up Message',
+         text: data.zoffset,
+         type: self.msgType(),
+         hide: self.autoClose()
+         });
 //            if (plugin != "NWTools") {
 				// console.log('Ignoring '+plugin);
 //                return;
