@@ -77,19 +77,11 @@ $(function() {
             });
         };
 
-    self.showMessage = function(title) {
-      var messageType = "preheating";
-      var messageData = {message:"", title:""};
-
-      self.tempCallback = callback;
-      messageData.title = title;
-      self.actionTriggerTemplate(messageType);
-      self.showActionTriggerDialog(messageData, null);
-    }
-
-
     self.onDataUpdaterPluginMessage = function(plugin, data) {
-//       console.log('ReceivedX '+plugin);
+
+      if (plugin != "NWTools") {
+          return;
+      }
 
        new PNotify({
          title: 'Pop Up Message',
@@ -97,16 +89,14 @@ $(function() {
          type: self.msgType(),
          hide: self.autoClose()
          });
-//            if (plugin != "NWTools") {
-				// console.log('Ignoring '+plugin);
-//                return;
-//            }
 
-			if(data.type == "popup") {
-				 console.log(data.msg);
-			} else {
-        console.log('MSL: got zoff1 ' + data.zoffset);
-      }
+         zoffsetinput
+
+//			if(data.type == "popup") {
+//				 console.log(data.msg);
+//			} else {
+//        console.log('MSL: got zoff1 ' + data.zoffset);
+//      }
 		}
 
 
@@ -400,7 +390,7 @@ $(function() {
 
 
     self.loadZOffset = function () {
-      console.log('Loading Z Offset');
+//      console.log('Loading Z Offset');
 
       sendPrinterCommand('M115');
       $.ajax({
@@ -411,6 +401,7 @@ $(function() {
           success: self.fromZResponse
       });
 
+      return("-3.0");
     };
 
 
