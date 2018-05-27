@@ -77,18 +77,18 @@
 </tr>
 </table>
 
-<table id="temperature-table" class="table table-bordered table-hover">
+<table id="zoffset-table" class="table table-bordered table-hover">
         <tr>
-            <th class="temperature_actual" title="{{ _('Current actual temperature as reported by your printer') }}">{{ _('Actual') }}</th>
-            <th class="temperature_target" title="{{ _('Current target temperature as reported by your printer') }}">{{ _('Target') }}</th>
+            <th class="zoffset_actual" title="{{ _('Current actual zoffset as reported by your printer') }}">{{ _('Actual') }}</th>
+            <th class="zoffset_target" title="{{ _('Current target zoffset as reported by your printer') }}">{{ _('Target') }}</th>
         </tr>
 <tr>
-<td class="temperature_actual" data-bind="html: formatTemperature(actual()), attr: {title: formatTemperature(actual())}"></td>
-<td class="temperature_target">
+<td class="zoffset_actual" data-bind="html: loadZOffset, attr: {title: loadZOffset}"></td>
+<td class="zoffset_target">
     <form class="form-inline" style="margin:0" data-bind="submit: function(element) { $root.setTarget($data, element) }">
         <div class="input-prepend input-append">
             <button type="button" class="btn btn-input-dec" data-bind="click: $root.decrementTarget, enable: $root.isOperational() && $root.loginState.isUser()" title="{{ _('Fine adjust: -1°C') }}"><i class="fa fa-minus"></i></button>
-            <input type="number" min="0" max="999" class="input-mini input-nospin" style="width: 30px" data-bind="attr: {placeholder: cleanTemperature(target())}, value: newTarget, valueUpdate: 'input', enable: $root.isOperational() && $root.loginState.isUser(), event: { focus: function(d, e) {$root.handleFocus(e, 'target', $data) } }">
+            <input type="number" min="0" max="999" class="input-mini input-nospin" style="width: 30px" data-bind="attr: {placeholder: cleanzoffset(target())}, value: newTarget, valueUpdate: 'input', enable: $root.isOperational() && $root.loginState.isUser(), event: { focus: function(d, e) {$root.handleFocus(e, 'target', $data) } }">
             <button type="button" class="btn btn-input-inc" data-bind="click: $root.incrementTarget, enable: $root.isOperational() && $root.loginState.isUser()" title="{{ _('Fine adjust: +1°C') }}"><i class="fa fa-plus"></i></button>
         </div>
         <div class="btn-group">
