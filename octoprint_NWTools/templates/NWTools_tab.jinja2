@@ -76,10 +76,15 @@
 </td>
 </tr>
 </table>
-<table width="900">
-<col width="900">
-<tr>
 
+<table id="temperature-table" class="table table-bordered table-hover">
+        <tr>
+            <th class="temperature_tool"></th>
+            <th class="temperature_actual" title="{{ _('Current actual temperature as reported by your printer') }}">{{ _('Actual') }}</th>
+            <th class="temperature_target" title="{{ _('Current target temperature as reported by your printer') }}">{{ _('Target') }}</th>
+            <th class="temperature_offset" title="{{ _('Offset to apply to temperature commands sent from files') }}">{{ _('Offset') }}</th>
+        </tr>
+<tr>
 <th class="temperature_tool" data-bind="text: name, attr: {title: name}"></th>
 <td class="temperature_actual" data-bind="html: formatTemperature(actual()), attr: {title: formatTemperature(actual())}"></td>
 <td class="temperature_target">
@@ -109,9 +114,10 @@
         </div>
     </form>
 </td>
-
 </tr>
 </table>
+
+
 <table width="900">
 <col width="900">
 <tr>
