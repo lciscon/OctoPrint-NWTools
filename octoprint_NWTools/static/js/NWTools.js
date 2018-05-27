@@ -11,6 +11,7 @@ $(function() {
 		    self.autoClose = ko.observable();
         self.autoCalibrating = 0;
         self.msgType = ko.observable();
+        self.zOffset2 = "3.12";
     		self.msgTypes = ko.observableArray([{
     						name : 'Notice',
     						value : 'notice'
@@ -378,6 +379,10 @@ $(function() {
     sendPrinterCommand('M561');
 	};
 
+
+  self.zActual = function() {
+
+  }
 
   self.setZOffsetDirect = function (offsetval) {
     self.preheat1();
