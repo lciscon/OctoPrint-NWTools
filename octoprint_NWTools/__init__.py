@@ -71,6 +71,8 @@ class NwtoolsPlugin(octoprint.plugin.SettingsPlugin,
 			return line
 
 		self._logger.info("Processings2: %s" % line)
+		self._logger.info("Sending message to: %s" % self._identifier)
+        
 		self._plugin_manager.send_plugin_message(self._identifier, dict(zoffset=line))
 #		self._plugin_manager.send_plugin_message(self._identifier, dict(type="popup", msg=re.sub(r'^M117\s?', '', cmd)))
 

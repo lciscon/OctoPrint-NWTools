@@ -72,11 +72,12 @@ $(function() {
 
     self.onDataUpdaterPluginMessage = function(plugin, data) {
        console.log('ReceivedX '+plugin);
+       self.showMessage("ReceivedX");
 
-            if (plugin != "NWTools") {
+//            if (plugin != "NWTools") {
 				// console.log('Ignoring '+plugin);
-                return;
-            }
+//                return;
+//            }
 
 			if(data.type == "popup") {
 				 console.log(data.msg);
