@@ -10,6 +10,9 @@ $(function() {
 	      self.currentTemp = 0;
 
         self.actual = ko.observable(-0.1);
+        self.target = ko.observable(-0.1);
+        self.newTarget: ko.observable(),
+
         self.autoClose = ko.observable();
 
         self.autoCalibrating = 0;
@@ -67,6 +70,19 @@ $(function() {
  	    return new Promise((resolve) => setTimeout(resolve, time));
 	}
 
+  self.newTargetValid = ko.pureComputed(function() {
+      var value = self.newTarget();
+
+      try {
+          value = parseInt(value);
+      } catch (exc) {
+          return false;
+      }
+
+      return (value >= 0 && value <= 999);
+  });
+
+
 	self.fromResponse = function (data) {
             console.log('MSL: got reply2 ' + data.tool0.actual);
 	    self.currentTemp = parseFloat(data.tool0.actual);
@@ -93,6 +109,7 @@ $(function() {
               hide: self.autoClose()
               });
 
+              actual(99);
 		}
 
 	function sendPrinterCommand (cmdstr) {
@@ -378,8 +395,8 @@ $(function() {
     sendPrinterCommand('M561');
 	};
 
-  self.handleFocus = function(event, type, item) {
-        var value = item.newTarget();
+  self.handleFocus = function(event, item) {
+        var value = self.newTarget();
         if (value === undefined || (typeof(value) === "string" && value.trim() === "")) {
             item.newTarget(item.target());
         }
