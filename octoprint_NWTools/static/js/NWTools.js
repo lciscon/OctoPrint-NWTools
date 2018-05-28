@@ -9,7 +9,7 @@ $(function() {
 	      self.targetTemp = 0;
 	      self.currentTemp = 0;
 
-        self.actual = ko.observable(-0.0);
+        self.actual = ko.observable(153);
         self.autoClose = ko.observable();
 
         self.autoCalibrating = 0;
@@ -97,7 +97,7 @@ $(function() {
 
     function formatZoffset(zoff) {
         if (zoff === undefined || !_.isNumber(zoff)) return "-";
-        return _.sprintf("%.2f", zoff);
+        return _.sprintf("%.1f", zoff);
     };
 
 	function sendPrinterCommand (cmdstr) {
