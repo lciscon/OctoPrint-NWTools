@@ -451,6 +451,37 @@ $(function() {
 
   };
 
+  self.incrementTarget = function(item) {
+      var value = item.newTarget();
+      if (value === undefined || (typeof(value) === "string" && value.trim() === "")) {
+          value = item.target();
+      }
+      try {
+          value = parseInt(value);
+          if (value > 999) return;
+          item.newTarget(value + 1);
+          self.autosendTarget(item);
+      } catch (ex) {
+          // do nothing
+      }
+  };
+
+  self.decrementTarget = function(item) {
+      var value = item.newTarget();
+      if (value === undefined || (typeof(value) === "string" && value.trim() === "")) {
+          value = item.target();
+      }
+      try {
+          value = parseInt(value);
+          if (value <= 0) return;
+          item.newTarget(value - 1);
+          self.autosendTarget(item);
+      } catch (ex) {
+          // do nothing
+      }
+  };
+
+
   self.decreaseZOffset1 = function() {
 
   };
