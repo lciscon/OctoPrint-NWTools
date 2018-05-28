@@ -5,34 +5,11 @@ $(function() {
 
         self.settings = parameters[0];
         self.control = parameters[1];
-        self.loginState = parameters[2];
 
-        self.actual: ko.observable(123),
-        self.ztarget: ko.observable(0),
 	      self.targetTemp = 0;
 	      self.currentTemp = 0;
-		    self.autoClose = ko.observable();
+
         self.autoCalibrating = 0;
-        self.msgType = ko.observable();
-    		self.msgTypes = ko.observableArray([{
-    						name : 'Notice',
-    						value : 'notice'
-    					}, {
-    						name : 'Error',
-    						value : 'error'
-    					}, {
-    						name : 'Info',
-    						value : 'info'
-    					}, {
-    						name : 'Success',
-    						value : 'success'
-    					}, {
-    						name : 'Disabled',
-    						value : 'disabled'
-    					}
-    				]);
-
-
 
     	self.actionTriggerTemplate = ko.observable(undefined);
 	    self.actionTriggerCallback = function () {
@@ -82,25 +59,31 @@ $(function() {
             });
         };
 
+    self.showMessage = function(title) {
+      var messageType = "preheating";
+      var messageData = {message:"", title:""};
+
+      self.tempCallback = callback;
+      messageData.title = title;
+      self.actionTriggerTemplate(messageType);
+      self.showActionTriggerDialog(messageData, null);
+    }
+
+
     self.onDataUpdaterPluginMessage = function(plugin, data) {
+       console.log('ReceivedX '+plugin);
+       self.showMessage("ReceivedX");
 
-      if (plugin != "NWTools") {
-          return;
+//            if (plugin != "NWTools") {
+				// console.log('Ignoring '+plugin);
+//                return;
+//            }
+
+			if(data.type == "popup") {
+				 console.log(data.msg);
+			} else {
+        console.log('MSL: got zoff1 ' + data.zoffset);
       }
-
-       new PNotify({
-         title: 'Pop Up Message',
-         text: data.zoffset,
-         type: self.msgType(),
-         hide: self.autoClose()
-         });
-
-
-//			if(data.type == "popup") {
-//				 console.log(data.msg);
-//			} else {
-//        console.log('MSL: got zoff1 ' + data.zoffset);
-//      }
 		}
 
 
@@ -220,11 +203,6 @@ $(function() {
 	self.loadFilament2 = function() {
 	    self.loadFilament(1);
 	};
-
-  self.setTarget = function(item, form) {
-
-  };
-
 
         self.unloadFilamentComplete = function() {
 	    self.turnOffExtruder();
@@ -387,9 +365,6 @@ $(function() {
     sendPrinterCommand('M561');
 	};
 
-  self.getZOffset = function() {
-    return "9393939";
-  };
 
   self.setZOffsetDirect = function (offsetval) {
     self.preheat1();
@@ -402,7 +377,7 @@ $(function() {
 
 
     self.loadZOffset = function () {
-//      console.log('Loading Z Offset');
+      console.log('Loading Z Offset');
 
       sendPrinterCommand('M115');
       $.ajax({
@@ -413,7 +388,6 @@ $(function() {
           success: self.fromZResponse
       });
 
-      return("-3.0");
     };
 
 
@@ -463,7 +437,7 @@ $(function() {
         // This is a list of dependencies to inject into the plugin, the order which you request
         // here is the order in which the dependencies will be injected into your view model upon
         // instantiation via the parameters argument
-        ["settingsViewModel", "controlViewModel". "loginStateViewModel"],
+        ["settingsViewModel", "controlViewModel"],
 
         // Finally, this is the list of selectors for all elements we want this view model to be bound to.
         ["#tab_plugin_NWTools"]
