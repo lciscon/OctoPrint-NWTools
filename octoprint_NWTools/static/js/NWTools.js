@@ -95,7 +95,8 @@ $(function() {
 
 		}
 
-    function formatZoffset(zoff) {
+//    function formatZoffset(zoff) {
+    self.formatZoffset = function(zoff) {
         if (zoff === undefined || !_.isNumber(zoff)) return "-";
         return _.sprintf("%.1f", zoff);
     };
