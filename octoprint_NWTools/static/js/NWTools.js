@@ -93,6 +93,7 @@ $(function() {
               hide: self.autoClose()
               });
 
+              self.actual = 123;
 		}
 
 	function sendPrinterCommand (cmdstr) {
