@@ -9,7 +9,7 @@ $(function() {
 	      self.targetTemp = 0;
 	      self.currentTemp = 0;
 
-        self.actual = ko.observable(153);
+        self.actual = ko.observable(-0.1);
         self.autoClose = ko.observable();
 
         self.autoCalibrating = 0;
@@ -94,12 +94,6 @@ $(function() {
               });
 
 		}
-
-//    function formatZoffset(zoff) {
-    self.formatZoffset = function(zoff) {
-        if (zoff === undefined || !_.isNumber(zoff)) return "-";
-        return _.sprintf("%.1f", zoff);
-    };
 
 	function sendPrinterCommand (cmdstr) {
 	   console.debug('MSL: sending cmd: '+cmdstr);
@@ -383,6 +377,11 @@ $(function() {
 	self.resetLeveling = function() {
     sendPrinterCommand('M561');
 	};
+
+  self.formatZoffset = function(zoff) {
+      if (zoff === undefined || !_.isNumber(zoff)) return "-";
+      return _.sprintf("%.2f", zoff);
+  };
 
 
   self.setZOffsetDirect = function (offsetval) {
