@@ -9,6 +9,7 @@ $(function() {
 	      self.targetTemp = 0;
 	      self.currentTemp = 0;
 
+        self.actual = ko.observable(153);
         self.autoClose = ko.observable();
 
         self.autoCalibrating = 0;

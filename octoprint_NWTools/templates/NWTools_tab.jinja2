@@ -79,11 +79,11 @@
 
 <table id="zoffset-table" class="table table-bordered table-hover">
         <tr>
-            <th class="zoffset_actual" title="{{ _('Current actual zoffset as reported by your printer') }}">{{ _('Actual') }}</th>
+            <th class="temperature_actual" title="{{ _('Current actual zoffset as reported by your printer') }}">{{ _('Actual') }}</th>
             <th class="zoffset_target" title="{{ _('Current target zoffset as reported by your printer') }}">{{ _('Target') }}</th>
         </tr>
 <tr>
-<td class="zoffset_actual" data-bind="html: actual(), attr: {title: actual()}"></td>
+<td class="temperature_actual" data-bind="html: formatTemperature(actual()), attr: {title: formatTemperature(actual())}"></td>
 <td class="zoffset_target">
     <form class="form-inline" style="margin:0" data-bind="submit: function(element) { $root.setTarget($data, element) }">
         <div class="input-prepend input-append">
