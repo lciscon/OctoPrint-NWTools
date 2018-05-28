@@ -73,7 +73,7 @@ class NwtoolsPlugin(octoprint.plugin.SettingsPlugin,
 		self._logger.info("Processings2: %s" % line)
 		self._logger.info("Sending message to: %s" % self._identifier)
 
-        self._settings.set(["zOffset2", "999"], None)
+#        self._settings.set(["zOffset2", "999"], None)
 
 #    	self._logger.info("Hello World2! (more: %s)" % self._settings.get(["zOffset2"]))
 
