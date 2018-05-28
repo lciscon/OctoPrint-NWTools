@@ -9,7 +9,6 @@ $(function() {
 	      self.targetTemp = 0;
 	      self.currentTemp = 0;
 		    self.autoClose = ko.observable();
-        self.zOffset3 = ko.observable("123");
         self.autoCalibrating = 0;
         self.msgType = ko.observable();
     		self.msgTypes = ko.observableArray([{

@@ -21,7 +21,7 @@ class NwtoolsPlugin(octoprint.plugin.SettingsPlugin,
 		   octoprint.printer.PrinterInterface):
 
 	def on_after_startup(self):
-    		self._logger.info("Hello World! (more: %s)" % self._settings.get(["url"]))
+    		self._logger.info("Hello World! (more: %s)" % self._settings.get(["zOffset2"]))
 
 	def get_settings_defaults(self):
 		return dict(zOffset2="3.14")
