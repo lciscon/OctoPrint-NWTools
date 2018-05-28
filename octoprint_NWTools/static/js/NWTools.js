@@ -5,8 +5,9 @@ $(function() {
 
         self.settings = parameters[0];
         self.control = parameters[1];
+        self.loginState = parameters[2];
 
-        self.zactual: ko.observable("1255"),
+        self.actual: ko.observable(123),
         self.ztarget: ko.observable(0),
 	      self.targetTemp = 0;
 	      self.currentTemp = 0;
@@ -30,6 +31,8 @@ $(function() {
     						value : 'disabled'
     					}
     				]);
+
+
 
     	self.actionTriggerTemplate = ko.observable(undefined);
 	    self.actionTriggerCallback = function () {
@@ -92,7 +95,6 @@ $(function() {
          hide: self.autoClose()
          });
 
-         self.zactual = "939393";
 
 //			if(data.type == "popup") {
 //				 console.log(data.msg);
@@ -218,6 +220,11 @@ $(function() {
 	self.loadFilament2 = function() {
 	    self.loadFilament(1);
 	};
+
+  self.setTarget = function(item, form) {
+
+  };
+
 
         self.unloadFilamentComplete = function() {
 	    self.turnOffExtruder();
@@ -380,10 +387,9 @@ $(function() {
     sendPrinterCommand('M561');
 	};
 
-
-  self.zActual = function() {
-
-  }
+  self.getZOffset = function() {
+    return "9393939";
+  };
 
   self.setZOffsetDirect = function (offsetval) {
     self.preheat1();
@@ -457,7 +463,7 @@ $(function() {
         // This is a list of dependencies to inject into the plugin, the order which you request
         // here is the order in which the dependencies will be injected into your view model upon
         // instantiation via the parameters argument
-        ["settingsViewModel", "controlViewModel"],
+        ["settingsViewModel", "controlViewModel". "loginStateViewModel"],
 
         // Finally, this is the list of selectors for all elements we want this view model to be bound to.
         ["#tab_plugin_NWTools"]
