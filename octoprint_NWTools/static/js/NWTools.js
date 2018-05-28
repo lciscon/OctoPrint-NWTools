@@ -10,6 +10,25 @@ $(function() {
 	      self.currentTemp = 0;
 
         self.autoCalibrating = 0;
+        self.msgType = ko.observable();
+    		self.msgTypes = ko.observableArray([{
+    						name : 'Notice',
+    						value : 'notice'
+    					}, {
+    						name : 'Error',
+    						value : 'error'
+    					}, {
+    						name : 'Info',
+    						value : 'info'
+    					}, {
+    						name : 'Success',
+    						value : 'success'
+    					}, {
+    						name : 'Disabled',
+    						value : 'disabled'
+    					}
+    				]);
+
 
     	self.actionTriggerTemplate = ko.observable(undefined);
 	    self.actionTriggerCallback = function () {
