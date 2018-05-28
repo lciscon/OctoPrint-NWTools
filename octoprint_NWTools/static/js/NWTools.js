@@ -384,14 +384,67 @@ $(function() {
 	};
 
   self.handleFocus = function(event, type, item) {
-        var value = item.newTarget();
+        var value = self.newTarget();
         if (value === undefined || (typeof(value) === "string" && value.trim() === "")) {
-            item.newTarget(item.target());
+            self.newTarget(self.target());
         }
         window.setTimeout(function() {
             event.target.select();
         }, 0);
   };
+
+  self.newTargetValid = function() {
+      var value = self.newTarget();
+
+      new PNotify({
+        title: 'Pop Up Message',
+        text: 'Target Valid',
+        type: self.msgType(),
+        hide: self.autoClose()
+        });
+
+      try {
+          value = parseInt(value);
+      } catch (exc) {
+          return false;
+      }
+
+      return (value >= 0 && value <= 999);
+  };
+
+
+          self.setTargetToValue = function(value) {
+//              self.clearAutosendTarget(item);
+
+              try {
+                  value = parseInt(value);
+              } catch (ex) {
+                  return OctoPrintClient.createRejectedDeferred();
+              }
+
+              if (value < 0 || value > 999) return OctoPrintClient.createRejectedDeferred();
+
+              var onSuccess = function() {
+                  self.target(value);
+                  self.newTarget("");
+              };
+
+//                  return self._setToolTemperature(item.key(), value)
+//                      .done(onSuccess);
+          };
+
+  self.setTarget = function(form) {
+      var value = self.newTarget();
+      if (form !== undefined) {
+          $(form).find("input").blur();
+      }
+      if (value === undefined || (typeof(value) === "string" && value.trim() === "")) return OctoPrintClient.createRejectedDeferred();
+
+//      self.clearAutosendTarget(item);
+      return self.setTargetToValue(value);
+  };
+
+
 
   self.formatZoffset = function(zoff) {
       if (zoff === undefined || !_.isNumber(zoff)) return "-";
