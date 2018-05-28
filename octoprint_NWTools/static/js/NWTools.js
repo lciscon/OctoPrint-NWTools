@@ -9,6 +9,8 @@ $(function() {
 	      self.targetTemp = 0;
 	      self.currentTemp = 0;
 
+        self.autoClose = ko.observable();
+
         self.autoCalibrating = 0;
         self.msgType = ko.observable();
     		self.msgTypes = ko.observableArray([{
@@ -79,10 +81,10 @@ $(function() {
         };
 
     self.onDataUpdaterPluginMessage = function(plugin, data) {
-            if (plugin != "NWTools") {
+//            if (plugin != "NWTools") {
 				// console.log('Ignoring '+plugin);
-                return;
-            }
+//                return;
+//            }
 
             new PNotify({
               title: 'Pop Up Message',
@@ -246,7 +248,12 @@ $(function() {
 
 	self.lightsOn = function() {
 	    sendPrinterCommand('M5');
-      self.preheat1(); //TESTTEST
+      new PNotify({
+        title: 'Pop Up Message',
+        text: 'here',
+        type: self.msgType(),
+        hide: self.autoClose()
+        });
 	};
 
 	self.lightsOff = function() {
