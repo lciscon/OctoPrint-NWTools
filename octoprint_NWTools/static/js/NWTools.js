@@ -90,8 +90,8 @@ $(function() {
          hide: self.autoClose()
          });
 
-         zoffsetinput
-
+         self.settings.set("zOffset2", "3333");
+         
 //			if(data.type == "popup") {
 //				 console.log(data.msg);
 //			} else {
