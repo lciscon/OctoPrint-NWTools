@@ -10,6 +10,9 @@ $(function() {
 	      self.currentTemp = 0;
 
         self.actual = ko.observable(-0.1);
+        self.target = ko.observable(-0.2);
+        self.newTarget = ko.observable(-0.3);
+
         self.autoClose = ko.observable();
 
         self.autoCalibrating = 0;
@@ -94,6 +97,7 @@ $(function() {
               });
 
               self.actual = 123;
+              self.target = 234;
 		}
 
 	function sendPrinterCommand (cmdstr) {
