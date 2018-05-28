@@ -11,7 +11,6 @@ $(function() {
 		    self.autoClose = ko.observable();
         self.autoCalibrating = 0;
         self.msgType = ko.observable();
-        self.zOffset2 = "3.12";
     		self.msgTypes = ko.observableArray([{
     						name : 'Notice',
     						value : 'notice'

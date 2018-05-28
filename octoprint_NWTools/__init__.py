@@ -24,7 +24,7 @@ class NwtoolsPlugin(octoprint.plugin.SettingsPlugin,
     		self._logger.info("Hello World! (more: %s)" % self._settings.get(["url"]))
 
 	def get_settings_defaults(self):
-		return dict(url="https://en.wikipedia.org/wiki/Hello_world")
+		return dict(zOffset2="3.14")
 
 	def get_template_configs(self):
     		return [
@@ -72,9 +72,10 @@ class NwtoolsPlugin(octoprint.plugin.SettingsPlugin,
 
 		self._logger.info("Processings2: %s" % line)
 		self._logger.info("Sending message to: %s" % self._identifier)
-        
+
+        self._settings.set(["zOffset2"], "99.99"))
+
 		self._plugin_manager.send_plugin_message(self._identifier, dict(zoffset=line))
-#		self._plugin_manager.send_plugin_message(self._identifier, dict(type="popup", msg=re.sub(r'^M117\s?', '', cmd)))
 
 		return line
 
