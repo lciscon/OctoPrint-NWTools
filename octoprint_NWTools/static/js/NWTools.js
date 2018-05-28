@@ -6,6 +6,8 @@ $(function() {
         self.settings = parameters[0];
         self.control = parameters[1];
 
+        self.zactual: ko.observable("1255"),
+        self.ztarget: ko.observable(0),
 	      self.targetTemp = 0;
 	      self.currentTemp = 0;
 		    self.autoClose = ko.observable();
@@ -90,8 +92,8 @@ $(function() {
          hide: self.autoClose()
          });
 
-         self.settings.set("zOffset2", "3333");
-         
+         self.zactual = "939393";
+
 //			if(data.type == "popup") {
 //				 console.log(data.msg);
 //			} else {
