@@ -378,6 +378,16 @@ $(function() {
     sendPrinterCommand('M561');
 	};
 
+  self.handleFocus = function(event, type, item) {
+        var value = item.newTarget();
+        if (value === undefined || (typeof(value) === "string" && value.trim() === "")) {
+            item.newTarget(item.target());
+        }
+        window.setTimeout(function() {
+            event.target.select();
+        }, 0);
+  };
+
   self.formatZoffset = function(zoff) {
       if (zoff === undefined || !_.isNumber(zoff)) return "-";
       return _.sprintf("%.2f", zoff);
