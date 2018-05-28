@@ -83,7 +83,7 @@
             <th class="zoffset_target" title="{{ _('Current target zoffset as reported by your printer') }}">{{ _('Target') }}</th>
         </tr>
 <tr>
-<td class="temperature_actual" data-bind="html: formatTemperature(actual()), attr: {title: formatTemperature(actual())}"></td>
+<td class="temperature_actual" data-bind="html: formatZoffset(actual()), attr: {title: formatZoffset(actual())}"></td>
 <td class="zoffset_target">
     <form class="form-inline" style="margin:0" data-bind="submit: function(element) { $root.setTarget($data, element) }">
         <div class="input-prepend input-append">

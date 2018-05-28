@@ -9,7 +9,7 @@ $(function() {
 	      self.targetTemp = 0;
 	      self.currentTemp = 0;
 
-        self.actual = ko.observable(153);
+        self.actual = ko.observable(-0.0);
         self.autoClose = ko.observable();
 
         self.autoCalibrating = 0;
@@ -82,10 +82,9 @@ $(function() {
         };
 
     self.onDataUpdaterPluginMessage = function(plugin, data) {
-//            if (plugin != "NWTools") {
-				// console.log('Ignoring '+plugin);
-//                return;
-//            }
+            if (plugin != "NWTools") {
+                return;
+            }
 
             new PNotify({
               title: 'Pop Up Message',
@@ -94,10 +93,12 @@ $(function() {
               hide: self.autoClose()
               });
 
-//              console.log('MSL: got zoff1 ' + data.zoffset);
-
 		}
 
+    function formatZoffset(zoff) {
+        if (zoff === undefined || !_.isNumber(zoff)) return "-";
+        return _.sprintf("%.2f", zoff);
+    };
 
 	function sendPrinterCommand (cmdstr) {
 	   console.debug('MSL: sending cmd: '+cmdstr);
