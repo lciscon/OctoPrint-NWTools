@@ -500,18 +500,19 @@ $(function() {
   };
 
   self.incrementTarget = function() {
-      var value = self.newTarget();
+    var value = self.newTarget();
+
+    new PNotify({
+      title: 'Increment Target0',
+      text: value,
+      type: self.msgType(),
+      hide: self.autoClose()
+      });
+
+
       if (value === undefined || (typeof(value) === "string" && value.trim() === "")) {
           value = self.target();
       }
-
-      new PNotify({
-        title: 'Increment Target',
-        text: value,
-        type: self.msgType(),
-        hide: self.autoClose()
-        });
-
 
       try {
           value = parseInt(value);
