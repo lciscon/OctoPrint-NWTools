@@ -434,6 +434,13 @@ $(function() {
           };
 
   self.setTarget = function(form) {
+    new PNotify({
+      title: 'Pop Up Message',
+      text: 'Set Target',
+      type: self.msgType(),
+      hide: self.autoClose()
+      });
+
       var value = self.newTarget();
       if (form !== undefined) {
           $(form).find("input").blur();
@@ -492,31 +499,31 @@ $(function() {
 
   };
 
-  self.incrementTarget = function(item) {
-      var value = item.newTarget();
+  self.incrementTarget = function() {
+      var value = self.newTarget();
       if (value === undefined || (typeof(value) === "string" && value.trim() === "")) {
-          value = item.target();
+          value = self.target();
       }
       try {
           value = parseInt(value);
           if (value > 999) return;
-          item.newTarget(value + 1);
-          self.autosendTarget(item);
+          self.newTarget(value + 1);
+//          self.autosendTarget(item);
       } catch (ex) {
           // do nothing
       }
   };
 
-  self.decrementTarget = function(item) {
-      var value = item.newTarget();
+  self.decrementTarget = function() {
+      var value = self.newTarget();
       if (value === undefined || (typeof(value) === "string" && value.trim() === "")) {
-          value = item.target();
+          value = self.target();
       }
       try {
           value = parseInt(value);
           if (value <= 0) return;
-          item.newTarget(value - 1);
-          self.autosendTarget(item);
+          self.newTarget(value - 1);
+//          self.autosendTarget(item);
       } catch (ex) {
           // do nothing
       }
@@ -554,7 +561,7 @@ $(function() {
         // This is a list of dependencies to inject into the plugin, the order which you request
         // here is the order in which the dependencies will be injected into your view model upon
         // instantiation via the parameters argument
-        ["settingsViewModel", "controlViewModel"],
+        ["settingsViewModel", "controlViewModel", "loginViewModel"],
 
         // Finally, this is the list of selectors for all elements we want this view model to be bound to.
         ["#tab_plugin_NWTools"]
