@@ -499,7 +499,7 @@ $(function() {
 
   };
 
-  self.incrementTarget = function() {
+  self.incrementTarget2 = function() {
     var value = self.newTarget();
 
     new PNotify({
