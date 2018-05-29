@@ -434,14 +434,15 @@ $(function() {
           };
 
   self.setTarget = function(form) {
+    var value = self.newTarget();
+
     new PNotify({
-      title: 'Pop Up Message',
-      text: 'Set Target',
+      title: 'Set Target',
+      text: value,
       type: self.msgType(),
       hide: self.autoClose()
       });
 
-      var value = self.newTarget();
       if (form !== undefined) {
           $(form).find("input").blur();
       }
@@ -499,7 +500,7 @@ $(function() {
 
   };
 
-  self.incrementTarget2 = function() {
+  self.incrementTarget = function() {
     var value = self.newTarget();
 
     new PNotify({
