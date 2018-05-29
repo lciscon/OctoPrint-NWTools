@@ -383,14 +383,14 @@ $(function() {
     sendPrinterCommand('M561');
 	};
 
-  self.handleFocus = function(event, type, item) {
-        var value = self.newTarget();
-        if (value === undefined || (typeof(value) === "string" && value.trim() === "")) {
-            self.newTarget(self.target());
-        }
-        window.setTimeout(function() {
-            event.target.select();
-        }, 0);
+  self.handleFocus = function(event) {
+//        var value = self.newTarget();
+//        if (value === undefined || (typeof(value) === "string" && value.trim() === "")) {
+//            self.newTarget(self.target());
+//        }
+//        window.setTimeout(function() {
+//            event.target.select();
+//        }, 0);
   };
 
   self.newTargetValid = function() {
@@ -561,7 +561,7 @@ $(function() {
         // This is a list of dependencies to inject into the plugin, the order which you request
         // here is the order in which the dependencies will be injected into your view model upon
         // instantiation via the parameters argument
-        ["settingsViewModel", "controlViewModel", "loginViewModel"],
+        ["settingsViewModel", "controlViewModel", "loginStateViewModel"],
 
         // Finally, this is the list of selectors for all elements we want this view model to be bound to.
         ["#tab_plugin_NWTools"]
