@@ -10,8 +10,8 @@ $(function() {
 	      self.currentTemp = 0;
 
         self.actual = ko.observable(-0.1);
-        self.target = ko.observable(-0.2);
-        self.newTarget = ko.observable(-0.3);
+        self.target = ko.observable(2);
+        self.newTarget = ko.observable(3);
 
         self.autoClose = ko.observable();
 
@@ -504,6 +504,15 @@ $(function() {
       if (value === undefined || (typeof(value) === "string" && value.trim() === "")) {
           value = self.target();
       }
+
+      new PNotify({
+        title: 'Increment Target',
+        text: value,
+        type: self.msgType(),
+        hide: self.autoClose()
+        });
+
+
       try {
           value = parseInt(value);
           if (value > 999) return;
