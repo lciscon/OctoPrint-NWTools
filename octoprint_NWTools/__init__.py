@@ -88,6 +88,9 @@ class NwtoolsPlugin(octoprint.plugin.SettingsPlugin,
 __plugin_name__ = "Tools"
 __plugin_implementation__ = NwtoolsPlugin()
 
+def __plugin_check__():
+    return True
+
 def __plugin_load__():
 	global __plugin_implementation__
 	__plugin_implementation__ = NwtoolsPlugin()
@@ -99,3 +102,7 @@ def __plugin_load__():
 		"octoprint.comm.protocol.gcode.queuing": __plugin_implementation__.AlertM117
 
 	}
+
+def __plugin_unload__():
+    # unloadFilament
+    
