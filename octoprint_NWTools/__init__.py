@@ -102,7 +102,8 @@ def __plugin_load__():
 		"octoprint.comm.protocol.gcode.queuing": __plugin_implementation__.AlertM117
 
 	}
+    return
 
 def __plugin_unload__():
     # unloadFilament
-    
+    return
