@@ -137,16 +137,16 @@ $(function() {
        self.tempTimer = function () {
             var messageCmd = "";
 
-	    self.requestData();
+	          self.requestData();
 
-	    if (self.currentTemp < self.targetTemp) {
-                    setTimeout(self.tempTimer, 1000);
-            } else {
-                    console.log('Finished heatup! ');
-		    self.hideActionTriggerDialog();
-		    if (self.tempCallback) {
-		    	self.tempCallback();
-		    }
+      	    if (self.currentTemp < self.targetTemp) {
+                          setTimeout(self.tempTimer, 1000);
+                  } else {
+                          console.log('Finished heatup! ');
+      		    self.hideActionTriggerDialog();
+      		    if (self.tempCallback) {
+      		    	self.tempCallback();
+      		    }
             }
         };
 
@@ -315,13 +315,16 @@ $(function() {
     sendPrinterCommand('M400');
     sendPrinterCommand('G28');
     sendPrinterCommand('M400');
-    sendPrinterCommand('G0 Z5');
+//    sendPrinterCommand('G0 Z5');
     sendPrinterCommand('G0 X0 Y0 F5000');
-    sendPrinterCommand('G0 Z0');
+//    sendPrinterCommand('G0 Z0');
     sendPrinterCommand('M400');
-    sendPrinterCommand('M280.1 S7.8'); //move up inactive extruder
-    sendPrinterCommand('M281'); //release active extruder
-    sendPrinterCommand('G30 Q T0');
+
+//    sendPrinterCommand('M280.1 S7.8'); //move up inactive extruder
+//    sendPrinterCommand('M281'); //release active extruder
+//    sendPrinterCommand('G30 Q T0');
+    sendPrinterCommand('G30.1 Q T0');
+
     sendPrinterCommand('G0 Z2 F300');
     sendPrinterCommand('M400');
     sendPrinterCommand('G31');
@@ -374,7 +377,7 @@ $(function() {
     sendPrinterCommand('G28');
     sendPrinterCommand('G0 Z1');
     sendPrinterCommand('G0 X0 Y0 F5000');
-    sendPrinterCommand('G30 Q');
+    sendPrinterCommand('G30.1 Q');
     sendPrinterCommand('G0 Z0');
     sendPrinterCommand('M516');
   };

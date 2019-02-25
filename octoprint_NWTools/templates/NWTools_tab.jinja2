@@ -87,12 +87,12 @@
 <td class="zoffset_target">
     <form class="form-inline" style="margin:0" data-bind="submit: $root.setTarget">
         <div class="input-prepend input-append">
-            <button type="button" class="btn btn-input-dec2" data-bind="click: $root.decrementTarget, enable: $root.isOperational() && $root.loginState.isUser()" title="{{ _('Fine adjust: -1°C') }}"><i class="fa fa-minus"></i></button>
+            <button type="button" class="btn btn-input-dec2" data-bind="click: $root.decrementTarget, enable: $root.loginState.isUser()" title="{{ _('Fine adjust: -1°C') }}"><i class="fa fa-minus"></i></button>
             <input type="number" min="0" max="999" class="input-mini input-nospin" style="width: 30px" data-bind="value: $root.newTarget, valueUpdate: 'input', enable: $root.isOperational() && $root.loginState.isUser()">
-            <button type="button" class="btn btn-input-inc2" data-bind="click: $root.incrementTarget, enable: $root.isOperational() && $root.loginState.isUser()" title="{{ _('Fine adjust: +1°C') }}"><i class="fa fa-plus"></i></button>
+            <button type="button" class="btn btn-input-inc2" data-bind="click: $root.incrementTarget, enable: $root.loginState.isUser()" title="{{ _('Fine adjust: +1°C') }}"><i class="fa fa-plus"></i></button>
         </div>
         <div class="btn-group">
-            <button type="submit" data-bind="enable: $root.isOperational() && $root.loginState.isUser() && $root.newTargetValid()" class="btn btn-primary" title="{{ _('Set') }}"><i class="fa fa-check"></i></button>
+            <button type="submit" data-bind="enable: $root.loginState.isUser() && $root.newTargetValid()" class="btn btn-primary" title="{{ _('Set') }}"><i class="fa fa-check"></i></button>
         </div>
     </form>
 </td>
@@ -112,8 +112,6 @@
 <button class="btn btn-primary" data-bind="click: autoCalibrate">{{ _('Calibrate<br/>Z Offset') }}</button>
 &nbsp;
 <button class="btn btn-primary" data-bind="click: calibrateSensor">{{ _('Calibrate<br/>Sensor') }}</button>
-&nbsp;
-<button class="btn btn-primary" data-bind="click: calibrateDeflection">{{ _('Calibrate<br/>Deflection') }}</button>
 &nbsp;
 </td>
 </tr>
@@ -144,7 +142,8 @@
 
 <!-- Filament -->
 <script type="text/html" id="preheating">
-  <div class="modal-footer">
+<!--  <div class="modal-footer">  -->
+  <div class="modal-">
     <a href="#" class="btn btn-warning action_trigger_dialog_acknowledge" aria-hidden="true">{{ _('Cancel') }}</a>
   </div>
 </script>
