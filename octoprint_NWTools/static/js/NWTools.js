@@ -5,6 +5,7 @@ $(function() {
 
         self.settings = parameters[0];
         self.control = parameters[1];
+        self.loginState = parameters[2];
 
 	      self.targetTemp = 0;
 	      self.currentTemp = 0;
@@ -72,7 +73,8 @@ $(function() {
 
 	self.fromResponse = function (data) {
             console.log('MSL: got reply2 ' + data.tool0.actual);
-	    self.currentTemp = parseFloat(data.tool0.actual);
+	          self.currentTemp = parseFloat(data.tool0.actual);
+            self.currentTemp2 = parseFloat(data.tool1.actual);
         };
 
 	self.requestData = function() {
@@ -138,15 +140,26 @@ $(function() {
             var messageCmd = "";
 
 	          self.requestData();
+            var stillRunning = false;
 
-      	    if (self.currentTemp < self.targetTemp) {
-                          setTimeout(self.tempTimer, 1000);
-                  } else {
-                          console.log('Finished heatup! ');
-      		    self.hideActionTriggerDialog();
-      		    if (self.tempCallback) {
-      		    	self.tempCallback();
-      		    }
+            if (self.targetTemp > 0) {
+              if (self.currentTemp < self.targetTemp) {
+                stillRunning = true;
+              }
+            } else if (self.targetTemp2 > 0) {
+              if (self.currentTemp2 < self.targetTemp2) {
+                stillRunning = true;
+              }
+            }
+
+      	    if (stillRunning) {
+                setTimeout(self.tempTimer, 1000);
+            } else {
+                console.log('Finished heatup! ');
+      		      self.hideActionTriggerDialog();
+        		    if (self.tempCallback) {
+        		    	self.tempCallback();
+        		    }
             }
         };
 
@@ -161,20 +174,26 @@ $(function() {
         	self.showActionTriggerDialog(messageData, null);
 
         	//begin hotend preheat
-           	sendPrinterCommand('M42');
+          sendPrinterCommand('M42');
         	sendPrinterCommand('T' + toolnumber);
         	sendPrinterCommand('M109 S220');
-		      self.targetTemp = 220;
+          if (toolnumber == 0) {
+		          self.targetTemp = 220;
+              self.targetTemp2 = 0;
+          } else {
+              self.targetTemp = 0;
+              self.targetTemp2 = 220;
+          }
 		      self.tempCallback = callback;
 		      self.tempTimer();
    	};
 
-    	self.preheat1 = function(callback) {
-	    	self.preheat(0,callback);
+    	self.preheat1 = function() {
+	    	self.preheat(0,null);
     	};
 
-	self.preheat2 = function(callback) {
-	    	self.preheat(1,callback);
+	self.preheat2 = function() {
+	    	self.preheat(1,null);
 	};
 
    	self.turnOnExtruder = function(direction) {
