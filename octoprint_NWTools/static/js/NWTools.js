@@ -9,6 +9,7 @@ $(function() {
 
 	      self.targetTemp = 0;
 	      self.currentTemp = 0;
+		self.currentTemp2 = 0;
 
         self.actual = ko.observable(-0.1);
         self.target = ko.observable(2);
@@ -74,7 +75,11 @@ $(function() {
 	self.fromResponse = function (data) {
             console.log('MSL: got reply2 ' + data.tool0.actual);
 	          self.currentTemp = parseFloat(data.tool0.actual);
-            self.currentTemp2 = parseFloat(data.tool1.actual);
+	    if (data.tool1) {
+		self.currentTemp2 = parseFloat(data.tool1.actual);
+            } else {
+		self.currentTemp2 = self.targetTemp2;
+	    } 
         };
 
 	self.requestData = function() {
@@ -423,12 +428,12 @@ $(function() {
   self.newTargetValid = function() {
       var value = self.newTarget();
 
-      new PNotify({
-        title: 'Pop Up Message',
-        text: 'Target Valid',
-        type: self.msgType(),
-        hide: self.autoClose()
-        });
+//      new PNotify({
+//        title: 'Pop Up Message',
+//        text: 'Target Valid',
+//        type: self.msgType(),
+//        hide: self.autoClose()
+//        });
 
       try {
           value = parseInt(value);
