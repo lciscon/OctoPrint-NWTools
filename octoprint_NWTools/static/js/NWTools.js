@@ -352,7 +352,7 @@ $(function() {
 
     sendPrinterCommand('G0 Z2 F300');
     sendPrinterCommand('M400');
-    sendPrinterCommand('G31');
+    sendPrinterCommand('G32');
     sendPrinterCommand('G0 Z2 F300');
     sendPrinterCommand('M374');
     sendPrinterCommand('M500');
