@@ -24,9 +24,9 @@ class NwtoolsPlugin(octoprint.plugin.SettingsPlugin,
     		self._logger.info("Hello World! (more: %s)" % self._settings.get(["zOffset2"]))
 
 	def get_settings_defaults(self):
-            return dict(zOffset2="3.14")
+		return dict(zOffset2="3.14")
 
-    def get_template_vars(self):
+	def get_template_vars(self):
             return dict(url=self._settings.get(["url"]))
 
 	def get_template_configs(self):
