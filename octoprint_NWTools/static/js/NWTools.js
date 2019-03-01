@@ -79,7 +79,7 @@ $(function() {
 		self.currentTemp2 = parseFloat(data.tool1.actual);
             } else {
 		self.currentTemp2 = self.targetTemp2;
-	    } 
+	    }
         };
 
 	self.requestData = function() {
@@ -300,8 +300,9 @@ $(function() {
       sendPrinterCommand('G0 X0 Y0  F5000');
       sendPrinterCommand('M400');
       sendPrinterCommand('M515');
-      sendPrinterCommand('G30 Z0');
-      sendPrinterCommand('G0 Z0.5 F300');
+      sendPrinterCommand('G30.1 Q T0');
+      sendPrinterCommand('G0 Z0 F300');
+      sendPrinterCommand('M515');
       sendPrinterCommand('G91');
 	};
 
@@ -393,7 +394,7 @@ $(function() {
     self.showActionTriggerDialog(messageData, self.calibrateDeflectionDoit);
   };
 
-
+/*
   self.homePrintheadHeated = function() {
     sendPrinterCommand('G91');
     sendPrinterCommand('G0 Z5 F300');
@@ -409,7 +410,7 @@ $(function() {
   self.homePrinthead = function() {
       self.preheat(0, self.homePrintheadHeated);
   };
-
+*/
 
 	self.resetLeveling = function() {
     sendPrinterCommand('M561');
