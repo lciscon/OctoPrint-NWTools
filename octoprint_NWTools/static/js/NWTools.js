@@ -297,7 +297,7 @@ $(function() {
       sendPrinterCommand('G90');
       sendPrinterCommand('G28');
       sendPrinterCommand('G0 Z1');
-      sendPrinterCommand('G0 X0 Y0  F5000');
+      sendPrinterCommand('G0 X150 Y150  F5000');
       sendPrinterCommand('M400');
       sendPrinterCommand('M515');
       sendPrinterCommand('G30.1 Q T0');
@@ -341,7 +341,7 @@ $(function() {
     sendPrinterCommand('G28');
     sendPrinterCommand('M400');
 //    sendPrinterCommand('G0 Z5');
-    sendPrinterCommand('G0 X0 Y0 F5000');
+    sendPrinterCommand('G0 X150 Y150 F5000');
 //    sendPrinterCommand('G0 Z0');
     sendPrinterCommand('M400');
 
@@ -401,7 +401,7 @@ $(function() {
     sendPrinterCommand('G90');
     sendPrinterCommand('G28');
     sendPrinterCommand('G0 Z1');
-    sendPrinterCommand('G0 X0 Y0 F5000');
+    sendPrinterCommand('G0 X150 Y150 F5000');
     sendPrinterCommand('G30.1 Q');
     sendPrinterCommand('G0 Z0');
     sendPrinterCommand('M516');
