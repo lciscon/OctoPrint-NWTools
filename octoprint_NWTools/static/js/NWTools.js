@@ -302,8 +302,7 @@ $(function() {
       sendPrinterCommand('M515');
       sendPrinterCommand('G30.1 Q T0');
       sendPrinterCommand('G0 Z0 F300');
-      sendPrinterCommand('M515');
-      sendPrinterCommand('G91');
+      sendPrinterCommand('M516');
 	};
 
 	self.autoCalibrate = function() {
@@ -333,24 +332,11 @@ $(function() {
 
 
 	self.levelBedHeated = function () {
-    sendPrinterCommand('M400');
+    sendPrinterCommand('M370');
+    autoCalibrateHeated();
     sendPrinterCommand('G91');
-    sendPrinterCommand('G0 Z10 F300');
-    sendPrinterCommand('G90');
-    sendPrinterCommand('M400');
-    sendPrinterCommand('G28');
-    sendPrinterCommand('M400');
-//    sendPrinterCommand('G0 Z5');
-    sendPrinterCommand('G0 X150 Y150 F5000');
-//    sendPrinterCommand('G0 Z0');
-    sendPrinterCommand('M400');
-
-//    sendPrinterCommand('M280.1 S7.8'); //move up inactive extruder
-//    sendPrinterCommand('M281'); //release active extruder
-//    sendPrinterCommand('G30 Q T0');
-    sendPrinterCommand('G30.1 Q T0');
-
     sendPrinterCommand('G0 Z2 F300');
+    sendPrinterCommand('G90');
     sendPrinterCommand('M400');
     sendPrinterCommand('G32');
     sendPrinterCommand('G0 Z2 F300');
