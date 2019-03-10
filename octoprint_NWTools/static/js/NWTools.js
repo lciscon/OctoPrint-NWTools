@@ -96,12 +96,12 @@ $(function() {
                 return;
             }
 
-            new PNotify({
-              title: 'Pop Up Message',
-              text: data.zoffset,
-              type: self.msgType(),
-              hide: self.autoClose()
-              });
+//            new PNotify({
+//              title: 'Pop Up Message',
+//              text: data.zoffset,
+//              type: self.msgType(),
+//              hide: self.autoClose()
+//              });
 
               self.actual = 123;
               self.target = 234;
@@ -299,10 +299,10 @@ $(function() {
       sendPrinterCommand('G0 Z1');
       sendPrinterCommand('G0 X150 Y150  F5000');
       sendPrinterCommand('M400');
-      sendPrinterCommand('M515');
+//      sendPrinterCommand('M515');
       sendPrinterCommand('G30.1 Q T0');
       sendPrinterCommand('G0 Z0 F300');
-      sendPrinterCommand('M516');
+//      sendPrinterCommand('M516');
 	};
 
 	self.autoCalibrate = function() {
@@ -333,7 +333,7 @@ $(function() {
 
 	self.levelBedHeated = function () {
     sendPrinterCommand('M370');
-    autoCalibrateHeated();
+    self.autoCalibrateHeated();
     sendPrinterCommand('G91');
     sendPrinterCommand('G0 Z2 F300');
     sendPrinterCommand('G90');
