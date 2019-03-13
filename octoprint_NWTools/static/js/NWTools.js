@@ -274,12 +274,12 @@ $(function() {
 
 	self.lightsOn = function() {
 	    sendPrinterCommand('M5');
-      new PNotify({
-        title: 'Pop Up Message',
-        text: 'here',
-        type: self.msgType(),
-        hide: self.autoClose()
-        });
+      //new PNotify({
+      //  title: 'Pop Up Message',
+      //  text: 'here',
+      //  type: self.msgType(),
+      //  hide: self.autoClose()
+      //  });
 	};
 
 	self.lightsOff = function() {
@@ -455,12 +455,12 @@ $(function() {
   self.setTarget = function(form) {
     var value = self.newTarget();
 
-    new PNotify({
-      title: 'Set Target',
-      text: value,
-      type: self.msgType(),
-      hide: self.autoClose()
-      });
+//    new PNotify({
+//      title: 'Set Target',
+//      text: value,
+//      type: self.msgType(),
+//      hide: self.autoClose()
+//      });
 
       if (form !== undefined) {
           $(form).find("input").blur();
@@ -522,12 +522,12 @@ $(function() {
   self.incrementTarget = function() {
     var value = self.newTarget();
 
-    new PNotify({
-      title: 'Increment Target0',
-      text: value,
-      type: self.msgType(),
-      hide: self.autoClose()
-      });
+//    new PNotify({
+//      title: 'Increment Target0',
+//      text: value,
+//      type: self.msgType(),
+//      hide: self.autoClose()
+//      });
 
 
       if (value === undefined || (typeof(value) === "string" && value.trim() === "")) {
@@ -546,13 +546,13 @@ $(function() {
 
   self.decrementTarget = function() {
     var value = self.newTarget();
-    new PNotify({
-      title: 'Decrement Target0',
-      text: value,
-      type: self.msgType(),
-      hide: self.autoClose()
-      });
-  };
+//    new PNotify({
+//      title: 'Decrement Target0',
+//      text: value,
+//      type: self.msgType(),
+//      hide: self.autoClose()
+//      });
+//  };
 
 
   self.decrementTarget9 = function() {
