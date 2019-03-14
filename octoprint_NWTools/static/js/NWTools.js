@@ -283,7 +283,7 @@ $(function() {
 	};
 
 	self.lightsOff = function() {
-            sendPrinterCommand('M3');
+      sendPrinterCommand('M3');
 	};
 
 	self.unloadPrint = function() {
@@ -552,7 +552,7 @@ $(function() {
 //      type: self.msgType(),
 //      hide: self.autoClose()
 //      });
-//  };
+  };
 
 
   self.decrementTarget9 = function() {
