@@ -546,13 +546,14 @@ $(function() {
 
   self.decrementTarget = function() {
     var value = self.newTarget();
-//    new PNotify({
-//      title: 'Decrement Target0',
-//      text: value,
-//      type: self.msgType(),
-//      hide: self.autoClose()
-//      });
   };
+
+  //    new PNotify({
+  //      title: 'Decrement Target0',
+  //      text: value,
+  //      type: self.msgType(),
+  //      hide: self.autoClose()
+  //      });
 
 
   self.decrementTarget9 = function() {
