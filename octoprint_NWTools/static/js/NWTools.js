@@ -6,6 +6,7 @@ $(function() {
         self.settings = parameters[0];
         self.control = parameters[1];
         self.loginState = parameters[2];
+        self.printerProfiles = parameters[3];
 
 	      self.targetTemp = 0;
 	      self.currentTemp = 0;
@@ -291,18 +292,19 @@ $(function() {
 	};
 
 	self.autoCalibrateHeated = function () {
+      cewnterx = self.printerProfiles.currentProfile.volume.width/2;
+      centery = self.printerProfiles.currentProfile.volume.depth/2;
+
       sendPrinterCommand('M400');
       sendPrinterCommand('G91');
       sendPrinterCommand('G0 Z5 F300');
       sendPrinterCommand('G90');
       sendPrinterCommand('G28');
       sendPrinterCommand('G0 Z1');
-      sendPrinterCommand('G0 X150 Y150  F5000');
+      sendPrinterCommand('G0 X'+centerx+' Y'+centery+' F5000');
       sendPrinterCommand('M400');
-//      sendPrinterCommand('M515');
       sendPrinterCommand('G30.1 Q T0');
       sendPrinterCommand('G0 Z0 F300');
-//      sendPrinterCommand('M516');
 	};
 
 	self.autoCalibrate = function() {
@@ -310,15 +312,15 @@ $(function() {
 	};
 
   self.moveUp = function() {
-//    sendPrinterCommand('G91');
+    sendPrinterCommand('G91');
     sendPrinterCommand('G1 Z-.025 F100');
-//    sendPrinterCommand('G90');
+    sendPrinterCommand('G90');
 	};
 
   self.moveDown = function() {
-//    sendPrinterCommand('G91');
+    sendPrinterCommand('G91');
     sendPrinterCommand('G1 Z.025 F100');
-//    sendPrinterCommand('G90');
+    sendPrinterCommand('G90');
 	};
 
   self.setOffset = function () {
@@ -326,7 +328,6 @@ $(function() {
     sendPrinterCommand('G91');
     sendPrinterCommand('G0 Z2');
     sendPrinterCommand('G90');
-    sendPrinterCommand('M516');
     sendPrinterCommand('M500');
 	};
 
@@ -505,7 +506,7 @@ $(function() {
 
 
   self.setZOffset = function() {
-    sendPrinterCommand('M115');
+    sendPrinterCommand('M671');  //M115??
 //    sendPrinterCommand('M670 O' + );
 //    console.log('Loading Z Offset: ' + z_offset_data[1]);
 //    return z_offset_data[1];
@@ -603,7 +604,7 @@ $(function() {
         // This is a list of dependencies to inject into the plugin, the order which you request
         // here is the order in which the dependencies will be injected into your view model upon
         // instantiation via the parameters argument
-        ["settingsViewModel", "controlViewModel", "loginStateViewModel"],
+        ["settingsViewModel", "controlViewModel", "loginStateViewModel", "printerProfilesViewModel"],
 
         // Finally, this is the list of selectors for all elements we want this view model to be bound to.
         ["#tab_plugin_NWTools"]
