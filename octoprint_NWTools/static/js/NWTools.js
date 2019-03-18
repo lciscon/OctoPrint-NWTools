@@ -509,9 +509,7 @@ $(function() {
 
   self.setZOffset = function() {
     sendPrinterCommand('M671');  //M115??
-//    sendPrinterCommand('M670 O' + );
-//    console.log('Loading Z Offset: ' + z_offset_data[1]);
-//    return z_offset_data[1];
+    sendPrinterCommand('M500');
   };
 
   self.increaseZOffset1 = function() {
