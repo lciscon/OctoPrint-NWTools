@@ -292,15 +292,16 @@ $(function() {
 	};
 
 	self.autoCalibrateHeated = function () {
-      cewnterx = self.printerProfiles.currentProfile.volume.width/2;
+    sendPrinterCommand('M400');
+    sendPrinterCommand('G91');
+    sendPrinterCommand('G0 Z5 F300');
+    sendPrinterCommand('G90');
+    sendPrinterCommand('G28');
+    sendPrinterCommand('G0 Z1');
+    
+      centerx = self.printerProfiles.currentProfile.volume.width/2;
       centery = self.printerProfiles.currentProfile.volume.depth/2;
 
-      sendPrinterCommand('M400');
-      sendPrinterCommand('G91');
-      sendPrinterCommand('G0 Z5 F300');
-      sendPrinterCommand('G90');
-      sendPrinterCommand('G28');
-      sendPrinterCommand('G0 Z1');
       sendPrinterCommand('G0 X'+centerx+' Y'+centery+' F5000');
       sendPrinterCommand('M400');
       sendPrinterCommand('G30.1 Q T0');
