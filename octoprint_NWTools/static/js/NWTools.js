@@ -314,12 +314,14 @@ $(function() {
   self.moveUp = function() {
     sendPrinterCommand('G91');
     sendPrinterCommand('G1 Z-.025 F100');
+    sendPrinterCommand('M400');
     sendPrinterCommand('G90');
 	};
 
   self.moveDown = function() {
     sendPrinterCommand('G91');
     sendPrinterCommand('G1 Z.025 F100');
+    sendPrinterCommand('M400');
     sendPrinterCommand('G90');
 	};
 
