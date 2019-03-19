@@ -298,12 +298,10 @@ $(function() {
     sendPrinterCommand('G90');
     sendPrinterCommand('G28');
     sendPrinterCommand('G0 Z1');
-    
-      centerx = self.printerProfiles.currentProfile.volume.width/2;
-      centery = self.printerProfiles.currentProfile.volume.depth/2;
-
-      sendPrinterCommand('G0 X'+centerx+' Y'+centery+' F5000');
-      sendPrinterCommand('M400');
+//      centerx = self.printerProfiles.currentProfile.volume.width/2;
+//      centery = self.printerProfiles.currentProfile.volume.depth/2;
+//      sendPrinterCommand('G0 X'+centerx+' Y'+centery+' F5000');
+//      sendPrinterCommand('M400');
       sendPrinterCommand('G30.1 Q T0');
       sendPrinterCommand('G0 Z0 F300');
 	};
