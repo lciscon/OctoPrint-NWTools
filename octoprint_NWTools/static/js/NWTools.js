@@ -343,8 +343,11 @@ $(function() {
     sendPrinterCommand('G90');
     sendPrinterCommand('M400');
     sendPrinterCommand('G32');
+    sendPrinterCommand('M400');
     sendPrinterCommand('G0 Z2 F300');
+    sendPrinterCommand('M400');
     sendPrinterCommand('M374');
+    sendPrinterCommand('M400');
     sendPrinterCommand('M500');
 	};
 
