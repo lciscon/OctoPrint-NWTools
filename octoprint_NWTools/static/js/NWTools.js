@@ -294,7 +294,7 @@ $(function() {
 	self.autoCalibrateHeated = function () {
     sendPrinterCommand('M400');
     sendPrinterCommand('G91');
-    sendPrinterCommand('G0 Z5 F300');
+    sendPrinterCommand('G0 Z10 F300');
     sendPrinterCommand('G90');
     sendPrinterCommand('M400');
     sendPrinterCommand('G28');
