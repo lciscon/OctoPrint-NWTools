@@ -287,6 +287,14 @@ $(function() {
       sendPrinterCommand('M3');
 	};
 
+  self.cabinetOn = function() {
+	    sendPrinterCommand('M282');
+	};
+
+	self.cabinetOff = function() {
+      sendPrinterCommand('M283');
+	};
+
 	self.unloadPrint = function() {
             sendPrinterCommand('G0 Z250');
 	};

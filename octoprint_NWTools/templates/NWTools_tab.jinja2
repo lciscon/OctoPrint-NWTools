@@ -12,6 +12,11 @@
     <button class="btn btn-primary" data-bind="click: lightsOn">{{ _('Lights<br/>On') }}</button>
 &nbsp;
     <button class="btn btn-primary" data-bind="click: lightsOff">{{ _('Lights<br/>Off') }}</button>
+&nbsp;
+&nbsp;
+    <button class="btn btn-primary" data-bind="click: cabinetOn">{{ _('Cabinet Heater<br/>On') }}</button>
+&nbsp;
+    <button class="btn btn-primary" data-bind="click: cabinetOff">{{ _('Cabinet Heater<br/>Off') }}</button>
 </td>
 <td>
 </td>
@@ -56,6 +61,22 @@
 </table>
 
 <br>
+<table width="600">
+<col width="150">
+<col width="5">
+<col width="150">
+<tr>
+<td>
+  <h1>Setup</h1>
+    <button class="btn btn-primary" data-bind="click: autoCalibrate">{{ _('Home<br/>Printhead') }}</button>
+&nbsp;
+    <button class="btn btn-primary" data-bind="click: levelBed">{{ _('Bed<br/>Leveling') }}</button>
+&nbsp;
+    <button class="btn btn-primary" data-bind="click: resetLeveling">{{ _('Reset<br/>Leveling') }}</button>
+&nbsp;
+</td>
+</tr>
+</table>
 <table width="600">
 <col width="600">
 <td>
