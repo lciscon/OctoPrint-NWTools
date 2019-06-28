@@ -202,6 +202,30 @@ $(function() {
 	    	self.preheat(1,null);
 	};
 
+  self.lockHead1 = function() {
+    sendPrinterCommand('M672 T0 P-1');
+	};
+
+  self.releaseHead1 = function() {
+    sendPrinterCommand('M672 T0 P0');
+	};
+
+  self.liftHead1 = function() {
+    sendPrinterCommand('M672 T0 P1');
+	};
+
+  self.lockHead2 = function() {
+    sendPrinterCommand('M672 T1 P-1');
+	};
+
+  self.releaseHead2 = function() {
+    sendPrinterCommand('M672 T1 P0');
+	};
+
+  self.liftHead2 = function() {
+    sendPrinterCommand('M672 T1 P1'); 
+	};
+
    	self.turnOnExtruder = function(direction) {
 	    	self.extrusionRunning = true;
 	   	self.extrusionDirection = direction;
