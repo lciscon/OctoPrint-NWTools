@@ -223,7 +223,7 @@ $(function() {
 	};
 
   self.liftHead2 = function() {
-    sendPrinterCommand('M672 T1 P1'); 
+    sendPrinterCommand('M672 T1 P1');
 	};
 
    	self.turnOnExtruder = function(direction) {
@@ -369,7 +369,9 @@ $(function() {
 
 
 	self.levelBedHeated = function () {
-    sendPrinterCommand('M370');
+//    sendPrinterCommand('M370');
+//unmount the usb drive first ...???
+
     self.autoCalibrateHeated();
     sendPrinterCommand('G91');
     sendPrinterCommand('G0 Z2 F300');
