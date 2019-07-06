@@ -370,6 +370,7 @@ $(function() {
 
 	self.levelBedHeated = function () {
     sendPrinterCommand('M370');
+    sendPrinterCommand('M502');
 //unmount the usb drive first ...???
 
     self.autoCalibrateHeated();
