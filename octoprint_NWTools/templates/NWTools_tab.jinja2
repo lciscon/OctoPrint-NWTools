@@ -1,10 +1,5 @@
-<h1>{{ _('Northworks Controls') }}</h1>
-<table width="600">
-<col width="150">
-<col width="5">
-<col width="150">
-<tr>
-<td>
+<div class="row-fluid">
+<div class="span6">
    <h1>General</h1>
     <button class="btn btn-primary" data-bind="click: unloadPrint">{{ _('Unload<br/>Print') }}</button>
 &nbsp;
@@ -13,71 +8,57 @@
 &nbsp;
     <button class="btn btn-primary" data-bind="click: lightsOff">{{ _('Lights<br/>Off') }}</button>
 &nbsp;
-</td>
-<td>
-</td>
-<td>
+</div>
+<dif class="span6">
    <h1>Cabinet</h1>
     <button class="btn btn-primary" data-bind="click: cabinetOn">{{ _('Heat<br/>On') }}</button>
 &nbsp;
     <button class="btn btn-primary" data-bind="click: cabinetOff">{{ _('Heat<br/>Off') }}</button>
 &nbsp;
-</td>
-</tr>
-</table>
+</div>
 <br>
-<table width="600">
-<col width="150">
-<col width="5">
-<col width="150">
-<tr>
-<td>
+<div class="row-fluid">
+<div class="span6">
 <h1>Printhead 1</h1>
-    <button class="btn btn-primary" data-bind="click: preheat1">{{ _('Preheat<br/>Head') }}</button>
+    <button class="btn btn-primary" data-bind="click: preheat1" style="width:75px">{{ _('Preheat<br/>Head') }}</button>
 &nbsp;
-    <button class="btn btn-primary" data-bind="click: loadFilament1">{{ _('Load<br/>Filament') }}</button>
+    <button class="btn btn-primary" data-bind="click: loadFilament1" style="width:75px">{{ _('Load<br/>Filament') }}</button>
 &nbsp;
-    <button class="btn btn-primary" data-bind="click: unloadFilament1">{{ _('Unload<br/>Filament') }}</button>
+    <button class="btn btn-primary" data-bind="click: unloadFilament1" style="width:75px">{{ _('Unload<br/>Filament') }}</button>
 &nbsp;
-</td>
-<td>
-</td>
-<td>
+</div>
+<div class="span6">
 <h1>Printhead 2</h1>
-    <button class="btn btn-primary" data-bind="click: preheat2">{{ _('Preheat<br/>Head') }}</button>
+    <button class="btn btn-primary" data-bind="click: preheat2" style="width:75px">{{ _('Preheat<br/>Head') }}</button>
 &nbsp;
-    <button class="btn btn-primary" data-bind="click: loadFilament2">{{ _('Load<br/>Filament') }}</button>
+    <button class="btn btn-primary" data-bind="click: loadFilament2" style="width:75px">{{ _('Load<br/>Filament') }}</button>
 &nbsp;
-    <button class="btn btn-primary" data-bind="click: unloadFilament2">{{ _('Unload<br/>Filament') }}</button>
+    <button class="btn btn-primary" data-bind="click: unloadFilament2" style="width:75px">{{ _('Unload<br/>Filament') }}</button>
 &nbsp;
-</td>
-</tr>
-<tr>
-<td>
-    <button class="btn btn-primary" data-bind="click: liftHead1">{{ _('Lift<br/>Head') }}</button>
+</div>
+</div>
+<div class="row-fluid">
+<div class="span6">
+    <button class="btn btn-primary" data-bind="click: liftHead1" style="width:75px">{{ _('Lift<br/>Head') }}</button>
 &nbsp;
-    <button class="btn btn-primary" data-bind="click: releaseHead1">{{ _('Release<br/>Head') }}</button>
+    <button class="btn btn-primary" data-bind="click: releaseHead1" style="width:75px">{{ _('Release<br/>Head') }}</button>
 &nbsp;
-    <button class="btn btn-primary" data-bind="click: lockHead1">{{ _('Lock<br/>Head') }}</button>
+    <button class="btn btn-primary" data-bind="click: lockHead1" style="width:75px">{{ _('Lock<br/>Head') }}</button>
 &nbsp;
-</td>
-<td>
-</td>
-<td>
-    <button class="btn btn-primary" data-bind="click: liftHead2">{{ _('Lift<br/>Head') }}</button>
+</div>
+<div class="span6">
+    <button class="btn btn-primary" data-bind="click: liftHead2" style="width:75px">{{ _('Lift<br/>Head') }}</button>
 &nbsp;
-    <button class="btn btn-primary" data-bind="click: releaseHead2">{{ _('Release<br/>Head') }}</button>
+    <button class="btn btn-primary" data-bind="click: releaseHead2" style="width:75px">{{ _('Release<br/>Head') }}</button>
 &nbsp;
-    <button class="btn btn-primary" data-bind="click: lockHead2">{{ _('Lock<br/>Head') }}</button>
+    <button class="btn btn-primary" data-bind="click: lockHead2" style="width:75px">{{ _('Lock<br/>Head') }}</button>
 &nbsp;
-</td>
-</tr>
-</table>
+</div>
+</div>
 
 <br>
-<table width="600">
-<col width="600">
-<td>
+<div class="row-fluid">
+<div class="span12">
 <h1>Calibration (Advanced)</h1>
 <button class="btn btn-primary" data-bind="click: calibrateSensor">{{ _('Calibrate<br/>Sensor') }}</button>
 &nbsp;
@@ -95,9 +76,8 @@
 &nbsp;
 <button class="btn btn-primary" data-bind="click: setZOffset">{{ _('Set<br/>Z Offset') }}</button>
 &nbsp;
-</td>
-</tr>
-</table>
+</div>
+</div>
 
 
 <div id="action_trigger_dialog" class="modal hide">
