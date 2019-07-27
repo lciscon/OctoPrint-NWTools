@@ -5,12 +5,14 @@ $(function() {
 
         self.settings = parameters[0];
         self.control = parameters[1];
-        self.loginState = parameters[2];
-        self.printerProfiles = parameters[3];
+        self.system = parameters[2];
+        self.loginState = parameters[3];
+        self.printerProfiles = parameters[4];
 
 	      self.targetTemp = 0;
 	      self.currentTemp = 0;
-		self.currentTemp2 = 0;
+		    self.currentTemp2 = 0;
+        self.currentZDelta = 0;
 
         self.actual = ko.observable(-0.1);
         self.target = ko.observable(2);
@@ -112,6 +114,12 @@ $(function() {
 	   console.debug('MSL: sending cmd: '+cmdstr);
            self.control.sendCustomCommand({ command: cmdstr });
    	};
+
+  function sendSystemCommand (cmdstr) {
+	   console.debug('MSL: sending cmd: '+cmdstr);
+           self.system.triggerCommand({ command: cmdstr });
+   	};
+
 
 	self.hideActionTriggerDialog = function () {
            var actionTriggerDialog = $("#action_trigger_dialog");
@@ -346,10 +354,10 @@ $(function() {
 
   self.moveUp = function() {
     sendPrinterCommand('G91');
-//    sendPrinterCommand('G1 Z-.025 F300');
     sendPrinterCommand('G1 Z-.025');
     sendPrinterCommand('M400');
     sendPrinterCommand('G90');
+    self.currentZDelta = self.currentZDelta - 0.025;
 	};
 
   self.moveDown = function() {
@@ -357,7 +365,14 @@ $(function() {
     sendPrinterCommand('G1 Z.025');
     sendPrinterCommand('M400');
     sendPrinterCommand('G90');
+    self.currentZDelta = currentZDelta + 0.025;
 	};
+
+  self.setZOffset = function() {
+    sendPrinterCommand('M670 P' + self.currentZDelta);  //M115??
+    sendPrinterCommand('M500');
+    self.currentZDelta = 0;
+  };
 
   self.setOffset = function () {
     sendPrinterCommand('M671');
@@ -367,9 +382,8 @@ $(function() {
     sendPrinterCommand('M500');
 	};
 
-
 	self.levelBedHeated = function () {
-//    runSystemScript('~/scripts/unmount-usb.sh');
+//    sendSystemCommand('unmount');
     sendPrinterCommand('M370');
 //    sendPrinterCommand('M502');
 //unmount the usb drive first ...???
@@ -548,19 +562,6 @@ $(function() {
     };
 
 
-  self.setZOffset = function() {
-    sendPrinterCommand('M671');  //M115??
-    sendPrinterCommand('M500');
-  };
-
-  self.increaseZOffset1 = function() {
-
-  };
-
-  self.increaseZOffset2 = function() {
-
-  };
-
   self.incrementTarget = function() {
     var value = self.newTarget();
 
@@ -645,7 +646,7 @@ $(function() {
         // This is a list of dependencies to inject into the plugin, the order which you request
         // here is the order in which the dependencies will be injected into your view model upon
         // instantiation via the parameters argument
-        ["settingsViewModel", "controlViewModel", "loginStateViewModel", "printerProfilesViewModel"],
+        ["settingsViewModel", "controlViewModel", "systemViewModel", "loginStateViewModel", "printerProfilesViewModel"],
 
         // Finally, this is the list of selectors for all elements we want this view model to be bound to.
         ["#tab_plugin_NWTools"]
