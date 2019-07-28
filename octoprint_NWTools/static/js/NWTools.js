@@ -355,19 +355,19 @@ $(function() {
   self.moveUp = function() {
     sendPrinterCommand('G91');
     sendPrinterCommand('G1 Z-.025');
-    sendPrinterCommand('G92.4 Z.025');
     sendPrinterCommand('M400');
     sendPrinterCommand('G90');
     self.currentZDelta = self.currentZDelta - 0.025;
+    sendPrinterCommand('G92.4 Z.025');
 	};
 
   self.moveDown = function() {
     sendPrinterCommand('G91');
     sendPrinterCommand('G1 Z.025');
-    sendPrinterCommand('G92.4 Z-.025');
     sendPrinterCommand('M400');
     sendPrinterCommand('G90');
     self.currentZDelta = self.currentZDelta + 0.025;
+    sendPrinterCommand('G92.4 Z-.025');
 	};
 
   self.setZOffset = function() {
