@@ -357,6 +357,7 @@ $(function() {
     sendPrinterCommand('G1 Z-.025');
     sendPrinterCommand('M400');
     sendPrinterCommand('G90');
+    sendPrinterCommand('M400');
     self.currentZDelta = self.currentZDelta + 0.025;
     sendPrinterCommand('G95 Z.025');
 	};
@@ -366,12 +367,13 @@ $(function() {
     sendPrinterCommand('G1 Z.025');
     sendPrinterCommand('M400');
     sendPrinterCommand('G90');
+    sendPrinterCommand('M400');
     self.currentZDelta = self.currentZDelta - 0.025;
     sendPrinterCommand('G95 Z-.025');
 	};
 
   self.setZOffset = function() {
-    sendPrinterCommand('M670 P' + self.currentZDelta); 
+    sendPrinterCommand('M670 P' + self.currentZDelta);
     sendPrinterCommand('M500');
     self.currentZDelta = 0;
   };
