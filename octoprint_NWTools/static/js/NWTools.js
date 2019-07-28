@@ -360,6 +360,7 @@ $(function() {
     sendPrinterCommand('M400');
     self.currentZDelta = self.currentZDelta + 0.025;
     sendPrinterCommand('G95 Z.025');
+    sendPrinterCommand('M114');
 	};
 
   self.moveDown = function() {
@@ -370,6 +371,7 @@ $(function() {
     sendPrinterCommand('M400');
     self.currentZDelta = self.currentZDelta - 0.025;
     sendPrinterCommand('G95 Z-.025');
+    sendPrinterCommand('M114');
 	};
 
   self.setZOffset = function() {
