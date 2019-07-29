@@ -355,8 +355,10 @@ $(function() {
   self.moveUp = function() {
     sendPrinterCommand('M400');
     sendPrinterCommand('M114.1');
+    sendPrinterCommand('M114.3');
     sendPrinterCommand('G95 Z.025');
     sendPrinterCommand('M114.1');
+    sendPrinterCommand('M114.3');
     sendPrinterCommand('G91');
     sendPrinterCommand('G1 Z-.025');
     sendPrinterCommand('M400');
@@ -369,8 +371,10 @@ $(function() {
   self.moveDown = function() {
     sendPrinterCommand('M400');
     sendPrinterCommand('M114.1');
+    sendPrinterCommand('M114.3');
     sendPrinterCommand('G95 Z-.025');
     sendPrinterCommand('M114.1');
+    sendPrinterCommand('M114.3');
     sendPrinterCommand('G91');
     sendPrinterCommand('G1 Z.025');
     sendPrinterCommand('M400');
