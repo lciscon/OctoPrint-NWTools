@@ -353,6 +353,7 @@ $(function() {
 	};
 
   self.moveUp = function() {
+    sendPrinterCommand('M400');
     sendPrinterCommand('M114');
     sendPrinterCommand('G95 Z.025');
     sendPrinterCommand('M114');
@@ -366,6 +367,7 @@ $(function() {
 	};
 
   self.moveDown = function() {
+    sendPrinterCommand('M400');
     sendPrinterCommand('M114');
     sendPrinterCommand('G95 Z-.025');
     sendPrinterCommand('M114');
