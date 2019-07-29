@@ -354,29 +354,21 @@ $(function() {
 
   self.moveUp = function() {
     sendPrinterCommand('M400');
-    sendPrinterCommand('M114.1');
-    sendPrinterCommand('M114.3');
     sendPrinterCommand('G91');
     sendPrinterCommand('G1 Z-.025');
     sendPrinterCommand('M400');
     sendPrinterCommand('G90');
     sendPrinterCommand('G95 Z.025');
-    sendPrinterCommand('M114.1');
-    sendPrinterCommand('M114.3');
     self.currentZDelta = self.currentZDelta + 0.025;
 	};
 
   self.moveDown = function() {
     sendPrinterCommand('M400');
-    sendPrinterCommand('M114.1');
-    sendPrinterCommand('M114.3');
     sendPrinterCommand('G91');
     sendPrinterCommand('G1 Z.025');
     sendPrinterCommand('M400');
     sendPrinterCommand('G90');
     sendPrinterCommand('G95 Z-.025');
-    sendPrinterCommand('M114.1');
-    sendPrinterCommand('M114.3');
     self.currentZDelta = self.currentZDelta - 0.025;
 	};
 
