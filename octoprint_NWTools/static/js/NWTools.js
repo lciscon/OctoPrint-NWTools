@@ -346,6 +346,7 @@ $(function() {
 //      sendPrinterCommand('M400');
       sendPrinterCommand('G30.1 Q T0');
       sendPrinterCommand('G0 Z0 F300');
+      self.lockHead1();
 	};
 
 	self.autoCalibrate = function() {
