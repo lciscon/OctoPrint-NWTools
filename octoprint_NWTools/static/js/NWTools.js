@@ -338,7 +338,7 @@ $(function() {
     sendPrinterCommand('G90');
     sendPrinterCommand('M400');
     sendPrinterCommand('G28');
-    sendPrinterCommand('G0 Z1');
+//    sendPrinterCommand('G0 Z1');
 //    sendPrinterCommand('G0 X150 Y150');
 //      centerx = self.printerProfiles.currentProfile.volume.width/2;
 //      centery = self.printerProfiles.currentProfile.volume.depth/2;
