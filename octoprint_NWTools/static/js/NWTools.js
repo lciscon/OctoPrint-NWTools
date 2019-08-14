@@ -13,6 +13,7 @@ $(function() {
 	      self.currentTemp = 0;
 		    self.currentTemp2 = 0;
         self.currentZDelta = 0;
+        self.currentZDelta2 = 0;
 
         self.actual = ko.observable(-0.1);
         self.target = ko.observable(2);
@@ -373,6 +374,55 @@ $(function() {
     sendPrinterCommand('M500');
     self.currentZDelta = 0;
   };
+
+
+
+
+
+  self.autoCalibrateHeated2 = function () {
+    sendPrinterCommand('M400');
+    sendPrinterCommand('G91');
+    sendPrinterCommand('G0 Z10 F300');
+    sendPrinterCommand('G90');
+    sendPrinterCommand('M400');
+    sendPrinterCommand('G28');
+    sendPrinterCommand('G30.1 Q T1');
+    sendPrinterCommand('G0 Z0 F300');
+    self.lockHead2();
+	};
+
+	self.autoCalibrate2 = function() {
+	    self.preheat(0, self.autoCalibrateHeated2);
+	};
+
+  self.moveUp2 = function() {
+    sendPrinterCommand('M400');
+    sendPrinterCommand('G91');
+    sendPrinterCommand('G1 Z-.025');
+    sendPrinterCommand('M400');
+    sendPrinterCommand('G90');
+    sendPrinterCommand('G95 Z.025');
+    self.currentZDelta2 = self.currentZDelta2 + 0.025;
+	};
+
+  self.moveDown2 = function() {
+    sendPrinterCommand('M400');
+    sendPrinterCommand('G91');
+    sendPrinterCommand('G1 Z.025');
+    sendPrinterCommand('M400');
+    sendPrinterCommand('G90');
+    sendPrinterCommand('G95 Z-.025');
+    self.currentZDelta2 = self.currentZDelta2 - 0.025;
+	};
+
+  self.setZOffset2 = function() {
+    sendPrinterCommand('M670 T' + self.currentZDelta2);
+    sendPrinterCommand('M500');
+    self.currentZDelta2 = 0;
+  };
+
+
+
 
   self.setOffset = function () {
     sendPrinterCommand('M671');
