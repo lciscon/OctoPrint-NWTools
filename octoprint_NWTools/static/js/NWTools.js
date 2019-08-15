@@ -416,7 +416,7 @@ $(function() {
 	};
 
   self.setZOffset2 = function() {
-    sendPrinterCommand('M670 T' + self.currentZDelta2);
+    sendPrinterCommand('M670 U' + self.currentZDelta2);
     sendPrinterCommand('M500');
     self.currentZDelta2 = 0;
   };
