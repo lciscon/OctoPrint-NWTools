@@ -340,7 +340,7 @@ $(function() {
     sendPrinterCommand('M400');
     sendPrinterCommand('G28');
 //    sendPrinterCommand('G0 Z1');
-      sendPrinterCommand('G30.1 Q T0');
+      sendPrinterCommand('G30.1 Q V0');
       sendPrinterCommand('G0 Z0 F300');
       self.lockHead1();
 	};
@@ -386,13 +386,13 @@ $(function() {
     sendPrinterCommand('G90');
     sendPrinterCommand('M400');
     sendPrinterCommand('G28');
-    sendPrinterCommand('G30.1 Q T1');
+    sendPrinterCommand('G30.1 Q V1');
     sendPrinterCommand('G0 Z0 F300');
     self.lockHead2();
 	};
 
 	self.autoCalibrate2 = function() {
-	    self.preheat(0, self.autoCalibrateHeated2);
+	    self.preheat(1, self.autoCalibrateHeated2);
 	};
 
   self.moveUp2 = function() {
