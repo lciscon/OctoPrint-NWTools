@@ -449,7 +449,7 @@ $(function() {
     sendPrinterCommand('M400');
     sendPrinterCommand('M374');
     sendPrinterCommand('M400');
-    sendPrinterCommand('M500');
+//    sendPrinterCommand('M500');
 	};
 
 	self.levelBed = function() {
