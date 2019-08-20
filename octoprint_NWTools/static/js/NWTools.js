@@ -507,6 +507,7 @@ $(function() {
 */
 
 	self.resetLeveling = function() {
+    sendPrinterCommand('M374.1');
     sendPrinterCommand('M561');
 	};
 
