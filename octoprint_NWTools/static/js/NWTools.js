@@ -433,8 +433,8 @@ $(function() {
 	};
 
 	self.levelBedHeated = function () {
-//    sendSystemCommand('unmount');
-    sendPrinterCommand('M370');
+    //    sendSystemCommand('unmount');
+    self.resetLeveling();
 //    sendPrinterCommand('M502');
 //unmount the usb drive first ...???
 
