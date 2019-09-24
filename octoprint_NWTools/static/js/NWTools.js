@@ -440,6 +440,7 @@ $(function() {
 
     self.autoCalibrateHeated();
     self.releaseHead1(); //!!!!
+    sendPrinterCommand('M400');
 		
     sendPrinterCommand('G91');
     sendPrinterCommand('G0 Z2 F300');
