@@ -332,7 +332,7 @@ $(function() {
             sendPrinterCommand('G0 Z250');
 	};
 
-	self.autoCalibrateHeated = function () {
+	self.autoCalibrateRun = function () {
     sendPrinterCommand('M400');
     sendPrinterCommand('G91');
     sendPrinterCommand('G0 Z10 F300');
@@ -342,6 +342,10 @@ $(function() {
 //    sendPrinterCommand('G0 Z1');
       sendPrinterCommand('G30.1 Q V0');
       sendPrinterCommand('G0 Z0 F300');
+	};
+	    
+	self.autoCalibrateHeated = function () {
+      self.autoCalibrateRun();
       self.lockHead1();
 	};
 
@@ -438,9 +442,7 @@ $(function() {
 //    sendPrinterCommand('M502');
 //unmount the usb drive first ...???
 
-    self.autoCalibrateHeated();
-//    self.releaseHead1(); //!!!!
-//    sendPrinterCommand('M400');
+    self.autoCalibrateRun();
 		
     sendPrinterCommand('G91');
     sendPrinterCommand('G0 Z2 F300');
