@@ -439,6 +439,8 @@ $(function() {
 //unmount the usb drive first ...???
 
     self.autoCalibrateHeated();
+    self.releaseHead1(); //!!!!
+		
     sendPrinterCommand('G91');
     sendPrinterCommand('G0 Z2 F300');
     sendPrinterCommand('G90');
