@@ -85,6 +85,23 @@ class NwtoolsPlugin(octoprint.plugin.SettingsPlugin,
 			return
 
 
+	def get_update_information(self):
+		return dict(
+			rtmpstreamer=dict(
+				displayName="Northworks Tools",
+				displayVersion=self._plugin_version,
+
+				# version check: github repository
+				type="github_release",
+				user="lciscon",
+				repo="OctoPrint-NWTools",
+				current=self._plugin_version,
+
+				# update method: pip
+				pip="https://github.com/lciscon/OctoPrint-NWTools/archive/{target_version}.zip"
+			)
+		)
+
 
 # If you want your plugin to be registered within OctoPrint under a different name than what you defined in setup.py
 # ("OctoPrint-PluginSkeleton"), you may define that here. Same goes for the other metadata derived from setup.py that
