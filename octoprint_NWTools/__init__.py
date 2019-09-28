@@ -49,6 +49,9 @@ class NwtoolsPlugin(octoprint.plugin.SettingsPlugin,
 
 	##~~ Softwareupdate hook
 
+	def get_version(self):
+		return self._plugin_version
+
 	def get_update_information(self):
 		# Define the configuration for your plugin to use with the Software Update
 		# Plugin here. See https://github.com/foosel/OctoPrint/wiki/Plugin:-Software-Update
@@ -84,23 +87,6 @@ class NwtoolsPlugin(octoprint.plugin.SettingsPlugin,
 			self._plugin_manager.send_plugin_message(self._identifier, dict(type="popup", msg=re.sub(r'^M117\s?', '', cmd)))
 			return
 
-
-	def get_update_information(self):
-		return dict(
-			rtmpstreamer=dict(
-				displayName="Northworks Tools",
-				displayVersion=self._plugin_version,
-
-				# version check: github repository
-				type="github_release",
-				user="lciscon",
-				repo="OctoPrint-NWTools",
-				current=self._plugin_version,
-
-				# update method: pip
-				pip="https://github.com/lciscon/OctoPrint-NWTools/archive/{target_version}.zip"
-			)
-		)
 
 
 # If you want your plugin to be registered within OctoPrint under a different name than what you defined in setup.py
