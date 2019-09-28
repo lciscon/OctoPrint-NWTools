@@ -92,7 +92,7 @@ class NwtoolsPlugin(octoprint.plugin.SettingsPlugin,
 # If you want your plugin to be registered within OctoPrint under a different name than what you defined in setup.py
 # ("OctoPrint-PluginSkeleton"), you may define that here. Same goes for the other metadata derived from setup.py that
 # can be overwritten via __plugin_xyz__ control properties. See the documentation for that.
-# __plugin_name__ = "Tools"
+__plugin_name__ = "Northworks Tools"
 __plugin_implementation__ = NwtoolsPlugin()
 
 def __plugin_check__():
@@ -107,5 +107,4 @@ def __plugin_load__():
 		"octoprint.plugin.softwareupdate.check_config": __plugin_implementation__.get_update_information,
 		"octoprint.comm.protocol.gcode.received": __plugin_implementation__.processGCODE,
 		"octoprint.comm.protocol.gcode.queuing": __plugin_implementation__.AlertM117,
-		"octoprint.plugin.softwareupdate.check_config": __plugin_implementation__.get_update_information
 	}
