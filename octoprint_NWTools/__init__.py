@@ -58,7 +58,7 @@ class NwtoolsPlugin(octoprint.plugin.SettingsPlugin,
 		# for details.
 		return dict(
 			nwtools=dict(
-				displayName="NWTools",
+				displayName="Northworks Tools",
 				displayVersion=self._plugin_version,
 
 				# version check: github repository
