@@ -106,6 +106,6 @@ def __plugin_load__():
 	__plugin_hooks__ = {
 		"octoprint.plugin.softwareupdate.check_config": __plugin_implementation__.get_update_information,
 		"octoprint.comm.protocol.gcode.received": __plugin_implementation__.processGCODE,
-		"octoprint.comm.protocol.gcode.queuing": __plugin_implementation__.AlertM117
-
+		"octoprint.comm.protocol.gcode.queuing": __plugin_implementation__.AlertM117,
+		"octoprint.plugin.softwareupdate.check_config": __plugin_implementation__.get_update_information
 	}
