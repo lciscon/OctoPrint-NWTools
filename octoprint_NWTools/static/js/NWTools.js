@@ -203,9 +203,9 @@ $(function() {
 
         	//begin hotend preheat
           sendPrinterCommand('M42');
-          sendPrinterCommand('M140 S' + bedTemp);
+          sendPrinterCommand('M190 S' + bedTemp);
         	sendPrinterCommand('T' + toolnumber);
-        	sendPrinterCommand('M104 S' + tipTemp);
+        	sendPrinterCommand('M109 S' + tipTemp);
 
           if (toolnumber == 0) {
 		          self.targetTemp = tipTemp;
@@ -465,10 +465,13 @@ $(function() {
      self.preheat(0, 1, self.levelBedHeated);
 	};
 
+  self.levelBed2 = function() {
+     self.preheat(0, 2, self.levelBedHeated);
+	};
+
   self.calibrateDone = function () {
       sendPrinterCommand('M511');
 	};
-
 
   self.calibrateSensor = function() {
     var messageType = "calibrating";
