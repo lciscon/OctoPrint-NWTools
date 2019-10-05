@@ -190,8 +190,10 @@ $(function() {
 
         	//begin hotend preheat
           sendPrinterCommand('M42');
+          sendPrinterCommand('M140 S60');
         	sendPrinterCommand('T' + toolnumber);
-        	sendPrinterCommand('M109 S220');
+        	sendPrinterCommand('M104 S220');
+
           if (toolnumber == 0) {
 		          self.targetTemp = 220;
               self.targetTemp2 = 0;
@@ -343,7 +345,7 @@ $(function() {
       sendPrinterCommand('G30.1 Q V0');
       sendPrinterCommand('G0 Z0 F300');
 	};
-	    
+
 	self.autoCalibrateHeated = function () {
       self.autoCalibrateRun();
       self.lockHead1();
@@ -443,7 +445,7 @@ $(function() {
 //unmount the usb drive first ...???
 
     self.autoCalibrateRun();
-		
+
     sendPrinterCommand('G91');
     sendPrinterCommand('G0 Z2 F300');
     sendPrinterCommand('G90');
