@@ -79,11 +79,11 @@ $(function() {
 	self.fromResponse = function (data) {
             console.log('MSL: got reply2 ' + data.tool0.actual);
 	          self.currentTemp = parseFloat(data.tool0.actual);
-	    if (data.tool1) {
-		self.currentTemp2 = parseFloat(data.tool1.actual);
+	          if (data.tool1) {
+		            self.currentTemp2 = parseFloat(data.tool1.actual);
             } else {
-		self.currentTemp2 = self.targetTemp2;
-	    }
+		            self.currentTemp2 = self.targetTemp2;
+	          }
         };
 
 	self.requestData = function() {
@@ -331,7 +331,7 @@ $(function() {
 	};
 
 	self.unloadPrint = function() {
-            sendPrinterCommand('G0 Z250');
+      sendPrinterCommand('G0 Z250');
 	};
 
 	self.autoCalibrateRun = function () {
