@@ -179,9 +179,22 @@ $(function() {
         };
 
 
-	self.preheat = function (toolnumber, callback) {
+	self.preheat = function (toolnumber, material, callback) {
         	var messageType = "preheating";
         	var messageData = {message:"", title:""};
+          var tipTemp = 0;
+          var bedTemp = 0;
+
+          if (material == 0) {
+            tipTemp = 220;
+            bedTemp = 0;
+          } else if (material == 1) {
+            tipTemp = 220;
+            bedTemp = 60;
+          } else {
+            tipTemp = 250;
+            bedTemp = 100;
+          }
 
 		      self.tempCallback = callback;
         	messageData.title = "Preheating...";
@@ -190,27 +203,27 @@ $(function() {
 
         	//begin hotend preheat
           sendPrinterCommand('M42');
-          sendPrinterCommand('M140 S60');
+          sendPrinterCommand('M140 S' + bedTemp);
         	sendPrinterCommand('T' + toolnumber);
-        	sendPrinterCommand('M104 S220');
+        	sendPrinterCommand('M104 S' + tipTemp);
 
           if (toolnumber == 0) {
-		          self.targetTemp = 220;
+		          self.targetTemp = tipTemp;
               self.targetTemp2 = 0;
           } else {
               self.targetTemp = 0;
-              self.targetTemp2 = 220;
+              self.targetTemp2 = tipTemp;
           }
 		      self.tempCallback = callback;
 		      self.tempTimer();
    	};
 
     	self.preheat1 = function() {
-	    	self.preheat(0,null);
+	    	self.preheat(0,0,null);
     	};
 
 	self.preheat2 = function() {
-	    	self.preheat(1,null);
+	    	self.preheat(1,0,null);
 	};
 
   self.lockHead1 = function() {
@@ -266,7 +279,7 @@ $(function() {
 
 	// this will be called when they press the loadFilament button
 	self.loadFilament = function(toolnumber) {
-	    self.preheat(toolnumber, self.loadFilamentPreheated);
+	    self.preheat(toolnumber, 0, self.loadFilamentPreheated);
 	};
 
 	self.loadFilament1 = function() {
@@ -297,7 +310,7 @@ $(function() {
 
 	//this will be called when they press the unloadFilament button
 	self.unloadFilament = function(toolnumber) {
-	    self.preheat(toolnumber, self.unloadFilamentPreheated);
+	    self.preheat(toolnumber, 0, self.unloadFilamentPreheated);
 	};
 
         self.unloadFilament1 = function() {
@@ -352,7 +365,7 @@ $(function() {
 	};
 
 	self.autoCalibrate = function() {
-	    self.preheat(0, self.autoCalibrateHeated);
+	    self.preheat(0, 1, self.autoCalibrateHeated);
 	};
 
   self.moveUp = function() {
@@ -381,10 +394,6 @@ $(function() {
     self.currentZDelta = 0;
   };
 
-
-
-
-
   self.autoCalibrateHeated2 = function () {
     sendPrinterCommand('M400');
     sendPrinterCommand('G91');
@@ -398,7 +407,7 @@ $(function() {
 	};
 
 	self.autoCalibrate2 = function() {
-	    self.preheat(1, self.autoCalibrateHeated2);
+	    self.preheat(1, 1, self.autoCalibrateHeated2);
 	};
 
   self.moveUp2 = function() {
@@ -427,9 +436,6 @@ $(function() {
     self.currentZDelta2 = 0;
   };
 
-
-
-
   self.setOffset = function () {
     sendPrinterCommand('M671');
     sendPrinterCommand('G91');
@@ -439,11 +445,7 @@ $(function() {
 	};
 
 	self.levelBedHeated = function () {
-    //    sendSystemCommand('unmount');
     self.resetLeveling();
-//    sendPrinterCommand('M502');
-//unmount the usb drive first ...???
-
     self.autoCalibrateRun();
 
     sendPrinterCommand('G91');
@@ -455,12 +457,12 @@ $(function() {
     sendPrinterCommand('G0 Z2 F300');
     sendPrinterCommand('M400');
     sendPrinterCommand('M374');
-//    sendPrinterCommand('M400');
-//    sendPrinterCommand('M500');
+    sendPrinterCommand('M400');
+    sendPrinterCommand('M500');
 	};
 
 	self.levelBed = function() {
-     self.preheat(0, self.levelBedHeated);
+     self.preheat(0, 1, self.levelBedHeated);
 	};
 
   self.calibrateDone = function () {
@@ -509,7 +511,7 @@ $(function() {
   };
 
   self.homePrinthead = function() {
-      self.preheat(0, self.homePrintheadHeated);
+      self.preheat(0, 1, self.homePrintheadHeated);
   };
 */
 
