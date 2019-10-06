@@ -1,0 +1,162 @@
+<div class="row-fluid">
+<div class="span6">
+   <h1>General</h1>
+    <button class="btn btn-primary" data-bind="click: unloadPrint" style="width:110px">{{ _('Unload<br/>Print') }}</button>
+&nbsp;
+    <button class="btn btn-primary" data-bind="click: lightsOn" style="width:110px">{{ _('Lights<br/>On') }}</button>
+&nbsp;
+    <button class="btn btn-primary" data-bind="click: lightsOff" style="width:110px">{{ _('Lights<br/>Off') }}</button>
+&nbsp;
+</div>
+<dif class="span6">
+   <h1>Cabinet</h1>
+    <button class="btn btn-primary" data-bind="click: cabinetOn" style="width:110px">{{ _('Heat<br/>On') }}</button>
+&nbsp;
+    <button class="btn btn-primary" data-bind="click: cabinetOff" style="width:110px">{{ _('Heat<br/>Off') }}</button>
+&nbsp;
+</div>
+<br>
+<div class="row-fluid">
+<div class="span6">
+<h1>Printhead 1</h1>
+    <button class="btn btn-primary" data-bind="click: preheat1" style="width:110px">{{ _('Preheat<br/>Head') }}</button>
+&nbsp;
+    <button class="btn btn-primary" data-bind="click: loadFilament1" style="width:110px">{{ _('Load<br/>Filament') }}</button>
+&nbsp;
+    <button class="btn btn-primary" data-bind="click: unloadFilament1" style="width:110px">{{ _('Unload<br/>Filament') }}</button>
+&nbsp;
+</div>
+<div class="span6">
+<h1>Printhead 2</h1>
+    <button class="btn btn-primary" data-bind="click: preheat2" style="width:110px">{{ _('Preheat<br/>Head') }}</button>
+&nbsp;
+    <button class="btn btn-primary" data-bind="click: loadFilament2" style="width:110px">{{ _('Load<br/>Filament') }}</button>
+&nbsp;
+    <button class="btn btn-primary" data-bind="click: unloadFilament2" style="width:110px">{{ _('Unload<br/>Filament') }}</button>
+&nbsp;
+</div>
+</div>
+<br>
+<div class="row-fluid">
+<div class="span6">
+    <button class="btn btn-primary" data-bind="click: liftHead1" style="width:110px">{{ _('Lift<br/>Head') }}</button>
+&nbsp;
+    <button class="btn btn-primary" data-bind="click: releaseHead1" style="width:110px">{{ _('Release<br/>Head') }}</button>
+&nbsp;
+    <button class="btn btn-primary" data-bind="click: lockHead1" style="width:110px">{{ _('Lock<br/>Head') }}</button>
+&nbsp;
+</div>
+<div class="span6">
+    <button class="btn btn-primary" data-bind="click: liftHead2" style="width:110px">{{ _('Lift<br/>Head') }}</button>
+&nbsp;
+    <button class="btn btn-primary" data-bind="click: releaseHead2" style="width:110px">{{ _('Release<br/>Head') }}</button>
+&nbsp;
+    <button class="btn btn-primary" data-bind="click: lockHead2" style="width:110px">{{ _('Lock<br/>Head') }}</button>
+&nbsp;
+</div>
+</div>
+
+<br>
+<h1>Calibration (Advanced)</h1>
+<div class="row-fluid">
+<div class="span6">
+<button class="btn btn-primary" data-bind="click: calibrateSensor" style="width:110px">{{ _('Calibrate<br/>Sensor') }}</button>
+&nbsp;
+<button class="btn btn-primary" data-bind="click: levelBed" style="width:110px">{{ _('Bed<br/>Leveling') }}</button>
+&nbsp;
+<button class="btn btn-primary" data-bind="click: resetLeveling" style="width:110px">{{ _('Reset<br/>Leveling') }}</button>
+</div>
+<div class="span6">
+<button class="btn btn-primary" data-bind="click: autoCalibrate" style="width:70px">{{ _('Calc<br/>Z') }}</button>
+&nbsp;
+<button class="btn btn-primary" data-bind="click: moveUp" style="width:70px">{{ _('&nbsp;&nbsp;^&nbsp;&nbsp; <br/>&nbsp;&nbsp;Up&nbsp;&nbsp;') }}</button>
+&nbsp;
+<button class="btn btn-primary" data-bind="click: moveDown" style="width:70px">{{ _('&nbsp;&nbsp;V&nbsp;&nbsp; <br/>Down') }}</button>
+&nbsp;
+<button class="btn btn-primary" data-bind="click: setZOffset" style="width:70px">{{ _('Set<br/>Z') }}</button>
+</div>
+</div>
+<br>
+
+<div class="row-fluid">
+<div class="span6">
+<button class="btn btn-primary" data-bind="click: levelBed2" style="width:110px">{{ _('Bed<br/>Leveling HT') }}</button>
+&nbsp;
+</div>
+<div class="span6">
+<button class="btn btn-primary" data-bind="click: autoCalibrate2" style="width:70px">{{ _('Calc<br/>Z 2') }}</button>
+&nbsp;
+<button class="btn btn-primary" data-bind="click: moveUp2" style="width:70px">{{ _('&nbsp;&nbsp;^&nbsp;&nbsp; <br/>&nbsp;&nbsp;Up&nbsp;&nbsp;') }}</button>
+&nbsp;
+<button class="btn btn-primary" data-bind="click: moveDown2" style="width:70px">{{ _('&nbsp;&nbsp;V&nbsp;&nbsp; <br/>Down') }}</button>
+&nbsp;
+<button class="btn btn-primary" data-bind="click: setZOffset2" style="width:70px">{{ _('Set<br/>Z 2') }}</button>
+</div>
+</div>
+
+
+<div id="action_trigger_dialog" class="modal hide">
+  <div class="modal-header">
+    <!--<a href="#" class="close" data-dismiss="modal" aria-hidden="true">&times;</a> Out for now-->
+    <h3><p class="action_trigger_title"></p></h3> <!-- trigger title variable -->
+  </div>
+  <div data-bind="template: { name: actionTriggerTemplate() }"></div>
+  </div>
+<!-- Trigger Action Templates -->
+
+<!-- Door -->
+<script type="text/html" id="door_open">
+  <div class="modal-body">
+      <!-- Message variable goes here with extra stuff might have to split into seperate dialogs being called -->
+      <strong>The Xeed door is open, for safety reason we have paused the print!</strong> </br>
+      To resume the print please close the door.
+      To disable this feature go to Settings -> ActionTrigger and untick "Door detection".
+  </div>
+  <div class="modal-footer">
+    <a href="#" class="btn btn-warning action_trigger_dialog_acknowledge" aria-hidden="true">{{ _('I understand, let me access the controls') }}</a>
+  </div>
+</script>
+
+<!-- Filament -->
+<script type="text/html" id="preheating">
+<!--  <div class="modal-footer">  -->
+  <div class="modal-footer">
+    <a href="#" class="btn btn-warning action_trigger_dialog_acknowledge" aria-hidden="true">{{ _('Cancel') }}</a>
+  </div>
+</script>
+
+<script type="text/html" id="calibrating">
+  <div class="modal-footer">
+    <a href="#" class="btn btn-warning action_trigger_dialog_acknowledge" aria-hidden="true">{{ _('Done') }}</a>
+  </div>
+</script>
+
+<script type="text/html" id="deflecting">
+  <div class="modal-body">
+    <!-- Message variable goes here with extra stuff might have to split into seperate dialogs being called -->
+    Make sure the printhead has been homed before proceeding.
+  </div>
+  <div class="modal-footer">
+    <a href="#" class="btn btn-warning action_trigger_dialog_acknowledge" aria-hidden="true">{{ _('OK') }}</a>
+  </div>
+</script>
+
+<script type="text/html" id="loading">
+  <div class="modal-body">
+    <!-- Message variable goes here with extra stuff might have to split into seperate dialogs being called -->
+    Press OK once filament starts extruding from the nozzle.
+  </div>
+  <div class="modal-footer">
+    <a href="#" class="btn btn-warning action_trigger_dialog_acknowledge" aria-hidden="true">{{ _('OK') }}</a>
+  </div>
+</script>
+
+<script type="text/html" id="unloading">
+  <div class="modal-body">
+    <!-- Message variable goes here with extra stuff might have to split into seperate dialogs being called -->
+    Press OK once filament has finished unloading.
+  </div>
+  <div class="modal-footer">
+    <a href="#" class="btn btn-warning action_trigger_dialog_acknowledge" aria-hidden="true">{{ _('OK') }}</a>
+  </div>
+</script>
