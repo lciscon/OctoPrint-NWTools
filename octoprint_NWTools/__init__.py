@@ -32,7 +32,7 @@ class NwtoolsPlugin(octoprint.plugin.SettingsPlugin,
 	def get_template_configs(self):
     		return [
    		     dict(type="tab", name="Tools", template="NWTools_tab.jinja2", custom_bindings=True),
-   		     dict(type="tab", name="Calibrate", template="NWTools2_tab.jinja2", custom_bindings=True)
+   		     dict(type="tab", name="Calibrate", template="NWCalibrate_tab.jinja2", custom_bindings=True)
     		]
 
 # 		     dict(type="settings", custom_bindings=False)
@@ -43,7 +43,7 @@ class NwtoolsPlugin(octoprint.plugin.SettingsPlugin,
 		# Define your plugin's asset files to automatically include in the
 		# core UI here.
 		return dict(
-			js=["js/NWTools.js"],
+			js=["js/NWTools.js","js/NWCalibrate.js"],
 			css=["css/NWTools.css"],
 			less=["less/NWTools.less"]
 		)

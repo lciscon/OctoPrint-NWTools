@@ -1,6 +1,6 @@
 $(function() {
 
-    function NWToolsViewModel(parameters) {
+    function NWCalibrateViewModel(parameters) {
         var self = this;
 
         self.settings = parameters[0];
@@ -96,7 +96,7 @@ $(function() {
         };
 
     self.onDataUpdaterPluginMessage = function(plugin, data) {
-            if (plugin != "NWTools") {
+            if (plugin != "NWCalibrate") {
                 return;
             }
 
@@ -615,7 +615,7 @@ $(function() {
 
       sendPrinterCommand('M115');
       $.ajax({
-          url: API_BASEURL + "plugins/NWTools",
+          url: API_BASEURL + "plugins/NWCalibrate",
           type: "POST",
           command: "command1",
           dataType: "json",
@@ -704,7 +704,7 @@ $(function() {
     // information to the global variable OCTOPRINT_VIEWMODELS
     OCTOPRINT_VIEWMODELS.push([
         // This is the constructor to call for instantiating the plugin
-        NWToolsViewModel,
+        NWCalibrateViewModel,
 
         // This is a list of dependencies to inject into the plugin, the order which you request
         // here is the order in which the dependencies will be injected into your view model upon
@@ -712,6 +712,6 @@ $(function() {
         ["settingsViewModel", "controlViewModel", "systemViewModel", "loginStateViewModel", "printerProfilesViewModel"],
 
         // Finally, this is the list of selectors for all elements we want this view model to be bound to.
-        ["#tab_plugin_NWTools"]
+        ["#tab_plugin_NWCalibrate"]
     ]);
 });
