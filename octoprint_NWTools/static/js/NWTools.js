@@ -3,6 +3,7 @@ $(function() {
     function NWToolsViewModel(parameters) {
         var self = this;
 
+        self.additionalNames = ["NWTools2"];
         self.settings = parameters[0];
         self.control = parameters[1];
         self.system = parameters[2];
@@ -712,6 +713,6 @@ $(function() {
         ["settingsViewModel", "controlViewModel", "systemViewModel", "loginStateViewModel", "printerProfilesViewModel"],
 
         // Finally, this is the list of selectors for all elements we want this view model to be bound to.
-        ["#tab_plugin_NWTools", "#tab_plugin_NWTools2"]
+        ["#tab_plugin_NWTools"]
     ]);
 });
