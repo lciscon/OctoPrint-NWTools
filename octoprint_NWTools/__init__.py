@@ -31,8 +31,8 @@ class NwtoolsPlugin(octoprint.plugin.SettingsPlugin,
 
 	def get_template_configs(self):
     		return [
-   		     dict(type="tab", name="Tools", template="NWTools_tab.jinja2", custom_bindings=False),
-   		     dict(type="tab", name="Calibrate", template="NWTools_tab2.jinja2", custom_bindings=False)
+   		     dict(type="tab", name="Tools", template="NWTools_tab.jinja2", custom_bindings=True),
+   		     dict(type="tab", name="Calibrate", template="NWTools2_tab.jinja2", custom_bindings=True)
     		]
 
 # 		     dict(type="settings", custom_bindings=False)
