@@ -165,6 +165,8 @@ $(function() {
               if (self.currentTemp2 < self.targetTemp2) {
                 stillRunning = true;
               }
+            } else {
+              stillRunning = false;
             }
 
       	    if (stillRunning) {
@@ -214,6 +216,7 @@ $(function() {
               self.targetTemp = 0;
               self.targetTemp2 = tipTemp;
           }
+
 		      self.tempCallback = callback;
 		      self.tempTimer();
    	};
