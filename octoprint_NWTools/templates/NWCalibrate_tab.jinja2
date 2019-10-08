@@ -1,12 +1,27 @@
-<h1>Calibration (Advanced)</h1>
+
+<h1>Bed Leveling</h1>
+<div class="row-fluid">
+<div class="span6">
+<button class="btn btn-primary" data-bind="click: levelBed" style="width:110px">{{ _('Bed<br/>Leveling 60C') }}</button>
+&nbsp;
+<button class="btn btn-primary" data-bind="click: levelBed2" style="width:110px">{{ _('Bed<br/>Leveling 100C') }}</button>
+&nbsp;
+<button class="btn btn-primary" data-bind="click: resetLeveling" style="width:110px">{{ _('Reset<br/>Leveling') }}</button>
+</div>
+</div>
+
+<h1>Sensor Calibration</h1>
 <div class="row-fluid">
 <div class="span6">
 <button class="btn btn-primary" data-bind="click: calibrateSensor" style="width:110px">{{ _('Calibrate<br/>Sensor') }}</button>
 &nbsp;
-<button class="btn btn-primary" data-bind="click: levelBed" style="width:110px">{{ _('Bed<br/>Leveling') }}</button>
+<button class="btn btn-primary" data-bind="click: autoCalibrate" style="width:70px">{{ _('Test<br/>Sensor') }}</button>
 &nbsp;
-<button class="btn btn-primary" data-bind="click: resetLeveling" style="width:110px">{{ _('Reset<br/>Leveling') }}</button>
 </div>
+</div>
+
+<h1>Sensor Offset (Advanced)</h1>
+<div class="row-fluid">
 <div class="span6">
 <button class="btn btn-primary" data-bind="click: autoCalibrate" style="width:70px">{{ _('Calc<br/>Z') }}</button>
 &nbsp;
@@ -15,14 +30,6 @@
 <button class="btn btn-primary" data-bind="click: moveDown" style="width:70px">{{ _('&nbsp;&nbsp;V&nbsp;&nbsp; <br/>Down') }}</button>
 &nbsp;
 <button class="btn btn-primary" data-bind="click: setZOffset" style="width:70px">{{ _('Set<br/>Z') }}</button>
-</div>
-</div>
-<br>
-
-<div class="row-fluid">
-<div class="span6">
-<button class="btn btn-primary" data-bind="click: levelBed2" style="width:110px">{{ _('Bed<br/>Leveling HT') }}</button>
-&nbsp;
 </div>
 <div class="span6">
 <button class="btn btn-primary" data-bind="click: autoCalibrate2" style="width:70px">{{ _('Calc<br/>Z 2') }}</button>
@@ -34,7 +41,6 @@
 <button class="btn btn-primary" data-bind="click: setZOffset2" style="width:70px">{{ _('Set<br/>Z 2') }}</button>
 </div>
 </div>
-
 
 <div id="action_trigger_dialog" class="modal hide">
   <div class="modal-header">
