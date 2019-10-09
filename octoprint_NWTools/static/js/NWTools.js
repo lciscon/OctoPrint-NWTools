@@ -58,9 +58,9 @@ $(function() {
       		actionTriggerDialogAck.bind("click", function (e) {
      		   e.preventDefault();
     		   $("#action_trigger_dialog").modal("hide");
-                   if (self.actionTriggerCallback !== null) {
-                        self.actionTriggerCallback();
-                   }
+           if (self.actionTriggerCallback !== null) {
+                self.actionTriggerCallback();
+           }
 
 //   		   self.showControls();
       		});
@@ -178,6 +178,11 @@ $(function() {
             }
         };
 
+  self.cancelPreheat = function () {
+    self.targetTemp = 0;
+    self.targetTemp2 = 0;
+    self.hideActionTriggerDialog();
+  }
 
 	self.preheat = function (toolnumber, material, callback) {
         	var messageType = "preheating";
@@ -199,7 +204,7 @@ $(function() {
 		      self.tempCallback = callback;
         	messageData.title = "Preheating...";
         	self.actionTriggerTemplate(messageType);
-        	self.showActionTriggerDialog(messageData, null);
+        	self.showActionTriggerDialog(messageData, self.cancelPreheat);
 
         	//begin hotend preheat
           sendPrinterCommand('M42');
