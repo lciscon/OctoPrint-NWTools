@@ -1,13 +1,5 @@
 
 <div class="row-fluid">
-<div class="span6">
-<h1>Bed Leveling</h1>
-<button class="btn btn-primary" data-bind="click: levelBed" style="width:110px">{{ _('Bed<br/>Leveling 60C') }}</button>
-&nbsp;
-<button class="btn btn-primary" data-bind="click: levelBed2" style="width:130px">{{ _('Bed<br/>Leveling 100C') }}</button>
-&nbsp;
-<button class="btn btn-primary" data-bind="click: resetLeveling" style="width:110px">{{ _('Reset<br/>Leveling') }}</button>
-</div>
 <div class="span4">
 <h1>Sensor Calibration</h1>
 <button class="btn btn-primary" data-bind="click: calibrateSensor" style="width:110px">{{ _('Calibrate<br/>Sensor') }}</button>
@@ -15,29 +7,37 @@
 <button class="btn btn-primary" data-bind="click: autoCalibrate" style="width:70px">{{ _('Test<br/>Sensor') }}</button>
 &nbsp;
 </div>
+<div class="span6">
+<h1>Bed Leveling</h1>
+<button class="btn btn-primary" data-bind="click: levelBed" style="width:115px">{{ _('Bed<br/>Leveling 60C') }}</button>
+&nbsp;
+<button class="btn btn-primary" data-bind="click: levelBed2" style="width:130px">{{ _('Bed<br/>Leveling 100C') }}</button>
+&nbsp;
+<button class="btn btn-primary" data-bind="click: resetLeveling" style="width:110px">{{ _('Reset<br/>Leveling') }}</button>
+</div>
 </div>
 
 <div class="row-fluid">
 <div class="span10">
 <h1>Sensor Offset (Advanced)</h1>
-<button class="btn btn-primary" data-bind="click: autoCalibrate" style="width:70px">{{ _('Calc<br/>Z') }}</button>
+<button class="btn btn-primary" data-bind="click: autoCalibrate" style="width:100px">{{ _('Calc<br/>Z') }}</button>
 &nbsp;
-<button class="btn btn-primary" data-bind="click: moveUp" style="width:70px">{{ _('&nbsp;&nbsp;^&nbsp;&nbsp; <br/>&nbsp;&nbsp;Up&nbsp;&nbsp;') }}</button>
+<button class="btn btn-primary" data-bind="click: moveUp" style="width:100px">{{ _('&nbsp;&nbsp;^&nbsp;&nbsp; <br/>&nbsp;&nbsp;Up&nbsp;&nbsp;') }}</button>
 &nbsp;
-<button class="btn btn-primary" data-bind="click: moveDown" style="width:70px">{{ _('&nbsp;&nbsp;V&nbsp;&nbsp; <br/>Down') }}</button>
+<button class="btn btn-primary" data-bind="click: moveDown" style="width:100px">{{ _('&nbsp;&nbsp;V&nbsp;&nbsp; <br/>Down') }}</button>
 &nbsp;
-<button class="btn btn-primary" data-bind="click: setZOffset" style="width:70px">{{ _('Set<br/>Z') }}</button>
+<button class="btn btn-primary" data-bind="click: setZOffset" style="width:100px">{{ _('Set<br/>Z') }}</button>
 </div>
 </div>
 <br>
 <div class="row-fluid">
 <div class="span10">
-<button class="btn btn-primary" data-bind="click: autoCalibrate2" style="width:70px">{{ _('Calc<br/>Z 2') }}</button>
+<button class="btn btn-primary" data-bind="click: autoCalibrate2" style="width:100px">{{ _('Calc<br/>Z 2') }}</button>
 &nbsp;
-<button class="btn btn-primary" data-bind="click: moveUp2" style="width:70px">{{ _('&nbsp;&nbsp;^&nbsp;&nbsp; <br/>&nbsp;&nbsp;Up&nbsp;&nbsp;') }}</button>
+<button class="btn btn-primary" data-bind="click: moveUp2" style="width:100px">{{ _('&nbsp;&nbsp;^&nbsp;&nbsp; <br/>&nbsp;&nbsp;Up&nbsp;&nbsp;') }}</button>
 &nbsp;
-<button class="btn btn-primary" data-bind="click: moveDown2" style="width:70px">{{ _('&nbsp;&nbsp;V&nbsp;&nbsp; <br/>Down') }}</button>
+<button class="btn btn-primary" data-bind="click: moveDown2" style="width:100px">{{ _('&nbsp;&nbsp;V&nbsp;&nbsp; <br/>Down') }}</button>
 &nbsp;
-<button class="btn btn-primary" data-bind="click: setZOffset2" style="width:70px">{{ _('Set<br/>Z 2') }}</button>
+<button class="btn btn-primary" data-bind="click: setZOffset2" style="width:100px">{{ _('Set<br/>Z 2') }}</button>
 </div>
 </div>
