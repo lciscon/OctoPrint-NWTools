@@ -483,6 +483,8 @@ $(function() {
     var messageType = "calibrating";
     var messageData = {message:"", title:""};
 
+    self.releaseHead1();
+    self.releaseHead2();
     sendPrinterCommand('M510');
 
     messageData.title = "Calibrating...";
