@@ -165,8 +165,6 @@ $(function() {
               if (self.currentTemp2 < self.targetTemp2) {
                 stillRunning = true;
               }
-            } else {
-              stillRunning = false;
             }
 
       	    if (stillRunning) {
