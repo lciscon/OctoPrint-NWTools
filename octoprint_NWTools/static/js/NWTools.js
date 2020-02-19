@@ -124,7 +124,10 @@ $(function() {
 
 	self.hideActionTriggerDialog = function () {
            var actionTriggerDialog = $("#action_trigger_dialog");
-           $("#action_trigger_dialog").modal("hide");
+           actionTriggerDialog.modal({
+              show: 'false'
+           });
+//           $("#action_trigger_dialog").modal("hide");
 //           self.showControls();
    	};
 

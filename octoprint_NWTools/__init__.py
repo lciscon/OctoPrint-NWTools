@@ -14,6 +14,28 @@ import octoprint.printer
 import flask
 import re
 
+class Prompt(object):
+
+	def __init__(self, text):
+		self.text = text
+		self.choices = []
+
+		self._active = False
+
+	@property
+	def active(self):
+		return self._active
+
+	def add_choice(self, text):
+		self.choices.append(text)
+
+	def activate(self):
+		self._active = True
+
+	def validate_choice(self, choice):
+		return 0 <= choice < len(self.choices)
+
+
 class NwtoolsPlugin(octoprint.plugin.SettingsPlugin,
                    octoprint.plugin.StartupPlugin,
                    octoprint.plugin.TemplatePlugin,
@@ -73,6 +95,29 @@ class NwtoolsPlugin(octoprint.plugin.SettingsPlugin,
 			)
 		)
 
+	def action_command_handler(self, comm, line, action, *args, **kwargs):
+		if not action.startswith(b"prompt_"):
+			return
+
+		parts = action.split(None, 1)
+		if len(parts) == 1:
+			action = parts[0]
+			parameter = ""
+		else:
+			action, parameter = parts
+
+		if action == "error":
+            self._plugin_manager.send_plugin_message(self._identifier, dict(action="show",
+            		                                                 text=self._prompt.text,
+            		                                                 choices=self._prompt.choices))
+
+			if self._prompt is None:
+				return
+			if self._prompt.active:
+				self._logger.warn("Prompt is already active")
+				return
+			self._show_prompt()
+
 	def processGCODE(self, comm, line, *args, **kwargs):
 #		if "Offset" not in line:
 		if "Marlin" not in line:
@@ -88,6 +133,21 @@ class NwtoolsPlugin(octoprint.plugin.SettingsPlugin,
 			self._plugin_manager.send_plugin_message(self._identifier, dict(type="popup", msg=re.sub(r'^M117\s?', '', cmd)))
 			return
 
+	def _show_prompt(self):
+		if self._enable == "never" or (self._enable == "detected" and not self._cap_prompt_support):
+			return
+
+		self._prompt.activate()
+		self._plugin_manager.send_plugin_message(self._identifier, dict(action="show",
+		                                                                text=self._prompt.text,
+		                                                                choices=self._prompt.choices))
+
+	def _close_prompt(self):
+		if self._enable == "never" or (self._enable == "detected" and not self._cap_prompt_support):
+			return
+
+		self._prompt = None
+		self._plugin_manager.send_plugin_message(self._identifier, dict(action="close"))
 
 
 # If you want your plugin to be registered within OctoPrint under a different name than what you defined in setup.py
@@ -105,6 +165,7 @@ def __plugin_load__():
 
 	global __plugin_hooks__
 	__plugin_hooks__ = {
+    	"octoprint.comm.protocol.action": __plugin_implementation__.action_command_handler,
 		"octoprint.plugin.softwareupdate.check_config": __plugin_implementation__.get_update_information,
 		"octoprint.comm.protocol.gcode.received": __plugin_implementation__.processGCODE,
 		"octoprint.comm.protocol.gcode.queuing": __plugin_implementation__.AlertM117,
