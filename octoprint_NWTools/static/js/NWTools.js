@@ -350,11 +350,17 @@ $(function() {
 	};
 
   self.cabinetOn = function() {
+	  sendPrinterCommand('OCTO282');
 	    sendPrinterCommand('M282');
 	};
 
 	self.cabinetOff = function() {
+	  sendPrinterCommand('OCTO283');
       sendPrinterCommand('M283');
+	};
+
+	self.restartMachine = function() {
+	  sendPrinterCommand('OCTO284');
 	};
 
 	self.unloadPrint = function() {
