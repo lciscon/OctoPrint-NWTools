@@ -331,7 +331,7 @@ $(function() {
         };
 
 	self.lightsOn = function() {
-		sendSystemCommand('lightsOn');
+		sendSystemCommand('lightson');
 	    //sendPrinterCommand('M5');
       //new PNotify({
       //  title: 'Pop Up Message',
@@ -342,7 +342,7 @@ $(function() {
 	};
 
 	self.lightsOff = function() {
-		sendSystemCommand('lightsOff');
+		sendSystemCommand('lightsoff');
 //      sendPrinterCommand('M3');
 	};
 
