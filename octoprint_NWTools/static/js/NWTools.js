@@ -116,12 +116,6 @@ $(function() {
        self.control.sendCustomCommand({ command: cmdstr });
    	};
 
-  function sendSystemCommand (cmdstr) {
-	   console.debug('MSL: sending system cmd: '+cmdstr);
-       self.system.triggerCommand({ actionSource: 'custom', action: cmdstr });
-   	};
-
-
 	self.hideActionTriggerDialog = function () {
            var actionTriggerDialog = $("#action_trigger_dialog");
            actionTriggerDialog.modal({
@@ -338,13 +332,11 @@ $(function() {
         };
 
 	self.lightsOn = function() {
-//		sendSystemCommand('lightson');
 		sendPrinterCommand('OCTO5');
 	    sendPrinterCommand('M5');
 	};
 
 	self.lightsOff = function() {
-//		sendSystemCommand('lightsoff');
 	   sendPrinterCommand('OCTO3');
        sendPrinterCommand('M3');
 	};
