@@ -118,7 +118,7 @@ $(function() {
 
   function sendSystemCommand (cmdstr) {
 	   console.debug('MSL: sending system cmd: '+cmdstr);
-       self.system.triggerCommand({ actionSource: 'nwtools', action: cmdstr });
+       self.system.triggerCommand({ actionSource: 'action', action: cmdstr });
    	};
 
 
