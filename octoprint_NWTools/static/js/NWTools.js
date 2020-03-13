@@ -331,8 +331,9 @@ $(function() {
         };
 
 	self.lightsOn = function() {
-		sendSystemCommand('lightson');
-	    //sendPrinterCommand('M5');
+//		sendSystemCommand('lightson');
+		sendPrinterCommand('OCTO5');
+	    sendPrinterCommand('M5');
       //new PNotify({
       //  title: 'Pop Up Message',
       //  text: 'here',
@@ -342,8 +343,9 @@ $(function() {
 	};
 
 	self.lightsOff = function() {
-		sendSystemCommand('lightsoff');
-//      sendPrinterCommand('M3');
+//		sendSystemCommand('lightsoff');
+	   sendPrinterCommand('OCTO3');
+      sendPrinterCommand('M3');
 	};
 
   self.cabinetOn = function() {
