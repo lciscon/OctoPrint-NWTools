@@ -150,6 +150,13 @@ $(function() {
 	    }
 	};
 
+	//new PNotify({
+	//  title: 'Pop Up Message',
+	//  text: 'here',
+	//  type: self.msgType(),
+	//  hide: self.autoClose()
+	//  });
+
 	self.tempCallback = function () {
 
 	};
@@ -334,18 +341,12 @@ $(function() {
 //		sendSystemCommand('lightson');
 		sendPrinterCommand('OCTO5');
 	    sendPrinterCommand('M5');
-      //new PNotify({
-      //  title: 'Pop Up Message',
-      //  text: 'here',
-      //  type: self.msgType(),
-      //  hide: self.autoClose()
-      //  });
 	};
 
 	self.lightsOff = function() {
 //		sendSystemCommand('lightsoff');
 	   sendPrinterCommand('OCTO3');
-      sendPrinterCommand('M3');
+       sendPrinterCommand('M3');
 	};
 
   self.cabinetOn = function() {
