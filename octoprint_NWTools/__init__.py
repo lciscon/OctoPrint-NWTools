@@ -107,9 +107,7 @@ class NwtoolsPlugin(octoprint.plugin.SettingsPlugin,
 			action, parameter = parts
 
 		if action == "error":
-            self._plugin_manager.send_plugin_message(self._identifier, dict(action="show",
-            		                                                 text=self._prompt.text,
-            		                                                 choices=self._prompt.choices))
+			self._plugin_manager.send_plugin_message(self._identifier, dict(action="show", text=self._prompt.text, choices=self._prompt.choices))
 
 			if self._prompt is None:
 				return
