@@ -113,12 +113,12 @@ $(function() {
 
 	function sendPrinterCommand (cmdstr) {
 	   console.debug('MSL: sending cmd: '+cmdstr);
-           self.control.sendCustomCommand({ command: cmdstr });
+       self.control.sendCustomCommand({ command: cmdstr });
    	};
 
   function sendSystemCommand (cmdstr) {
-	   console.debug('MSL: sending cmd: '+cmdstr);
-           self.system.triggerCommand({ command: cmdstr });
+	   console.debug('MSL: sending system cmd: '+cmdstr);
+       self.system.triggerCommand({ actionSource: 'nwtools', action: cmdstr });
    	};
 
 
@@ -331,7 +331,8 @@ $(function() {
         };
 
 	self.lightsOn = function() {
-	    sendPrinterCommand('M5');
+		sendSystemCommand('lightsOn');
+	    //sendPrinterCommand('M5');
       //new PNotify({
       //  title: 'Pop Up Message',
       //  text: 'here',
@@ -341,7 +342,8 @@ $(function() {
 	};
 
 	self.lightsOff = function() {
-      sendPrinterCommand('M3');
+		sendSystemCommand('lightsOff');
+//      sendPrinterCommand('M3');
 	};
 
   self.cabinetOn = function() {
@@ -363,9 +365,8 @@ $(function() {
     sendPrinterCommand('G90');
     sendPrinterCommand('M400');
     sendPrinterCommand('G28');
-//    sendPrinterCommand('G0 Z1');
-      sendPrinterCommand('G30.1 Q V0');
-      sendPrinterCommand('G0 Z0 F300');
+  	sendPrinterCommand('G30.1 Q V0');
+    sendPrinterCommand('G0 Z0 F300');
 	};
 
 	self.autoCalibrateHeated = function () {
@@ -398,6 +399,8 @@ $(function() {
 	};
 
   self.setZOffset = function() {
+	  //subtract a bit for the material thickness
+	  self.currentZDelta = self.currentZDelta + .05;
     sendPrinterCommand('M670 P' + self.currentZDelta);
     sendPrinterCommand('M500');
     self.currentZDelta = 0;
@@ -440,6 +443,8 @@ $(function() {
 	};
 
   self.setZOffset2 = function() {
+	//subtract a bit for the material thickness
+	self.currentZDelta2 = self.currentZDelta2 + .05;
     sendPrinterCommand('M670 U' + self.currentZDelta2);
     sendPrinterCommand('M500');
     self.currentZDelta2 = 0;
