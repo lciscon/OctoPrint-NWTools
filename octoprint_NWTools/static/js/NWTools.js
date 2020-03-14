@@ -19,6 +19,14 @@ $(function() {
         self.target = ko.observable(2);
         self.newTarget = ko.observable(3);
 
+		self.isErrorOrClosed = ko.observable(undefined);
+        self.isOperational = ko.observable(undefined);
+        self.isPrinting = ko.observable(undefined);
+        self.isPaused = ko.observable(undefined);
+        self.isError = ko.observable(undefined);
+        self.isReady = ko.observable(undefined);
+        self.isLoading = ko.observable(undefined);
+
         self.autoClose = ko.observable();
 
         self.autoCalibrating = 0;
@@ -75,6 +83,20 @@ $(function() {
     	function sleep (time) {
  	    return new Promise((resolve) => setTimeout(resolve, time));
 	}
+
+	self.fromCurrentData = function(data) {
+		self._processStateData(data.state);
+	};
+
+	self._processStateData = function(data) {
+		self.isErrorOrClosed(data.flags.closedOrError);
+		self.isOperational(data.flags.operational);
+		self.isPaused(data.flags.paused);
+		self.isPrinting(data.flags.printing);
+		self.isError(data.flags.error);
+		self.isReady(data.flags.ready);
+		self.isLoading(data.flags.loading);
+	};
 
 	self.fromResponse = function (data) {
             console.log('MSL: got reply2 ' + data.tool0.actual);
