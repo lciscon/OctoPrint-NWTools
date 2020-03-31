@@ -227,6 +227,8 @@ $(function() {
             bedTemp = 100;
           }
 
+		  console.log('Starting heatup! ');
+
 		      self.tempCallback = callback;
         	messageData.title = "Preheating...";
         	self.actionTriggerTemplate(messageType);
