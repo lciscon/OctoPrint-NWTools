@@ -143,7 +143,7 @@ $(function() {
            actionTriggerDialog.modal({
               show: 'false'
            });
-//           $("#action_trigger_dialog").modal("hide");
+           $("#action_trigger_dialog").modal("hide");
 //           self.showControls();
    	};
 
