@@ -1,4 +1,3 @@
-<h1>Test me</h1>
 <div class="row-fluid">
 <div class="span4">
    <h1>General</h1>
@@ -7,6 +6,7 @@
 <button class="btn btn-primary" data-bind="enable: $root.isOperational() && !$root.isPrinting(), click: unloadPrint" style="width: 45%">{{ _('Unload<br/>Print') }}</button>
 &nbsp;
 </div>
+&nbsp;
 <div class="span4">
 	<h1>Lights</h1>
     <button class="btn btn-primary" data-bind="enable: $root.isOperational() && !$root.isPrinting(), click: lightsOn" style="width: 45%">{{ _('Lights<br/>On') }}</button>
@@ -14,6 +14,7 @@
     <button class="btn btn-primary" data-bind="enable: $root.isOperational() && !$root.isPrinting(), click: lightsOff" style="width: 45%">{{ _('Lights<br/>Off') }}</button>
 &nbsp;
 </div>
+&nbsp;
 <div class="span4">
    <h1>Cabinet</h1>
     <button class="btn btn-primary" data-bind="enable: $root.isOperational() && !$root.isPrinting(), click: cabinetOn" style="width: 45%">{{ _('Heat<br/>On') }}</button>
@@ -24,41 +25,41 @@
 </div>
 <br>
 <div class="row-fluid">
-<div class="span10">
+<div class="span12">
 <h1>Printhead 1</h1>
-    <button class="btn btn-primary" data-bind="enable: $root.isOperational() && !$root.isPrinting(), click: loadFilament1" style="width:110px">{{ _('Load<br/>Filament') }}</button>
+    <button class="btn btn-primary" data-bind="enable: $root.isOperational() && !$root.isPrinting(), click: loadFilament1" style="width:20%">{{ _('Load<br/>Filament') }}</button>
 &nbsp;
-    <button class="btn btn-primary" data-bind="enable: $root.isOperational() && !$root.isPrinting(), click: unloadFilament1" style="width:110px">{{ _('Unload<br/>Filament') }}</button>
-&nbsp;
-&nbsp;
+    <button class="btn btn-primary" data-bind="enable: $root.isOperational() && !$root.isPrinting(), click: unloadFilament1" style="width:20%">{{ _('Unload<br/>Filament') }}</button>
 &nbsp;
 &nbsp;
 &nbsp;
-    <button class="btn btn-primary" data-bind="enable: $root.isOperational() && !$root.isPrinting(), click: liftHead1" style="width:110px">{{ _('Lift<br/>Head') }}</button>
 &nbsp;
-    <button class="btn btn-primary" data-bind="enable: $root.isOperational() && !$root.isPrinting(), click: releaseHead1" style="width:110px">{{ _('Release<br/>Head') }}</button>
 &nbsp;
-    <button class="btn btn-primary" data-bind="enable: $root.isOperational() && !$root.isPrinting(), click: lockHead1" style="width:110px">{{ _('Lock<br/>Head') }}</button>
+    <button class="btn btn-primary" data-bind="enable: $root.isOperational() && !$root.isPrinting(), click: liftHead1" style="width:20%">{{ _('Lift<br/>Head') }}</button>
+&nbsp;
+    <button class="btn btn-primary" data-bind="enable: $root.isOperational() && !$root.isPrinting(), click: releaseHead1" style="width:20%">{{ _('Release<br/>Head') }}</button>
+&nbsp;
+    <button class="btn btn-primary" data-bind="enable: $root.isOperational() && !$root.isPrinting(), click: lockHead1" style="width:20%">{{ _('Lock<br/>Head') }}</button>
 &nbsp;
 </div>
 </div>
 <br>
 <div class="row-fluid">
-<div class="span10">
+<div class="span12">
 <h1>Printhead 2</h1>
-    <button class="btn btn-primary" data-bind="enable: $root.isOperational() && !$root.isPrinting(), click: loadFilament2" style="width:110px">{{ _('Load<br/>Filament') }}</button>
+    <button class="btn btn-primary" data-bind="enable: $root.isOperational() && !$root.isPrinting(), click: loadFilament2" style="width:20%">{{ _('Load<br/>Filament') }}</button>
 &nbsp;
-    <button class="btn btn-primary" data-bind="enable: $root.isOperational() && !$root.isPrinting(), click: unloadFilament2" style="width:110px">{{ _('Unload<br/>Filament') }}</button>
-&nbsp;
-&nbsp;
+    <button class="btn btn-primary" data-bind="enable: $root.isOperational() && !$root.isPrinting(), click: unloadFilament2" style="width:20%">{{ _('Unload<br/>Filament') }}</button>
 &nbsp;
 &nbsp;
 &nbsp;
-    <button class="btn btn-primary" data-bind="enable: $root.isOperational() && !$root.isPrinting(), click: liftHead2" style="width:110px">{{ _('Lift<br/>Head') }}</button>
 &nbsp;
-    <button class="btn btn-primary" data-bind="enable: $root.isOperational() && !$root.isPrinting(), click: releaseHead2" style="width:110px">{{ _('Release<br/>Head') }}</button>
 &nbsp;
-    <button class="btn btn-primary" data-bind="enable: $root.isOperational() && !$root.isPrinting(), click: lockHead2" style="width:110px">{{ _('Lock<br/>Head') }}</button>
+    <button class="btn btn-primary" data-bind="enable: $root.isOperational() && !$root.isPrinting(), click: liftHead2" style="width:20%">{{ _('Lift<br/>Head') }}</button>
+&nbsp;
+    <button class="btn btn-primary" data-bind="enable: $root.isOperational() && !$root.isPrinting(), click: releaseHead2" style="width:20%">{{ _('Release<br/>Head') }}</button>
+&nbsp;
+    <button class="btn btn-primary" data-bind="enable: $root.isOperational() && !$root.isPrinting(), click: lockHead2" style="width:20%">{{ _('Lock<br/>Head') }}</button>
 &nbsp;
 </div>
 </div>
