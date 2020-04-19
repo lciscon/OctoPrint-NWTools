@@ -359,6 +359,10 @@ $(function() {
             self.unloadFilament(1);
         };
 
+		self.rebootController = function() {
+			sendPrinterCommand('OCTO999');
+		};
+
 	self.lightsOn = function() {
 		sendPrinterCommand('OCTO5');
 	    sendPrinterCommand('M5');
