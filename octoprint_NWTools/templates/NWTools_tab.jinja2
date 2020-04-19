@@ -1,30 +1,32 @@
 <div class="row-fluid">
 <div class="span4">
-   <h1>General</h1>
-    <button class="btn btn-primary" data-bind="enable: $root.isOperational() && !$root.isPrinting(), click: parkPrinthead" style="width: 30%">{{ _('Park<br/>Printhead') }}</button>
-&nbsp;
-	<button class="btn btn-primary" data-bind="enable: $root.isOperational() && !$root.isPrinting(), click: unloadPrint" style="width: 30%">{{ _('Unload<br/>Print') }}</button>
-&nbsp;
-</div>
-<div class="span4">
 	<h1>Lights</h1>
     <button class="btn btn-primary" data-bind="enable: $root.isOperational() && !$root.isPrinting(), click: lightsOn" style="width: 40%">{{ _('Lights<br/>On') }}</button>
 &nbsp;
     <button class="btn btn-primary" data-bind="enable: $root.isOperational() && !$root.isPrinting(), click: lightsOff" style="width: 40%">{{ _('Lights<br/>Off') }}</button>
 &nbsp;
 </div>
+<div class="span4">
+   <h1>General</h1>
+    <button class="btn btn-primary" data-bind="enable: $root.isOperational() && !$root.isPrinting(), click: parkPrinthead" style="width: 40%">{{ _('Park<br/>Printhead') }}</button>
+&nbsp;
+	<button class="btn btn-primary" data-bind="enable: $root.isOperational() && !$root.isPrinting(), click: unloadPrint" style="width: 40%">{{ _('Unload<br/>Print') }}</button>
+&nbsp;
+</div>
 </div>
 
 <div class="row-fluid">
-<div class="span4">
-	<button class="btn btn-primary" data-bind="enable: $root.isOperational() && !$root.isPrinting(), click: unloadPrint" style="width: 30%">{{ _('Reset<br/>Controller') }}</button>
-&nbsp;
-</div>
 <div class="span4">
    <h1>Cabinet</h1>
     <button class="btn btn-primary" data-bind="enable: $root.isOperational() && !$root.isPrinting(), click: cabinetOn" style="width: 40%">{{ _('Heat<br/>On') }}</button>
 &nbsp;
     <button class="btn btn-primary" data-bind="enable: $root.isOperational() && !$root.isPrinting(), click: cabinetOff" style="width: 40%">{{ _('Heat<br/>Off') }}</button>
+&nbsp;
+</div>
+<div class="span4">
+	<br>
+	<br>
+	<button class="btn btn-primary" data-bind="enable: $root.isOperational() && !$root.isPrinting(), click: unloadPrint" style="width: 40%">{{ _('Reset<br/>Controller') }}</button>
 &nbsp;
 </div>
 </div>
