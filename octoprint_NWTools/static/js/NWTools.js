@@ -9,11 +9,15 @@ $(function() {
         self.loginState = parameters[3];
         self.printerProfiles = parameters[4];
 
-	      self.targetTemp = 0;
-	      self.currentTemp = 0;
-		    self.currentTemp2 = 0;
-        self.currentZDelta = 0;
-        self.currentZDelta2 = 0;
+	    self.targetTemp = 0;
+	    self.currentTemp = 0;
+		self.currentTemp2 = 0;
+        self.tool0_ZDelta = 0;
+        self.tool1_ZDelta = 0;
+		self.tool0_Raised = 0;
+		self.tool0_Locked = 0;
+		self.tool1_Raised = 0;
+		self.tool1_Locked = 0;
 
         self.actual = ko.observable(-0.1);
         self.target = ko.observable(2);
@@ -414,7 +418,7 @@ $(function() {
     sendPrinterCommand('M400');
     sendPrinterCommand('G90');
     sendPrinterCommand('G95 Z.025');
-    self.currentZDelta = self.currentZDelta + 0.025;
+    self.tool0_ZDelta = self.tool0_ZDelta + 0.025;
 	};
 
   self.moveDown = function() {
@@ -424,15 +428,15 @@ $(function() {
     sendPrinterCommand('M400');
     sendPrinterCommand('G90');
     sendPrinterCommand('G95 Z-.025');
-    self.currentZDelta = self.currentZDelta - 0.025;
+    self.tool0_ZDelta = self.tool0_ZDelta - 0.025;
 	};
 
   self.setZOffset = function() {
 	  //subtract a bit for the material thickness
-	  self.currentZDelta = self.currentZDelta + .05;
-    sendPrinterCommand('M670 P' + self.currentZDelta);
+	  self.tool0_ZDelta = self.tool0_ZDelta + .05;
+    sendPrinterCommand('M670 P' + self.tool0_ZDelta);
     sendPrinterCommand('M500');
-    self.currentZDelta = 0;
+    self.tool0_ZDelta = 0;
   };
 
   self.autoCalibrateHeated2 = function () {
@@ -458,7 +462,7 @@ $(function() {
     sendPrinterCommand('M400');
     sendPrinterCommand('G90');
     sendPrinterCommand('G95 Z.025');
-    self.currentZDelta2 = self.currentZDelta2 + 0.025;
+    self.tool1_ZDelta = self.tool1_ZDelta + 0.025;
 	};
 
   self.moveDown2 = function() {
@@ -468,15 +472,15 @@ $(function() {
     sendPrinterCommand('M400');
     sendPrinterCommand('G90');
     sendPrinterCommand('G95 Z-.025');
-    self.currentZDelta2 = self.currentZDelta2 - 0.025;
+    self.tool1_ZDelta = self.tool1_ZDelta - 0.025;
 	};
 
   self.setZOffset2 = function() {
 	//subtract a bit for the material thickness
-	self.currentZDelta2 = self.currentZDelta2 + .05;
-    sendPrinterCommand('M670 U' + self.currentZDelta2);
+	self.tool1_ZDelta = self.tool1_ZDelta + .05;
+    sendPrinterCommand('M670 U' + self.tool1_ZDelta);
     sendPrinterCommand('M500');
-    self.currentZDelta2 = 0;
+    self.tool1_ZDelta = 0;
   };
 
   self.setOffset = function () {
