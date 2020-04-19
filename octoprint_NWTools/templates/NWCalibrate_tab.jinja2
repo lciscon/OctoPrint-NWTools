@@ -58,15 +58,15 @@
 <div class="row-fluid">
     <table id="calibrate-table" class="table table-bordered table-hover">
         <tr>
-            <th class="calibration_tool"></th>
-            <th class="calibration_current">{{ _('Current') }}</th>
-            <th class="calibration_target">{{ _('Target') }}</th>
-            <th class="calibration_test"></th>
+            <th class="calibrate_tool"></th>
+            <th class="calibrate_current">{{ _('Current') }}</th>
+            <th class="calibrate_target">{{ _('Target') }}</th>
+            <th class="calibrate_test"></th>
         </tr>
 		<tr>
-			<th class="calibration_tool">{{ _('Tool0 Z Offset') }}</th>
-	        <td class="calibration_current" data-bind="html: tool0_ZDelta(), attr: {title: tool0_ZDelta()}"></td>
-	        <td class="calibration_target">
+			<th class="calibrate_tool">{{ _('Tool0 Z Offset') }}</th>
+	        <td class="calibrate_current" data-bind="html: tool0_ZDelta(), attr: {title: tool0_ZDelta()}"></td>
+	        <td class="calibrate_target">
 	            <form class="form-inline" style="margin:0" data-bind="submit: function(element) { $root.setSensor1Target($data, element) }">
 	                <div class="input-prepend input-append">
 	                    <button type="button" class="btn btn-input-dec" data-bind="click: $root.decrementTarget, enable: $root.isOperational() && $root.loginState.isUser()" title="{{ _('Fine adjust: -1°C')|edq }}"><i class="fa fa-minus"></i></button>
@@ -78,7 +78,7 @@
 	                </div>
 	            </form>
 	        </td>
-	        <td class="calibration_test">
+	        <td class="calibrate_test">
 				<button class="btn btn-primary" data-bind="enable: $root.isOperational() && !$root.isPrinting(), click: setZOffset2" style="width:30%">{{ _('Test') }}</button>
 	        </td>
 		</tr>
