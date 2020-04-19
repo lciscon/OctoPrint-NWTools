@@ -383,6 +383,10 @@ $(function() {
       sendPrinterCommand('G0 Z250');
 	};
 
+	self.parkPrinthead = function() {
+      sendPrinterCommand('G28.2');
+	};
+
 	self.autoCalibrateRun = function () {
     sendPrinterCommand('M400');
     sendPrinterCommand('G91');
