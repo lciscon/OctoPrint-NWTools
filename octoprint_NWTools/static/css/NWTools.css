@@ -12,16 +12,16 @@
     margin-top: 20px
 }
 
-#calibrate-table td.calibrate_actual, #calibrate-table td.calibrate_offset, #calibrate-table td.calibrate_target, #calibrate-table td.calibrate_tool, #calibrate-table th.calibrate_actual, #calibrate-table th.calibrate_offset, #calibrate-table th.calibrate_target, #calibrate-table th.calibrate_tool {
+#calibrate-table td.calibrate_current, #calibrate-table td.calibrate_test, #calibrate-table td.calibrate_target, #calibrate-table td.calibrate_tool, #calibrate-table th.calibrate_current, #calibrate-table th.calibrate_test, #calibrate-table th.calibrate_target, #calibrate-table th.calibrate_tool {
     vertical-align: middle;
     text-align: center
 }
 
-#calibrate-table td.calibrate_actual form, #calibrate-table td.calibrate_offset form, #calibrate-table td.calibrate_target form, #calibrate-table td.calibrate_tool form, #calibrate-table th.calibrate_actual form, #calibrate-table th.calibrate_offset form, #calibrate-table th.calibrate_target form, #calibrate-table th.calibrate_tool form {
+#calibrate-table td.calibrate_current form, #calibrate-table td.calibrate_test form, #calibrate-table td.calibrate_target form, #calibrate-table td.calibrate_tool form, #calibrate-table th.calibrate_current form, #calibrate-table th.calibrate_test form, #calibrate-table th.calibrate_target form, #calibrate-table th.calibrate_tool form {
     margin: 0
 }
 
-#calibrate-table td.calibrate_actual .dropdown-menu, #calibrate-table td.calibrate_offset .dropdown-menu, #calibrate-table td.calibrate_target .dropdown-menu, #calibrate-table td.calibrate_tool .dropdown-menu, #calibrate-table th.calibrate_actual .dropdown-menu, #calibrate-table th.calibrate_offset .dropdown-menu, #calibrate-table th.calibrate_target .dropdown-menu, #calibrate-table th.calibrate_tool .dropdown-menu {
+#calibrate-table td.calibrate_current .dropdown-menu, #calibrate-table td.calibrate_test .dropdown-menu, #calibrate-table td.calibrate_target .dropdown-menu, #calibrate-table td.calibrate_tool .dropdown-menu, #calibrate-table th.calibrate_current .dropdown-menu, #calibrate-table th.calibrate_test .dropdown-menu, #calibrate-table th.calibrate_target .dropdown-menu, #calibrate-table th.calibrate_tool .dropdown-menu {
     text-align: left
 }
 
@@ -33,7 +33,7 @@
     text-overflow: ellipsis
 }
 
-#calibrate-table td.calibrate_actual, #calibrate-table th.calibrate_actual {
+#calibrate-table td.calibrate_current, #calibrate-table th.calibrate_current {
     width: 12%
 }
 
@@ -42,6 +42,6 @@
     overflow: visible
 }
 
-#calibrate-table td.calibrate_offset, #calibrate-table th.calibrate_offset {
+#calibrate-table td.calibrate_test, #calibrate-table th.calibrate_test {
     width: 30%
 }
