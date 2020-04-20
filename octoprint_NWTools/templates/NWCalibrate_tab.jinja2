@@ -1,7 +1,7 @@
 
 <div class="row-fluid">
 <div class="span7">
-<h1>Sensor Calibration</h1>
+<h1>Sensor Setup</h1>
 <button class="btn btn-primary" data-bind="enable: $root.isOperational() && !$root.isPrinting(), click: calibrateSensor" style="width:30%">{{ _('Calibrate<br/>Sensors') }}</button>
 &nbsp;
 <button class="btn btn-primary" data-bind="enable: $root.isOperational() && !$root.isPrinting(), click: autoCalibrate" style="width:30%">{{ _('Test<br/>Sensor 0') }}</button>
@@ -27,6 +27,7 @@
 </div>
 </div>
 <br>
+<br>
 <h1>Advanced Settings</h1>
 <div class="row-fluid">
     <table id="calibrate-table" class="table table-bordered table-hover">
@@ -38,7 +39,7 @@
         </tr>
 		<tr>
 			<th class="calibrate_tool">{{ _('Tool0 Z Offset') }}</th>
-	        <td class="calibrate_current" data-bind="html: tool0_ZDelta(), attr: {title: tool0_ZDelta()}"></td>
+	        <td class="calibrate_current" data-bind="html: tool0_Zoffset(), attr: {title: tool0_ZOffset()}"></td>
 	        <td class="calibrate_target">
 	            <form class="form-inline" style="margin:0" data-bind="submit: function(element) { $root.setSensor1Target($data, element) }">
 	                <div class="input-prepend input-append">

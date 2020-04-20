@@ -14,10 +14,13 @@ $(function() {
 		self.currentTemp2 = 0;
         self.tool0_ZDelta = 0;
         self.tool1_ZDelta = 0;
-		self.tool0_Raised = 0;
-		self.tool0_Locked = 0;
-		self.tool1_Raised = 0;
-		self.tool1_Locked = 0;
+
+		self.tool0_ZOffset = ko.observable(-0.125);
+		self.tool1_ZOffset = ko.observable(-0.125);
+		self.tool0_Raised = ko.observable(7.2);
+		self.tool0_Locked = ko.observable(5.2);
+		self.tool1_Raised = ko.observable(6.3);
+		self.tool1_Locked = ko.observable(8.0);
 
         self.actual = ko.observable(-0.1);
         self.target = ko.observable(2);
