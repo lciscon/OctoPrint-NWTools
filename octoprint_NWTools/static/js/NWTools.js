@@ -556,6 +556,11 @@ $(function() {
     self.showActionTriggerDialog(messageData, self.calibrateDeflectionDoit);
   };
 
+  self.updateFirmware = function() {
+
+
+  };
+
 /*
   self.homePrintheadHeated = function() {
     sendPrinterCommand('G91');
