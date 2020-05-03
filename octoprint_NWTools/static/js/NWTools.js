@@ -533,19 +533,19 @@ self.calibrateBedHeated = function () {
 	  	sendPrinterCommand('G30.9');
 
   	  	self._postCommand("get_leveling", {}, function(response) {
-  		  if (response.success) {
+  		  	if (response.success) {
 			  	curz = response.curz;
 
 				var messageType = "leveling";
 				var messageData = {message:"", title:""};
 
 				messageData.title = "Notice";
-				messageData.message = "Adjust the screws as follows:\nFront Center: %lf\nBack Left: %lf\nBack Right: %lf\n" ,curz[0], curz[1], curz[2]);
+				messageData.message = "Adjust the screws as follows:\nFront Center: " + str(curz[0]) + "\nBack Left: " + str(curz[1]) + "\nBack Right: " + str(curz[1]) + "\n";
 				self.actionTriggerTemplate(messageType);
 				self.showActionTriggerDialog(messageData, null);
 				return;
-  		  }
-  	  	});
+  		  	}
+	  	});
     };
 
 	self.levelBed = function() {
