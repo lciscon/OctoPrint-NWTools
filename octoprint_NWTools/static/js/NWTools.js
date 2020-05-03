@@ -540,7 +540,7 @@ self.calibrateBedHeated = function () {
 				var messageData = {message:"", title:""};
 
 				messageData.title = "Notice";
-				messageData.message = "Adjust the screws as follows:\nFront Center: " + str(curz[0]) + "\nBack Left: " + str(curz[1]) + "\nBack Right: " + str(curz[1]) + "\n";
+				messageData.message = "Adjust the screws as follows:\nFront Center: " + curz[0].toString() + "\nBack Left: " + curz[1].toString() + "\nBack Right: " + curz[2].toString() + "\n";
 				self.actionTriggerTemplate(messageType);
 				self.showActionTriggerDialog(messageData, null);
 				return;
