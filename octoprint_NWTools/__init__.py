@@ -197,6 +197,24 @@ class NwtoolsPlugin(octoprint.plugin.SettingsPlugin,
 		self._prompt = None
 		self._plugin_manager.send_plugin_message(self._identifier, dict(action="close"))
 
+	def _exec_cmd(self, cmd_line):
+		self._logger.info("Executing command: %s" % (cmd_line))
+		try:
+#			r = os.system(cmd_line)
+#			Python 3
+#			process = subprocess.run(cmd_line, check=True, stdout=subprocess.PIPE, universal_newlines=True)
+#			r = process.stdout
+#			Python 2
+#			r = subprocess.check_output(cmd_line).decode()
+			r = subprocess.check_output(cmd_line, shell=True).decode()
+		except Exception as e:
+			output = "Error while executing command: {}" + str(e)
+			self._logger.warn(output)
+			return (None,)
+
+#		self._logger.info("Command %s returned: %s" % (cmd_line, r))
+		return(r)
+
 
 # If you want your plugin to be registered within OctoPrint under a different name than what you defined in setup.py
 # ("OctoPrint-PluginSkeleton"), you may define that here. Same goes for the other metadata derived from setup.py that
