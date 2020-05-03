@@ -88,8 +88,8 @@ $(function() {
     	};
 
     	function sleep (time) {
- 	    return new Promise((resolve) => setTimeout(resolve, time));
-	}
+ 	    	return new Promise((resolve) => setTimeout(resolve, time));
+		}
 
 	self.fromCurrentData = function(data) {
 		self._processStateData(data.state);
@@ -773,6 +773,34 @@ self.calibrateBedHeated = function () {
 
         self.onEventConnected = function(payload) {
           self.loadZOffset();
+        };
+
+
+		self._postCommand = function (command, data, successCallback, failureCallback, alwaysCallback, timeout) {
+            var payload = _.extend(data, {command: command});
+
+            var params = {
+                url: API_BASEURL + "plugin/NWTools",
+                type: "POST",
+                dataType: "json",
+                data: JSON.stringify(payload),
+                contentType: "application/json; charset=UTF-8",
+                success: function(response) {
+                    if (successCallback) successCallback(response);
+                },
+                error: function() {
+                    if (failureCallback) failureCallback();
+                },
+                complete: function() {
+                    if (alwaysCallback) alwaysCallback();
+                }
+            };
+
+            if (timeout != undefined) {
+                params.timeout = timeout;
+            }
+
+            $.ajax(params);
         };
 
     }
