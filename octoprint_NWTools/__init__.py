@@ -10,6 +10,8 @@ from __future__ import absolute_import
 # Take a look at the documentation on what other plugin mixins are available.
 
 import octoprint.plugin
+from flask import jsonify, make_response
+
 import octoprint.printer
 import flask
 import re
@@ -57,7 +59,31 @@ class NwtoolsPlugin(octoprint.plugin.SettingsPlugin,
    		     dict(type="tab", name="Calibrate", template="NWCalibrate_tab.jinja2", custom_bindings=True)
     		]
 
-# 		     dict(type="settings", custom_bindings=False)
+	##~~ SimpleApiPlugin API
+
+	def get_api_commands(self):
+		return dict(
+			firmware_exists=[],
+			update_firmware=[],
+		)
+
+	def on_api_command(self, command, data):
+		if command == "firmware_exists":
+			self._logger.info("Checking for firmware file")
+			return jsonify(dict(exists=str(self._check_for_firmware())))
+
+		elif command == "update_firmware":
+			self._logger.info("Updating Firmware")
+			return jsonify(dict(success=str(self._update_firmware())))
+
+
+	def _check_for_firmware(self):
+		r = self._exec_cmd("checkfirm")
+		return r
+
+	def _update_firmware(self):
+		r = self._exec_cmd("updatefirm")
+		return r
 
 	##~~ AssetPlugin mixin
 
