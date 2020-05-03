@@ -73,8 +73,8 @@ class NwtoolsPlugin(octoprint.plugin.SettingsPlugin,
 			get_leveling=[],
 		)
 
-    def on_api_get(self, request):
-        return None
+	def on_api_get(self, request):
+		return None
 
 	def on_api_command(self, command, data):
 		if command == "firmware_exists":
