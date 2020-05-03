@@ -24,7 +24,7 @@ plugin_description = "Northworks printer tools"
 plugin_author = "Larry Ciscon"
 
 # The plugin's author's mail address.
-plugin_author_email = "lciscon@yahoo.com"
+plugin_author_email = "lciscon@gmail.com"
 
 # The plugin's homepage URL. Can be overwritten within OctoPrint's internal data via __plugin_url__ in the plugin module
 plugin_url = "https://github.com/lciscon/OctoPrint-NWTools"
