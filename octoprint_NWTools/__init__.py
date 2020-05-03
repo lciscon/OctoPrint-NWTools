@@ -49,7 +49,7 @@ class NwtoolsPlugin(octoprint.plugin.SettingsPlugin,
 					octoprint.plugin.SimpleApiPlugin):
 
 	def __init__(self):
-		self._bedlevels = np.zeros(3)
+		self._bedlevels = [0.0]*3
 
 ##	def on_after_startup(self):
 ##    		self._logger.info("Hello World! (more: %s)" % self._settings.get(["zOffset2"]))
