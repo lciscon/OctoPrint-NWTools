@@ -20,6 +20,7 @@ class Prompt(object):
 
 	def __init__(self, text):
 		self.text = text
+		self._bedlevels = np.zeros(3)
 		self.choices = []
 
 		self._active = False
@@ -27,6 +28,10 @@ class Prompt(object):
 	@property
 	def active(self):
 		return self._active
+
+	@property
+	def bedlevels(self):
+		return self._bedlevels
 
 	def add_choice(self, text):
 		self.choices.append(text)
@@ -44,8 +49,8 @@ class NwtoolsPlugin(octoprint.plugin.SettingsPlugin,
 		   octoprint.plugin.AssetPlugin,
 		   octoprint.printer.PrinterInterface):
 
-	def on_after_startup(self):
-    		self._logger.info("Hello World! (more: %s)" % self._settings.get(["zOffset2"]))
+##	def on_after_startup(self):
+##    		self._logger.info("Hello World! (more: %s)" % self._settings.get(["zOffset2"]))
 
 	def get_settings_defaults(self):
 		return dict(zOffset2="3.14")
@@ -65,7 +70,11 @@ class NwtoolsPlugin(octoprint.plugin.SettingsPlugin,
 		return dict(
 			firmware_exists=[],
 			update_firmware=[],
+			get_leveling=[],
 		)
+
+    def on_api_get(self, request):
+        return None
 
 	def on_api_command(self, command, data):
 		if command == "firmware_exists":
@@ -76,6 +85,9 @@ class NwtoolsPlugin(octoprint.plugin.SettingsPlugin,
 			self._logger.info("Updating Firmware")
 			return jsonify(dict(success=str(self._update_firmware())))
 
+		elif command == "get_leveling":
+			self._logger.info("Getting leveling data")
+			return jsonify(dict(levels=str(self._bedlevels())))
 
 	def _check_for_firmware(self):
 		r = self._exec_cmd("checkfirm")
@@ -142,20 +154,26 @@ class NwtoolsPlugin(octoprint.plugin.SettingsPlugin,
 				return
 			self._show_prompt()
 
-	def processGCODE(self, comm, line, *args, **kwargs):
-#		if "Offset" not in line:
-		if "Marlin" not in line:
-			return line
-
+	## this is the responses received from the printer
+	## we need to scan this for anything relevant to us
+	def processResponse(self, comm, line, *args, **kwargs):
 		self._logger.info("Processings2: %s" % line)
-		self._plugin_manager.send_plugin_message(self._identifier, dict(zoffset=line))
+
+		if "Leveling:" in line:
+			# The line should look like this:
+			# Leveling: 2.51 3.52 0.1
+			llist = line.split(" ")
+			this._bedlevels[0] = float(llist[1])
+			this._bedlevels[1] = float(llist[2])
+			this._bedlevels[2] = float(llist[3])
 
 		return line
 
-	def AlertM117(self, comm_instance, phase, cmd, cmd_type, gcode, *args, **kwargs):
-		if gcode and cmd.startswith("M117"):
-			self._plugin_manager.send_plugin_message(self._identifier, dict(type="popup", msg=re.sub(r'^M117\s?', '', cmd)))
-			return
+	## this is the gcode being queued up to send to the printer
+	def processQueueing(self, comm_instance, phase, cmd, cmd_type, gcode, *args, **kwargs):
+##		if gcode and cmd.startswith("M117"):
+##			self._plugin_manager.send_plugin_message(self._identifier, dict(type="popup", msg=re.sub(r'^M117\s?', '', cmd)))
+		return
 
 	def _show_prompt(self):
 		if self._enable == "never" or (self._enable == "detected" and not self._cap_prompt_support):
@@ -191,6 +209,6 @@ def __plugin_load__():
 	__plugin_hooks__ = {
     	"octoprint.comm.protocol.action": __plugin_implementation__.action_command_handler,
 		"octoprint.plugin.softwareupdate.check_config": __plugin_implementation__.get_update_information,
-		"octoprint.comm.protocol.gcode.received": __plugin_implementation__.processGCODE,
-		"octoprint.comm.protocol.gcode.queuing": __plugin_implementation__.AlertM117,
+		"octoprint.comm.protocol.gcode.received": __plugin_implementation__.processResponse,
+		"octoprint.comm.protocol.gcode.queuing": __plugin_implementation__.processQueueing,
 	}

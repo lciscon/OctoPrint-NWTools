@@ -2,7 +2,7 @@
 <div class="row-fluid">
 <div class="span4">
 <h1>Firmware</h1>
-<button class="btn btn-primary" data-bind="enable: false, click: updateFirmware" style="width:80%">{{ _('Update<br/>Firmware') }}</button>
+<button class="btn btn-primary" data-bind="enable: true, click: updateFirmware" style="width:80%">{{ _('Update<br/>Firmware') }}</button>
 &nbsp;
 </div>
 <div class="span7">
@@ -18,17 +18,17 @@
 <div class="row-fluid">
 <div class="span4">
 <h1>Bed Leveling</h1>
-<button class="btn btn-primary" data-bind="enable: false, click: levelBed" style="width:40%">{{ _('Level<br/>Bed 60C') }}</button>
+<button class="btn btn-primary" data-bind="enable: true, click: levelBed" style="width:40%">{{ _('Level<br/>Bed 60C') }}</button>
 &nbsp;
-<button class="btn btn-primary" data-bind="enable: false, click: levelBed2" style="width:40%">{{ _('Level<br/>Bed 100C') }}</button>
+<button class="btn btn-primary" data-bind="enable: true, click: levelBed2" style="width:40%">{{ _('Level<br/>Bed 100C') }}</button>
 </div>
 <div class="span7">
 <h1>Bed Calibration</h1>
-<button class="btn btn-primary" data-bind="enable: $root.isOperational() && !$root.isPrinting(), click: levelBed" style="width:30%">{{ _('Measure<br/>Bed 60C') }}</button>
+<button class="btn btn-primary" data-bind="enable: $root.isOperational() && !$root.isPrinting(), click: calibrateBed" style="width:30%">{{ _('Calibrate<br/>Bed 60C') }}</button>
 &nbsp;
-<button class="btn btn-primary" data-bind="enable: $root.isOperational() && !$root.isPrinting(), click: levelBed2" style="width:30%">{{ _('Measure<br/>Bed 100C') }}</button>
+<button class="btn btn-primary" data-bind="enable: $root.isOperational() && !$root.isPrinting(), click: calibrateBed2" style="width:30%">{{ _('Calibrate<br/>Bed 100C') }}</button>
 &nbsp;
-<button class="btn btn-primary" data-bind="enable: $root.isOperational() && !$root.isPrinting(), click: resetLeveling" style="width:30%">{{ _('Reset<br/>Calibration') }}</button>
+<button class="btn btn-primary" data-bind="enable: $root.isOperational() && !$root.isPrinting(), click: resetCalibration" style="width:30%">{{ _('Reset<br/>Calibration') }}</button>
 </div>
 </div>
 <br>
@@ -167,10 +167,15 @@
 	        </td>
 		</tr>
 
-
-
-
-
-
     </table>
 </div>
+
+<script type="text/html" id="leveling">
+  <div class="modal-body">
+    <!-- Message variable goes here with extra stuff might have to split into seperate dialogs being called -->
+    Press OK once filament starts extruding from the nozzle.
+  </div>
+  <div class="modal-footer">
+    <a href="#" class="btn btn-warning action_trigger_dialog_acknowledge" aria-hidden="true">{{ _('OK') }}</a>
+  </div>
+</script>

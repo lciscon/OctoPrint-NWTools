@@ -498,7 +498,7 @@ $(function() {
     sendPrinterCommand('M500');
 	};
 
-	self.levelBedHeated = function () {
+self.calibrateBedHeated = function () {
     self.resetLeveling();
     self.autoCalibrateRun();
 
@@ -515,13 +515,47 @@ $(function() {
     sendPrinterCommand('M400');
 	};
 
-	self.levelBed = function() {
-     self.preheat(0, 1, self.levelBedHeated);
+	self.calibrateBed = function() {
+     self.preheat(0, 1, self.calibrateBedHeated);
 	};
 
-  self.levelBed2 = function() {
-     self.preheat(0, 2, self.levelBedHeated);
+    self.calibrateBed2 = function() {
+     self.preheat(0, 2, self.calibrateBedHeated);
 	};
+
+	self.levelBedHeated = function() {
+		sendPrinterCommand('M400');
+	    sendPrinterCommand('G91');
+	    sendPrinterCommand('G0 Z10 F300');
+	    sendPrinterCommand('G90');
+	    sendPrinterCommand('M400');
+	    sendPrinterCommand('G28');
+	  	sendPrinterCommand('G30.9');
+
+  	  	self._postCommand("get_leveling", {}, function(response) {
+  		  if (response.success) {
+			  	curz = response.curz;
+
+				var messageType = "leveling";
+				var messageData = {message:"", title:""};
+
+				messageData.title = "Notice";
+				messageData.message = "Adjust the screws as follows:\nFront Center: %lf\nBack Left: %lf\nBack Right: %lf\n" ,curz[0], curz[1], curz[2]);
+				self.actionTriggerTemplate(messageType);
+				self.showActionTriggerDialog(messageData, null);
+				return;
+  		  }
+  	  	});
+    };
+
+	self.levelBed = function() {
+	     self.preheat(0, 1, self.levelBedHeated);
+		};
+
+	self.levelBed2 = function() {
+	     self.preheat(0, 2, self.levelBedHeated);
+		};
+
 
   self.calibrateDone = function () {
       sendPrinterCommand('M511');
@@ -538,22 +572,6 @@ $(function() {
     messageData.title = "Calibrating...";
     self.actionTriggerTemplate(messageType);
     self.showActionTriggerDialog(messageData, self.calibrateDone);
-  };
-
-  self.calibrateDeflectionDoit = function () {
-    sendPrinterCommand('M515');
-    sendPrinterCommand('G33');
-    sendPrinterCommand('M516');
-    sendPrinterCommand('M500');
-  }
-
-  self.calibrateDeflection = function() {
-    var messageType = "deflecting";
-    var messageData = {message:"", title:""};
-
-    messageData.title = "Calibrating Deflection...";
-    self.actionTriggerTemplate(messageType);
-    self.showActionTriggerDialog(messageData, self.calibrateDeflectionDoit);
   };
 
   self.updateFirmware = function() {
@@ -582,7 +600,6 @@ $(function() {
 			  return;
 		  }
 	  });
-
   };
 
 /*
@@ -603,7 +620,7 @@ $(function() {
   };
 */
 
-	self.resetLeveling = function() {
+  self.resetLeveling = function() {
     sendPrinterCommand('M374.1');
     sendPrinterCommand('M561');
 	};
