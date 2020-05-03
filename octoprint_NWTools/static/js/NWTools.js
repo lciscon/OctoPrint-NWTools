@@ -129,16 +129,9 @@ $(function() {
                 return;
             }
 
-//            new PNotify({
-//              title: 'Pop Up Message',
-//              text: data.zoffset,
-//              type: self.msgType(),
-//              hide: self.autoClose()
-//              });
-
-              self.actual = 123;
-              self.target = 234;
-		}
+          self.actual = 123;
+          self.target = 234;
+	}
 
 	function sendPrinterCommand (cmdstr) {
 	   console.debug('MSL: sending cmd: '+cmdstr);
@@ -218,77 +211,77 @@ $(function() {
   }
 
 	self.preheat = function (toolnumber, material, callback) {
-        	var messageType = "preheating";
-        	var messageData = {message:"", title:""};
-          var tipTemp = 0;
-          var bedTemp = 0;
+			var messageType = "preheating";
+	    	var messageData = {message:"", title:""};
+	      var tipTemp = 0;
+	      var bedTemp = 0;
 
-          if (material == 0) {
-            tipTemp = 220;
-            bedTemp = 0;
-          } else if (material == 1) {
-            tipTemp = 220;
-            bedTemp = 60;
-          } else {
-            tipTemp = 250;
-            bedTemp = 100;
-          }
+	      if (material == 0) {
+	        tipTemp = 220;
+	        bedTemp = 0;
+	      } else if (material == 1) {
+	        tipTemp = 220;
+	        bedTemp = 60;
+	      } else {
+	        tipTemp = 250;
+	        bedTemp = 100;
+	      }
 
 		  console.log('Starting heatup! ');
 
 		      self.tempCallback = callback;
-        	messageData.title = "Preheating...";
-        	self.actionTriggerTemplate(messageType);
-        	self.showActionTriggerDialog(messageData, self.cancelPreheat);
+	    	messageData.title = "Preheating...";
+	    	self.actionTriggerTemplate(messageType);
+	    	self.showActionTriggerDialog(messageData, self.cancelPreheat);
 
-        	//begin hotend preheat
-          sendPrinterCommand('M42');
-          sendPrinterCommand('M190 S' + bedTemp);
-        	sendPrinterCommand('T' + toolnumber);
-        	sendPrinterCommand('M109 S' + tipTemp);
+	    	//begin hotend preheat
+	      sendPrinterCommand('M42');
+	      sendPrinterCommand('M190 S' + bedTemp);
+	    	sendPrinterCommand('T' + toolnumber);
+	    	sendPrinterCommand('M109 S' + tipTemp);
 
-          if (toolnumber == 0) {
+	      if (toolnumber == 0) {
 		          self.targetTemp = tipTemp;
-              self.targetTemp2 = 0;
-          } else {
-              self.targetTemp = 0;
-              self.targetTemp2 = tipTemp;
-          }
+	          self.targetTemp2 = 0;
+	      } else {
+	          self.targetTemp = 0;
+	          self.targetTemp2 = tipTemp;
+	      }
 
-		      self.tempCallback = callback;
-		      self.tempTimer();
+	      self.tempCallback = callback;
+	      self.tempTimer();
    	};
 
-    	self.preheat1 = function() {
-	    	self.preheat(0,0,null);
-    	};
+    self.preheat1 = function() {
+	   	self.preheat(0,0,null);
+    };
 
 	self.preheat2 = function() {
 	    	self.preheat(1,0,null);
 	};
 
-  self.lockHead1 = function() {
-    sendPrinterCommand('M672 T0 P-1');
+  	self.lockHead1 = function() {
+    	sendPrinterCommand('M672 T0 P-1');
 	};
 
-  self.releaseHead1 = function() {
-    sendPrinterCommand('M672 T0 P0');
+  	self.releaseHead1 = function() {
+    	sendPrinterCommand('M672 T0 P0');
 	};
 
-  self.liftHead1 = function() {
-    sendPrinterCommand('M672 T0 P1');
+  	self.liftHead1 = function() {
+    	sendPrinterCommand('M672 T0 P1');
 	};
 
-  self.lockHead2 = function() {
-    sendPrinterCommand('M672 T1 P-1');
+  	self.lockHead2 = function() {
+    	sendPrinterCommand('M672 T1 P-1');
 	};
 
-  self.releaseHead2 = function() {
-    sendPrinterCommand('M672 T1 P0');
+  	self.releaseHead2 = function() {
+    	sendPrinterCommand('M672 T1 P0');
 	};
 
-  self.liftHead2 = function() {
-    sendPrinterCommand('M672 T1 P1');
+  	self.liftHead2 = function() {
+    	sendPrinterCommand('M672 T1 P1');
 	};
 
    	self.turnOnExtruder = function(direction) {
@@ -331,22 +324,22 @@ $(function() {
 	    self.loadFilament(1);
 	};
 
-        self.unloadFilamentComplete = function() {
-	    self.turnOffExtruder();
+    self.unloadFilamentComplete = function() {
+    self.turnOffExtruder();
 //            sendPrinterCommand('G90');
-            sendPrinterCommand('M104 S0');
-        };
+        sendPrinterCommand('M104 S0');
+    };
 
-       self.unloadFilamentPreheated = function() {
-            var messageType = "unloading";
-            var messageData = {message:"", title:"Unload Filament"};
+   self.unloadFilamentPreheated = function() {
+        var messageType = "unloading";
+        var messageData = {message:"", title:"Unload Filament"};
 
-	    sendPrinterCommand('G91');
-	    //move forward a bit to remove blobs
-            sendPrinterCommand('G1 E5 F100');
-            self.turnOnExtruder(-1);
-            self.actionTriggerTemplate(messageType);
-            self.showActionTriggerDialog(messageData, self.unloadFilamentComplete);
+    sendPrinterCommand('G91');
+    //move forward a bit to remove blobs
+        sendPrinterCommand('G1 E5 F100');
+        self.turnOnExtruder(-1);
+        self.actionTriggerTemplate(messageType);
+        self.showActionTriggerDialog(messageData, self.unloadFilamentComplete);
 	};
 
 	//this will be called when they press the unloadFilament button
@@ -602,25 +595,7 @@ self.calibrateBedHeated = function () {
 	  });
   };
 
-/*
-  self.homePrintheadHeated = function() {
-    sendPrinterCommand('G91');
-    sendPrinterCommand('G0 Z5 F300');
-    sendPrinterCommand('G90');
-    sendPrinterCommand('G28');
-    sendPrinterCommand('G0 Z1');
-    sendPrinterCommand('G0 X150 Y150 F5000');
-    sendPrinterCommand('G30.1 Q');
-    sendPrinterCommand('G0 Z0');
-    sendPrinterCommand('M516');
-  };
-
-  self.homePrinthead = function() {
-      self.preheat(0, 1, self.homePrintheadHeated);
-  };
-*/
-
-  self.resetLeveling = function() {
+  self.resetCalibration = function() {
     sendPrinterCommand('M374.1');
     sendPrinterCommand('M561');
 	};
@@ -655,25 +630,25 @@ self.calibrateBedHeated = function () {
   };
 
 
-          self.setTargetToValue = function(value) {
+  self.setTargetToValue = function(value) {
 //              self.clearAutosendTarget(item);
 
-              try {
-                  value = parseInt(value);
-              } catch (ex) {
-                  return OctoPrintClient.createRejectedDeferred();
-              }
+      try {
+          value = parseInt(value);
+      } catch (ex) {
+          return OctoPrintClient.createRejectedDeferred();
+      }
 
-              if (value < 0 || value > 999) return OctoPrintClient.createRejectedDeferred();
+      if (value < 0 || value > 999) return OctoPrintClient.createRejectedDeferred();
 
-              var onSuccess = function() {
-                  self.target(value);
-                  self.newTarget("");
-              };
+      var onSuccess = function() {
+          self.target(value);
+          self.newTarget("");
+      };
 
 //                  return self._setToolTemperature(item.key(), value)
 //                      .done(onSuccess);
-          };
+  };
 
   self.setTarget = function(form) {
     var value = self.newTarget();
