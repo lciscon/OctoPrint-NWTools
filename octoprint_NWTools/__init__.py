@@ -101,7 +101,7 @@ class NwtoolsPlugin(octoprint.plugin.SettingsPlugin,
 		return r
 
 	def _update_firmware(self):
-		r = self._exec_cmd("updatefirm")
+		r = self._exec_cmd("sudo updatefirm")
 		return r
 
 	##~~ AssetPlugin mixin
