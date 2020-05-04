@@ -572,6 +572,18 @@ self.calibrateBedHeated = function () {
 		  console.log('File Exists value: ' + response.file_exists);
 
 		  if (response.file_exists == 0) {
+			  console.log('Here1!');
+		  }
+
+		  if (response.file_exists) {
+			  console.log('Here2!');
+		  }
+
+		  if (parseInt(response.file_exists) == 0) {
+			  console.log('Here3!');
+		  }
+
+		  if (response.file_exists == 0) {
 			  var messageType = "firmfile";
 		      var messageData = {message:"", title:""};
 
