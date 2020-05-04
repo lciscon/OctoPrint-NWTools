@@ -1,9 +1,9 @@
 <div class="row-fluid">
 <div class="span4">
 	<h1>Lights</h1>
-    <button class="btn btn-primary" data-bind="enable: $root.isOperational() && !$root.isPrinting(), click: lightsOn" style="width: 40%">{{ _('Lights<br/>On') }}</button>
+    <button class="btn btn-primary" data-bind="enable: $root.isOperational(), click: lightsOn" style="width: 40%">{{ _('Lights<br/>On') }}</button>
 &nbsp;
-    <button class="btn btn-primary" data-bind="enable: $root.isOperational() && !$root.isPrinting(), click: lightsOff" style="width: 40%">{{ _('Lights<br/>Off') }}</button>
+    <button class="btn btn-primary" data-bind="enable: $root.isOperational(), click: lightsOff" style="width: 40%">{{ _('Lights<br/>Off') }}</button>
 &nbsp;
 </div>
 <div class="span7">
@@ -20,9 +20,9 @@
 <div class="row-fluid">
 <div class="span4">
    <h1>Cabinet</h1>
-    <button class="btn btn-primary" data-bind="enable: $root.isOperational() && !$root.isPrinting(), click: cabinetOn" style="width: 40%">{{ _('Heat<br/>On') }}</button>
+    <button class="btn btn-primary" data-bind="enable: $root.isOperational(), click: cabinetOn" style="width: 40%">{{ _('Heat<br/>On') }}</button>
 &nbsp;
-    <button class="btn btn-primary" data-bind="enable: $root.isOperational() && !$root.isPrinting(), click: cabinetOff" style="width: 40%">{{ _('Heat<br/>Off') }}</button>
+    <button class="btn btn-primary" data-bind="enable: $root.isOperational(), click: cabinetOff" style="width: 40%">{{ _('Heat<br/>Off') }}</button>
 &nbsp;
 </div>
 </div>
