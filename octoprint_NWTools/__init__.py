@@ -96,7 +96,8 @@ class NwtoolsPlugin(octoprint.plugin.SettingsPlugin,
 			return jsonify(dict(levels=str(self._bedlevels())))
 
 	def _check_for_firmware(self):
-		r = self._exec_cmd("checkfirm")
+		r = 0
+#		r = self._exec_cmd("checkfirm")
 		return r
 
 	def _update_firmware(self):
