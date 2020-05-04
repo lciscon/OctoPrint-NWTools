@@ -570,11 +570,11 @@ self.calibrateBedHeated = function () {
   self.updateFirmware = function() {
 	  self._postCommand("firmware_exists", {}, function(response) {
 		  if (!response.exists) {
-			  var messageType = "error";
+			  var messageType = "firmfile";
 		      var messageData = {message:"", title:""};
 
 			  messageData.title = "Error";
-			  messageData.message = "You must first upload the firmware.bin file";
+			  messageData.message = "Firmware";
 			  self.actionTriggerTemplate(messageType);
 			  self.showActionTriggerDialog(messageData, null);
 			  return;
@@ -583,11 +583,11 @@ self.calibrateBedHeated = function () {
 
 	  self._postCommand("update_firmware", {}, function(response) {
 		  if (response.success) {
-			  var messageType = "error";
+			  var messageType = "firmdone";
 		      var messageData = {message:"", title:""};
 
 			  messageData.title = "Notice";
-			  messageData.message = "Firmware updated!";
+			  messageData.message = "Firmware";
 			  self.actionTriggerTemplate(messageType);
 			  self.showActionTriggerDialog(messageData, null);
 			  return;
