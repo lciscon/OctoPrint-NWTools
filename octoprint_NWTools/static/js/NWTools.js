@@ -569,7 +569,7 @@ self.calibrateBedHeated = function () {
 
   self.updateFirmware = function() {
 	  self._postCommand("firmware_exists", {}, function(response) {
-		  if (!response.file_exists) {
+		  if (response.file_exists == 0) {
 			  var messageType = "firmfile";
 		      var messageData = {message:"", title:""};
 
