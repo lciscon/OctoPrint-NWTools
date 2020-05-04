@@ -84,7 +84,7 @@ class NwtoolsPlugin(octoprint.plugin.SettingsPlugin,
 
 	def on_api_command(self, command, data):
 		if command == "firmware_exists":
-			retval = bool(int(self._check_for_firmware()))
+			retval = self._check_for_firmware()
 			self._logger.info("Checking for firmware file " + str(retval))
 			return jsonify(dict(file_exists=retval)))
 
@@ -97,8 +97,7 @@ class NwtoolsPlugin(octoprint.plugin.SettingsPlugin,
 			return jsonify(dict(levels=str(self._bedlevels())))
 
 	def _check_for_firmware(self):
-		r = 0
-#		r = self._exec_cmd("checkfirm")
+		r = self._exec_cmd("checkfirm")
 		return r
 
 	def _update_firmware(self):
