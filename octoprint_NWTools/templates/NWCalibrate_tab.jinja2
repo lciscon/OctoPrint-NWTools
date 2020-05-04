@@ -2,7 +2,7 @@
 <div class="row-fluid">
 <div class="span4">
 <h1>Firmware</h1>
-<button class="btn btn-primary" data-bind="enable: true, click: updateFirmware" style="width:80%">{{ _('Update<br/>Firmware') }}</button>
+<button class="btn btn-primary" data-bind="enable: $root.isOperational() && !$root.isPrinting(), click: updateFirmware" style="width:80%">{{ _('Update<br/>Firmware') }}</button>
 &nbsp;
 </div>
 <div class="span7">
