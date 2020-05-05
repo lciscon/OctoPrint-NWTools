@@ -380,7 +380,7 @@ $(function() {
 	};
 
 	self.restartMachine = function() {
-	  sendPrinterCommand('OCTO284');
+	  sendPrinterCommand('OCTO999');
 	};
 
 	self.unloadPrint = function() {
