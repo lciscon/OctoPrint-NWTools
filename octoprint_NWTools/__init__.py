@@ -77,6 +77,11 @@ class NwtoolsPlugin(octoprint.plugin.SettingsPlugin,
 			firmware_exists=[],
 			update_firmware=[],
 			get_leveling=[],
+			reboot_controller=[],
+			lights_on=[],
+			lights_off=[],
+			cabinet_on=[],
+			cabinet_off=[],
 		)
 
 	def on_api_get(self, request):
@@ -95,6 +100,22 @@ class NwtoolsPlugin(octoprint.plugin.SettingsPlugin,
 		elif command == "get_leveling":
 			self._logger.info("Getting leveling data")
 			return jsonify(dict(levels=str(self._bedlevels())))
+
+		elif command == "reboot_controller":
+			self._exec_cmd("machine restart")
+
+		elif command == "lights_on":
+			self._exec_cmd("lights on")
+
+		elif command == "lights_off":
+			self._exec_cmd("lights off")
+
+		elif command == "cabinet_on":
+			self._exec_cmd("cabinet on")
+
+		elif command == "cabinet_off":
+			self._exec_cmd("cabinet off")
+
 
 	def _check_for_firmware(self):
 		r = self._exec_cmd("checkfirm")

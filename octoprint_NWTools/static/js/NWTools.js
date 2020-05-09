@@ -347,40 +347,37 @@ $(function() {
 	    self.preheat(toolnumber, 0, self.unloadFilamentPreheated);
 	};
 
-        self.unloadFilament1 = function() {
-            self.unloadFilament(0);
-        };
+    self.unloadFilament1 = function() {
+        self.unloadFilament(0);
+    };
 
-        self.unloadFilament2 = function() {
-            self.unloadFilament(1);
-        };
+    self.unloadFilament2 = function() {
+        self.unloadFilament(1);
+    };
 
-		self.rebootController = function() {
-			sendPrinterCommand('OCTO999');
-		};
+	self.rebootController = function() {
+		self._postCommand("reboot_controller", {});
+		self.reconnectSerial();
+	};
 
 	self.lightsOn = function() {
-		sendPrinterCommand('OCTO5');
+		self._postCommand("lights_on", {});
 	    sendPrinterCommand('M5');
 	};
 
 	self.lightsOff = function() {
-	   sendPrinterCommand('OCTO3');
+		self._postCommand("lights_off", {});
        sendPrinterCommand('M3');
 	};
 
-  self.cabinetOn = function() {
-	  sendPrinterCommand('OCTO282');
+    self.cabinetOn = function() {
+	  self._postCommand("cabinet_on", {});
 	    sendPrinterCommand('M282');
 	};
 
 	self.cabinetOff = function() {
-	  sendPrinterCommand('OCTO283');
+	  self._postCommand("cabinet_off", {});
       sendPrinterCommand('M283');
-	};
-
-	self.restartMachine = function() {
-	  sendPrinterCommand('OCTO999');
 	};
 
 	self.unloadPrint = function() {
@@ -432,8 +429,8 @@ $(function() {
 	};
 
   self.setZOffset = function() {
-	  //subtract a bit for the material thickness
-	  self.tool0_ZDelta = self.tool0_ZDelta + .05;
+	//subtract a bit for the material thickness
+	self.tool0_ZDelta = self.tool0_ZDelta + .05;
     sendPrinterCommand('M670 P' + self.tool0_ZDelta);
     sendPrinterCommand('M500');
     self.tool0_ZDelta = 0;
@@ -804,6 +801,22 @@ self.calibrateBedHeated = function () {
 
             $.ajax(params);
         };
+
+
+		self.reconnectSerial = function () {
+			var payload = _.extend(data, {command: "connect"});
+
+            $.ajax({
+                url: API_BASEURL + "api/connection",
+                type: "POST",
+                dataType: "json",
+				data: JSON.stringify(payload),
+				contentType: "application/json; charset=UTF-8",
+				success: function(response) {
+                },
+            });
+        };
+
 
     }
 
