@@ -804,7 +804,7 @@ self.calibrateBedHeated = function () {
 
 
 		self.reconnectSerial = function () {
-			var payload = _.extend(data, {command: "connect"});
+			var payload = {command: "connect"};
 
             $.ajax({
                 url: API_BASEURL + "api/connection",
