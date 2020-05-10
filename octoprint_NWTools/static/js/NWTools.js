@@ -565,12 +565,20 @@ self.calibrateBedHeated = function () {
   };
 
   self.updateFirmware = function() {
+	  var messageType = "firmstart";
+	  var messageData = {message:"", title:""};
+
+	  messageData.title = "Notice";
+	  messageData.message = "Firmware";
+	  self.actionTriggerTemplate(messageType);
+	  self.showActionTriggerDialog(messageData, null);
+
 	  self._postCommand("firmware_exists", {}, function(response) {
 		  console.log('File Exists value: ' + response.file_exists);
 
 		  if (response.file_exists == 0) {
-			  var messageType = "firmfile";
-		      var messageData = {message:"", title:""};
+			  messageType = "firmfile";
+		      messageData = {message:"", title:""};
 
 			  messageData.title = "Error";
 			  messageData.message = "Firmware";
@@ -581,8 +589,8 @@ self.calibrateBedHeated = function () {
 
 		  self._postCommand("update_firmware", {}, function(response) {
 			  if (response.success) {
-				  var messageType = "firmdone";
-			      var messageData = {message:"", title:""};
+				  messageType = "firmdone";
+			      messageData = {message:"", title:""};
 
 				  messageData.title = "Notice";
 				  messageData.message = "Firmware";
