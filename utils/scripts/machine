@@ -1,0 +1,11 @@
+#!/bin/bash
+
+if [ $1 = "on" ]; then
+gpio -g write 4 0
+elif [ $1 = "restart" ]; then
+gpio -g write 4 1
+sleep 10
+gpio -g write 4 0
+else
+gpio -g write 4 1
+fi
