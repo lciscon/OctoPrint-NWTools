@@ -1,7 +1,0 @@
-#!/bin/bash
-
-if [ $1 = "on" ]; then
-gpio -g write 17 0
-else
-gpio -g write 17 1
-fi

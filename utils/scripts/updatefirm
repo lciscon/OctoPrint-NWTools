@@ -1,5 +1,0 @@
-#!/bin/bash
-
-cp /home/pi/.octoprint/uploads/firmware.bin /media/usb0 &>> /tmp/err.out
-rm /home/pi/.octoprint/uploads/firmware.bin
-echo 1

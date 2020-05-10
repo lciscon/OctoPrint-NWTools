@@ -1,8 +1,0 @@
-#!/bin/bash
-
-FILE=~/.octoprint/uploads/firmware.bin
-if test -f "$FILE"; then
-    echo "1"
-else
-    echo "0"
-fi
