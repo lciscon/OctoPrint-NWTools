@@ -807,7 +807,7 @@ self.calibrateBedHeated = function () {
 			var payload = {command: "connect"};
 
             $.ajax({
-                url: API_BASEURL + "api/connection",
+                url: API_BASEURL + "connection",
                 type: "POST",
                 dataType: "json",
 				data: JSON.stringify(payload),
