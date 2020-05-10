@@ -1,8 +1,0 @@
-#!/bin/bash
-
-hgrid
-sudo cp /tmp/cartesian.grid  /media/usb0
-sleep 1
-machine off
-sleep 2
-machine on
