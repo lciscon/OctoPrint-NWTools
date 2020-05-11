@@ -135,7 +135,7 @@ $(function() {
 
 		if (data.action == "error") {
 			var messageType = "notice";
-			var messageData = {message:data.text, title:"Error!"};
+			var messageData = {message:data.text, title:"Error"};
 
 			self.actionTriggerTemplate(messageType);
 			self.showActionTriggerDialog(messageData, null);
