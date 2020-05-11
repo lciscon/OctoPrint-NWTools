@@ -162,8 +162,8 @@ class NwtoolsPlugin(octoprint.plugin.SettingsPlugin,
 		)
 
 	def action_command_handler(self, comm, line, action, *args, **kwargs):
-		if not action.startswith(b"prompt_"):
-			return
+##		if not action.startswith(b"prompt_"):
+##			return
 
 		parts = action.split(None, 1)
 		if len(parts) == 1:
@@ -173,7 +173,10 @@ class NwtoolsPlugin(octoprint.plugin.SettingsPlugin,
 			action, parameter = parts
 
 		if action == "error":
-			self._plugin_manager.send_plugin_message(self._identifier, dict(action="show", text=self._prompt.text, choices=self._prompt.choices))
+			self._plugin_manager.send_plugin_message(self._identifier, dict(action=action, text=parameter))
+		else
+			if not action.startswith(b"prompt_"):
+				return
 
 			if self._prompt is None:
 				return
@@ -236,6 +239,7 @@ class NwtoolsPlugin(octoprint.plugin.SettingsPlugin,
 
 #		self._logger.info("Command %s returned: %s" % (cmd_line, r))
 		return(r)
+
 
 
 # If you want your plugin to be registered within OctoPrint under a different name than what you defined in setup.py

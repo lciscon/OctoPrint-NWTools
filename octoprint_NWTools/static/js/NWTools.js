@@ -129,8 +129,18 @@ $(function() {
                 return;
             }
 
-          self.actual = 123;
-          self.target = 234;
+//          self.actual = 123;
+//          self.target = 234;
+		//dict(action="show", text=self._prompt.text, choices=self._prompt.choices)
+
+		if (data.action == "error") {
+			var messageType = "notice";
+			var messageData = {message:data.text, title:"Error!"};
+
+			self.actionTriggerTemplate(messageType);
+			self.showActionTriggerDialog(messageData, null);
+		}
+
 	}
 
 	function sendPrinterCommand (cmdstr) {
