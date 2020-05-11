@@ -34,6 +34,7 @@
 <br>
 <br>
 <h1>Advanced Settings</h1>
+<h2>Tool 0</h2>
 <div class="row-fluid">
     <table id="calibrate-table" class="table table-bordered table-hover">
         <tr>
@@ -103,7 +104,12 @@
 				<button class="btn btn-primary" data-bind="enable: $root.isOperational() && !$root.isPrinting(), click: setZOffset2" style="width:50%">{{ _('Test') }}</button>
 	        </td>
 		</tr>
+		</table>
+		</div>
 
+<h2>Tool 1</h2>
+<div class="row-fluid">
+    <table id="calibrate-table" class="table table-bordered table-hover">
 
 		<tr>
 			<th class="calibrate_tool">{{ _('Tool 1 Z Offset') }}</th>
@@ -149,6 +155,46 @@
 
 		<tr>
 			<th class="calibrate_tool">{{ _('Tool 1 Servo Lowered') }}</th>
+	        <td class="calibrate_current" data-bind="html: tool0_ZOffset(), attr: {title: tool0_ZOffset()}"></td>
+	        <td class="calibrate_target">
+	            <form class="form-inline" style="margin:0" data-bind="submit: function(element) { $root.setSensor1Target($data, element) }">
+	                <div class="input-prepend input-append">
+	                    <button type="button" class="btn btn-input-dec" data-bind="click: $root.decrementTarget, enable: $root.isOperational() && $root.loginState.isUser()" title="{{ _('Fine adjust: -1°C')|edq }}"><i class="fa fa-minus"></i></button>
+	                    <input type="number" min="0" max="999" class="input-mini input-nospin" style="width: 30px" data-bind="attr: {placeholder: cleanTemperature(target(), 1)}, value: newTarget, valueUpdate: 'input', enable: $root.isOperational() && $root.loginState.isUser(), event: { focus: function(d, e) {$root.handleFocus(e, 'target', $data) } }">
+	                    <button type="button" class="btn btn-input-inc" data-bind="click: $root.incrementTarget, enable: $root.isOperational() && $root.loginState.isUser()" title="{{ _('Fine adjust: +1°C')|edq }}"><i class="fa fa-plus"></i></button>
+	                </div>
+	                <div class="btn-group">
+	                    <button type="submit" data-bind="enable: $root.isOperational() && $root.loginState.isUser() && $data.newTargetValid()" class="btn btn-primary" title="{{ _('Set')|edq }}"><i class="fa fa-check"></i></button>
+	                </div>
+	            </form>
+	        </td>
+	        <td class="calibrate_test">
+				<button class="btn btn-primary" data-bind="enable: $root.isOperational() && !$root.isPrinting(), click: setZOffset2" style="width:50%">{{ _('Test') }}</button>
+	        </td>
+		</tr>
+
+		<tr>
+			<th class="calibrate_tool">{{ _('Tool 1 X Offset') }}</th>
+	        <td class="calibrate_current" data-bind="html: tool0_ZOffset(), attr: {title: tool0_ZOffset()}"></td>
+	        <td class="calibrate_target">
+	            <form class="form-inline" style="margin:0" data-bind="submit: function(element) { $root.setSensor1Target($data, element) }">
+	                <div class="input-prepend input-append">
+	                    <button type="button" class="btn btn-input-dec" data-bind="click: $root.decrementTarget, enable: $root.isOperational() && $root.loginState.isUser()" title="{{ _('Fine adjust: -1°C')|edq }}"><i class="fa fa-minus"></i></button>
+	                    <input type="number" min="0" max="999" class="input-mini input-nospin" style="width: 30px" data-bind="attr: {placeholder: cleanTemperature(target(), 1)}, value: newTarget, valueUpdate: 'input', enable: $root.isOperational() && $root.loginState.isUser(), event: { focus: function(d, e) {$root.handleFocus(e, 'target', $data) } }">
+	                    <button type="button" class="btn btn-input-inc" data-bind="click: $root.incrementTarget, enable: $root.isOperational() && $root.loginState.isUser()" title="{{ _('Fine adjust: +1°C')|edq }}"><i class="fa fa-plus"></i></button>
+	                </div>
+	                <div class="btn-group">
+	                    <button type="submit" data-bind="enable: $root.isOperational() && $root.loginState.isUser() && $data.newTargetValid()" class="btn btn-primary" title="{{ _('Set')|edq }}"><i class="fa fa-check"></i></button>
+	                </div>
+	            </form>
+	        </td>
+	        <td class="calibrate_test">
+				<button class="btn btn-primary" data-bind="enable: $root.isOperational() && !$root.isPrinting(), click: setZOffset2" style="width:50%">{{ _('Test') }}</button>
+	        </td>
+		</tr>
+
+		<tr>
+			<th class="calibrate_tool">{{ _('Tool 1 Y Offset') }}</th>
 	        <td class="calibrate_current" data-bind="html: tool0_ZOffset(), attr: {title: tool0_ZOffset()}"></td>
 	        <td class="calibrate_target">
 	            <form class="form-inline" style="margin:0" data-bind="submit: function(element) { $root.setSensor1Target($data, element) }">
