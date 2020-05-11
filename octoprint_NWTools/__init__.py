@@ -174,7 +174,7 @@ class NwtoolsPlugin(octoprint.plugin.SettingsPlugin,
 
 		if action == "error":
 			self._plugin_manager.send_plugin_message(self._identifier, dict(action=action, text=parameter))
-		else
+		else:
 			if not action.startswith(b"prompt_"):
 				return
 
