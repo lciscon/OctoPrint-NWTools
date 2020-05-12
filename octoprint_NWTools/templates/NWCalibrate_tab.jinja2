@@ -34,7 +34,7 @@
 <br>
 <br>
 <h1>Advanced Settings</h1>
-<h2>Tool 0</h2>
+<h3>Tool 0</h3>
 <div class="row-fluid">
     <table id="calibrate-table" class="table table-bordered table-hover">
         <tr>
@@ -107,10 +107,15 @@
 		</table>
 		</div>
 
-<h2>Tool 1</h2>
+<h3>Tool 1</h3>
 <div class="row-fluid">
     <table id="calibrate-table" class="table table-bordered table-hover">
-
+		<tr>
+			<th class="calibrate_tool" style="width:30%"></th>
+			<th class="calibrate_current" style="width:15%">{{ _('Current') }}</th>
+			<th class="calibrate_target" style="width:30%">{{ _('Target') }}</th>
+			<th class="calibrate_test" style="width:25%"></th>
+		</tr>
 		<tr>
 			<th class="calibrate_tool">{{ _('Tool 1 Z Offset') }}</th>
 	        <td class="calibrate_current" data-bind="html: tool0_ZOffset(), attr: {title: tool0_ZOffset()}"></td>
