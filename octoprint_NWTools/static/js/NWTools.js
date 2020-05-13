@@ -497,7 +497,7 @@ $(function() {
 	};
 
 self.calibrateBedHeated = function () {
-    self.resetLeveling();
+    self.resetCalibration();
     self.autoCalibrateRun();
 
     sendPrinterCommand('G91');
