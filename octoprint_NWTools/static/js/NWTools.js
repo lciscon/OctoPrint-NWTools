@@ -15,12 +15,14 @@ $(function() {
         self.tool0_ZDelta = 0;
         self.tool1_ZDelta = 0;
 
-		self.tool0_ZOffset = ko.observable(-0.125);
-		self.tool1_ZOffset = ko.observable(-0.125);
-		self.tool0_Raised = ko.observable(7.2);
-		self.tool0_Locked = ko.observable(5.2);
-		self.tool1_Raised = ko.observable(6.3);
-		self.tool1_Locked = ko.observable(8.0);
+		self.tool0_ZOffset = ko.observable(0.0);
+		self.tool0_Raised = ko.observable(0.0);
+		self.tool0_Locked = ko.observable(0.0);
+		self.tool1_ZOffset = ko.observable(0.0);
+		self.tool1_Raised = ko.observable(0.0);
+		self.tool1_Locked = ko.observable(0.0);
+		self.tool1_XOffset = ko.observable(0.0);
+		self.tool1_YOffset = ko.observable(0.0);
 
         self.actual = ko.observable(-0.1);
         self.target = ko.observable(2);
@@ -128,10 +130,6 @@ $(function() {
             if (plugin != "NWTools") {
                 return;
             }
-
-//          self.actual = 123;
-//          self.target = 234;
-		//dict(action="show", text=self._prompt.text, choices=self._prompt.choices)
 
 		if (data.action == "error") {
 			var messageType = "notice";
@@ -704,19 +702,19 @@ self.calibrateBedHeated = function () {
           };
 
 
-    self.loadZOffset = function () {
-      console.log('Loading Z Offset');
+  self.loadZOffset = function () {
+    console.log('Loading Z Offset');
 
-      sendPrinterCommand('M115');
-      $.ajax({
-          url: API_BASEURL + "plugins/NWTools",
-          type: "POST",
-          command: "command1",
-          dataType: "json",
-          success: self.fromZResponse
-      });
+    sendPrinterCommand('M115');
+    $.ajax({
+      url: API_BASEURL + "plugins/NWTools",
+      type: "POST",
+      command: "command1",
+      dataType: "json",
+      success: self.fromZResponse
+    });
 
-    };
+  };
 
 
   self.incrementTarget = function() {

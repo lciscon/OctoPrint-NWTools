@@ -188,9 +188,9 @@ class NwtoolsPlugin(octoprint.plugin.SettingsPlugin,
 	## this is the responses received from the printer
 	## we need to scan this for anything relevant to us
 	def processResponse(self, comm, line, *args, **kwargs):
-		self._logger.info("Processings2: %s" % line)
+#		self._logger.info("Processings2: %s" % line)
 
-		if "Leveling:" in line:
+		if line.startswith("Leveling"):
 			# The line should look like this:
 			# Leveling: 2.51 3.52 0.1
 			llist = line.split(" ")
