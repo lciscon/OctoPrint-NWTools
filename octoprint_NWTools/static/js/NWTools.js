@@ -416,6 +416,131 @@ $(function() {
 	    self.preheat(0, 1, self.autoCalibrateHeated);
 	};
 
+	self.updateFirmware = function() {
+  	  var messageType = "firmstart";
+  	  var messageData = {message:"", title:""};
+
+  	  messageData.title = "Notice";
+  	  messageData.message = "Firmware";
+  	  self.actionTriggerTemplate(messageType);
+  	  self.showActionTriggerDialog(messageData, null);
+
+  	  self._postCommand("firmware_exists", {}, function(response) {
+  		  console.log('File Exists value: ' + response.file_exists);
+
+  		  if (response.file_exists == 0) {
+  			  messageType = "firmfile";
+  		      messageData = {message:"", title:""};
+
+  			  messageData.title = "Error";
+  			  messageData.message = "Firmware";
+  			  self.actionTriggerTemplate(messageType);
+  			  self.showActionTriggerDialog(messageData, null);
+  			  return;
+  		  }
+
+  		  self._postCommand("update_firmware", {}, function(response) {
+  			  if (response.success) {
+  				  messageType = "firmdone";
+  			      messageData = {message:"", title:""};
+
+  				  messageData.title = "Notice";
+  				  messageData.message = "Firmware";
+  				  self.actionTriggerTemplate(messageType);
+  				  self.showActionTriggerDialog(messageData, null);
+  				  return;
+  			  }
+  		  });
+  	  });
+    };
+
+	self.calibrateBedHeated = function () {
+      self.resetCalibration();
+      self.autoCalibrateRun();
+
+      sendPrinterCommand('G91');
+      sendPrinterCommand('G0 Z2 F300');
+      sendPrinterCommand('G90');
+      sendPrinterCommand('M400');
+      sendPrinterCommand('G32');
+      sendPrinterCommand('M400');
+      sendPrinterCommand('G0 Z2 F300');
+      sendPrinterCommand('M400');
+  	sendPrinterCommand('M500');
+      sendPrinterCommand('M374');
+      sendPrinterCommand('M400');
+    };
+
+    self.calibrateBed = function() {
+       self.preheat(0, 1, self.calibrateBedHeated);
+    };
+
+    self.calibrateBed2 = function() {
+       self.preheat(0, 2, self.calibrateBedHeated);
+    };
+
+	self.levelBedHeated = function() {
+  		sendPrinterCommand('M400');
+  	    sendPrinterCommand('G91');
+  	    sendPrinterCommand('G0 Z10 F300');
+  	    sendPrinterCommand('G90');
+  	    sendPrinterCommand('M400');
+  	    sendPrinterCommand('G28');
+  	  	sendPrinterCommand('G30.9');
+
+    	  	self._postCommand("get_leveling", {}, function(response) {
+    		  	if (response.success) {
+  			  	curz = response.curz;
+
+  				var messageType = "leveling";
+  				var messageData = {message:"", title:""};
+
+  				messageData.title = "Notice";
+  				messageData.message = "Adjust the screws as follows:\nFront Center: " + curz[0].toString() + "\nBack Left: " + curz[1].toString() + "\nBack Right: " + curz[2].toString() + "\n";
+  				self.actionTriggerTemplate(messageType);
+  				self.showActionTriggerDialog(messageData, null);
+  				return;
+    		  	}
+  	  	});
+    };
+
+    self.levelBed = function() {
+  	     self.preheat(0, 1, self.levelBedHeated);
+    };
+
+    self.levelBed2 = function() {
+  	     self.preheat(0, 2, self.levelBedHeated);
+    };
+
+
+    self.calibrateDone = function () {
+        sendPrinterCommand('M511');
+    };
+
+    self.calibrateSensor = function() {
+      var messageType = "calibrating";
+      var messageData = {message:"", title:""};
+
+      self.releaseHead1();
+      self.releaseHead2();
+      sendPrinterCommand('M510');
+
+      messageData.title = "Calibrating...";
+      self.actionTriggerTemplate(messageType);
+      self.showActionTriggerDialog(messageData, self.calibrateDone);
+    };
+
+
+    self.resetCalibration = function() {
+      sendPrinterCommand('M374.1');
+      sendPrinterCommand('M561');
+  	};
+
+
+
+// -----
+
+
   self.moveUp = function() {
     sendPrinterCommand('M400');
     sendPrinterCommand('G91');
@@ -494,126 +619,48 @@ $(function() {
     sendPrinterCommand('G0 Z2');
     sendPrinterCommand('G90');
     sendPrinterCommand('M500');
-	};
-
-self.calibrateBedHeated = function () {
-    self.resetCalibration();
-    self.autoCalibrateRun();
-
-    sendPrinterCommand('G91');
-    sendPrinterCommand('G0 Z2 F300');
-    sendPrinterCommand('G90');
-    sendPrinterCommand('M400');
-    sendPrinterCommand('G32');
-    sendPrinterCommand('M400');
-    sendPrinterCommand('G0 Z2 F300');
-    sendPrinterCommand('M400');
-	sendPrinterCommand('M500');
-    sendPrinterCommand('M374');
-    sendPrinterCommand('M400');
-	};
-
-	self.calibrateBed = function() {
-     self.preheat(0, 1, self.calibrateBedHeated);
-	};
-
-    self.calibrateBed2 = function() {
-     self.preheat(0, 2, self.calibrateBedHeated);
-	};
-
-	self.levelBedHeated = function() {
-		sendPrinterCommand('M400');
-	    sendPrinterCommand('G91');
-	    sendPrinterCommand('G0 Z10 F300');
-	    sendPrinterCommand('G90');
-	    sendPrinterCommand('M400');
-	    sendPrinterCommand('G28');
-	  	sendPrinterCommand('G30.9');
-
-  	  	self._postCommand("get_leveling", {}, function(response) {
-  		  	if (response.success) {
-			  	curz = response.curz;
-
-				var messageType = "leveling";
-				var messageData = {message:"", title:""};
-
-				messageData.title = "Notice";
-				messageData.message = "Adjust the screws as follows:\nFront Center: " + curz[0].toString() + "\nBack Left: " + curz[1].toString() + "\nBack Right: " + curz[2].toString() + "\n";
-				self.actionTriggerTemplate(messageType);
-				self.showActionTriggerDialog(messageData, null);
-				return;
-  		  	}
-	  	});
-    };
-
-	self.levelBed = function() {
-	     self.preheat(0, 1, self.levelBedHeated);
-		};
-
-	self.levelBed2 = function() {
-	     self.preheat(0, 2, self.levelBedHeated);
-		};
-
-
-  self.calibrateDone = function () {
-      sendPrinterCommand('M511');
-	};
-
-  self.calibrateSensor = function() {
-    var messageType = "calibrating";
-    var messageData = {message:"", title:""};
-
-    self.releaseHead1();
-    self.releaseHead2();
-    sendPrinterCommand('M510');
-
-    messageData.title = "Calibrating...";
-    self.actionTriggerTemplate(messageType);
-    self.showActionTriggerDialog(messageData, self.calibrateDone);
   };
 
-  self.updateFirmware = function() {
-	  var messageType = "firmstart";
-	  var messageData = {message:"", title:""};
+  self.decreaseZOffset1 = function() {
 
-	  messageData.title = "Notice";
-	  messageData.message = "Firmware";
-	  self.actionTriggerTemplate(messageType);
-	  self.showActionTriggerDialog(messageData, null);
-
-	  self._postCommand("firmware_exists", {}, function(response) {
-		  console.log('File Exists value: ' + response.file_exists);
-
-		  if (response.file_exists == 0) {
-			  messageType = "firmfile";
-		      messageData = {message:"", title:""};
-
-			  messageData.title = "Error";
-			  messageData.message = "Firmware";
-			  self.actionTriggerTemplate(messageType);
-			  self.showActionTriggerDialog(messageData, null);
-			  return;
-		  }
-
-		  self._postCommand("update_firmware", {}, function(response) {
-			  if (response.success) {
-				  messageType = "firmdone";
-			      messageData = {message:"", title:""};
-
-				  messageData.title = "Notice";
-				  messageData.message = "Firmware";
-				  self.actionTriggerTemplate(messageType);
-				  self.showActionTriggerDialog(messageData, null);
-				  return;
-			  }
-		  });
-	  });
   };
 
-  self.resetCalibration = function() {
-    sendPrinterCommand('M374.1');
-    sendPrinterCommand('M561');
-	};
+  self.decreaseZOffset2 = function() {
+
+  };
+
+
+  self.formatZoffset = function(zoff) {
+      if (zoff === undefined || !_.isNumber(zoff)) return "-";
+      return _.sprintf("%.2f", zoff);
+  };
+
+
+  self.setZOffsetDirect = function (offsetval) {
+    self.preheat1();
+    console.log('Loading Z Offset Direct: ' + offsetval);
+  };
+
+  self.fromZResponse = function (data) {
+              console.log('MSL: got reply5 ' + data);
+          };
+
+
+  self.loadZOffset = function () {
+    console.log('Loading Z Offset');
+
+    sendPrinterCommand('M115');
+    $.ajax({
+      url: API_BASEURL + "plugins/NWTools",
+      type: "POST",
+      command: "command1",
+      dataType: "json",
+      success: self.fromZResponse
+    });
+
+  };
+
+//---------
 
   self.handleFocus = function(event) {
 //        var value = self.newTarget();
@@ -684,39 +731,6 @@ self.calibrateBedHeated = function () {
       return self.setTargetToValue(value);
   };
 
-
-
-  self.formatZoffset = function(zoff) {
-      if (zoff === undefined || !_.isNumber(zoff)) return "-";
-      return _.sprintf("%.2f", zoff);
-  };
-
-
-  self.setZOffsetDirect = function (offsetval) {
-    self.preheat1();
-    console.log('Loading Z Offset Direct: ' + offsetval);
-  };
-
-  self.fromZResponse = function (data) {
-              console.log('MSL: got reply5 ' + data);
-          };
-
-
-  self.loadZOffset = function () {
-    console.log('Loading Z Offset');
-
-    sendPrinterCommand('M115');
-    $.ajax({
-      url: API_BASEURL + "plugins/NWTools",
-      type: "POST",
-      command: "command1",
-      dataType: "json",
-      success: self.fromZResponse
-    });
-
-  };
-
-
   self.incrementTarget = function() {
     var value = self.newTarget();
 
@@ -770,68 +784,61 @@ self.calibrateBedHeated = function () {
   };
 
 
-  self.decreaseZOffset1 = function() {
+// ----
 
-  };
+    // This will get called before the HelloWorldViewModel gets bound to the DOM, but after its
+    // dependencies have already been initialized. It is especially guaranteed that this method
+    // gets called _after_ the settings have been retrieved from the OctoPrint backend and thus
+    // the SettingsViewModel been properly populated.
+	self.onBeforeBinding = function() {
+	}
 
-  self.decreaseZOffset2 = function() {
-
-  };
-
-
-        // This will get called before the HelloWorldViewModel gets bound to the DOM, but after its
-        // dependencies have already been initialized. It is especially guaranteed that this method
-        // gets called _after_ the settings have been retrieved from the OctoPrint backend and thus
-        // the SettingsViewModel been properly populated.
-        self.onBeforeBinding = function() {
-        }
-
-        self.onEventConnected = function(payload) {
-          self.loadZOffset();
-        };
+	self.onEventConnected = function(payload) {
+	  self.loadZOffset();
+	};
 
 
-		self._postCommand = function (command, data, successCallback, failureCallback, alwaysCallback, timeout) {
-            var payload = _.extend(data, {command: command});
+	self._postCommand = function (command, data, successCallback, failureCallback, alwaysCallback, timeout) {
+	    var payload = _.extend(data, {command: command});
 
-            var params = {
-                url: API_BASEURL + "plugin/NWTools",
-                type: "POST",
-                dataType: "json",
-                data: JSON.stringify(payload),
-                contentType: "application/json; charset=UTF-8",
-                success: function(response) {
-                    if (successCallback) successCallback(response);
-                },
-                error: function() {
-                    if (failureCallback) failureCallback();
-                },
-                complete: function() {
-                    if (alwaysCallback) alwaysCallback();
-                }
-            };
+	    var params = {
+	        url: API_BASEURL + "plugin/NWTools",
+	        type: "POST",
+	        dataType: "json",
+	        data: JSON.stringify(payload),
+	        contentType: "application/json; charset=UTF-8",
+	        success: function(response) {
+	            if (successCallback) successCallback(response);
+	        },
+	        error: function() {
+	            if (failureCallback) failureCallback();
+	        },
+	        complete: function() {
+	            if (alwaysCallback) alwaysCallback();
+	        }
+	    };
 
-            if (timeout != undefined) {
-                params.timeout = timeout;
-            }
+	    if (timeout != undefined) {
+	        params.timeout = timeout;
+	    }
 
-            $.ajax(params);
-        };
+	    $.ajax(params);
+	};
 
 
-		self.reconnectSerial = function () {
-			var payload = {command: "connect"};
+	self.reconnectSerial = function () {
+		var payload = {command: "connect"};
 
-            $.ajax({
-                url: API_BASEURL + "connection",
-                type: "POST",
-                dataType: "json",
-				data: JSON.stringify(payload),
-				contentType: "application/json; charset=UTF-8",
-				success: function(response) {
-                },
-            });
-        };
+	    $.ajax({
+	        url: API_BASEURL + "connection",
+	        type: "POST",
+	        dataType: "json",
+			data: JSON.stringify(payload),
+			contentType: "application/json; charset=UTF-8",
+			success: function(response) {
+	        },
+	    });
+	};
 
 
     }
