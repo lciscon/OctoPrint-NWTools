@@ -47,9 +47,9 @@
 			<th class="calibrate_tool">{{ _('Z Offset') }}</th>
 	        <td class="calibrate_current" data-bind="html: tool0_ZOffset(), attr: {title: tool0_ZOffset()}"></td>
 	        <td class="calibrate_target">
-	            <form class="form-inline" style="margin:0" data-bind="submit: function(element) { $root.setSensor1Target($data, element) }">
+	            <form class="form-inline" style="margin:0" data-bind="submit: function(element) { $root.setTarget($data, element) }">
 	                <div class="input-prepend input-append">
-	                    <button type="button" class="btn btn-input-dec" data-bind="click: $root.decrementT0ZOffset, enable: $root.isOperational() && $root.loginState.isUser()" title="{{ _('Fine adjust: -.025mm')|edq }}"><i class="fa fa-minus"></i></button>
+	                    <button type="button" class="btn btn-input-dec" data-bind="click: $root.decrementTarget, enable: $root.isOperational() && $root.loginState.isUser()" title="{{ _('Fine adjust: -.025mm')|edq }}"><i class="fa fa-minus"></i></button>
 	                    <input type="number" min="0" max="999" class="input-mini input-nospin" style="width: 30px" data-bind="attr: {placeholder: cleanTemperature(target(), 1)}, value: newTarget, valueUpdate: 'input', enable: $root.isOperational() && $root.loginState.isUser(), event: { focus: function(d, e) {$root.handleFocus(e, 'target', $data) } }">
 	                    <button type="button" class="btn btn-input-inc" data-bind="click: $root.incrementTarget, enable: $root.isOperational() && $root.loginState.isUser()" title="{{ _('Fine adjust: +.025mm')|edq }}"><i class="fa fa-plus"></i></button>
 	                </div>
@@ -160,7 +160,7 @@
 
 		<tr>
 			<th class="calibrate_tool">{{ _('Servo Lowered') }}</th>
-	        <td class="calibrate_current" data-bind="html: tool1_Locked), attr: {title: tool1_Locked()}"></td>
+	        <td class="calibrate_current" data-bind="html: tool1_Locked(), attr: {title: tool1_Locked()}"></td>
 	        <td class="calibrate_target">
 	            <form class="form-inline" style="margin:0" data-bind="submit: function(element) { $root.setSensor1Target($data, element) }">
 	                <div class="input-prepend input-append">
