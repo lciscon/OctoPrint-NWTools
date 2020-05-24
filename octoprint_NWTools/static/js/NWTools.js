@@ -364,8 +364,15 @@ $(function() {
     };
 
 	self.rebootController = function() {
+		var messageType = "notice";
+		var messageData = {message:"Rebooting...", title:"Notice"};
+
+		self.actionTriggerTemplate(messageType);
+		self.showActionTriggerDialog(messageData, null);
+
 		self._postCommand("reboot_controller", {});
 		self.reconnectSerial();
+		self.hideActionTriggerDialog();
 	};
 
 	self.lightsOn = function() {
