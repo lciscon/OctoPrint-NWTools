@@ -370,9 +370,10 @@ $(function() {
 		self.actionTriggerTemplate(messageType);
 		self.showActionTriggerDialog(messageData, null);
 
-		self._postCommand("reboot_controller", {});
-		self.reconnectSerial();
-		self.hideActionTriggerDialog();
+		self._postCommand("reboot_controller", {}, function(response) {
+			self.reconnectSerial();
+	  		self.hideActionTriggerDialog();
+	    });
 	};
 
 	self.lightsOn = function() {

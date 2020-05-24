@@ -103,6 +103,7 @@ class NwtoolsPlugin(octoprint.plugin.SettingsPlugin,
 
 		elif command == "reboot_controller":
 			self._exec_cmd("machine restart")
+			return jsonify(dict(success="true"))
 
 		elif command == "lights_on":
 			self._exec_cmd("lights on")
