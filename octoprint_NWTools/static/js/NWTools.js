@@ -53,11 +53,9 @@ $(function() {
             var entry = {
                 name: ko.observable(),
                 key: ko.observable(),
-                actual: ko.observable(0),
-                target: ko.observable(0),
-                offset: ko.observable(0),
+                actual: ko.observable(0.0),
+                target: ko.observable(0.0),
                 newTarget: ko.observable(),
-                newOffset: ko.observable()
             };
 
             entry.newTargetValid = ko.pureComputed(function() {
