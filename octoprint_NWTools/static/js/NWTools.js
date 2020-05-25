@@ -15,15 +15,6 @@ $(function() {
         self.tool0_ZDelta = 0;
         self.tool1_ZDelta = 0;
 
-		self.tool0_ZOffset = ko.observable(0.0);
-		self.tool0_Raised = ko.observable(0.0);
-		self.tool0_Locked = ko.observable(0.0);
-		self.tool1_ZOffset = ko.observable(0.0);
-		self.tool1_Raised = ko.observable(0.0);
-		self.tool1_Locked = ko.observable(0.0);
-		self.tool1_XOffset = ko.observable(0.0);
-		self.tool1_YOffset = ko.observable(0.0);
-
         self.actual = ko.observable(-0.1);
         self.target = ko.observable(2);
         self.newTarget = ko.observable(3);
@@ -57,6 +48,45 @@ $(function() {
     						value : 'disabled'
     					}
     				]);
+
+		self._createToolEntry = function() {
+            var entry = {
+                name: ko.observable(),
+                key: ko.observable(),
+                actual: ko.observable(0),
+                target: ko.observable(0),
+                offset: ko.observable(0),
+                newTarget: ko.observable(),
+                newOffset: ko.observable()
+            };
+
+            entry.newTargetValid = ko.pureComputed(function() {
+                var value = entry.newTarget();
+
+                try {
+                    value = parseFloat(value);
+                } catch (exc) {
+                    return false;
+                }
+
+                return (value >= -999.99 && value <= 999.99);
+            });
+
+            return entry;
+        };
+
+		self.tool0_ZOffset = self._createToolEntry();
+        self.tool0_ZOffset["name"](gettext("Z Offset"));
+        self.tool0_ZOffset["key"]("tool0_z_offset");
+
+		self.tool0_Raised = ko.observable(0.0);
+		self.tool0_Locked = ko.observable(0.0);
+		self.tool1_ZOffset = ko.observable(0.0);
+		self.tool1_Raised = ko.observable(0.0);
+		self.tool1_Locked = ko.observable(0.0);
+		self.tool1_XOffset = ko.observable(0.0);
+		self.tool1_YOffset = ko.observable(0.0);
+
 
 
     	self.actionTriggerTemplate = ko.observable(undefined);
@@ -548,7 +578,7 @@ $(function() {
 
   self.testTarget = function(event) {
 	  //test it....hmmm
-	  
+
   };
 
   self.handleFocus = function(event) {
@@ -560,20 +590,6 @@ $(function() {
 //            event.target.select();
 //        }, 0);
   };
-
-  self.newTargetValid = function() {
-      var value = self.newTarget();
-
-      try {
-          value = parseFloat(value);
-      } catch (exc) {
-          return false;
-      }
-
-//      return (value >= 0 && value <= 999);
-	  return true;
-  };
-
 
   self.setTargetToValue = function(value) {
 //              self.clearAutosendTarget(item);
