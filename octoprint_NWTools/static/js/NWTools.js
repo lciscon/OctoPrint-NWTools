@@ -544,137 +544,18 @@ $(function() {
       sendPrinterCommand('M561');
   	};
 
-
-
-// -----
-
-
-  self.moveUp = function() {
-    sendPrinterCommand('M400');
-    sendPrinterCommand('G91');
-    sendPrinterCommand('G1 Z-.025');
-    sendPrinterCommand('M400');
-    sendPrinterCommand('G90');
-    sendPrinterCommand('G95 Z.025');
-    self.tool0_ZDelta = self.tool0_ZDelta + 0.025;
-	};
-
-  self.moveDown = function() {
-    sendPrinterCommand('M400');
-    sendPrinterCommand('G91');
-    sendPrinterCommand('G1 Z.025');
-    sendPrinterCommand('M400');
-    sendPrinterCommand('G90');
-    sendPrinterCommand('G95 Z-.025');
-    self.tool0_ZDelta = self.tool0_ZDelta - 0.025;
-	};
-
-  self.setZOffset = function() {
-	//subtract a bit for the material thickness
-	self.tool0_ZDelta = self.tool0_ZDelta + .05;
-    sendPrinterCommand('M670 P' + self.tool0_ZDelta);
-    sendPrinterCommand('M500');
-    self.tool0_ZDelta = 0;
-  };
-
-  self.autoCalibrateHeated2 = function () {
-    sendPrinterCommand('M400');
-    sendPrinterCommand('G91');
-    sendPrinterCommand('G0 Z10 F300');
-    sendPrinterCommand('G90');
-    sendPrinterCommand('M400');
-    sendPrinterCommand('G28');
-    sendPrinterCommand('G30.1 Q V1');
-    sendPrinterCommand('G0 Z0 F300');
-    self.lockHead2();
-	};
-
-	self.autoCalibrate2 = function() {
-	    self.preheat(1, 1, self.autoCalibrateHeated2);
-	};
-
-  self.moveUp2 = function() {
-    sendPrinterCommand('M400');
-    sendPrinterCommand('G91');
-    sendPrinterCommand('G1 Z-.025');
-    sendPrinterCommand('M400');
-    sendPrinterCommand('G90');
-    sendPrinterCommand('G95 Z.025');
-    self.tool1_ZDelta = self.tool1_ZDelta + 0.025;
-	};
-
-  self.moveDown2 = function() {
-    sendPrinterCommand('M400');
-    sendPrinterCommand('G91');
-    sendPrinterCommand('G1 Z.025');
-    sendPrinterCommand('M400');
-    sendPrinterCommand('G90');
-    sendPrinterCommand('G95 Z-.025');
-    self.tool1_ZDelta = self.tool1_ZDelta - 0.025;
-	};
-
-  self.setZOffset2 = function() {
-	//subtract a bit for the material thickness
-	self.tool1_ZDelta = self.tool1_ZDelta + .05;
-    sendPrinterCommand('M670 U' + self.tool1_ZDelta);
-    sendPrinterCommand('M500');
-    self.tool1_ZDelta = 0;
-  };
-
-  self.setOffset = function () {
-    sendPrinterCommand('M671');
-    sendPrinterCommand('G91');
-    sendPrinterCommand('G0 Z2');
-    sendPrinterCommand('G90');
-    sendPrinterCommand('M500');
-  };
-
-  self.decreaseZOffset1 = function() {
-
-  };
-
-  self.decreaseZOffset2 = function() {
-
-  };
-
-
-  self.formatZoffset = function(zoff) {
-      if (zoff === undefined || !_.isNumber(zoff)) return "-";
-      return _.sprintf("%.2f", zoff);
-  };
-
-
-  self.setZOffsetDirect = function (offsetval) {
-    self.preheat1();
-    console.log('Loading Z Offset Direct: ' + offsetval);
-  };
-
-  self.fromZResponse = function (data) {
-              console.log('MSL: got reply5 ' + data);
-          };
-
-
-  self.loadZOffset = function () {
-    console.log('Loading Z Offset');
-
-    sendPrinterCommand('M115');
-    $.ajax({
-      url: API_BASEURL + "plugins/NWTools",
-      type: "POST",
-      command: "command1",
-      dataType: "json",
-      success: self.fromZResponse
-    });
-
-  };
-
 //---------
 
+  self.testTarget = function(event) {
+	  //test it....hmmm
+	  
+  };
+
   self.handleFocus = function(event) {
-//        var value = self.newTarget();
-//        if (value === undefined || (typeof(value) === "string" && value.trim() === "")) {
-//            self.newTarget(self.target());
-//        }
+        var value = self.newTarget();
+        if (value === undefined || (typeof(value) === "string" && value.trim() === "")) {
+            self.newTarget(self.target());
+        }
 //        window.setTimeout(function() {
 //            event.target.select();
 //        }, 0);
@@ -683,20 +564,14 @@ $(function() {
   self.newTargetValid = function() {
       var value = self.newTarget();
 
-//      new PNotify({
-//        title: 'Pop Up Message',
-//        text: 'Target Valid',
-//        type: self.msgType(),
-//        hide: self.autoClose()
-//        });
-
       try {
-          value = parseInt(value);
+          value = parseFloat(value);
       } catch (exc) {
           return false;
       }
 
-      return (value >= 0 && value <= 999);
+//      return (value >= 0 && value <= 999);
+	  return true;
   };
 
 
@@ -704,12 +579,12 @@ $(function() {
 //              self.clearAutosendTarget(item);
 
       try {
-          value = parseInt(value);
+          value = parseFloat(value);
       } catch (ex) {
           return OctoPrintClient.createRejectedDeferred();
       }
 
-      if (value < 0 || value > 999) return OctoPrintClient.createRejectedDeferred();
+      if (value < -999.99 || value > 999.99) return OctoPrintClient.createRejectedDeferred();
 
       var onSuccess = function() {
           self.target(value);
@@ -723,13 +598,6 @@ $(function() {
   self.setTarget = function(form) {
     var value = self.newTarget();
 
-//    new PNotify({
-//      title: 'Set Target',
-//      text: value,
-//      type: self.msgType(),
-//      hide: self.autoClose()
-//      });
-
       if (form !== undefined) {
           $(form).find("input").blur();
       }
@@ -742,22 +610,14 @@ $(function() {
   self.incrementTarget = function() {
     var value = self.newTarget();
 
-//    new PNotify({
-//      title: 'Increment Target0',
-//      text: value,
-//      type: self.msgType(),
-//      hide: self.autoClose()
-//      });
-
-
       if (value === undefined || (typeof(value) === "string" && value.trim() === "")) {
           value = self.target();
       }
 
       try {
-          value = parseInt(value);
-          if (value > 999) return;
-          self.newTarget(value + 1);
+          value = parseFloat(value);
+          if (value > 999.99) return;
+          self.newTarget(value + 0.25);
 //          self.autosendTarget(item);
       } catch (ex) {
           // do nothing
@@ -765,26 +625,14 @@ $(function() {
   };
 
   self.decrementTarget = function() {
-    var value = self.newTarget();
-  };
-
-  //    new PNotify({
-  //      title: 'Decrement Target0',
-  //      text: value,
-  //      type: self.msgType(),
-  //      hide: self.autoClose()
-  //      });
-
-
-  self.decrementTarget9 = function() {
       var value = self.newTarget();
       if (value === undefined || (typeof(value) === "string" && value.trim() === "")) {
           value = self.target();
       }
       try {
-          value = parseInt(value);
-          if (value <= 0) return;
-          self.newTarget(value - 1);
+          value = parseFloat(value);
+          if (value < -999.99) return;
+          self.newTarget(value - 0.25);
 //          self.autosendTarget(item);
       } catch (ex) {
           // do nothing
@@ -868,3 +716,12 @@ $(function() {
         ["#tab_plugin_NWTools", "#tab_plugin_NWTools_2"]
     ]);
 });
+
+
+
+//    new PNotify({
+//      title: 'Increment Target0',
+//      text: value,
+//      type: self.msgType(),
+//      hide: self.autoClose()
+//      });
