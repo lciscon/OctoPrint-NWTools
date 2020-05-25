@@ -103,15 +103,16 @@ $(function() {
         self.tool1_YOffset["name"](gettext("Z Offset"));
         self.tool1_YOffset["key"]("tool1_YOffset");
 
-		self.tool0_ZOffset.actual(0.5);
-		self.tool0_Raised.actual(1.0);
-		self.tool0_Locked.actual(1.25);
+		self.tool0_ZOffset["actual"](-0.15);
+		self.tool0_Raised["actual"](5.6);
+		self.tool0_Locked["actual"](8.3);
 
-		self.tool1_ZOffset.actual(0.5);
-		self.tool1_Raised.actual(1.0);
-		self.tool1_Locked.actual(1.25);
-		self.tool1_XOffset.actual(1.0);
-		self.tool1_YOffset.actual(1.25);
+		self.tool1_ZOffset["actual"](-0.075);
+		self.tool1_Raised["actual"](5.6);
+		self.tool1_Locked["actual"](8.3);
+		self.tool1_XOffset["actual"](20.15);
+		self.tool1_YOffset["actual"](0.075);
+
 
     	self.actionTriggerTemplate = ko.observable(undefined);
 	    self.actionTriggerCallback = function () {
