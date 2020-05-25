@@ -83,7 +83,7 @@ $(function() {
 
 		self.tool0_Locked = self._createToolEntry();
         self.tool0_Locked["name"](gettext("Locked"));
-        self.tool0_Lockd["key"]("tool0_Locked");
+        self.tool0_Locked["key"]("tool0_Locked");
 
 		self.tool1_ZOffset = self._createToolEntry();
         self.tool1_ZOffset["name"](gettext("Z Offset"));
@@ -95,7 +95,7 @@ $(function() {
 
 		self.tool1_Locked = self._createToolEntry();
         self.tool1_Locked["name"](gettext("Locked"));
-        self.tool1_Lockd["key"]("tool1_Locked");
+        self.tool1_Locked["key"]("tool1_Locked");
 
 		self.tool1_XOffset = self._createToolEntry();
         self.tool1_XOffset["name"](gettext("X Offset"));
