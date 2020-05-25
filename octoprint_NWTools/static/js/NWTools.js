@@ -835,6 +835,8 @@ $(function() {
 
 
 	self.reconnectSerial = function () {
+		console.log('Reconnecting to controller');
+
 		var payload = {command: "connect"};
 
 	    $.ajax({

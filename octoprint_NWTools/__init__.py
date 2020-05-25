@@ -11,6 +11,7 @@ from flask import jsonify, make_response
 import octoprint.printer
 import flask
 import re
+import time
 
 import logging
 import os
@@ -103,6 +104,7 @@ class NwtoolsPlugin(octoprint.plugin.SettingsPlugin,
 
 		elif command == "reboot_controller":
 			self._exec_cmd("machine restart")
+			time.sleep(3)
 			return jsonify(dict(success="true"))
 
 		elif command == "lights_on":
