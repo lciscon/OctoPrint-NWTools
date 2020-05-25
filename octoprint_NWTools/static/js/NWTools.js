@@ -79,13 +79,34 @@ $(function() {
         self.tool0_ZOffset["name"](gettext("Z Offset"));
         self.tool0_ZOffset["key"]("tool0_z_offset");
 
-		self.tool0_Raised = ko.observable(0.0);
-		self.tool0_Locked = ko.observable(0.0);
-		self.tool1_ZOffset = ko.observable(0.0);
-		self.tool1_Raised = ko.observable(0.0);
-		self.tool1_Locked = ko.observable(0.0);
-		self.tool1_XOffset = ko.observable(0.0);
-		self.tool1_YOffset = ko.observable(0.0);
+		self.tool0_Raised = self._createToolEntry();
+        self.tool0_Raised["name"](gettext("Raised"));
+        self.tool0_Raised["key"]("tool0_raised");
+
+		self.tool0_Locked = self._createToolEntry();
+        self.tool0_Locked["name"](gettext("Locked"));
+        self.tool0_Lockd["key"]("tool0_locked");
+
+		self.tool1_ZOffset = self._createToolEntry();
+        self.tool1_ZOffset["name"](gettext("Z Offset"));
+        self.tool1_ZOffset["key"]("tool1_z_offset");
+
+		self.tool1_Raised = self._createToolEntry();
+        self.tool1_Raised["name"](gettext("Raised"));
+        self.tool1_Raised["key"]("tool1_raised");
+
+		self.tool1_Locked = self._createToolEntry();
+        self.tool1_Locked["name"](gettext("Locked"));
+        self.tool1_Lockd["key"]("tool1_locked");
+
+		self.tool1_XOffset = self._createToolEntry();
+        self.tool1_XOffset["name"](gettext("X Offset"));
+        self.tool1_XOffset["key"]("tool1_x_offset");
+
+		self.tool1_YOffset = self._createToolEntry();
+        self.tool1_YOffset["name"](gettext("Z Offset"));
+        self.tool1_YOffset["key"]("tool1_y_offset");
+
 
 
 
