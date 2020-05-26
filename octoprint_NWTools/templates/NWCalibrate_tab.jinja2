@@ -106,7 +106,7 @@
 
 <script type="text/html" id="calrow-template">
 	<th class="calibrate_tool" data-bind="text: name, attr: {title: name}"></th>
-	<td class="calibrate_current" data-bind="html: formatFloat(actual()), attr: {title: formatFloat(actual())}"></td>
+	<td class="calibrate_current" data-bind="html: $root.formatFloat(actual()), attr: {title: $root.formatFloat(actual())}"></td>
 	<td class="calibrate_target">
 	<form class="form-inline" style="margin:0" data-bind="submit: function(element) { $root.setTarget($data, element) }">
 			<div class="input-prepend input-append">

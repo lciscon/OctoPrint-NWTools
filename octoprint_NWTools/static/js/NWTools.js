@@ -149,7 +149,7 @@ $(function() {
 	    	return new Promise((resolve) => setTimeout(resolve, time));
 	}
 
-	function formatFloat(newval) {
+	self.formatFloat = function(newval) {
 	    if (newval === undefined || !_.isNumber(newval)) return "-";
 		return _.sprintf("%2.2f", newval);
 	}
