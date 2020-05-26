@@ -1,11 +1,5 @@
 $(function() {
 
-	function formatFloat(newval) {
-	    if (newval === undefined || !_.isNumber(newval)) return "-";
-		return _.sprintf("%2.2f", newval);
-	}
-
-
     function NWToolsViewModel(parameters) {
         var self = this;
 
@@ -151,9 +145,14 @@ $(function() {
 
     	};
 
-    	function sleep (time) {
- 	    	return new Promise((resolve) => setTimeout(resolve, time));
-		}
+	function sleep (time) {
+	    	return new Promise((resolve) => setTimeout(resolve, time));
+	}
+
+	function formatFloat(newval) {
+	    if (newval === undefined || !_.isNumber(newval)) return "-";
+		return _.sprintf("%2.2f", newval);
+	}
 
 	self.fromCurrentData = function(data) {
 		self._processStateData(data.state);
