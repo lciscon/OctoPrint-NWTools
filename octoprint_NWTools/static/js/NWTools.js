@@ -648,6 +648,7 @@ $(function() {
           self.newTarget("");
       };
 
+	  onSuccess();
 //                  return self._setToolTemperature(item.key(), value)
 //                      .done(onSuccess);
   };
