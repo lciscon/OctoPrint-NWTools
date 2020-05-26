@@ -1,5 +1,11 @@
 $(function() {
 
+	function formatFloat(newval) {
+	    if (newval === undefined || !_.isNumber(newval)) return "-";
+		return _.sprintf("%2.2f", newval);
+	}
+
+
     function NWToolsViewModel(parameters) {
         var self = this;
 
@@ -757,12 +763,6 @@ $(function() {
         // Finally, this is the list of selectors for all elements we want this view model to be bound to.
         ["#tab_plugin_NWTools", "#tab_plugin_NWTools_2"]
     ]);
-
-
-	function formatFloat(newval, showF, offThreshold) {
-	    if (newval === undefined || !_.isNumber(newval)) return "-";
-		return _.sprintf("%2.2f", newval);
-	}
 
 });
 
