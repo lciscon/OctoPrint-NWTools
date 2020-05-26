@@ -13,9 +13,9 @@ $(function() {
 	    self.currentTemp = 0;
 		self.currentTemp2 = 0;
 
-        self.actual = ko.observable(-0.1);
-        self.target = ko.observable(2);
-        self.newTarget = ko.observable(3);
+//        self.actual = ko.observable(-0.1);
+//        self.target = ko.observable(2);
+//        self.newTarget = ko.observable(3);
 
 		self.isErrorOrClosed = ko.observable(undefined);
         self.isOperational = ko.observable(undefined);
