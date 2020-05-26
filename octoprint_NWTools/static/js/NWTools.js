@@ -103,6 +103,7 @@ $(function() {
         self.tool1_YOffset["name"](gettext("Z Offset"));
         self.tool1_YOffset["key"]("tool1_YOffset");
 
+
 		self.tool0_ZOffset["actual"](-0.15);
 		self.tool0_Raised["actual"](5.6);
 		self.tool0_Locked["actual"](8.3);
@@ -756,6 +757,13 @@ $(function() {
         // Finally, this is the list of selectors for all elements we want this view model to be bound to.
         ["#tab_plugin_NWTools", "#tab_plugin_NWTools_2"]
     ]);
+
+
+	function formatFloat(newval, showF, offThreshold) {
+	    if (newval === undefined || !_.isNumber(newval)) return "-";
+		return _.sprintf("%2.2f", newval);
+	}
+
 });
 
 
