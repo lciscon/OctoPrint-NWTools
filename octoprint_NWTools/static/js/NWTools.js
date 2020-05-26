@@ -104,7 +104,7 @@ $(function() {
         self.tool1_YOffset["key"]("tool1_YOffset");
 
 
-		self.tool0_ZOffset["actual"](""-0.15");
+		self.tool0_ZOffset["actual"]("-0.15");
 		self.tool0_Raised["actual"]("5.6");
 		self.tool0_Locked["actual"]("8.3");
 
@@ -124,7 +124,7 @@ $(function() {
 		self.tool1_XOffset["target"](20.15);
 		self.tool1_YOffset["target"](0.075);
 
-		self.tool0_ZOffset["newTarget"](""-0.15");
+		self.tool0_ZOffset["newTarget"]("-0.15");
 		self.tool1_ZOffset["newTarget"](-0.15);
 
     	self.actionTriggerTemplate = ko.observable(undefined);
