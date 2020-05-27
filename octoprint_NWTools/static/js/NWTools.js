@@ -647,10 +647,7 @@ $(function() {
 	  }
   };
 
-
-
-
-  self.setTargetToValue = function(value) {
+  self.setTargetToValue = function(item, value) {
 //              self.clearAutosendTarget(item);
 
       try {
@@ -662,8 +659,8 @@ $(function() {
       if (value < -999.99 || value > 999.99) return OctoPrintClient.createRejectedDeferred();
 
       var onSuccess = function() {
-          self.target(value);
-          self.newTarget("");
+          item.target(value);
+          item.newTarget("");
       };
 
 	  onSuccess();
@@ -671,8 +668,8 @@ $(function() {
 //                      .done(onSuccess);
   };
 
-  self.setTarget = function(form) {
-    var value = self.newTarget();
+  self.setTarget = function(item, form) {
+    var value = item.newTarget();
 
       if (form !== undefined) {
           $(form).find("input").blur();
@@ -683,12 +680,12 @@ $(function() {
       return self.setTargetToValue(value);
   };
 
-  self.incrementTarget = function() {
-    var value = self.newTarget();
+  self.incrementTarget = function(item) {
+    var value = item.newTarget();
 	console.debug('Incrementing value: ' + value);
 
       if (value === undefined || (typeof(value) === "string" && value.trim() === "")) {
-          value = self.target();
+          value = item.target();
       }
 	  console.debug('New value: ' + value);
 
@@ -697,8 +694,8 @@ $(function() {
 		  console.debug('New value2: ' + value);
 
           if (value > 999.99) return;
-          self.newTarget(value + 0.25);
-		  console.debug('New target: ' + self.newTarget());
+          item.newTarget(value + 0.25);
+		  console.debug('New target: ' + item.newTarget());
 
 //          self.autosendTarget(item);
       } catch (ex) {
@@ -706,15 +703,15 @@ $(function() {
       }
   };
 
-  self.decrementTarget = function() {
-      var value = self.newTarget();
+  self.decrementTarget = function(item) {
+      var value = item.newTarget();
       if (value === undefined || (typeof(value) === "string" && value.trim() === "")) {
-          value = self.target();
+          value = item.target();
       }
       try {
           value = parseFloat(value);
           if (value < -999.99) return;
-          self.newTarget(value - 0.25);
+          item.newTarget(value - 0.25);
 //          self.autosendTarget(item);
       } catch (ex) {
           // do nothing
