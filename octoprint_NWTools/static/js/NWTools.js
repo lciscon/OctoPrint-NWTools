@@ -665,7 +665,7 @@ $(function() {
 
 
 	  if (item.key() === "tool0_ZOffset") {
-/*		  
+/*
 		  return self._setBedTemperature(value)
 			  .done(onSuccess);
 	  } else if (item.key() === "chamber") {
@@ -688,7 +688,7 @@ $(function() {
       if (value === undefined || (typeof(value) === "string" && value.trim() === "")) return OctoPrintClient.createRejectedDeferred();
 
 //      self.clearAutosendTarget(item);
-      return self.setTargetToValue(value);
+      return self.setTargetToValue(item, value);
   };
 
   self.incrementTarget = function(item) {
