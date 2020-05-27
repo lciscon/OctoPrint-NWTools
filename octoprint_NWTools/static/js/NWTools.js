@@ -663,9 +663,20 @@ $(function() {
           item.newTarget("");
       };
 
-	  onSuccess();
-//                  return self._setToolTemperature(item.key(), value)
-//                      .done(onSuccess);
+
+	  if (item.key() === "tool0_ZOffset") {
+/*		  
+		  return self._setBedTemperature(value)
+			  .done(onSuccess);
+	  } else if (item.key() === "chamber") {
+		  return self._setChamberTemperature(value)
+			  .done(onSuccess);
+	  } else {
+		  return self._setToolTemperature(item.key(), value)
+			  .done(onSuccess);
+*/
+	  }
+
   };
 
   self.setTarget = function(item, form) {
