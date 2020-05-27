@@ -624,15 +624,31 @@ $(function() {
 
   };
 
-  self.handleFocus = function(event) {
-        var value = self.newTarget();
-        if (value === undefined || (typeof(value) === "string" && value.trim() === "")) {
-            self.newTarget(self.target());
-        }
-//        window.setTimeout(function() {
-//            event.target.select();
-//        }, 0);
+  self.handleEnter = function(event, type, item) {
+	  if (event.keyCode === 13) {
+		  if (type === "target") {
+			  self.setTarget(item)
+				  .done(function() {
+					  event.target.blur();
+				  });
+		  }
+	  }
   };
+
+  self.handleFocus = function(event, type, item) {
+	  if (type === "target") {
+		  var value = item.newTarget();
+		  if (value === undefined || (typeof(value) === "string" && value.trim() === "")) {
+			  item.newTarget(item.target());
+		  }
+//		  window.setTimeout(function() {
+//			  event.target.select();
+//		  }, 0);
+	  }
+  };
+
+
+
 
   self.setTargetToValue = function(value) {
 //              self.clearAutosendTarget(item);
