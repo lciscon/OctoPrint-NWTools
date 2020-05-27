@@ -669,15 +669,21 @@ $(function() {
 
   self.incrementTarget = function() {
     var value = self.newTarget();
+	console.debug('Incrementing value: ' + value);
 
       if (value === undefined || (typeof(value) === "string" && value.trim() === "")) {
           value = self.target();
       }
+	  console.debug('New value: ' + value);
 
       try {
           value = parseFloat(value);
+		  console.debug('New value2: ' + value);
+
           if (value > 999.99) return;
           self.newTarget(value + 0.25);
+		  console.debug('New target: ' + self.newTarget());
+
 //          self.autosendTarget(item);
       } catch (ex) {
           // do nothing
