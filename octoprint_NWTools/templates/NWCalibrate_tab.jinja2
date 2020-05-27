@@ -111,7 +111,7 @@
 	<form class="form-inline" style="margin:0" data-bind="submit: function(element) { $root.setTarget($data, element) }">
 			<div class="input-prepend input-append">
 				<button type="button" class="btn btn-input-dec" data-bind="click: $root.decrementTarget, enable: $root.isOperational() && $root.loginState.isUser()" title="{{ _('Fine adjust: -.025mm')|edq }}"><i class="fa fa-minus"></i></button>
-				<input type="number" min="-999.99" max="999.99" class="input-mini input-nospin" style="width: 30px" data-bind="attr: {placeholder: target()}, value: newTarget, valueUpdate: 'input', enable: $root.isOperational() && $root.loginState.isUser(), event: { focus: function(d, e) {$root.handleFocus(e, 'target', $data) } }">
+				<input type="number" min="-999.99" max="999.99" step="0.1" class="input-mini input-nospin" style="width: 30px" data-bind="attr: {placeholder: target()}, value: newTarget, valueUpdate: 'input', enable: $root.isOperational() && $root.loginState.isUser(), event: { focus: function(d, e) {$root.handleFocus(e, 'target', $data) } }">
 				<button type="button" class="btn btn-input-inc" data-bind="click: $root.incrementTarget, enable: $root.isOperational() && $root.loginState.isUser()" title="{{ _('Fine adjust: +.025mm')|edq }}"><i class="fa fa-plus"></i></button>
 			</div>
 			<div class="btn-group">
