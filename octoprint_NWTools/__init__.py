@@ -189,7 +189,7 @@ class NwtoolsPlugin(octoprint.plugin.SettingsPlugin,
 				return
 			self._show_prompt()
 
-	def findListVal(llist, key)
+	def findListVal(llist, key):
 		return("0.0")
 
 
