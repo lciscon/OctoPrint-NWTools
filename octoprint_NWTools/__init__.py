@@ -25,7 +25,8 @@ class Prompt(object):
 	def __init__(self, text):
 		self.text = text
 		self.choices = []
-
+		self._tool0_ZOffset = 0.0
+		self._tool1_ZOffset = 0.0
 		self._active = False
 
 	@property
@@ -188,10 +189,14 @@ class NwtoolsPlugin(octoprint.plugin.SettingsPlugin,
 				return
 			self._show_prompt()
 
+	def findListVal(llist, key)
+		return("0.0")
+
+
 	## this is the responses received from the printer
 	## we need to scan this for anything relevant to us
 	def processResponse(self, comm, line, *args, **kwargs):
-#		self._logger.info("Processings2: %s" % line)
+		self._logger.info("Processings2: %s" % line)
 
 		if line.startswith("Leveling"):
 			# The line should look like this:
@@ -201,7 +206,17 @@ class NwtoolsPlugin(octoprint.plugin.SettingsPlugin,
 			this._bedlevels[1] = float(llist[2])
 			this._bedlevels[2] = float(llist[3])
 
+		elif line.contains("M670")
+			# M670 S0.50 K100.00 R0.00 Z30.00 H3.00 D0.00 O-0.2000 Q-0.3500
+			self._logger.info("Found M670!")
+			llist = line.split(" ")
+			this._tool0_ZOffset = float(findListVal(llist, "O"))
+			this._tool1_ZOffset = float(findListVal(llist, "Q"))
+			self._plugin_manager.send_plugin_message(self._identifier, dict(action="update", tool0_ZOffset=this._tool0_ZOffset, tool1_ZOffset=this._tool1_ZOffset, ))
+
 		return line
+
+
 
 	## this is the gcode being queued up to send to the printer
 	def processQueueing(self, comm_instance, phase, cmd, cmd_type, gcode, *args, **kwargs):

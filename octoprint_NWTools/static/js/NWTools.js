@@ -199,6 +199,7 @@ $(function() {
             });
         };
 
+// !!!
     self.onDataUpdaterPluginMessage = function(plugin, data) {
             if (plugin != "NWTools") {
                 return;
@@ -210,9 +211,14 @@ $(function() {
 
 			self.actionTriggerTemplate(messageType);
 			self.showActionTriggerDialog(messageData, null);
+		} else if (data.action == "update") {
+			console.debug('Processing update ');
+			tool0_ZOffset = data.tool0_ZOffset;
+			tool1_ZOffset = data.tool1_ZOffset;
 		}
 
 	}
+
 
 	function sendPrinterCommand (cmdstr) {
 	   console.debug('MSL: sending cmd: '+cmdstr);
@@ -740,7 +746,7 @@ $(function() {
 	}
 
 	self.onEventConnected = function(payload) {
-//	  self.loadZOffset();
+		sendPrinterCommand('M503');
 	};
 
 
