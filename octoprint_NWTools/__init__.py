@@ -210,8 +210,8 @@ class NwtoolsPlugin(octoprint.plugin.SettingsPlugin,
 			# M670 S0.50 K100.00 R0.00 Z30.00 H3.00 D0.00 O-0.2000 Q-0.3500
 			self._logger.info("Found M670!")
 			llist = line.split(" ")
-			this._tool0_ZOffset = float(self.findListVal(llist, "O"))
-			this._tool1_ZOffset = float(self.findListVal(llist, "Q"))
+			self._tool0_ZOffset = float(self.findListVal(llist, "O"))
+			self._tool1_ZOffset = float(self.findListVal(llist, "Q"))
 			self._plugin_manager.send_plugin_message(self._identifier, dict(action="update", tool0_ZOffset=this._tool0_ZOffset, tool1_ZOffset=this._tool1_ZOffset, ))
 
 		return line
