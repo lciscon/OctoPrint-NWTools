@@ -212,7 +212,7 @@ class NwtoolsPlugin(octoprint.plugin.SettingsPlugin,
 			llist = line.split(" ")
 			self._tool0_ZOffset = float(self.findListVal(llist, "O"))
 			self._tool1_ZOffset = float(self.findListVal(llist, "Q"))
-			self._plugin_manager.send_plugin_message(self._identifier, dict(action="update", tool0_ZOffset=this._tool0_ZOffset, tool1_ZOffset=this._tool1_ZOffset, ))
+			self._plugin_manager.send_plugin_message(self._identifier, dict(action="update", tool0_ZOffset=self._tool0_ZOffset, tool1_ZOffset=self._tool1_ZOffset))
 
 		return line
 
