@@ -196,7 +196,7 @@ class NwtoolsPlugin(octoprint.plugin.SettingsPlugin,
 	## this is the responses received from the printer
 	## we need to scan this for anything relevant to us
 	def processResponse(self, comm, line, *args, **kwargs):
-		self._logger.info("Processings2: %s" % line)
+#		self._logger.info("Processings2: %s" % line)
 
 		if line.startswith("Leveling"):
 			# The line should look like this:
@@ -212,8 +212,8 @@ class NwtoolsPlugin(octoprint.plugin.SettingsPlugin,
 			llist = line.split(" ")
 			self._tool0_ZOffset = float(self.findListVal(llist, "O"))
 			self._tool1_ZOffset = float(self.findListVal(llist, "Q"))
-			self._plugin_manager.send_plugin_message(self._identifier, dict(action="error", text="blah"))
-#			self._plugin_manager.send_plugin_message(self._identifier, dict(action="update", tool0_ZOffset=self._tool0_ZOffset, tool1_ZOffset=self._tool1_ZOffset))
+#			self._plugin_manager.send_plugin_message(self._identifier, dict(action="error", text="blah"))
+			self._plugin_manager.send_plugin_message(self._identifier, dict(action="update", tool0_ZOffset=self._tool0_ZOffset, tool1_ZOffset=self._tool1_ZOffset))
 
 		return line
 

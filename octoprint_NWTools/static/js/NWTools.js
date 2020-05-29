@@ -205,7 +205,7 @@ $(function() {
                 return;
             }
 
-		console.debug('Processing message...');
+//		console.debug('Processing message...');
 
 		if (data.action == "error") {
 			var messageType = "notice";
@@ -214,9 +214,13 @@ $(function() {
 			self.actionTriggerTemplate(messageType);
 			self.showActionTriggerDialog(messageData, null);
 		} else if (data.action == "update") {
-			console.debug('Processing update ');
-			tool0_ZOffset = data.tool0_ZOffset;
-			tool1_ZOffset = data.tool1_ZOffset;
+			var messageType = "notice";
+			var messageData = {message:"Processing update!", title:"Info"};
+			self.actionTriggerTemplate(messageType);
+			self.showActionTriggerDialog(messageData, null);
+
+			self.tool0_ZOffset["actual"](data.tool0_ZOffset);
+			self.tool1_ZOffset["actual"](data.tool1_ZOffset);
 		}
 
 	}
