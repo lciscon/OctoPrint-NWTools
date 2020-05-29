@@ -205,6 +205,8 @@ $(function() {
                 return;
             }
 
+		console.debug('Processing message...');
+
 		if (data.action == "error") {
 			var messageType = "notice";
 			var messageData = {message:data.text, title:"Error"};
