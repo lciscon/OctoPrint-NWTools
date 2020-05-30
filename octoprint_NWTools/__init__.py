@@ -191,11 +191,11 @@ class NwtoolsPlugin(octoprint.plugin.SettingsPlugin,
 
 	def findListVal(self, llist, key):
 		for i in llist:
-			self._logger.info("Processings3: %s" % i)
+			self._logger.info("Processings3: %s in %s" % (key, i))
 			if (i.startswith(key)):
 				val = i[1:]
-				return(val)
 				self._logger.info("Returning: %s" % val)
+				return(val)
 
 		return("")
 
@@ -217,8 +217,8 @@ class NwtoolsPlugin(octoprint.plugin.SettingsPlugin,
 			# M670 S0.50 K100.00 R0.00 Z30.00 H3.00 D0.00 O-0.2000 Q-0.3500
 			self._logger.info("Found M670!")
 			llist = line.split(" ")
-			self._tool0_ZOffset = float(self.findListVal(llist, "O"))
-			self._tool1_ZOffset = float(self.findListVal(llist, "Q"))
+			self._tool0_ZOffset = float(self.findListVal(llist, 'O'))
+			self._tool1_ZOffset = float(self.findListVal(llist, 'Q'))
 #			self._plugin_manager.send_plugin_message(self._identifier, dict(action="error", text="blah"))
 			self._plugin_manager.send_plugin_message(self._identifier, dict(action="update", tool0_ZOffset=self._tool0_ZOffset, tool1_ZOffset=self._tool1_ZOffset))
 
