@@ -191,10 +191,10 @@ class NwtoolsPlugin(octoprint.plugin.SettingsPlugin,
 
 	def findListVal(self, llist, key):
 		for i in llist:
-			self._logger.info("Processings3: %s in %s" % (key, i))
+#			self._logger.info("Processings3: %s in %s" % (key, i))
 			if (i.startswith(key)):
 				val = i[1:]
-				self._logger.info("Returning: %s" % val)
+#				self._logger.info("Returning: %s" % val)
 				return(val)
 
 		return("")
@@ -219,8 +219,13 @@ class NwtoolsPlugin(octoprint.plugin.SettingsPlugin,
 			llist = line.split(" ")
 			self._tool0_ZOffset = float(self.findListVal(llist, 'O'))
 			self._tool1_ZOffset = float(self.findListVal(llist, 'Q'))
-#			self._plugin_manager.send_plugin_message(self._identifier, dict(action="error", text="blah"))
-			self._plugin_manager.send_plugin_message(self._identifier, dict(action="update", tool0_ZOffset=self._tool0_ZOffset, tool1_ZOffset=self._tool1_ZOffset))
+
+			self._tool0_Raised = float(self.findListVal(llist, 'J'))
+			self._tool0_Locked = float(self.findListVal(llist, 'L'))
+			self._tool1_Raised = float(self.findListVal(llist, 'M'))
+			self._tool1_Locked = float(self.findListVal(llist, 'N'))
+
+			self._plugin_manager.send_plugin_message(self._identifier, dict(action="update", tool0_ZOffset=self._tool0_ZOffset, tool1_ZOffset=self._tool1_ZOffset, tool0_Raised=self._tool0_Raised, tool0_Lowered=self._tool0_Lowered, tool1_Raised=self._tool1_Raised, tool1_Lowered=self._tool1_Lowered,))
 
 		return line
 
