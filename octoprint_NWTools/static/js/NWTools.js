@@ -214,11 +214,6 @@ $(function() {
 			self.actionTriggerTemplate(messageType);
 			self.showActionTriggerDialog(messageData, null);
 		} else if (data.action == "update") {
-			var messageType = "notice";
-			var messageData = {message:"Processing update!", title:"Info"};
-			self.actionTriggerTemplate(messageType);
-			self.showActionTriggerDialog(messageData, null);
-
 			self.tool0_ZOffset["actual"](data.tool0_ZOffset);
 			self.tool1_ZOffset["actual"](data.tool1_ZOffset);
 		}

@@ -190,7 +190,14 @@ class NwtoolsPlugin(octoprint.plugin.SettingsPlugin,
 			self._show_prompt()
 
 	def findListVal(self, llist, key):
-		return("0.0")
+		for i in llist:
+			self._logger.info("Processings3: %s" % i)
+			if (i.startswith(key)):
+				val = i[1:]
+				return(val)
+				self._logger.info("Returning: %s" % val)
+
+		return("")
 
 
 	## this is the responses received from the printer
