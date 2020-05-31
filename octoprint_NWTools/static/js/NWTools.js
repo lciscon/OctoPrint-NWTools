@@ -782,7 +782,7 @@ $(function() {
 
 // ----
 
-	self.refreshSettings() {
+	self.refreshSettings = function() {
 		sendPrinterCommand('M503');
 	};
 
