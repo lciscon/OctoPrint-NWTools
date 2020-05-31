@@ -120,6 +120,6 @@
 		</form>
 	</td>
 	<td class="calibrate_test">
-		<button class="btn btn-primary" data-bind="enable: $root.isOperational() && !$root.isPrinting(), click: function(element) { $root.testTarget($data, element) }" style="width:50%">{{ _('Test') }}</button>
+		<button class="btn btn-primary" data-bind="enable: $root.isOperational() && !$root.isPrinting(), visible: $root.showTest($data), click: function(element) { $root.testTarget($data, element) }" style="width:50%">{{ _('Test') }}</button>
 	</td>
 </script>

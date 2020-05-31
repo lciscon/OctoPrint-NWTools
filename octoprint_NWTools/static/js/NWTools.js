@@ -51,6 +51,7 @@ $(function() {
             var entry = {
                 name: ko.observable(),
                 key: ko.observable(),
+				showtest: ko.observable(),
                 actual: ko.observable(0.0),
                 target: ko.observable(0.0),
                 newTarget: ko.observable(),
@@ -74,34 +75,42 @@ $(function() {
 		self.tool0_ZOffset = self._createToolEntry();
         self.tool0_ZOffset["name"](gettext("Z Offset"));
         self.tool0_ZOffset["key"]("tool0_ZOffset");
+		self.tool0_ZOffset["showtest"]("true");
 
 		self.tool0_Raised = self._createToolEntry();
         self.tool0_Raised["name"](gettext("Raised"));
         self.tool0_Raised["key"]("tool0_Raised");
+		self.tool0_Raised["showtest"]("true");
 
 		self.tool0_Locked = self._createToolEntry();
         self.tool0_Locked["name"](gettext("Locked"));
         self.tool0_Locked["key"]("tool0_Locked");
+		self.tool0_Locked["showtest"]("true");
 
 		self.tool1_ZOffset = self._createToolEntry();
         self.tool1_ZOffset["name"](gettext("Z Offset"));
         self.tool1_ZOffset["key"]("tool1_ZOffset");
+		self.tool1_ZOffset["showtest"]("true");
 
 		self.tool1_Raised = self._createToolEntry();
         self.tool1_Raised["name"](gettext("Raised"));
         self.tool1_Raised["key"]("tool1_Raised");
+		self.tool1_Raised["showtest"]("true");
 
 		self.tool1_Locked = self._createToolEntry();
         self.tool1_Locked["name"](gettext("Locked"));
         self.tool1_Locked["key"]("tool1_Locked");
+		self.tool1_Locked["showtest"]("true");
 
 		self.tool1_XOffset = self._createToolEntry();
         self.tool1_XOffset["name"](gettext("X Offset"));
         self.tool1_XOffset["key"]("tool1_XOffset");
+		self.tool1_XOffset["showtest"]("false");
 
 		self.tool1_YOffset = self._createToolEntry();
         self.tool1_YOffset["name"](gettext("Z Offset"));
         self.tool1_YOffset["key"]("tool1_YOffset");
+		self.tool1_YOffset["showtest"]("false");
 
 /*
 		self.tool0_ZOffset["actual"](-0.15);
@@ -214,12 +223,24 @@ $(function() {
 			self.actionTriggerTemplate(messageType);
 			self.showActionTriggerDialog(messageData, null);
 		} else if (data.action == "update") {
-			self.tool0_ZOffset["actual"](data.tool0_ZOffset);
-			self.tool0_Raised["actual"](data.tool0_Raised);
-			self.tool0_Locked["actual"](data.tool0_Locked);
-			self.tool1_ZOffset["actual"](data.tool1_ZOffset);
-			self.tool1_Raised["actual"](data.tool1_Raised);
-			self.tool1_Locked["actual"](data.tool1_Locked);
+			if (data.tool0_ZOffset) {
+				self.tool0_ZOffset["actual"](data.tool0_ZOffset);
+			}
+			if (data.tool1_ZOffset) {
+				self.tool1_ZOffset["actual"](data.tool1_ZOffset);
+			}
+			if (data.tool0_Raised) {
+				self.tool0_Raised["actual"](data.tool0_Raised);
+			}
+			if (data.tool0_Locked) {
+				self.tool0_Locked["actual"](data.tool0_Locked);
+			}
+			if (data.tool1_Raised) {
+				self.tool1_Raised["actual"](data.tool1_Raised);
+			}
+			if (data.tool1_Locked) {
+				self.tool1_Locked["actual"](data.tool1_Locked);
+			}
 		}
 
 	}
@@ -630,10 +651,15 @@ $(function() {
 
 //---------
 
-  self.testTarget = function(event) {
+	self.showTest = function(item) {
+		return true;
+	};
+
+
+	self.testTarget = function(item) {
 	  //test it....hmmm
 
-  };
+	};
 
   self.handleEnter = function(event, type, item) {
 	  if (event.keyCode === 13) {

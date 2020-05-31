@@ -220,12 +220,25 @@ class NwtoolsPlugin(octoprint.plugin.SettingsPlugin,
 			self._tool0_ZOffset = float(self.findListVal(llist, 'O'))
 			self._tool1_ZOffset = float(self.findListVal(llist, 'Q'))
 
+			self._plugin_manager.send_plugin_message(self._identifier, dict(action="update", tool0_ZOffset=self._tool0_ZOffset, tool1_ZOffset=self._tool1_ZOffset))
+
+		elif "M673" in line:
+			self._logger.info("Found M673!")
+			llist = line.split(" ")
 			self._tool0_Raised = float(self.findListVal(llist, 'J'))
 			self._tool0_Locked = float(self.findListVal(llist, 'L'))
 			self._tool1_Raised = float(self.findListVal(llist, 'M'))
 			self._tool1_Locked = float(self.findListVal(llist, 'N'))
 
-			self._plugin_manager.send_plugin_message(self._identifier, dict(action="update", tool0_ZOffset=self._tool0_ZOffset, tool1_ZOffset=self._tool1_ZOffset, tool0_Raised=self._tool0_Raised, tool0_Lowered=self._tool0_Lowered, tool1_Raised=self._tool1_Raised, tool1_Lowered=self._tool1_Lowered))
+			self._plugin_manager.send_plugin_message(self._identifier, dict(action="update", tool0_Raised=self._tool0_Raised, tool0_Lowered=self._tool0_Lowered, tool1_Raised=self._tool1_Raised, tool1_Lowered=self._tool1_Lowered))
+
+		elif "M675" in line:
+			self._logger.info("Found M675!")
+			llist = line.split(" ")
+			self._tool1_XOffset = float(self.findListVal(llist, 'X'))
+			self._tool1_YOffset = float(self.findListVal(llist, 'Y'))
+
+			self._plugin_manager.send_plugin_message(self._identifier, dict(action="update", tool1_Xoffset=self._tool1_Xoffset, tool1_YOffset=self._tool1_YOffset))
 
 		return line
 
