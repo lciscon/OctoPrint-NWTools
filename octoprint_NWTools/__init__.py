@@ -225,7 +225,7 @@ class NwtoolsPlugin(octoprint.plugin.SettingsPlugin,
 			self._tool1_Raised = float(self.findListVal(llist, 'M'))
 			self._tool1_Locked = float(self.findListVal(llist, 'N'))
 
-			self._plugin_manager.send_plugin_message(self._identifier, dict(action="update", tool0_ZOffset=self._tool0_ZOffset, tool1_ZOffset=self._tool1_ZOffset, tool0_Raised=self._tool0_Raised, tool0_Lowered=self._tool0_Lowered, tool1_Raised=self._tool1_Raised, tool1_Lowered=self._tool1_Lowered,))
+			self._plugin_manager.send_plugin_message(self._identifier, dict(action="update", tool0_ZOffset=self._tool0_ZOffset, tool1_ZOffset=self._tool1_ZOffset, tool0_Raised=self._tool0_Raised, tool0_Lowered=self._tool0_Lowered, tool1_Raised=self._tool1_Raised, tool1_Lowered=self._tool1_Lowered))
 
 		return line
 
