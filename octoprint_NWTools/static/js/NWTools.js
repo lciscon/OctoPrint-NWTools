@@ -704,10 +704,10 @@ $(function() {
 
 
 	  if (item.key() === "tool0_ZOffset") {
-		  sendPrinterCommand('M670 O' + item.value());
+		  sendPrinterCommand('M670 O' + value;
 		  sendPrinterCommand('M500');
 	  } else if (item.key() === "tool1_ZOffset") {
-		  sendPrinterCommand('M670 O' + item.value());
+		  sendPrinterCommand('M670 O' + value);
 		  sendPrinterCommand('M500');
 	  } else if (item.key() === "tool0_Raised") {
 	  } else if (item.key() === "tool0_Lowered") {
