@@ -697,35 +697,28 @@ $(function() {
 
       if (value < -999.99 || value > 999.99) return OctoPrintClient.createRejectedDeferred();
 
-      var onSuccess = function() {
-          item.target(value);
-          item.newTarget("");
-      };
-
-
 	  if (item.key() === "tool0_ZOffset") {
 		  sendPrinterCommand('M670 O' + value);
-		  sendPrinterCommand('M500');
 	  } else if (item.key() === "tool1_ZOffset") {
 		  sendPrinterCommand('M670 O' + value);
-		  sendPrinterCommand('M500');
 	  } else if (item.key() === "tool0_Raised") {
+		  sendPrinterCommand('M673 R' + value);
 	  } else if (item.key() === "tool0_Lowered") {
+		  sendPrinterCommand('M673 L' + value);
 	  } else if (item.key() === "tool1_Raised") {
+		  sendPrinterCommand('M673.1 R' + value);
 	  } else if (item.key() === "tool1_Lowered") {
+		  sendPrinterCommand('M673.1 L' + value);
 	  } else if (item.key() === "tool1_XOffset") {
+		  sendPrinterCommand('M675 X' + value);
 	  } else if (item.key() === "tool1_YOffset") {
-/*
-		  return self._setBedTemperature(value)
-			  .done(onSuccess);
-	  } else if (item.key() === "chamber") {
-		  return self._setChamberTemperature(value)
-			  .done(onSuccess);
-	  } else {
-		  return self._setToolTemperature(item.key(), value)
-			  .done(onSuccess);
-*/
+		  sendPrinterCommand('M675 Y' + value);
 	  }
+	  
+	  sendPrinterCommand('M500');
+
+	  item.target(value);
+	  item.newTarget("");
 
   };
 
