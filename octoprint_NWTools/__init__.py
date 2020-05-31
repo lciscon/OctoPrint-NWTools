@@ -230,7 +230,7 @@ class NwtoolsPlugin(octoprint.plugin.SettingsPlugin,
 			self._tool1_Raised = float(self.findListVal(llist, 'M'))
 			self._tool1_Locked = float(self.findListVal(llist, 'N'))
 
-			self._plugin_manager.send_plugin_message(self._identifier, dict(action="update", tool0_Raised=self._tool0_Raised, tool0_Lowered=self._tool0_Lowered, tool1_Raised=self._tool1_Raised, tool1_Lowered=self._tool1_Lowered))
+			self._plugin_manager.send_plugin_message(self._identifier, dict(action="update", tool0_Raised=self._tool0_Raised, tool0_Locked=self._tool0_Locked, tool1_Raised=self._tool1_Raised, tool1_Locked=self._tool1_Locked))
 
 		elif "M675" in line:
 			self._logger.info("Found M675!")
@@ -238,7 +238,7 @@ class NwtoolsPlugin(octoprint.plugin.SettingsPlugin,
 			self._tool1_XOffset = float(self.findListVal(llist, 'X'))
 			self._tool1_YOffset = float(self.findListVal(llist, 'Y'))
 
-			self._plugin_manager.send_plugin_message(self._identifier, dict(action="update", tool1_Xoffset=self._tool1_Xoffset, tool1_YOffset=self._tool1_YOffset))
+			self._plugin_manager.send_plugin_message(self._identifier, dict(action="update", tool1_XOffset=self._tool1_XOffset, tool1_YOffset=self._tool1_YOffset))
 
 		return line
 
