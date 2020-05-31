@@ -290,38 +290,38 @@ $(function() {
 
 	};
 
-       self.tempTimer = function () {
-            var messageCmd = "";
+	self.tempTimer = function () {
+	    var messageCmd = "";
 
-	          self.requestData();
-            var stillRunning = false;
+	      self.requestData();
+	    var stillRunning = false;
 
-            if (self.targetTemp > 0) {
-              if (self.currentTemp < self.targetTemp) {
-                stillRunning = true;
-              }
-            } else if (self.targetTemp2 > 0) {
-              if (self.currentTemp2 < self.targetTemp2) {
-                stillRunning = true;
-              }
-            }
+	    if (self.targetTemp > 0) {
+	      if (self.currentTemp < self.targetTemp) {
+	        stillRunning = true;
+	      }
+	    } else if (self.targetTemp2 > 0) {
+	      if (self.currentTemp2 < self.targetTemp2) {
+	        stillRunning = true;
+	      }
+	    }
 
-      	    if (stillRunning) {
-                setTimeout(self.tempTimer, 1000);
-            } else {
-                console.log('Finished heatup! ');
-      		      self.hideActionTriggerDialog();
-        		    if (self.tempCallback) {
-        		    	self.tempCallback();
-        		    }
-            }
-        };
+		    if (stillRunning) {
+	        setTimeout(self.tempTimer, 1000);
+	    } else {
+	        console.log('Finished heatup! ');
+			      self.hideActionTriggerDialog();
+			    if (self.tempCallback) {
+			    	self.tempCallback();
+			    }
+	    }
+	};
 
-  self.cancelPreheat = function () {
-    self.targetTemp = 0;
-    self.targetTemp2 = 0;
-    self.hideActionTriggerDialog();
-  }
+	self.cancelPreheat = function () {
+		self.targetTemp = 0;
+		self.targetTemp2 = 0;
+		self.hideActionTriggerDialog();
+	}
 
 	self.preheat = function (toolnumber, material, callback) {
 			var messageType = "preheating";
@@ -447,8 +447,8 @@ $(function() {
         var messageType = "unloading";
         var messageData = {message:"", title:"Unload Filament"};
 
-    sendPrinterCommand('G91');
-    //move forward a bit to remove blobs
+    	sendPrinterCommand('G91');
+    	//move forward a bit to remove blobs
         sendPrinterCommand('G1 E5 F100');
         self.turnOnExtruder(-1);
         self.actionTriggerTemplate(messageType);
@@ -510,14 +510,14 @@ $(function() {
 	};
 
 	self.autoCalibrateRun = function () {
-    sendPrinterCommand('M400');
-    sendPrinterCommand('G91');
-    sendPrinterCommand('G0 Z10 F300');
-    sendPrinterCommand('G90');
-    sendPrinterCommand('M400');
-    sendPrinterCommand('G28');
-  	sendPrinterCommand('G30.1 Q V0');
-    sendPrinterCommand('G0 Z0 F300');
+		sendPrinterCommand('M400');
+		sendPrinterCommand('G91');
+		sendPrinterCommand('G0 Z10 F300');
+		sendPrinterCommand('G90');
+		sendPrinterCommand('M400');
+		sendPrinterCommand('G28');
+			sendPrinterCommand('G30.1 Q V0');
+		sendPrinterCommand('G0 Z0 F300');
 	};
 
 	self.autoCalibrateHeated = function () {
@@ -652,6 +652,8 @@ $(function() {
 //---------
 
 	self.showTest = function(item) {
+		console.debug('Checking test: for ' + item["key"] + " is " + item["showtest"]);
+
 		return item["showtest"];
 	};
 
@@ -702,6 +704,17 @@ $(function() {
 
 
 	  if (item.key() === "tool0_ZOffset") {
+		  sendPrinterCommand('M670 O' + item.value());
+		  sendPrinterCommand('M500');
+	  } else if (item.key() === "tool1_ZOffset") {
+		  sendPrinterCommand('M670 O' + item.value());
+		  sendPrinterCommand('M500');
+	  } else if (item.key() === "tool0_Raised") {
+	  } else if (item.key() === "tool0_Lowered") {
+	  } else if (item.key() === "tool1_Raised") {
+	  } else if (item.key() === "tool1_Lowered") {
+	  } else if (item.key() === "tool1_XOffset") {
+	  } else if (item.key() === "tool1_YOffset") {
 /*
 		  return self._setBedTemperature(value)
 			  .done(onSuccess);
