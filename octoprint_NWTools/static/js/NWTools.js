@@ -652,7 +652,7 @@ $(function() {
 //---------
 
 	self.showTest = function(item) {
-		return true;
+		return item["showtest"];
 	};
 
 
