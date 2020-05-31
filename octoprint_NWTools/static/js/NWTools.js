@@ -781,6 +781,10 @@ $(function() {
 		sendPrinterCommand('M503');
 	};
 
+	self.onStartupComplete = function() {
+		self.refreshSettings();
+	};
+
 	self.onEventConnected = function(payload) {
 		self.refreshSettings();
 	};
