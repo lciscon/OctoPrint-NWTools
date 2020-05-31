@@ -781,21 +781,8 @@ $(function() {
 		sendPrinterCommand('M503');
 	};
 
-    // This will get called before the HelloWorldViewModel gets bound to the DOM, but after its
-    // dependencies have already been initialized. It is especially guaranteed that this method
-    // gets called _after_ the settings have been retrieved from the OctoPrint backend and thus
-    // the SettingsViewModel been properly populated.
-	self.onBeforeBinding = function() {
-	};
-
-	self.onTabChange = function(next, current) {
-		if (current === "#tab_plugin_NWCalibrate") {
-			self.refreshSettings();
-		}
-	};
-
 	self.onEventConnected = function(payload) {
-//		sendPrinterCommand('M503');
+		self.refreshSettings();
 	};
 
 
