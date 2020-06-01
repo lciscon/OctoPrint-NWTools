@@ -241,6 +241,12 @@ $(function() {
 			if (data.tool1_Locked) {
 				self.tool1_Locked["actual"](data.tool1_Locked);
 			}
+			if (data.tool1_XOffset) {
+				self.tool1_XOffset["actual"](data.tool1_XOffset);
+			}
+			if (data.tool1_YOffset) {
+				self.tool1_YOffset["actual"](data.tool1_YOffset);
+			}
 		}
 
 	}
