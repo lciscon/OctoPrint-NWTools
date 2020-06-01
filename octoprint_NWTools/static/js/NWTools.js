@@ -720,7 +720,7 @@ $(function() {
 		  sendPrinterCommand('M675 Y' + value);
 	  }
 
-	  sendPrinterCommand('M500').done(onSuccess);
+	  return self.control.sendCustomCommand({ command: cmdstr }).done(onSuccess);
 
   };
 
