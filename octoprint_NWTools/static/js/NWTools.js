@@ -666,7 +666,13 @@ $(function() {
 	};
 
 
-	self.testTarget = function(item, element) {
+	self.testTarget = function(item, form) {
+		var value = item.newTarget();
+
+		if (value === undefined || (typeof(value) === "string" && value.trim() === "")) {
+			value = item.target();
+		}
+
 	  if (item.key() === "tool0_ZOffset") {
 		  self.autoCalibrate();
 	  } else if (item.key() === "tool1_ZOffset") {
