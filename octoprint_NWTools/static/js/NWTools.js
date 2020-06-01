@@ -738,7 +738,9 @@ $(function() {
 		  console.debug('New value2: ' + value);
 
           if (value > 999.99) return;
-          item.newTarget(value + 0.025);
+		  value = value + 0.025;
+		  value = Number((value).toFixed(3));
+          item.newTarget(value);
 		  console.debug('New target: ' + item.newTarget());
 
 //          self.autosendTarget(item);
@@ -755,7 +757,9 @@ $(function() {
       try {
           value = parseFloat(value);
           if (value < -999.99) return;
-          item.newTarget(value - 0.25);
+		  value = value - 0.025;
+		  value = Number((value).toFixed(3));
+          item.newTarget(value);
 //          self.autosendTarget(item);
       } catch (ex) {
           // do nothing
