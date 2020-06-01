@@ -112,30 +112,6 @@ $(function() {
         self.tool1_YOffset["key"]("tool1_YOffset");
 		self.tool1_YOffset["showtest"](false);
 
-/*
-		self.tool0_ZOffset["actual"](-0.15);
-		self.tool0_Raised["actual"](5.6);
-		self.tool0_Locked["actual"](8.3);
-
-		self.tool1_ZOffset["actual"](-0.075);
-		self.tool1_Raised["actual"](5.6);
-		self.tool1_Locked["actual"](8.3);
-		self.tool1_XOffset["actual"](20.15);
-		self.tool1_YOffset["actual"](0.075);
-
-		self.tool0_ZOffset["target"](-0.15);
-		self.tool0_Raised["target"](5.6);
-		self.tool0_Locked["target"](8.3);
-
-		self.tool1_ZOffset["target"](-0.075);
-		self.tool1_Raised["target"](5.6);
-		self.tool1_Locked["target"](8.3);
-		self.tool1_XOffset["target"](20.15);
-		self.tool1_YOffset["target"](0.075);
-
-		self.tool0_ZOffset["newTarget"](-0.15);
-		self.tool1_ZOffset["newTarget"](-0.15);
-*/
     	self.actionTriggerTemplate = ko.observable(undefined);
 	    self.actionTriggerCallback = function () {
 	    };
@@ -225,27 +201,35 @@ $(function() {
 		} else if (data.action == "update") {
 			if (data.tool0_ZOffset) {
 				self.tool0_ZOffset["actual"](data.tool0_ZOffset);
+				self.tool0_ZOffset["target"](data.tool0_ZOffset);
 			}
 			if (data.tool1_ZOffset) {
 				self.tool1_ZOffset["actual"](data.tool1_ZOffset);
+				self.tool1_ZOffset["target"](data.tool1_ZOffset);
 			}
 			if (data.tool0_Raised) {
 				self.tool0_Raised["actual"](data.tool0_Raised);
+				self.tool0_Raised["target"](data.tool0_Raised);
 			}
 			if (data.tool0_Locked) {
 				self.tool0_Locked["actual"](data.tool0_Locked);
+				self.tool0_Locked["target"](data.tool0_Locked);
 			}
 			if (data.tool1_Raised) {
 				self.tool1_Raised["actual"](data.tool1_Raised);
+				self.tool1_Raised["target"](data.tool1_Raised);
 			}
 			if (data.tool1_Locked) {
 				self.tool1_Locked["actual"](data.tool1_Locked);
+				self.tool1_Locked["target"](data.tool1_Locked);
 			}
 			if (data.tool1_XOffset) {
 				self.tool1_XOffset["actual"](data.tool1_XOffset);
+				self.tool1_XOffset["target"](data.tool1_XOffset);
 			}
 			if (data.tool1_YOffset) {
 				self.tool1_YOffset["actual"](data.tool1_YOffset);
+				self.tool1_YOffset["target"](data.tool1_YOffset);
 			}
 		}
 
@@ -754,7 +738,7 @@ $(function() {
 		  console.debug('New value2: ' + value);
 
           if (value > 999.99) return;
-          item.newTarget(value + 0.25);
+          item.newTarget(value + 0.025);
 		  console.debug('New target: ' + item.newTarget());
 
 //          self.autosendTarget(item);
