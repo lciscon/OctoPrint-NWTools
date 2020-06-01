@@ -108,7 +108,7 @@ $(function() {
 		self.tool1_XOffset["showtest"](false);
 
 		self.tool1_YOffset = self._createToolEntry();
-        self.tool1_YOffset["name"](gettext("Z Offset"));
+        self.tool1_YOffset["name"](gettext("Y Offset"));
         self.tool1_YOffset["key"]("tool1_YOffset");
 		self.tool1_YOffset["showtest"](false);
 
