@@ -207,27 +207,27 @@ $(function() {
 				self.tool1_ZOffset["actual"](data.tool1_ZOffset);
 				self.tool1_ZOffset["target"](data.tool1_ZOffset);
 			}
-			if (data.tool0_Raised) {
+			if (typeof data.tool0_Raised !== 'undefined') {
 				self.tool0_Raised["actual"](data.tool0_Raised);
 				self.tool0_Raised["target"](data.tool0_Raised);
 			}
-			if (data.tool0_Locked) {
+			if (typeof data.tool0_Locked !== 'undefined') {
 				self.tool0_Locked["actual"](data.tool0_Locked);
 				self.tool0_Locked["target"](data.tool0_Locked);
 			}
-			if (data.tool1_Raised) {
+			if (typeof data.tool1_Raised !== 'undefined') {
 				self.tool1_Raised["actual"](data.tool1_Raised);
 				self.tool1_Raised["target"](data.tool1_Raised);
 			}
-			if (data.tool1_Locked) {
+			if (typeof data.tool1_Locked !== 'undefined') {
 				self.tool1_Locked["actual"](data.tool1_Locked);
 				self.tool1_Locked["target"](data.tool1_Locked);
 			}
-			if (data.tool1_XOffset) {
+			if (typeof data.tool1_XOffset !== 'undefined') {
 				self.tool1_XOffset["actual"](data.tool1_XOffset);
 				self.tool1_XOffset["target"](data.tool1_XOffset);
 			}
-			if (data.tool1_YOffset) {
+			if (typeof data.tool1_YOffset !== 'undefined') {
 				self.tool1_YOffset["actual"](data.tool1_YOffset);
 				self.tool1_YOffset["target"](data.tool1_YOffset);
 			}
@@ -519,6 +519,26 @@ $(function() {
 	    self.preheat(0, 1, self.autoCalibrateHeated);
 	};
 
+	self.autoCalibrate2Run = function () {
+		sendPrinterCommand('M400');
+		sendPrinterCommand('G91');
+		sendPrinterCommand('G0 Z10 F300');
+		sendPrinterCommand('G90');
+		sendPrinterCommand('M400');
+		sendPrinterCommand('G28');
+			sendPrinterCommand('G30.1 Q V0');
+		sendPrinterCommand('G0 Z0 F300');
+	};
+
+	self.autoCalibrate2Heated = function () {
+      self.autoCalibrateRun();
+      self.lockHead1();
+	};
+
+	self.autoCalibrate2 = function() {
+	    self.preheat(0, 1, self.autoCalibrate2Heated);
+	};
+
 	self.updateFirmware = function() {
   	  var messageType = "firmstart";
   	  var messageData = {message:"", title:""};
@@ -642,14 +662,28 @@ $(function() {
 //---------
 
 	self.showTest = function(item) {
-		console.debug('Checking test: for ' + item["key"] + " is " + item["showtest"]);
-
 		return item["showtest"];
 	};
 
 
 	self.testTarget = function(item, element) {
-	  //test it....hmmm
+	  if (item.key() === "tool0_ZOffset") {
+		  self.autoCalibrate();
+	  } else if (item.key() === "tool1_ZOffset") {
+		  self.autoCalibrate();
+	  } else if (item.key() === "tool0_Raised") {
+		  sendPrinterCommand('M280 S' + value);
+	  } else if (item.key() === "tool0_Locked") {
+		  sendPrinterCommand('M280 S' + value);
+	  } else if (item.key() === "tool1_Raised") {
+		  sendPrinterCommand('M280.1 S' + value);
+	  } else if (item.key() === "tool1_Locked") {
+		  sendPrinterCommand('M280.1 S' + value);
+	  } else if (item.key() === "tool1_XOffset") {
+		  //nada
+	  } else if (item.key() === "tool1_YOffset") {
+		  //nada
+	  }
 
 	};
 
