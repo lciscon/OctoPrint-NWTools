@@ -148,7 +148,7 @@ $(function() {
 
 	self.formatFloat = function(newval) {
 	    if (newval === undefined || !_.isNumber(newval)) return "-";
-		return _.sprintf("%2.2f", newval);
+		return _.sprintf("%2.3f", newval);
 	}
 
 	self.fromCurrentData = function(data) {
