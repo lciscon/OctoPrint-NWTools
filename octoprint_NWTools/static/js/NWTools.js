@@ -706,7 +706,7 @@ $(function() {
 	  if (item.key() === "tool0_ZOffset") {
 		  sendPrinterCommand('M670 O' + value);
 	  } else if (item.key() === "tool1_ZOffset") {
-		  sendPrinterCommand('M670 P' + value);
+		  sendPrinterCommand('M670 Q' + value);
 	  } else if (item.key() === "tool0_Raised") {
 		  sendPrinterCommand('M673 A' + value);
 	  } else if (item.key() === "tool0_Locked") {
