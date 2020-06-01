@@ -697,11 +697,6 @@ $(function() {
 
       if (value < -999.99 || value > 999.99) return OctoPrintClient.createRejectedDeferred();
 
-	  var onSuccess = function() {
-		  item.target(value);
-		  item.newTarget("");
-	  };
-
 	  if (item.key() === "tool0_ZOffset") {
 		  sendPrinterCommand('M670 O' + value);
 	  } else if (item.key() === "tool1_ZOffset") {
@@ -720,7 +715,10 @@ $(function() {
 		  sendPrinterCommand('M675 Y' + value);
 	  }
 
-	  return self.control.sendCustomCommand({ command: 'M500'}).done(onSuccess);
+	  sendPrinterCommand('M500');
+	  item.target(value);
+	  item.newTarget("");
+	  self.refreshSettings();
 
   };
 
