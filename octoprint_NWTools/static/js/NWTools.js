@@ -715,10 +715,21 @@ $(function() {
   self.setTarget = function(item, form) {
     var value = item.newTarget();
 
+	var messageType = "notice";
+	var messageData = {message:"Set Target 1", title:"Notice"};
+
+	self.actionTriggerTemplate(messageType);
+	self.showActionTriggerDialog(messageData, null);
+
       if (form !== undefined) {
           $(form).find("input").blur();
       }
       if (value === undefined || (typeof(value) === "string" && value.trim() === "")) return OctoPrintClient.createRejectedDeferred();
+
+  	messageData = {message:"Set Target 2", title:"Notice"};
+
+  	self.actionTriggerTemplate(messageType);
+  	self.showActionTriggerDialog(messageData, null);
 
 //      self.clearAutosendTarget(item);
       return self.setTargetToValue(item, value);
