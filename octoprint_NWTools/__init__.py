@@ -225,10 +225,10 @@ class NwtoolsPlugin(octoprint.plugin.SettingsPlugin,
 		elif "M673" in line:
 			self._logger.info("Found M673!")
 			llist = line.split(" ")
-			self._tool0_Raised = float(self.findListVal(llist, 'J'))
-			self._tool0_Locked = float(self.findListVal(llist, 'L'))
-			self._tool1_Raised = float(self.findListVal(llist, 'M'))
-			self._tool1_Locked = float(self.findListVal(llist, 'N'))
+			self._tool0_Raised = float(self.findListVal(llist, 'A'))
+			self._tool0_Locked = float(self.findListVal(llist, 'B'))
+			self._tool1_Raised = float(self.findListVal(llist, 'C'))
+			self._tool1_Locked = float(self.findListVal(llist, 'D'))
 
 			self._plugin_manager.send_plugin_message(self._identifier, dict(action="update", tool0_Raised=self._tool0_Raised, tool0_Locked=self._tool0_Locked, tool1_Raised=self._tool1_Raised, tool1_Locked=self._tool1_Locked))
 
