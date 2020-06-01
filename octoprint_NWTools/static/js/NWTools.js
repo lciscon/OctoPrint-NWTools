@@ -199,11 +199,11 @@ $(function() {
 			self.actionTriggerTemplate(messageType);
 			self.showActionTriggerDialog(messageData, null);
 		} else if (data.action == "update") {
-			if (data.tool0_ZOffset) {
+			if (typeof data.tool0_ZOffset !== 'undefined') {
 				self.tool0_ZOffset["actual"](data.tool0_ZOffset);
 				self.tool0_ZOffset["target"](data.tool0_ZOffset);
 			}
-			if (data.tool1_ZOffset) {
+			if (typeof data.tool1_ZOffset !== 'undefined') {
 				self.tool1_ZOffset["actual"](data.tool1_ZOffset);
 				self.tool1_ZOffset["target"](data.tool1_ZOffset);
 			}
@@ -715,21 +715,10 @@ $(function() {
   self.setTarget = function(item, form) {
     var value = item.newTarget();
 
-	var messageType = "notice";
-	var messageData = {message:"Set Target 1", title:"Notice"};
-
-	self.actionTriggerTemplate(messageType);
-	self.showActionTriggerDialog(messageData, null);
-
       if (form !== undefined) {
           $(form).find("input").blur();
       }
       if (value === undefined || (typeof(value) === "string" && value.trim() === "")) return OctoPrintClient.createRejectedDeferred();
-
-  	messageData = {message:"Set Target 2", title:"Notice"};
-
-  	self.actionTriggerTemplate(messageType);
-  	self.showActionTriggerDialog(messageData, null);
 
 //      self.clearAutosendTarget(item);
       return self.setTargetToValue(item, value);
