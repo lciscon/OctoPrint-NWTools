@@ -702,17 +702,17 @@ $(function() {
 	  } else if (item.key() === "tool1_ZOffset") {
 		  sendPrinterCommand('M670 O' + value);
 	  } else if (item.key() === "tool0_Raised") {
-		  sendPrinterCommand('M673 R' + value);
+		  sendPrinterCommand('M673 J' + value);
 	  } else if (item.key() === "tool0_Lowered") {
 		  sendPrinterCommand('M673 L' + value);
 	  } else if (item.key() === "tool1_Raised") {
-		  sendPrinterCommand('M673.1 R' + value);
+		  sendPrinterCommand('M673 M' + value);
 	  } else if (item.key() === "tool1_Lowered") {
-		  sendPrinterCommand('M673.1 L' + value);
+		  sendPrinterCommand('M673 N' + value);
 	  } else if (item.key() === "tool1_XOffset") {
-		  sendPrinterCommand('M675 X' + value);
+		  sendPrinterCommand('M675.1 X' + value);
 	  } else if (item.key() === "tool1_YOffset") {
-		  sendPrinterCommand('M675 Y' + value);
+		  sendPrinterCommand('M675.1 Y' + value);
 	  }
 
 	  sendPrinterCommand('M500');
