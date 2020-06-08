@@ -326,7 +326,7 @@ $(function() {
 	        tipTemp = 220;
 	        bedTemp = 60;
 	      } else {
-	        tipTemp = 250;
+	        tipTemp = 235;
 	        bedTemp = 100;
 	      }
 
