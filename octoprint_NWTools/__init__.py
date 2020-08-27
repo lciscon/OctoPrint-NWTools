@@ -267,7 +267,7 @@ class NwtoolsPlugin(octoprint.plugin.SettingsPlugin,
 		self._plugin_manager.send_plugin_message(self._identifier, dict(action="close"))
 
 	def _exec_cmd(self, cmd_line):
-		self._logger.info("Executing command: %s" % (cmd_line))
+		self._logger.debug("Executing command: %s" % (cmd_line))
 		try:
 #			r = os.system(cmd_line)
 #			Python 3

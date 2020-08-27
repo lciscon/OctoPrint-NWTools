@@ -1,3 +1,7 @@
+::-webkit-scrollbar {
+    display: none;
+}
+
 #tab_plugin_NWTools {
   iframe {
     width: 100%;
@@ -44,4 +48,64 @@
 
 #calibrate-table td.calibrate_test, #calibrate-table th.calibrate_test {
     width: 30%
+}
+
+#touch body #tabs #tab_plugin_NWTools_link a:before, #touch body #navbar #all_touchui_settings #tab_plugin_NWTools_link a:before, #touch body #tabs #tab_plugin_NWTools_link2 a:before, #touch body #navbar #all_touchui_settings #tab_plugin_NWTools_link2 a:before {
+        content: "\f0ad"
+}
+
+#touch body #tabs #tab_plugin_NWTools_2_link a:before, #touch body #navbar #all_touchui_settings #tab_plugin_NWTools_2_link a:before, #touch body #tabs #tab_plugin_NWTools_2_link2 a:before, #touch body #navbar #all_touchui_settings #tab_plugin_NWTools_2_link2 a:before {
+        content: "\f085"
+}
+
+#touch body #tabs #plugins_NWTools_2_link a:before, #touch body #navbar #all_touchui_settings #control_link a:before, #touch body #tabs #control_link2 a:before, #touch body #navbar #all_touchui_settings #control_link2 a:before {
+	content: "\f7d9"
+}
+
+#touch body #tabs #plugins_NWTools_2_link a:before, #touch body #navbar #all_touchui_settings #control_link a:before, #touch body #tabs #control_link2 a:before, #touch body #navbar #all_touchui_settings #control_link2 a:before {
+	content: "\f546"
+}
+
+
+
+/* short fix touch ui */
+/* for fix modal dimension (button cancel save..) */
+#touch body .modal-scrollable {
+    height:calc(100vh - 10px)!important;
+}
+
+/* for fix icon in table list of files */
+#touch body #files_wrapper #files .gcode_files .entry .btn.toggleAdditionalData {
+    left: calc(100vw - 59px)!important;
+}
+
+
+#touch body #files_wrapper #files .gcode_files .entry div.action-buttons .btn:first-child {
+    right: 120px!important;
+}
+
+#touch body #files_wrapper #files .gcode_files .entry div.action-buttons .btn:last-child {
+    right: 54px!important;
+}
+
+/* for align arrow menu */
+#touch body .dropdown-menu:before {
+    right: 45px!important;
+}
+/* for show option apply preset temp in table temperature target */
+#touch body #temperature-table .temperature_target > div > button .caret:after {
+    content: "\f0d7";
+    font-family: FontAwesome;
+    font-size: 1.125rem;
+    top: -7px;
+    left: -6px;
+    position: relative;
+}
+/* for align th title in table temperature target */
+#touch body #temperature-table td, #temperature-table th {
+    line-height: 34px!important;
+}
+/* for show completely Actual th in table temperature target  */
+#touch body #temp>div:last-child table tr:first-child th {
+    font-size: 0.9rem!important;
 }
