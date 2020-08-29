@@ -116,24 +116,34 @@ $(function() {
 	    self.actionTriggerCallback = function () {
 	    };
 
-	    self.showActionTriggerDialog = function (data, callback) {
+	    self.showActionTriggerDialog2 = function (data, callback, callback2) {
       		var actionTriggerDialog = $("#action_trigger_dialog");
       		var actionTriggerDialogAck = $(".action_trigger_dialog_acknowledge", actionTriggerDialog);
+			var actionTriggerDialogAck2 = $(".action_trigger_dialog_acknowledge2", actionTriggerDialog);
 
       		$(".action_trigger_title", actionTriggerDialog).text(data.title);
       		$(".action_trigger_dialog_message", actionTriggerDialog).text(data.message);
       		actionTriggerDialogAck.unbind("click");
-		      self.actionTriggerCallback = callback;
+			actionTriggerDialogAck2.unbind("click");
+		    self.actionTriggerCallback = callback;
+			self.actionTriggerCallback2 = callback2;
 
       		actionTriggerDialogAck.bind("click", function (e) {
      		   e.preventDefault();
     		   $("#action_trigger_dialog").modal("hide");
-           if (self.actionTriggerCallback !== null) {
-                self.actionTriggerCallback();
-           }
-
-//   		   self.showControls();
+               if (self.actionTriggerCallback !== null) {
+                    self.actionTriggerCallback();
+               }
       		});
+
+			actionTriggerDialogAck2.bind("click", function (e) {
+     		   e.preventDefault();
+    		   $("#action_trigger_dialog").modal("hide");
+               if (self.actionTriggerCallback2 !== null) {
+                    self.actionTriggerCallback2();
+               }
+      		});
+
       		actionTriggerDialog.modal({
      		   show: 'true',
     		    backdrop:'static',
@@ -141,6 +151,10 @@ $(function() {
       		});
 
     	};
+
+		self.showActionTriggerDialog = function (data, callback) {
+			self.showActionTriggerDialog2(data, callback, null);
+		};
 
 	function sleep (time) {
 	    	return new Promise((resolve) => setTimeout(resolve, time));
@@ -198,6 +212,10 @@ $(function() {
 
 			self.actionTriggerTemplate(messageType);
 			self.showActionTriggerDialog(messageData, null);
+		} else if (data.action == "gridsaved") {
+			//the grid was saved.  run the fixgrid command and reopen the connection
+			self._postCommand("fixgrid", {});
+			self.reconnectSerial();
 		} else if (data.action == "update") {
 			if (typeof data.tool0_ZOffset !== 'undefined') {
 				self.tool0_ZOffset["actual"](data.tool0_ZOffset);
@@ -506,7 +524,7 @@ $(function() {
 		sendPrinterCommand('G90');
 		sendPrinterCommand('M400');
 		sendPrinterCommand('G28');
-			sendPrinterCommand('G30.1 Q V0');
+		sendPrinterCommand('G30.1 Q V0');
 		sendPrinterCommand('G0 Z0 F300');
 	};
 
@@ -515,8 +533,16 @@ $(function() {
       self.lockHead1();
 	};
 
-	self.autoCalibrate = function() {
+	self.autoCalibrateGo = function() {
 	    self.preheat(0, 1, self.autoCalibrateHeated);
+	};
+
+	self.autoCalibrate = function() {
+		var messageType = "startprobe";
+		var messageData = {message:"", title:"Notice"};
+
+		self.actionTriggerTemplate(messageType);
+		self.showActionTriggerDialog(messageData, self.autoCalibrateGo, null);
 	};
 
 	self.autoCalibrate2Run = function () {
@@ -676,7 +702,7 @@ $(function() {
 	  if (item.key() === "tool0_ZOffset") {
 		  self.autoCalibrate();
 	  } else if (item.key() === "tool1_ZOffset") {
-		  self.autoCalibrate();
+		  self.autoCalibrate2();
 	  } else if (item.key() === "tool0_Raised") {
 		  sendPrinterCommand('M280 S' + value);
 	  } else if (item.key() === "tool0_Locked") {
