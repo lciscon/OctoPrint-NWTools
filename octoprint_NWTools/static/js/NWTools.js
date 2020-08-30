@@ -576,8 +576,16 @@ $(function() {
       self.lockHead1();
 	};
 
-	self.autoCalibrate2 = function() {
+	self.autoCalibrate2Go = function() {
 	    self.preheat(0, 1, self.autoCalibrate2Heated);
+	};
+
+	self.autoCalibrate2 = function() {
+		var messageType = "notice2"; //startprobe
+		var messageData = {message:"Running probe test. Make sure the bed is clear.", title:"Notice"};
+
+		self.actionTriggerTemplate(messageType);
+		self.showActionTriggerDialog(messageData, self.autoCalibrate2Go, null);
 	};
 
 	self.updateFirmware = function() {
