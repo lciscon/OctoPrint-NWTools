@@ -519,6 +519,8 @@ $(function() {
 
 	self.resetDefaultsGo = function() {
       sendPrinterCommand('M502');
+	  sendPrinterCommand('M400');
+	  self.rebootController();
 	};
 
 	self.resetDefaults = function() {
