@@ -517,6 +517,19 @@ $(function() {
       sendPrinterCommand('G28.2');
 	};
 
+	self.resetDefaultsGo = function() {
+      sendPrinterCommand('M502');
+	};
+
+	self.resetDefaults = function() {
+		var messageType = "notice2"; //startprobe
+		var messageData = {message:"This will reset the settings to the defaults.", title:"Warning"};
+
+		self.actionTriggerTemplate(messageType);
+		self.showActionTriggerDialog(messageData, self.resetDefaultsGo, null);
+	};
+
+
 	self.autoCalibrateRun = function () {
 		sendPrinterCommand('M400');
 		sendPrinterCommand('G91');
@@ -538,8 +551,8 @@ $(function() {
 	};
 
 	self.autoCalibrate = function() {
-		var messageType = "startprobe";
-		var messageData = {message:"", title:"Notice"};
+		var messageType = "notice2"; //startprobe
+		var messageData = {message:"Running probe test. Make sure the bed is clear.", title:"Notice"};
 
 		self.actionTriggerTemplate(messageType);
 		self.showActionTriggerDialog(messageData, self.autoCalibrateGo, null);
