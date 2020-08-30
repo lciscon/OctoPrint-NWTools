@@ -218,7 +218,10 @@ $(function() {
 			self.reconnectSerial();
 		} else if (data.action == "gridcomplete") {
 			//the grid scan is done.  save the grid.
-			sendPrinterCommand('M374');
+			sendPrinterCommand('M400');
+	  	  	sendPrinterCommand('M500'); //save changes
+	        sendPrinterCommand('M374'); //save the bed - triggers an action command that is used to fix the grid
+	        sendPrinterCommand('M400');
 		} else if (data.action == "update") {
 			if (typeof data.tool0_ZOffset !== 'undefined') {
 				self.tool0_ZOffset["actual"](data.tool0_ZOffset);
@@ -640,8 +643,8 @@ $(function() {
 	  sendPrinterCommand('G32 S');  //grid probe with bed save
       sendPrinterCommand('M400');
       sendPrinterCommand('G0 Z2 F300');
-      sendPrinterCommand('M400');
-  	  sendPrinterCommand('M500'); //save changes
+//      sendPrinterCommand('M400');
+//  	sendPrinterCommand('M500'); //save changes
 //      sendPrinterCommand('M374'); //save the bed - triggers an action command that is used to fix the grid
 //      sendPrinterCommand('M400');
     };
