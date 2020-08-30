@@ -634,7 +634,8 @@ $(function() {
       sendPrinterCommand('G0 Z2 F300');
       sendPrinterCommand('G90');
       sendPrinterCommand('M400');
-      sendPrinterCommand('G32 S');  //grid probe with bed save
+      sendPrinterCommand('G32');  //grid probe with bed save
+//	  sendPrinterCommand('G32 S');  //grid probe with bed save
       sendPrinterCommand('M400');
       sendPrinterCommand('G0 Z2 F300');
       sendPrinterCommand('M400');
