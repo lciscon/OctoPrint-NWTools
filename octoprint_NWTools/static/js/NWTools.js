@@ -218,7 +218,7 @@ $(function() {
 			self.reconnectSerial();
 		} else if (data.action == "gridcomplete") {
 			//the grid scan is done.  save the grid.
-			self._postCommand("M374", {});
+			sendPrinterCommand('M374');
 		} else if (data.action == "update") {
 			if (typeof data.tool0_ZOffset !== 'undefined') {
 				self.tool0_ZOffset["actual"](data.tool0_ZOffset);
