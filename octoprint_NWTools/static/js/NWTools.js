@@ -406,10 +406,10 @@ $(function() {
 	};
 
    	self.turnOnExtruder = function(direction) {
-	    	self.extrusionRunning = true;
+	    self.extrusionRunning = true;
 	   	self.extrusionDirection = direction;
-	    	self.extrusionTimer();
-    	};
+	    self.extrusionTimer();
+    };
 
 	self.turnOffExtruder = function() {
 	    	self.extrusionRunning = false;
