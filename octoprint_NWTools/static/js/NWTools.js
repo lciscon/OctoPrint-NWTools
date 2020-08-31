@@ -214,11 +214,12 @@ $(function() {
 			self.showActionTriggerDialog(messageData, null);
 		} else if (data.action == "gridsaved") {
 			//the grid was saved.  run the fixgrid command and reopen the connection
+			console.debug('Received Grid Saved...\n');
 			self._postCommand("fixgrid", {});
 			self.reconnectSerial();
 		} else if (data.action == "gridcomplete") {
 			//the grid scan is done.  save the grid.
-			console.debug('Grid Complete...');
+			console.debug('Received Grid Complete...\n');
 
 			sendPrinterCommand('M400');
 	        sendPrinterCommand('G0 Z2 F300');
