@@ -223,7 +223,6 @@ $(function() {
 			sendPrinterCommand('M400');
 	  	  	sendPrinterCommand('M500'); //save changes
 	        sendPrinterCommand('M374'); //save the bed - triggers an action command that is used to fix the grid
-	        sendPrinterCommand('M400');
 		} else if (data.action == "update") {
 			if (typeof data.tool0_ZOffset !== 'undefined') {
 				self.tool0_ZOffset["actual"](data.tool0_ZOffset);
