@@ -218,6 +218,8 @@ $(function() {
 			self.reconnectSerial();
 		} else if (data.action == "gridcomplete") {
 			//the grid scan is done.  save the grid.
+			console.debug('Grid Complete...');
+
 			sendPrinterCommand('M400');
 	        sendPrinterCommand('G0 Z2 F300');
 			sendPrinterCommand('M400');
