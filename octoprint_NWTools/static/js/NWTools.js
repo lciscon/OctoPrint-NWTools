@@ -200,9 +200,9 @@ $(function() {
 
 // !!!
     self.onDataUpdaterPluginMessage = function(plugin, data) {
-            if (plugin != "NWTools") {
-                return;
-            }
+        if (plugin != "NWTools") {
+            return;
+        }
 
 //		console.debug('Processing message...');
 
@@ -215,7 +215,7 @@ $(function() {
 		} else if (data.action == "gridsaved") {
 			//the grid was saved.  run the fixgrid command and reopen the connection
 			console.log('Grid Saved... ');
-			
+
 			self._postCommand("fixgrid", {});
 			self.reconnectSerial();
 		} else if (data.action == "gridcomplete") {
