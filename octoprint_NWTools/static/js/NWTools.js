@@ -576,13 +576,13 @@ $(function() {
 		sendPrinterCommand('G90');
 		sendPrinterCommand('M400');
 		sendPrinterCommand('G28');
-			sendPrinterCommand('G30.1 Q V0');
+		sendPrinterCommand('G30.1 Q V0');
 		sendPrinterCommand('G0 Z0 F300');
 	};
 
 	self.autoCalibrate2Heated = function () {
-      self.autoCalibrateRun();
-      self.lockHead1();
+      self.autoCalibrate2Run();
+      self.lockHead2();
 	};
 
 	self.autoCalibrate2Go = function() {
