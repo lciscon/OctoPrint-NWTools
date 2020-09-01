@@ -576,7 +576,7 @@ $(function() {
 		sendPrinterCommand('G90');
 		sendPrinterCommand('M400');
 		sendPrinterCommand('G28');
-		sendPrinterCommand('G30.1 Q V0');
+		sendPrinterCommand('G30.1 Q V1');
 		sendPrinterCommand('G0 Z0 F300');
 	};
 
@@ -586,7 +586,7 @@ $(function() {
 	};
 
 	self.autoCalibrate2Go = function() {
-	    self.preheat(0, 1, self.autoCalibrate2Heated);
+	    self.preheat(1, 1, self.autoCalibrate2Heated);
 	};
 
 	self.autoCalibrate2 = function() {
