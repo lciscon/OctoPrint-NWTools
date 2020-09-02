@@ -212,7 +212,7 @@ $(function() {
 
 			self.actionTriggerTemplate(messageType);
 			self.showActionTriggerDialog(messageData, null);
-		} else if (data.action == "gridsaved") {
+		} else if (data.action == "gridsave") {
 			//the grid was saved.  run the fixgrid command and reopen the connection
 //			self._postCommand("fixgrid", {});
 //			self.reconnectSerial();
