@@ -13,7 +13,7 @@ $(function() {
 	    self.currentTemp = 0;
 		self.currentTemp2 = 0;
 
-		self.startedSave = 0;
+		self.startedAction = 0;
 
 //        self.actual = ko.observable(-0.1);
 //        self.target = ko.observable(2);
@@ -652,7 +652,7 @@ $(function() {
       sendPrinterCommand('G0 Z2 F300');
       sendPrinterCommand('G90');
       sendPrinterCommand('M400');
-	  self.startedSave = 1;
+	  self.startedAction = 1;
 	  sendPrinterCommand('G32');  //grid probe
 //      sendPrinterCommand('M400');
 //      sendPrinterCommand('G0 Z2 F300');
