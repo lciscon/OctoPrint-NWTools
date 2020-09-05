@@ -222,6 +222,7 @@ $(function() {
 		} else if (data.action == "gridcomplete") {
 			if (self.startedAction == 1) {
 					//the grid scan is done.  save the grid.
+				try {
 					sendPrinterCommand('M374'); //save the bed - triggers an action command that is used to fix the grid
 					sendPrinterCommand('M400');
 			        sendPrinterCommand('G0 Z2 F300');
@@ -229,8 +230,9 @@ $(function() {
 			  	  	sendPrinterCommand('M500'); //save changes
 					self._postCommand("fixgrid", {});
 					self.reconnectSerial();
-			} finally {
-				self.startedAction = 0;
+				} finally {
+					self.startedAction = 0;
+				}
 			}
 		} else if (data.action == "update") {
 			if (typeof data.tool0_ZOffset !== 'undefined') {
