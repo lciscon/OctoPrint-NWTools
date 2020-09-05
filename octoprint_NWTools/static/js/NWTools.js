@@ -13,6 +13,8 @@ $(function() {
 	    self.currentTemp = 0;
 		self.currentTemp2 = 0;
 
+		self.inSaveCallback = 0;
+
 //        self.actual = ko.observable(-0.1);
 //        self.target = ko.observable(2);
 //        self.newTarget = ko.observable(3);
@@ -217,14 +219,21 @@ $(function() {
 //			self._postCommand("fixgrid", {});
 //			self.reconnectSerial();
 		} else if (data.action == "gridcomplete") {
-			//the grid scan is done.  save the grid.
-			sendPrinterCommand('M374'); //save the bed - triggers an action command that is used to fix the grid
-			sendPrinterCommand('M400');
-	        sendPrinterCommand('G0 Z2 F300');
-			sendPrinterCommand('M400');
-	  	  	sendPrinterCommand('M500'); //save changes
-			self._postCommand("fixgrid", {});
-			self.reconnectSerial();
+			if (self.inSaveCallback == 0) {
+				self.inSaveCallback = 1;
+				try {
+					//the grid scan is done.  save the grid.
+					sendPrinterCommand('M374'); //save the bed - triggers an action command that is used to fix the grid
+					sendPrinterCommand('M400');
+			        sendPrinterCommand('G0 Z2 F300');
+					sendPrinterCommand('M400');
+			  	  	sendPrinterCommand('M500'); //save changes
+					self._postCommand("fixgrid", {});
+					self.reconnectSerial();
+				} finally {
+					self.inSaveCallback = 0;
+				}
+			}
 		} else if (data.action == "update") {
 			if (typeof data.tool0_ZOffset !== 'undefined') {
 				self.tool0_ZOffset["actual"](data.tool0_ZOffset);
