@@ -895,9 +895,13 @@ $(function() {
 		self.refreshSettings();
 	};
 
+	self.unmountHandler = function() {
+		self.unmountCtrl();
+	};
+
 	self.onEventConnected = function(payload) {
 		self.refreshSettings();
-		self.unmountCtrl();
+		setTimeout(self.unmountHandler, 10000);
 	};
 
 	self.unmountCtrl = function() {
