@@ -905,10 +905,12 @@ $(function() {
 	};
 
 	self.unmountCtrl = function() {
+		console.log('Unmounting file system...');
 		self._postCommand("umountctl", {});
 	};
 
 	self.mountCtrl = function() {
+		console.log('Mounting file system...');
 		self._postCommand("mountctl", {});
 	};
 
