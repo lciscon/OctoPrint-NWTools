@@ -84,6 +84,9 @@ class NwtoolsPlugin(octoprint.plugin.SettingsPlugin,
 			lights_off=[],
 			cabinet_on=[],
 			cabinet_off=[],
+			fixgrid=[],
+			mountctl[],
+			umountctl[],
 		)
 
 	def on_api_get(self, request):
