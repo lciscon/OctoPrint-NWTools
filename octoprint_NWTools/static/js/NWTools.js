@@ -679,19 +679,19 @@ $(function() {
   	    sendPrinterCommand('G28');
   	  	sendPrinterCommand('G30.9');
 
-    	  	self._postCommand("get_leveling", {}, function(response) {
-    		  	if (response.success) {
-  			  	curz = response.curz;
+	  	self._postCommand("get_leveling", {}, function(response) {
+		  	if (response.success) {
+			  	curz = response.curz;
 
-  				var messageType = "leveling";
-  				var messageData = {message:"", title:""};
+				var messageType = "leveling";
+				var messageData = {message:"", title:""};
 
-  				messageData.title = "Notice";
-  				messageData.message = "Adjust the screws as follows:\nFront Center: " + curz[0].toString() + "\nBack Left: " + curz[1].toString() + "\nBack Right: " + curz[2].toString() + "\n";
-  				self.actionTriggerTemplate(messageType);
-  				self.showActionTriggerDialog(messageData, null);
-  				return;
-    		  	}
+				messageData.title = "Notice";
+				messageData.message = "Adjust the screws as follows:\nFront Center: " + curz[0].toString() + "\nBack Left: " + curz[1].toString() + "\nBack Right: " + curz[2].toString() + "\n";
+				self.actionTriggerTemplate(messageType);
+				self.showActionTriggerDialog(messageData, null);
+				return;
+		  	}
   	  	});
     };
 
@@ -897,8 +897,16 @@ $(function() {
 
 	self.onEventConnected = function(payload) {
 		self.refreshSettings();
+		self.unmountCtrl();
 	};
 
+	self.unmountCtrl = function() {
+		self._postCommand("umountctl", {});
+	};
+
+	self.mountCtrl = function() {
+		self._postCommand("mountctl", {});
+	};
 
 	self._postCommand = function (command, data, successCallback, failureCallback, alwaysCallback, timeout) {
 	    var payload = _.extend(data, {command: command});

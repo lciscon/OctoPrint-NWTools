@@ -120,13 +120,22 @@ class NwtoolsPlugin(octoprint.plugin.SettingsPlugin,
 		elif command == "cabinet_off":
 			self._exec_cmd("cabinet off")
 
+		elif command == "mountctl":
+			self._exec_cmd("mountctl")
+
+		elif command == "umountctl":
+			self._exec_cmd("umountctl")
+
+		elif command == "fixgrid":
+			self._exec_cmd("fixgrid")
+
 
 	def _check_for_firmware(self):
 		r = self._exec_cmd("checkfirm")
 		return r
 
 	def _update_firmware(self):
-		r = self._exec_cmd("sudo updatefirm")
+		r = self._exec_cmd("updatefirm")
 		return r
 
 	##~~ AssetPlugin mixin
