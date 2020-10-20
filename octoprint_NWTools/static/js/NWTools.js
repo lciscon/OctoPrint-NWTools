@@ -671,13 +671,13 @@ $(function() {
     };
 
 	self.levelBedHeated = function() {
+		self.resetCalibration();
   		sendPrinterCommand('M400');
   	    sendPrinterCommand('G91');
   	    sendPrinterCommand('G0 Z10 F300');
   	    sendPrinterCommand('G90');
   	    sendPrinterCommand('M400');
   	    sendPrinterCommand('G28');
-		sendPrinterCommand('M370'); // clear the bed leveling grid
   	  	sendPrinterCommand('G33');
 
 	  	self._postCommand("get_leveling", {}, function(response) {
@@ -688,7 +688,7 @@ $(function() {
 				var messageData = {message:"", title:""};
 
 				messageData.title = "Notice";
-				messageData.message = "Adjust the screws as follows:\nFront Center: " + curz[0].toString() + "\nBack Left: " + curz[1].toString() + "\nBack Right: " + curz[2].toString() + "\n";
+				messageData.message = "Adjust the screws as follows:\nFront Center: " + curz[2].toString() + "\nBack Left: " + curz[0].toString() + "\nBack Right: " + curz[1].toString() + "\n";
 				self.actionTriggerTemplate(messageType);
 				self.showActionTriggerDialog(messageData, null);
 				return;
