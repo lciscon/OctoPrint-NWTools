@@ -688,7 +688,7 @@ $(function() {
 
 				messageData.title = "Notice";
 
-				if ((abs(curz[0]) < .1) && (abs(curz[0]) < .1) && (abs(curz[0]) < .1)) {
+				if ((Math.abs(curz[0]) < .1) && (Math.abs(curz[0]) < .1) && (Math.abs(curz[0]) < .1)) {
 					messageData.message = "Bed is level!";
 				} else {
 					messageData.message = "Adjust the screws as follows and relevel:\nFront Center: " + curz[2].toString() + "\nBack Left: " + curz[0].toString() + "\nBack Right: " + curz[1].toString() + "\n";
