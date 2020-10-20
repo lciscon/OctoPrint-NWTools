@@ -243,15 +243,15 @@ $(function() {
 					var frontstr;
 					var backstr;
 					if (curz[2] < 0) {
-						frontstr = Math.abs(curz[2].toFixed(1)).toString() + " Turn CW";
+						frontstr = Math.abs(curz[2].toFixed(1)).toString() + " turn CW";
 					} else {
-						frontstr = Math.abs(curz[2].toFixed(1)).toString() + " Turn CCW";
+						frontstr = Math.abs(curz[2].toFixed(1)).toString() + " turn CCW";
 					}
 
 					if (curz[1] < 0) {
-						backstr = Math.abs(curz[1].toFixed(1)).toString() + " Turn CW";
+						backstr = Math.abs(curz[1].toFixed(1)).toString() + " turn CW";
 					} else {
-						backstr = Math.abs(curz[1].toFixed(1)).toString() + " Turn CCW";
+						backstr = Math.abs(curz[1].toFixed(1)).toString() + " turn CCW";
 					}
 
 					messageData.title = "Notice";
@@ -259,7 +259,7 @@ $(function() {
 					if ((Math.abs(curz[1]) < .1) && (Math.abs(curz[2]) < .1)) {
 						messageData.message = "Bed is level!";
 					} else {
-						messageData.message = "Adjust the screws and then re-level:"+'\n'+'\n'+"Front Center: " + frontstr + " Back Right: " + backstr;
+						messageData.message = "Adjust the screws and then re-level: <br> Front Center: " + frontstr + " Back Right: " + backstr;
 					}
 
 					self.actionTriggerTemplate(messageType);
