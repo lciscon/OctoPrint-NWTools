@@ -243,15 +243,15 @@ $(function() {
 					var frontstr;
 					var backstr;
 					if (curz[2] < 0) {
-						frontstr = curz[2].toFixed(1).toString() + " Turn CW";
+						frontstr = Math.abs(curz[2].toFixed(1)).toString() + " Turn CW";
 					} else {
-						frontstr = curz[2].toFixed(1).toString() + " Turn CCW";
+						frontstr = Math.abs(curz[2].toFixed(1)).toString() + " Turn CCW";
 					}
 
 					if (curz[1] < 0) {
-						backstr = curz[1].toFixed(1).toString() + " Turn CW";
+						backstr = Math.abs(curz[1].toFixed(1)).toString() + " Turn CW";
 					} else {
-						backstr = curz[1].toFixed(1).toString() + " Turn CCW";
+						backstr = Math.abs(curz[1].toFixed(1)).toString() + " Turn CCW";
 					}
 
 					messageData.title = "Notice";
