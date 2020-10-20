@@ -234,6 +234,26 @@ $(function() {
 					self.startedAction = 0;
 				}
 			}
+		} else if (data.action == "levelcomplete") {
+			self._postCommand("get_leveling", {}, function(response) {
+			  	if (response.levels) {
+				  	curz = response.levels;
+					var messageType = "notice";
+					var messageData = {message:"", title:""};
+
+					messageData.title = "Notice";
+
+					if ((Math.abs(curz[0]) < .1) && (Math.abs(curz[0]) < .1) && (Math.abs(curz[0]) < .1)) {
+						messageData.message = "Bed is level!";
+					} else {
+						messageData.message = "Adjust the screws and then re-level:\rFront Center: " + curz[2].toString() + "\nBack Right: " + curz[1].toString();
+					}
+
+					self.actionTriggerTemplate(messageType);
+					self.showActionTriggerDialog(messageData, null);
+					return;
+			  	}
+	  	  	});
 		} else if (data.action == "update") {
 			if (typeof data.tool0_ZOffset !== 'undefined') {
 				self.tool0_ZOffset["actual"](data.tool0_ZOffset);
@@ -679,26 +699,6 @@ $(function() {
   	    sendPrinterCommand('M400');
   	    sendPrinterCommand('G28');
   	  	sendPrinterCommand('G33');
-
-	  	self._postCommand("get_leveling", {}, function(response) {
-		  	if (response.levels) {
-			  	curz = response.levels;
-				var messageType = "notice";
-				var messageData = {message:"", title:""};
-
-				messageData.title = "Notice";
-
-				if ((Math.abs(curz[0]) < .1) && (Math.abs(curz[0]) < .1) && (Math.abs(curz[0]) < .1)) {
-					messageData.message = "Bed is level!";
-				} else {
-					messageData.message = "Adjust the screws as follows and relevel:\nFront Center: " + curz[2].toString() + "\nBack Left: " + curz[0].toString() + "\nBack Right: " + curz[1].toString() + "\n";
-				}
-
-				self.actionTriggerTemplate(messageType);
-				self.showActionTriggerDialog(messageData, null);
-				return;
-		  	}
-  	  	});
     };
 
     self.levelBed = function() {
