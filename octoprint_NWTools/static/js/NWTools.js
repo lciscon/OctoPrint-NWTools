@@ -704,6 +704,13 @@ $(function() {
     };
 
 	self.levelBedHeated = function() {
+		var messageType = "notice";
+		var messageData = {message:"Leveling Bed", title:"Notice"};
+
+		self.actionTriggerTemplate(messageType);
+		self.showActionTriggerDialog(messageData, null);
+//	  		self.hideActionTriggerDialog();
+
 		self.resetCalibration();
   		sendPrinterCommand('M400');
   	    sendPrinterCommand('G91');
