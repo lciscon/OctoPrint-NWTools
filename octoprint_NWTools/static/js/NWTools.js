@@ -681,7 +681,7 @@ $(function() {
   	  	sendPrinterCommand('G33');
 
 	  	self._postCommand("get_leveling", {}, function(response) {
-		  	if (response.success) {
+		  	if (response.levels) {
 			  	curz = response.levels;
 
 				var messageType = "leveling";
