@@ -682,7 +682,7 @@ $(function() {
 
 	  	self._postCommand("get_leveling", {}, function(response) {
 		  	if (response.success) {
-			  	curz = response.curz;
+			  	curz = response.levels;
 
 				var messageType = "leveling";
 				var messageData = {message:"", title:""};
