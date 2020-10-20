@@ -240,13 +240,26 @@ $(function() {
 				  	curz = response.levels;
 					var messageType = "notice";
 					var messageData = {message:"", title:""};
+					var frontstr;
+					var backstr;
+					if (curz[2] < 0) {
+						frontstr = curz[2].toFixed(1).toString() + " Turn CW";
+					} else {
+						frontstr = curz[2].toFixed(1).toString() + " Turn CCW";
+					}
+
+					if (curz[1] < 0) {
+						backstr = curz[1].toFixed(1).toString() + " Turn CW";
+					} else {
+						backstr = curz[1].toFixed(1).toString() + " Turn CCW";
+					}
 
 					messageData.title = "Notice";
 
-					if ((Math.abs(curz[0]) < .1) && (Math.abs(curz[0]) < .1) && (Math.abs(curz[0]) < .1)) {
+					if ((Math.abs(curz[1]) < .1) && (Math.abs(curz[2]) < .1)) {
 						messageData.message = "Bed is level!";
 					} else {
-						messageData.message = "Adjust the screws and then re-level:\rFront Center: " + curz[2].toString() + "\nBack Right: " + curz[1].toString();
+						messageData.message = "Adjust the screws and then re-level:"+'\n'+'\n'+"Front Center: " + frontstr + " Back Right: " + backstr;
 					}
 
 					self.actionTriggerTemplate(messageType);

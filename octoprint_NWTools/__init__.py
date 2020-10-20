@@ -225,7 +225,6 @@ class NwtoolsPlugin(octoprint.plugin.SettingsPlugin,
 			self._bedlevels[0] = float(llist[1])
 			self._bedlevels[1] = float(llist[2])
 			self._bedlevels[2] = float(llist[3])
-
 		elif "M670" in line:
 			# M670 S0.50 K100.00 R0.00 Z30.00 H3.00 D0.00 O-0.2000 Q-0.3500
 			self._logger.info("Found M670!")
