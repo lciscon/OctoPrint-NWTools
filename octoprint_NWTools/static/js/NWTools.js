@@ -259,7 +259,7 @@ $(function() {
 					if ((Math.abs(curz[1]) < .1) && (Math.abs(curz[2]) < .1)) {
 						messageData.message = "Bed is level!";
 					} else {
-						messageData.message = "Adjust the screws and then re-level: <br> Front Center: " + frontstr + " Back Right: " + backstr;
+						messageData.message = "Adjust the screws and then re-level: \<br\> Front Center: " + frontstr + " Back Right: " + backstr;
 					}
 
 					self.actionTriggerTemplate(messageType);
