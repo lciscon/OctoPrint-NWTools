@@ -222,9 +222,9 @@ class NwtoolsPlugin(octoprint.plugin.SettingsPlugin,
 			# The line should look like this:
 			# Leveling: 2.51 3.52 0.1
 			llist = line.split(" ")
-			this._bedlevels[0] = float(llist[1])
-			this._bedlevels[1] = float(llist[2])
-			this._bedlevels[2] = float(llist[3])
+			self._bedlevels[0] = float(llist[1])
+			self._bedlevels[1] = float(llist[2])
+			self._bedlevels[2] = float(llist[3])
 
 		elif "M670" in line:
 			# M670 S0.50 K100.00 R0.00 Z30.00 H3.00 D0.00 O-0.2000 Q-0.3500
