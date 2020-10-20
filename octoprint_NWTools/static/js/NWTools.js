@@ -683,12 +683,17 @@ $(function() {
 	  	self._postCommand("get_leveling", {}, function(response) {
 		  	if (response.levels) {
 			  	curz = response.levels;
-
-				var messageType = "leveling";
+				var messageType = "notice";
 				var messageData = {message:"", title:""};
 
 				messageData.title = "Notice";
-				messageData.message = "Adjust the screws as follows:\nFront Center: " + curz[2].toString() + "\nBack Left: " + curz[0].toString() + "\nBack Right: " + curz[1].toString() + "\n";
+
+				if ((abs(curz[0]) < .1) && (abs(curz[0]) < .1) && (abs(curz[0]) < .1)) {
+					messageData.message = "Bed is level!";
+				} else {
+					messageData.message = "Adjust the screws as follows and relevel:\nFront Center: " + curz[2].toString() + "\nBack Left: " + curz[0].toString() + "\nBack Right: " + curz[1].toString() + "\n";
+				}
+
 				self.actionTriggerTemplate(messageType);
 				self.showActionTriggerDialog(messageData, null);
 				return;
