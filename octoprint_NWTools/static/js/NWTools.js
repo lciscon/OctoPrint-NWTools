@@ -677,7 +677,8 @@ $(function() {
   	    sendPrinterCommand('G90');
   	    sendPrinterCommand('M400');
   	    sendPrinterCommand('G28');
-  	  	sendPrinterCommand('G30.9');
+		sendPrinterCommand('M370'); // clear the bed leveling grid
+  	  	sendPrinterCommand('G33');
 
 	  	self._postCommand("get_leveling", {}, function(response) {
 		  	if (response.success) {

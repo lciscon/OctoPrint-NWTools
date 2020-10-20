@@ -18,9 +18,9 @@
 <div class="row-fluid">
 <div class="span4">
 <h1>Bed Leveling</h1>
-<button class="btn btn-primary" data-bind="enable: false, click: levelBed" style="width:40%">{{ _('Level<br/>Bed 60C') }}</button>
+<button class="btn btn-primary" data-bind="enable: $root.isOperational() && !$root.isPrinting(), click: levelBed" style="width:40%">{{ _('Level<br/>Bed 60C') }}</button>
 &nbsp;
-<button class="btn btn-primary" data-bind="enable: false, click: levelBed2" style="width:40%">{{ _('Level<br/>Bed 100C') }}</button>
+<button class="btn btn-primary" data-bind="enable: $root.isOperational() && !$root.isPrinting(), click: levelBed2" style="width:40%">{{ _('Level<br/>Bed 100C') }}</button>
 </div>
 <div class="span7">
 <h1>Bed Calibration</h1>
