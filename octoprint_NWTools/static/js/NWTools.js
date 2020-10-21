@@ -718,6 +718,7 @@ $(function() {
   	    sendPrinterCommand('G90');
   	    sendPrinterCommand('M400');
   	    sendPrinterCommand('G28');
+		sendPrinterCommand('M400');		
   	  	sendPrinterCommand('G33');
     };
 
