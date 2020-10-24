@@ -754,6 +754,11 @@ $(function() {
       sendPrinterCommand('M561');
   	};
 
+	self.filterCalibration = function() {
+		self._postCommand("fixgrid", {});
+		self.reconnectSerial();
+  	};
+
 //---------
 
 	self.showTest = function(item) {
