@@ -16,17 +16,17 @@
 </div>
 </div>
 <div class="row-fluid">
-<div class="span3">
-<h1>Bed Level</h1>
-<button class="btn btn-primary" data-bind="enable: $root.isOperational() && !$root.isPrinting(), click: levelBed" style="width:80%">{{ _('Level<br/>Bed') }}</button>
+<div class="span4">
+<h1>Bed Leveling</h1>
+<button class="btn btn-primary" data-bind="enable: $root.isOperational() && !$root.isPrinting(), click: levelBed" style="width:40%">{{ _('Level<br/>Bed 60C') }}</button>
+&nbsp;
+<button class="btn btn-primary" data-bind="enable: $root.isOperational() && !$root.isPrinting(), click: levelBed2" style="width:40%">{{ _('Level<br/>Bed 100C') }}</button>
 </div>
 <div class="span7">
 <h1>Bed Calibration</h1>
 <button class="btn btn-primary" data-bind="enable: $root.isOperational() && !$root.isPrinting(), click: calibrateBed" style="width:22%">{{ _('Calibrate<br/>Bed 60C') }}</button>
 &nbsp;
 <button class="btn btn-primary" data-bind="enable: $root.isOperational() && !$root.isPrinting(), click: calibrateBed2" style="width:22%">{{ _('Calibrate<br/>Bed 100C') }}</button>
-&nbsp;
-<button class="btn btn-primary" data-bind="enable: $root.isOperational() && !$root.isPrinting(), click: filterCalibration" style="width:22%">{{ _('Cleanup<br/>Calibration') }}</button>
 &nbsp;
 <button class="btn btn-primary" data-bind="enable: $root.isOperational() && !$root.isPrinting(), click: resetCalibration" style="width:22%">{{ _('Reset<br/>Calibration') }}</button>
 </div>
@@ -69,7 +69,9 @@
 		<tr>
 			<th class="calibrate_tool" style="width:30%"></th>
 			<th class="calibrate_current" style="width:15%"></th>
-			<th class="calibrate_target" style="width:30%"></th>
+			<th class="calibrate_target" style="width:30%">
+			<button class="btn btn-primary" data-bind="enable: $root.isOperational() && !$root.isPrinting(), click: filterCalibration" style="width:50%">{{ _('Cleanup<br/>Calibration') }}</button>
+			</th>
 			<th class="calibrate_test" style="width:25%">
 			<button class="btn btn-primary" data-bind="enable: $root.isOperational() && !$root.isPrinting(), click: resetDefaults" style="width:50%">{{ _('Reset Settings') }}</button>
 			</th>
