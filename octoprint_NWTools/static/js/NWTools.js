@@ -259,7 +259,7 @@ $(function() {
 					if ((Math.abs(curz[1]) < .1) && (Math.abs(curz[2]) < .1)) {
 						messageData.message = "Bed is level!";
 					} else {
-						messageData.message = "Adjust the screws and then re-level: Front Center: " + frontstr + " Back Right: " + backstr;
+						messageData.message = "Adjust the screws and then re-level: Center: " + frontstr + " Right: " + backstr;
 					}
 
 					self.actionTriggerTemplate(messageType);
@@ -430,6 +430,13 @@ $(function() {
 
 	self.preheat2 = function() {
 	    	self.preheat(1,0,null);
+	};
+
+	self.coolDown = function(toolnumber) {
+		sendPrinterCommand('M42');
+		sendPrinterCommand('M140 S0');
+		sendPrinterCommand('T' + toolnumber);
+		sendPrinterCommand('M104 S0');
 	};
 
   	self.lockHead1 = function() {
@@ -693,6 +700,8 @@ $(function() {
 //  	sendPrinterCommand('M500'); //save changes
 //      sendPrinterCommand('M374'); //save the bed - triggers an action command that is used to fix the grid
 //      sendPrinterCommand('M400');
+	  self.coolDown(0);
+
     };
 
     self.calibrateBed = function() {
@@ -720,6 +729,7 @@ $(function() {
   	    sendPrinterCommand('G28');
 		sendPrinterCommand('M400');
   	  	sendPrinterCommand('G33');
+		self.coolDown(0);
     };
 
     self.levelBed = function() {
@@ -927,13 +937,8 @@ $(function() {
 		self.refreshSettings();
 	};
 
-	self.unmountHandler = function() {
-		self.unmountCtrl();
-	};
-
 	self.onEventConnected = function(payload) {
 		self.refreshSettings();
-		setTimeout(self.unmountHandler, 10000);
 	};
 
 	self.unmountCtrl = function() {
