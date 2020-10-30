@@ -307,7 +307,8 @@ $(function() {
 
 	function sendPrinterCommand (cmdstr) {
 	   console.debug('MSL: sending cmd: '+cmdstr);
-       self.control.sendCustomCommand({ command: cmdstr });
+	   self.control.sendGcode(cmdstr);
+//       self.control.sendCustomCommand({ command: cmdstr });
    	};
 
 	self.hideActionTriggerDialog = function () {
