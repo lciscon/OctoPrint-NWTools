@@ -307,7 +307,7 @@ $(function() {
 
 	function sendPrinterCommand (cmdstr) {
 	   console.debug('MSL: sending cmd: '+cmdstr);
-	   self.control.sendGcode(cmdstr);
+	   OctoPrint.control.sendGcode(cmdstr);
 //       self.control.sendCustomCommand({ command: cmdstr });
    	};
 
