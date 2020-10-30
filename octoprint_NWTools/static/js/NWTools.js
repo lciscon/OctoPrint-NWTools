@@ -182,7 +182,7 @@ $(function() {
 	};
 
 	self.fromResponse = function (data) {
-            console.log('MSL: got reply2 ' + data.tool0.actual);
+//            console.log('MSL: got reply2 ' + data.tool0.actual);
 	          self.currentTemp = parseFloat(data.tool0.actual);
 	          if (data.tool1) {
 		            self.currentTemp2 = parseFloat(data.tool1.actual);
@@ -865,7 +865,9 @@ $(function() {
 		  sendPrinterCommand('M675.1 Y' + value);
 	  }
 
+	  sendPrinterCommand('M400');
 	  sendPrinterCommand('M500');
+	  sendPrinterCommand('M400');
 	  item.target(value);
 	  item.newTarget("");
 	  self.refreshSettings();
