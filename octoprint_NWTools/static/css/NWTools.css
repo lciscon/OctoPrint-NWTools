@@ -50,7 +50,7 @@
     width: 30%
 }
 
-#row-fluid {
+class row-fluid {
 	max-height: 250px
 }
 
