@@ -99,6 +99,13 @@ const NWToolsAlerts = {
 	  type: "error"
 	});
   },
+  bedLevelDoneAlert: message => {
+	return swal({
+	  title: `Notice`,
+	  text: message,
+	  type: "info"
+	});
+  },
   resetDefaultAlert: () => {
     return swal({
       title: "Warning",

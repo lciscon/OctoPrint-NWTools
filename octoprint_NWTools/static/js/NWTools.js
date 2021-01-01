@@ -243,8 +243,9 @@ $(function() {
 			self._postCommand("get_leveling", {}, function(response) {
 			  	if (response.levels) {
 				  	curz = response.levels;
-					var messageType = "notice";
-					var messageData = {message:"", title:""};
+//					var messageType = "notice";
+//					var messageData = {message:"", title:""};
+					var messageData
 					var frontstr;
 					var backstr;
 					if (curz[2] < 0) {
@@ -259,6 +260,15 @@ $(function() {
 						backstr = Math.abs(curz[1].toFixed(1)).toString() + " turns CCW";
 					}
 
+					if ((Math.abs(curz[1]) < .1) && (Math.abs(curz[2]) < .1)) {
+						messageData = "Bed is level!";
+					} else {
+						messageData = "Adjust the screws and then re-level: Center: " + frontstr + " Right: " + backstr;
+					}
+
+					NWToolsAlerts.bedLevelDoneAlert(messageData);
+
+/*
 					messageData.title = "Notice";
 
 					if ((Math.abs(curz[1]) < .1) && (Math.abs(curz[2]) < .1)) {
@@ -269,6 +279,7 @@ $(function() {
 
 					self.actionTriggerTemplate(messageType);
 					self.showActionTriggerDialog(messageData, null);
+*/
 					return;
 			  	}
 	  	  	});
@@ -814,7 +825,7 @@ $(function() {
       self.releaseHead2();
       sendPrinterCommand('M510');
 
-	  NWToolsAlerts.calibrateAlert().then(result => {
+	  NWToolsAlerts.calibratingAlert().then(result => {
 		// if user clicks yes
 		if (result.isConfirmed) {
 			self.calibrateDone();
