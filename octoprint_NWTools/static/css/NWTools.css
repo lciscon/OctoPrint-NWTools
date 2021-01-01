@@ -66,48 +66,15 @@
 	content: "\f546"
 }
 
+
 #touch body #temp>div:first-child {
-		height: 40vh;
+	height: 40vh !important;
 }
 
-/* short fix touch ui */
-/* for fix modal dimension (button cancel save..) */
-#touch body .modal-scrollable {
-    height:calc(100vh - 10px)!important;
+#touch body #temp>div:last-child table tr th {
+	padding: 4px;
 }
 
-/* for fix icon in table list of files */
-#touch body #files_wrapper #files .gcode_files .entry .btn.toggleAdditionalData {
-    left: calc(100vw - 59px)!important;
-}
-
-
-#touch body #files_wrapper #files .gcode_files .entry div.action-buttons .btn:first-child {
-    right: 120px!important;
-}
-
-#touch body #files_wrapper #files .gcode_files .entry div.action-buttons .btn:last-child {
-    right: 54px!important;
-}
-
-/* for align arrow menu */
-#touch body .dropdown-menu:before {
-    right: 45px!important;
-}
-/* for show option apply preset temp in table temperature target */
-#touch body #temperature-table .temperature_target > div > button .caret:after {
-    content: "\f0d7";
-    font-family: FontAwesome;
-    font-size: 1.125rem;
-    top: -7px;
-    left: -6px;
-    position: relative;
-}
-/* for align th title in table temperature target */
-#touch body #temperature-table td, #temperature-table th {
-    line-height: 34px!important;
-}
-/* for show completely Actual th in table temperature target  */
-#touch body #temp>div:last-child table tr:first-child th {
-    font-size: 0.9rem!important;
+#touch body #temp>div:last-child table tr td {
+	padding: 8px;
 }
