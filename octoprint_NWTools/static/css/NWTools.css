@@ -50,7 +50,8 @@
     width: 30%
 }
 
-class row-fluid {
+#temp first-child {
+	height: 250px;
 	max-height: 250px
 }
 
