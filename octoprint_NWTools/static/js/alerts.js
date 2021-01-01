@@ -28,9 +28,13 @@ const NWToolsAlerts = {
   },
   preheatAlert: () => {
     return swal({
-      title: "Pre-heat your printer",
+      title: "Notice",
       text:
-        "Palette 2 is now making filament. In the meantime, please pre-heat your printer using the controls in the Temperature Tab.",
+        "Preheating...",
+	  confirmButtonText: "Proceed",
+      showCancelButton: true,
+  	  cancelButtonText: "Cancel",
+      reverseButtons: false,
       type: "info"
     });
   },
@@ -52,5 +56,10 @@ const NWToolsAlerts = {
       reverseButtons: false,
       type: "info"
     });
+  },
+  closeAlert: () => {
+	if (Swal.isVisible()) {
+	  Swal.close();
+	}
   },
 };

@@ -375,7 +375,8 @@ $(function() {
 	        setTimeout(self.tempTimer, 1000);
 	    } else {
 	        console.log('Finished heatup! ');
-			      self.hideActionTriggerDialog();
+				  NWToolsAlerts.closeAlert();
+			      //self.hideActionTriggerDialog();
 			    if (self.tempCallback) {
 			    	self.tempCallback();
 			    }
@@ -385,12 +386,13 @@ $(function() {
 	self.cancelPreheat = function () {
 		self.targetTemp = 0;
 		self.targetTemp2 = 0;
-		self.hideActionTriggerDialog();
+		NWToolsAlerts.closeAlert();
+//		self.hideActionTriggerDialog();
 	}
 
 	self.preheat = function (toolnumber, material, callback) {
-			var messageType = "preheating";
-	    	var messageData = {message:"", title:""};
+//			var messageType = "preheating";
+//	    	var messageData = {message:"", title:""};
 	      var tipTemp = 0;
 	      var bedTemp = 0;
 
@@ -406,21 +408,21 @@ $(function() {
 	      }
 
 		  console.log('Starting heatup! ');
-/*
+
 		  NWToolsAlerts.preheatAlert().then(result => {
             // if user clicks yes
             if (result.isConfirmed) {
-  			  self.autoCalibrateGo();
-            }
-            // if user clicks no
-            else {
-            }
-*/
+            } else {
+				// if user clicks no
+				self.cancelPreheat();
+			}
+		  });
+/*
 		    self.tempCallback = callback;
 	    	messageData.title = "Preheating...";
 	    	self.actionTriggerTemplate(messageType);
 	    	self.showActionTriggerDialog(messageData, self.cancelPreheat);
-
+*/
 	    	//begin hotend preheat
 	      sendPrinterCommand('M42');
 	      sendPrinterCommand('M190 S' + bedTemp);
