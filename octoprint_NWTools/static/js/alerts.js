@@ -65,6 +65,24 @@ const NWToolsAlerts = {
       type: "error"
     });
   },
+  loadFilamentAlert: () => {
+    return swal({
+      title: "Notice",
+      text:
+        "Press OK once filament starts extruding from the nozzle.",
+	  confirmButtonText: "Ok",
+      type: "info"
+    });
+  },
+  unloadFilamentAlert: () => {
+    return swal({
+      title: "Notice",
+      text:
+        "Press OK once filament has finished unloading.",
+	  confirmButtonText: "Ok",
+      type: "info"
+    });
+  },
   firmDoneAlert: () => {
     return swal({
       title: "Notice",

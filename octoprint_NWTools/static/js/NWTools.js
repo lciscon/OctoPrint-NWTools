@@ -514,13 +514,19 @@ $(function() {
 
 
 	self.loadFilamentPreheated = function() {
-            var messageType = "loading";
-            var messageData = {message:"", title:"Load Filament"};
+//            var messageType = "loading";
+//            var messageData = {message:"", title:"Load Filament"};
 
             sendPrinterCommand('G91');
             self.turnOnExtruder(1);
-            self.actionTriggerTemplate(messageType);
-            self.showActionTriggerDialog(messageData, self.loadFilamentComplete);
+//            self.actionTriggerTemplate(messageType);
+//            self.showActionTriggerDialog(messageData, self.loadFilamentComplete);
+		NWToolsAlerts.loadFilamentAlert().then(result => {
+		  // if user clicks yes
+		  if (result.isConfirmed) {
+			  self.loadFilamentComplete();
+		  }
+	    });
 	};
 
 	// this will be called when they press the loadFilament button
@@ -543,15 +549,23 @@ $(function() {
     };
 
    self.unloadFilamentPreheated = function() {
-        var messageType = "unloading";
-        var messageData = {message:"", title:"Unload Filament"};
+//        var messageType = "unloading";
+//        var messageData = {message:"", title:"Unload Filament"};
 
     	sendPrinterCommand('G91');
     	//move forward a bit to remove blobs
         sendPrinterCommand('G1 E5 F100');
         self.turnOnExtruder(-1);
-        self.actionTriggerTemplate(messageType);
-        self.showActionTriggerDialog(messageData, self.unloadFilamentComplete);
+
+		NWToolsAlerts.unloadFilamentAlert().then(result => {
+		  // if user clicks yes
+		  if (result.isConfirmed) {
+			  self.unloadFilamentComplete();
+		  }
+		});
+
+//        self.actionTriggerTemplate(messageType);
+//        self.showActionTriggerDialog(messageData, self.unloadFilamentComplete);
 	};
 
 	//this will be called when they press the unloadFilament button
