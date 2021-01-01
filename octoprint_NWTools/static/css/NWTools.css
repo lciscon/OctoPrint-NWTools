@@ -66,15 +66,9 @@
 	content: "\f546"
 }
 
-#touch body #temp div:first-child {
+#touch body #temp>div:first-child {
 		height: 40vh;
 }
-
-/*
-#touch body #temp div:first-child #temperature-graph {
-		height: 40vh;
-}
-*/
 
 /* short fix touch ui */
 /* for fix modal dimension (button cancel save..) */
