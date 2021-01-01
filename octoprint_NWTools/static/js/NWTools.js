@@ -210,11 +210,16 @@ $(function() {
 
 		if (data.action == "error") {
 			self.startedAction = 0;  //make sure to clear out any actions I started
+
+			NWToolsAlerts.errorAlert(message:data.text);
+
+/*
 			var messageType = "notice";
 			var messageData = {message:data.text, title:"Error"};
 
 			self.actionTriggerTemplate(messageType);
 			self.showActionTriggerDialog(messageData, null);
+*/
 		} else if (data.action == "gridsave") {
 			//the grid was saved.  run the fixgrid command and reopen the connection
 //			self._postCommand("fixgrid", {});
@@ -384,7 +389,6 @@ $(function() {
 	}
 
 	self.preheat = function (toolnumber, material, callback) {
-		NWToolsAlerts.preheatAlert();
 			var messageType = "preheating";
 	    	var messageData = {message:"", title:""};
 	      var tipTemp = 0;
@@ -402,8 +406,17 @@ $(function() {
 	      }
 
 		  console.log('Starting heatup! ');
-
-		      self.tempCallback = callback;
+/*
+		  NWToolsAlerts.preheatAlert().then(result => {
+            // if user clicks yes
+            if (result.isConfirmed) {
+  			  self.autoCalibrateGo();
+            }
+            // if user clicks no
+            else {
+            }
+*/
+		    self.tempCallback = callback;
 	    	messageData.title = "Preheating...";
 	    	self.actionTriggerTemplate(messageType);
 	    	self.showActionTriggerDialog(messageData, self.cancelPreheat);
@@ -411,8 +424,8 @@ $(function() {
 	    	//begin hotend preheat
 	      sendPrinterCommand('M42');
 	      sendPrinterCommand('M190 S' + bedTemp);
-	    	sendPrinterCommand('T' + toolnumber);
-	    	sendPrinterCommand('M109 S' + tipTemp);
+	      sendPrinterCommand('T' + toolnumber);
+	      sendPrinterCommand('M109 S' + tipTemp);
 
 	      if (toolnumber == 0) {
 		          self.targetTemp = tipTemp;
@@ -584,11 +597,24 @@ $(function() {
 	};
 
 	self.resetDefaults = function() {
-		var messageType = "notice2"; //startprobe
-		var messageData = {message:"This will reset the settings to the defaults.", title:"Warning"};
+		NWToolsAlerts.resetDefaultAlert().then(result => {
+		  // if user clicks yes
+		  if (result.isConfirmed) {
+			  self.resetDefaultsGo();
+		  }
+		  // if user clicks no
+		  else {
+		  }
+	    });
+		
+		  /*
+		  		var messageType = "notice2"; //startprobe
+		  		var messageData = {message:"This will reset the settings to the defaults.", title:"Warning"};
 
-		self.actionTriggerTemplate(messageType);
-		self.showActionTriggerDialog(messageData, self.resetDefaultsGo, null);
+		  		self.actionTriggerTemplate(messageType);
+		  		self.showActionTriggerDialog(messageData, self.resetDefaultsGo, null);
+		  */
+
 	};
 
 
@@ -622,14 +648,6 @@ $(function() {
           else {
           }
 	  });
-
-/*
-		var messageType = "notice2"; //startprobe
-		var messageData = {message:"Running probe test. Make sure the bed is clear.", title:"Notice"};
-
-		self.actionTriggerTemplate(messageType);
-		self.showActionTriggerDialog(messageData, self.autoCalibrateGo, null);
-*/
 	};
 
 	self.autoCalibrate2Run = function () {
@@ -662,13 +680,6 @@ $(function() {
           else {
           }
 	  });
-/*
-		var messageType = "notice2"; //startprobe
-		var messageData = {message:"Running probe test. Make sure the bed is clear.", title:"Notice"};
-
-		self.actionTriggerTemplate(messageType);
-		self.showActionTriggerDialog(messageData, self.autoCalibrate2Go, null);
-*/
 	};
 
 	self.updateFirmware = function() {

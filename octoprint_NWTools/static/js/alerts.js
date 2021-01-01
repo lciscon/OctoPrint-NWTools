@@ -33,5 +33,24 @@ const NWToolsAlerts = {
         "Palette 2 is now making filament. In the meantime, please pre-heat your printer using the controls in the Temperature Tab.",
       type: "info"
     });
-  },  
+  },
+  errorAlert: errorNumber => {
+	return swal({
+	  title: `Error ${errorNumber} detected`,
+	  text: `An error occurred on your printer.`,
+	  type: "error"
+	});
+  },
+  resetDefaultAlert: () => {
+    return swal({
+      title: "Warning",
+      text:
+        "This will reset the settings to the defaults.",
+      confirmButtonText: "Proceed",
+      showCancelButton: true,
+	  cancelButtonText: "Cancel",
+      reverseButtons: false,
+      type: "info"
+    });
+  },
 };
