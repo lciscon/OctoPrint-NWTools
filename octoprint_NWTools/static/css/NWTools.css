@@ -72,9 +72,9 @@
 }
 
 #touch body #temp>div:last-child table tr th {
-	padding: 4px;
+	padding: 4px !important;
 }
 
 #touch body #temp>div:last-child table tr td {
-	padding: 8px;
+	padding: 8px !important;
 }
