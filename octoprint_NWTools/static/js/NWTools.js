@@ -557,15 +557,20 @@ $(function() {
     };
 
 	self.rebootController = function() {
+
+		NWToolsAlerts.rebootAlert();
+/*
 		var messageType = "notice";
 		var messageData = {message:"Rebooting...", title:"Notice"};
 
 		self.actionTriggerTemplate(messageType);
 		self.showActionTriggerDialog(messageData, null);
+*/
 
 		self._postCommand("reboot_controller", {}, function(response) {
 			self.reconnectSerial();
-	  		self.hideActionTriggerDialog();
+			NWToolsAlerts.closeAlert();
+//	  		self.hideActionTriggerDialog();
 	    });
 	};
 

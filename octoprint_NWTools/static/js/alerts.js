@@ -38,6 +38,15 @@ const NWToolsAlerts = {
       type: "info"
     });
   },
+  rebootAlert: () => {
+    return swal({
+      title: "Notice",
+      text:
+        "Rebooting Controller...",
+	  confirmButtonText: "Ok",
+      type: "info"
+    });
+  },
   errorAlert: errorNumber => {
 	return swal({
 	  title: `Error ${errorNumber} detected`,
