@@ -613,6 +613,8 @@ $(function() {
 	};
 
 	self.autoCalibrate = function() {
+		NWToolsAlerts.preheatAlert();
+
 		var messageType = "notice2"; //startprobe
 		var messageData = {message:"Running probe test. Make sure the bed is clear.", title:"Notice"};
 
