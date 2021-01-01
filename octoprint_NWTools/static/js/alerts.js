@@ -14,6 +14,18 @@ if (!document.getElementById("sweetalert2-script")) {
 }
 
 const NWToolsAlerts = {
+  probeTestAlert: () => {
+    return swal({
+      title: "Notice",
+      text:
+        "Running probe test. Make sure the bed is clear.",
+      confirmButtonText: "Proceed",
+      showCancelButton: true,
+	  cancelButtonText: "Cancel",
+      reverseButtons: false,
+      type: "info"
+    });
+  },
   preheatAlert: () => {
     return swal({
       title: "Pre-heat your printer",
@@ -21,5 +33,5 @@ const NWToolsAlerts = {
         "Palette 2 is now making filament. In the meantime, please pre-heat your printer using the controls in the Temperature Tab.",
       type: "info"
     });
-  },
+  },  
 };

@@ -613,13 +613,22 @@ $(function() {
 	};
 
 	self.autoCalibrate = function() {
-		NWToolsAlerts.preheatAlert();
+		NWToolsAlerts.probeTestAlert().then(result => {
+          // if user clicks yes
+          if (result.isConfirmed) {
+			  self.autoCalibrateGo();
+          }
+          // if user clicks no
+          else {
+          }
 
+/*
 		var messageType = "notice2"; //startprobe
 		var messageData = {message:"Running probe test. Make sure the bed is clear.", title:"Notice"};
 
 		self.actionTriggerTemplate(messageType);
 		self.showActionTriggerDialog(messageData, self.autoCalibrateGo, null);
+*/
 	};
 
 	self.autoCalibrate2Run = function () {
@@ -643,11 +652,22 @@ $(function() {
 	};
 
 	self.autoCalibrate2 = function() {
+		NWToolsAlerts.probeTestAlert().then(result => {
+          // if user clicks yes
+          if (result.isConfirmed) {
+			  self.autoCalibrate2Go();
+          }
+          // if user clicks no
+          else {
+          }
+
+/*
 		var messageType = "notice2"; //startprobe
 		var messageData = {message:"Running probe test. Make sure the bed is clear.", title:"Notice"};
 
 		self.actionTriggerTemplate(messageType);
 		self.showActionTriggerDialog(messageData, self.autoCalibrate2Go, null);
+*/
 	};
 
 	self.updateFirmware = function() {
