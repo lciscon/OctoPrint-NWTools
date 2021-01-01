@@ -211,7 +211,7 @@ $(function() {
 		if (data.action == "error") {
 			self.startedAction = 0;  //make sure to clear out any actions I started
 
-			NWToolsAlerts.errorAlert(message:data.text);
+			NWToolsAlerts.errorAlert(data.text);
 
 /*
 			var messageType = "notice";
@@ -606,7 +606,7 @@ $(function() {
 		  else {
 		  }
 	    });
-		
+
 		  /*
 		  		var messageType = "notice2"; //startprobe
 		  		var messageData = {message:"This will reset the settings to the defaults.", title:"Warning"};
