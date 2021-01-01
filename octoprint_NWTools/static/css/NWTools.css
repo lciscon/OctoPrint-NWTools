@@ -50,17 +50,6 @@
     width: 30%
 }
 
-#temp first-child {
-	height: 250px;
-	max-height: 250px
-}
-
-#temperature-graph {
-	height: 250px;
-	max-height: 250px
-}
-
-
 #touch body #tabs #tab_plugin_NWTools_link a:before, #touch body #navbar #all_touchui_settings #tab_plugin_NWTools_link a:before, #touch body #tabs #tab_plugin_NWTools_link2 a:before, #touch body #navbar #all_touchui_settings #tab_plugin_NWTools_link2 a:before {
         content: "\f0ad"
 }
@@ -78,6 +67,9 @@
 }
 
 
+#touch body #temp div:first-child {
+		height: 40vh;
+}
 
 /* short fix touch ui */
 /* for fix modal dimension (button cancel save..) */
