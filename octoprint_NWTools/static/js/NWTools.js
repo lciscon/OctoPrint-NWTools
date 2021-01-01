@@ -377,7 +377,7 @@ $(function() {
 	        console.log('Finished heatup! ');
 			NWToolsAlerts.closeAlert();
 			//self.hideActionTriggerDialog();
-			if ((self.currentTemp > 0) || (self.currentTemp2 > 0)) {
+			if ((self.targetTemp > 0) || (self.targetTemp2 > 0)) {
 				if (self.tempCallback) {
 				   	self.tempCallback();
 				}
