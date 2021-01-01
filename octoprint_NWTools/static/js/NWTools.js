@@ -621,7 +621,7 @@ $(function() {
           // if user clicks no
           else {
           }
-	   }
+	  });
 
 /*
 		var messageType = "notice2"; //startprobe
@@ -661,7 +661,7 @@ $(function() {
           // if user clicks no
           else {
           }
-	   }
+	  });
 /*
 		var messageType = "notice2"; //startprobe
 		var messageData = {message:"Running probe test. Make sure the bed is clear.", title:"Notice"};
