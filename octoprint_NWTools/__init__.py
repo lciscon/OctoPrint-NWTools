@@ -147,7 +147,7 @@ class NwtoolsPlugin(octoprint.plugin.SettingsPlugin,
 		# Define your plugin's asset files to automatically include in the
 		# core UI here.
 		return dict(
-			js=["js/NWTools.js"],
+			js=["js/NWTools.js", "js/alerts.js"],
 			css=["css/NWTools.css"],
 			less=["less/NWTools.less"]
 		)

@@ -384,6 +384,7 @@ $(function() {
 	}
 
 	self.preheat = function (toolnumber, material, callback) {
+		NWToolsAlerts.preheatAlert();
 			var messageType = "preheating";
 	    	var messageData = {message:"", title:""};
 	      var tipTemp = 0;
