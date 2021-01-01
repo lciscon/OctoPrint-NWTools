@@ -50,6 +50,12 @@
     width: 30%
 }
 
+#temperature-graph {
+	height: 250px;
+	max-height: 250px
+}
+
+
 #touch body #tabs #tab_plugin_NWTools_link a:before, #touch body #navbar #all_touchui_settings #tab_plugin_NWTools_link a:before, #touch body #tabs #tab_plugin_NWTools_link2 a:before, #touch body #navbar #all_touchui_settings #tab_plugin_NWTools_link2 a:before {
         content: "\f0ad"
 }
