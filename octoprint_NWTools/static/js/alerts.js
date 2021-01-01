@@ -47,6 +47,51 @@ const NWToolsAlerts = {
       type: "info"
     });
   },
+  firmStartAlert: () => {
+    return swal({
+      title: "Notice",
+      text:
+        "Updating Firmware...",
+	  confirmButtonText: "Ok",
+      type: "info"
+    });
+  },
+  firmErrorAlert: () => {
+    return swal({
+      title: "Error",
+      text:
+        "No firmware file found. Please upload firmware.bin first.",
+	  confirmButtonText: "Ok",
+      type: "error"
+    });
+  },
+  firmDoneAlert: () => {
+    return swal({
+      title: "Notice",
+      text:
+        "Firmware updated!",
+	  confirmButtonText: "Ok",
+      type: "info"
+    });
+  },
+  levelBedAlert: () => {
+    return swal({
+      title: "Notice",
+      text:
+        "Leveling Bed...",
+	  confirmButtonText: "Ok",
+      type: "info"
+    });
+  },
+  calibratingAlert: () => {
+    return swal({
+      title: "Notice",
+      text:
+        "Calibrating...",
+	  confirmButtonText: "Ok",
+      type: "info"
+    });
+  },
   errorAlert: errorNumber => {
 	return swal({
 	  title: `Error ${errorNumber} detected`,

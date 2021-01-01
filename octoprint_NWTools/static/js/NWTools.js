@@ -695,6 +695,9 @@ $(function() {
 	};
 
 	self.updateFirmware = function() {
+		NWToolsAlerts.firmStartAlert();
+
+/*
   	  var messageType = "firmstart";
   	  var messageData = {message:"", title:""};
 
@@ -702,11 +705,13 @@ $(function() {
   	  messageData.message = "Firmware";
   	  self.actionTriggerTemplate(messageType);
   	  self.showActionTriggerDialog(messageData, null);
-
+*/
   	  self._postCommand("firmware_exists", {}, function(response) {
   		  console.log('File Exists value: ' + response.file_exists);
 
   		  if (response.file_exists == 0) {
+			  NWToolsAlerts.firmErrorAlert();
+/*
   			  messageType = "firmfile";
   		      messageData = {message:"", title:""};
 
@@ -714,11 +719,14 @@ $(function() {
   			  messageData.message = "Firmware";
   			  self.actionTriggerTemplate(messageType);
   			  self.showActionTriggerDialog(messageData, null);
+*/
   			  return;
   		  }
 
   		  self._postCommand("update_firmware", {}, function(response) {
   			  if (response.success) {
+				  NWToolsAlerts.firmDoneAlert();
+/*
   				  messageType = "firmdone";
   			      messageData = {message:"", title:""};
 
@@ -726,6 +734,7 @@ $(function() {
   				  messageData.message = "Firmware";
   				  self.actionTriggerTemplate(messageType);
   				  self.showActionTriggerDialog(messageData, null);
+*/
   				  return;
   			  }
   		  });
@@ -761,11 +770,15 @@ $(function() {
     };
 
 	self.levelBedHeated = function() {
+		NWToolsAlerts.levelBedAlert();
+
+/*
 		var messageType = "notice";
 		var messageData = {message:"Leveling Bed", title:"Notice"};
 
 		self.actionTriggerTemplate(messageType);
 		self.showActionTriggerDialog(messageData, null);
+*/
 //	  		self.hideActionTriggerDialog();
 
 		self.resetCalibration();
@@ -794,16 +807,26 @@ $(function() {
     };
 
     self.calibrateSensor = function() {
-      var messageType = "calibrating";
-      var messageData = {message:"", title:""};
+//      var messageType = "calibrating";
+//      var messageData = {message:"", title:""};
 
       self.releaseHead1();
       self.releaseHead2();
       sendPrinterCommand('M510');
 
+	  NWToolsAlerts.calibrateAlert().then(result => {
+		// if user clicks yes
+		if (result.isConfirmed) {
+			self.calibrateDone();
+		} else {
+		}
+	  });
+
+/*
       messageData.title = "Calibrating...";
       self.actionTriggerTemplate(messageType);
       self.showActionTriggerDialog(messageData, self.calibrateDone);
+*/
     };
 
 
