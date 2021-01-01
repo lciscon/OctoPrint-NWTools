@@ -50,6 +50,10 @@
     width: 30%
 }
 
+#row-fluid {
+	max-height: 250px
+}
+
 #temperature-graph {
 	height: 250px;
 	max-height: 250px
