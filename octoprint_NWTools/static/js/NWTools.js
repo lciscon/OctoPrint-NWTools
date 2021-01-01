@@ -358,7 +358,7 @@ $(function() {
 	self.tempTimer = function () {
 	    var messageCmd = "";
 
-	      self.requestData();
+	    self.requestData();
 	    var stillRunning = false;
 
 	    if (self.targetTemp > 0) {
@@ -371,22 +371,25 @@ $(function() {
 	      }
 	    }
 
-		    if (stillRunning) {
+		if (stillRunning) {
 	        setTimeout(self.tempTimer, 1000);
 	    } else {
 	        console.log('Finished heatup! ');
-				  NWToolsAlerts.closeAlert();
-			      //self.hideActionTriggerDialog();
-			    if (self.tempCallback) {
-			    	self.tempCallback();
-			    }
+			NWToolsAlerts.closeAlert();
+			//self.hideActionTriggerDialog();
+			if ((self.currentTemp > 0) || (self.currentTemp2 > 0)) {
+				if (self.tempCallback) {
+				   	self.tempCallback();
+				}
+			}
 	    }
 	};
 
 	self.cancelPreheat = function () {
+		console.log('Cancelling preheat... ');
 		self.targetTemp = 0;
 		self.targetTemp2 = 0;
-		NWToolsAlerts.closeAlert();
+//		NWToolsAlerts.closeAlert();
 //		self.hideActionTriggerDialog();
 	}
 
@@ -425,9 +428,11 @@ $(function() {
 */
 	    	//begin hotend preheat
 	      sendPrinterCommand('M42');
-	      sendPrinterCommand('M190 S' + bedTemp);
+	      sendPrinterCommand('M140 S' + bedTemp);
+//		  sendPrinterCommand('M190 S' + bedTemp);
 	      sendPrinterCommand('T' + toolnumber);
-	      sendPrinterCommand('M109 S' + tipTemp);
+	      sendPrinterCommand('M104 S' + tipTemp);
+//		  sendPrinterCommand('M109 S' + tipTemp);
 
 	      if (toolnumber == 0) {
 		          self.targetTemp = tipTemp;
