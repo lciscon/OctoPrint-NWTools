@@ -114,9 +114,11 @@ $(function() {
         self.tool1_YOffset["key"]("tool1_YOffset");
 		self.tool1_YOffset["showtest"](false);
 
+/* LC3
     	self.actionTriggerTemplate = ko.observable(undefined);
 	    self.actionTriggerCallback = function () {
 	    };
+
 
 	    self.showActionTriggerDialog2 = function (data, callback, callback2) {
       		var actionTriggerDialog = $("#action_trigger_dialog");
@@ -157,6 +159,7 @@ $(function() {
 		self.showActionTriggerDialog = function (data, callback) {
 			self.showActionTriggerDialog2(data, callback, null);
 		};
+		LC3 */
 
 	function sleep (time) {
 	    	return new Promise((resolve) => setTimeout(resolve, time));
@@ -327,6 +330,7 @@ $(function() {
 //       self.control.sendCustomCommand({ command: cmdstr });
    	};
 
+/*LC3
 	self.hideActionTriggerDialog = function () {
            var actionTriggerDialog = $("#action_trigger_dialog");
            actionTriggerDialog.modal({
@@ -335,6 +339,7 @@ $(function() {
            $("#action_trigger_dialog").modal("hide");
 //           self.showControls();
    	};
+LC3*/
 
 	self.extrusionRunning = false;
 	self.extrusionDirection = 1;
@@ -843,7 +848,6 @@ $(function() {
 		// if user clicks yes
 		if (result.isConfirmed) {
 			self.calibrateDone();
-		} else {
 		}
 	  });
 
