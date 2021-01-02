@@ -539,7 +539,7 @@ LC3*/
 //            self.showActionTriggerDialog(messageData, self.loadFilamentComplete);
 		NWToolsAlerts.loadFilamentAlert().then(result => {
 		  // if user clicks yes
-		  if (result.isConfirmed) {
+		  if (result.value) {
 			  self.loadFilamentComplete();
 		  }
 	    });
@@ -575,7 +575,7 @@ LC3*/
 
 		NWToolsAlerts.unloadFilamentAlert().then(result => {
 		  // if user clicks yes
-		  if (result.isConfirmed) {
+		  if (result.value) {
 			  self.unloadFilamentComplete();
 		  }
 		});
@@ -651,12 +651,8 @@ LC3*/
 
 	self.resetDefaults = function() {
 		NWToolsAlerts.resetDefaultAlert().then(result => {
-		  // if user clicks yes
-		  if (result.isConfirmed) {
+		  if (result.value) {
 			  self.resetDefaultsGo();
-		  }
-		  // if user clicks no
-		  else {
 		  }
 	    });
 
@@ -694,12 +690,9 @@ LC3*/
 	self.autoCalibrate = function() {
 		NWToolsAlerts.probeTestAlert().then(result => {
           // if user clicks yes
-          if (result.isConfirmed) {
+		  if (result.value) {
 			  self.autoCalibrateGo();
-          }
-          // if user clicks no
-          else {
-          }
+		  }
 	  });
 	};
 
@@ -725,13 +718,10 @@ LC3*/
 
 	self.autoCalibrate2 = function() {
 		NWToolsAlerts.probeTestAlert().then(result => {
-          // if user clicks yes
-          if (result.isConfirmed) {
-			  self.autoCalibrate2Go();
-          }
-          // if user clicks no
-          else {
-          }
+		  // if user clicks yes
+			if (result.value) {
+				self.autoCalibrate2Go();
+			}
 	  });
 	};
 
@@ -857,9 +847,9 @@ LC3*/
 
 	  NWToolsAlerts.calibratingAlert().then(result => {
 		// if user clicks yes
-		if (result.isConfirmed) {
-			self.calibrateDone();
-		}
+		  if (result.value) {
+			  self.calibrateDone();
+		  }
 	  });
 
 /*
