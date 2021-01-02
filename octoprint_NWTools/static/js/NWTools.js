@@ -429,6 +429,17 @@ LC3*/
 		  console.log('Starting heatup! ');
 
 		  NWToolsAlerts.preheatAlert().then(result => {
+			  // if user clicks yes
+	          if (result.value) {
+	          }
+	          // if user clicks no
+	          else if (result.dismiss === Swal.DismissReason.cancel) {
+				  self.cancelPreheat();
+	          }
+		  });
+
+/*
+		  NWToolsAlerts.preheatAlert().then(result => {
             // if user clicks yes
             if (result.isConfirmed) {
             } else {
@@ -436,7 +447,7 @@ LC3*/
 				self.cancelPreheat();
 			}
 		  });
-/*
+/
 		    self.tempCallback = callback;
 	    	messageData.title = "Preheating...";
 	    	self.actionTriggerTemplate(messageType);
