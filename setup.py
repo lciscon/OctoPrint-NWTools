@@ -65,6 +65,7 @@ additional_setup_parameters = {}
 
 from setuptools import setup
 # from setuptools.command.build import build
+from setuptools.command.install import install
 
 try:
 	import octoprint_setuptools
