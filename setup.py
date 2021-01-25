@@ -87,7 +87,7 @@ class Install(install):
         protoc_command = ["make", "install"]
         if subprocess.call(protoc_command) != 0:
             sys.exit(-1)
-        build.run(self)
+        install.run(self)
 
 setup_parameters = octoprint_setuptools.create_plugin_setup_parameters(
 	identifier=plugin_identifier,
