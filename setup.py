@@ -75,7 +75,7 @@ except:
 	import sys
 	sys.exit(-1)
 
-class Build(build):
+class Install(install):
     """Customized setuptools build command - builds protos on build."""
     def run(self):
         protoc_command = ["make", "all"]
@@ -101,7 +101,7 @@ setup_parameters = octoprint_setuptools.create_plugin_setup_parameters(
 	ignored_packages=plugin_ignored_packages,
 	additional_data=plugin_additional_data,
     cmdclass={
-        'build': Build,
+        'install': Install,
     },
 )
 
