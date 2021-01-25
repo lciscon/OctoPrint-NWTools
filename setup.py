@@ -63,6 +63,9 @@ additional_setup_parameters = {}
 
 ########################################################################################################################
 
+import subprocess
+import sys
+
 from setuptools import setup
 # from setuptools.command.build import build
 from setuptools.command.install import install
