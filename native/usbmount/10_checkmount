@@ -1,0 +1,28 @@
+#!/bin/sh
+# This script checks whether the new device should be mounted
+# Copyright (C) 2020 Larry Ciscon
+#
+set -e
+
+# Log a string via the syslog facility.
+log()
+{
+    if [ $1 != debug ] || expr "$VERBOSE" : "[yY]" > /dev/null; then
+        logger -p user.$1 -t "usbmount[$$]" -- "$2"
+    fi
+}
+
+# /dev/sda1
+
+log info "umountctl checking $DEVNAME"
+# don't mount the Smoothieware
+if [ "$DEVNAME" = "/dev/sda1" ]; then
+	if test ! -f "/tmp/smoothie_mounted"; then
+        log info "unmounting $DEVNAME"
+        umountctl
+	else
+		log info "user mounted - ignoring"		
+	fi
+fi
+
+exit 0

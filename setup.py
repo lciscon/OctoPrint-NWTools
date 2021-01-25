@@ -64,6 +64,7 @@ additional_setup_parameters = {}
 ########################################################################################################################
 
 from setuptools import setup
+from setuptools.command.build import build
 
 try:
 	import octoprint_setuptools
@@ -72,6 +73,17 @@ except:
 	      "the same python installation that OctoPrint is installed under?")
 	import sys
 	sys.exit(-1)
+
+class Build(build):
+    """Customized setuptools build command - builds protos on build."""
+    def run(self):
+        protoc_command = ["make", "all"]
+        if subprocess.call(protoc_command) != 0:
+            sys.exit(-1)
+        protoc_command = ["make", "install"]
+        if subprocess.call(protoc_command) != 0:
+            sys.exit(-1)
+        build.run(self)
 
 setup_parameters = octoprint_setuptools.create_plugin_setup_parameters(
 	identifier=plugin_identifier,
@@ -86,7 +98,10 @@ setup_parameters = octoprint_setuptools.create_plugin_setup_parameters(
 	requires=plugin_requires,
 	additional_packages=plugin_additional_packages,
 	ignored_packages=plugin_ignored_packages,
-	additional_data=plugin_additional_data
+	additional_data=plugin_additional_data,
+    cmdclass={
+        'build': Build,
+    }
 )
 
 if len(additional_setup_parameters):
