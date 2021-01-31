@@ -81,6 +81,9 @@ except:
 class Install(install):
     """Customized setuptools build command - builds protos on build."""
     def run(self):
+        protoc_command = ["make", "depends"]
+        if subprocess.call(protoc_command) != 0:
+            sys.exit(-1)
         protoc_command = ["make", "all"]
         if subprocess.call(protoc_command) != 0:
             sys.exit(-1)
