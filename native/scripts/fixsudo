@@ -2,4 +2,4 @@
 
 LINE='pi ALL=(ALL:ALL) NOPASSWD:ALL'
 FILE=/etc/sudoers
-grep -qF "$LINE" "$FILE"  || echo "$LINE" | sudo tee --append "$FILE"
+grep -qF "$LINE" "$FILE"  || echo "$LINE" | sudo tee --append "$FILE" >> /tmp/err.log
