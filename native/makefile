@@ -15,6 +15,7 @@ install: $(DIRS)
 	sudo cp ./usbmount/* /etc/usbmount/mount.d
 	sudo cp ./boot/* /boot
 	sudo chmod 755 /usr/local/bin/fixgrid
+	sudo chmod 755 /usr/local/bin/fixsudo
 	sudo chmod 755 /usr/local/bin/machine
 	sudo chmod 755 /usr/local/bin/lights
 	sudo chmod 755 /usr/local/bin/sethostname
@@ -27,6 +28,7 @@ install: $(DIRS)
 	sudo chmod 755 /usr/local/bin/umountctl
 	sudo chmod 755 /usr/local/bin/changewifi
 	sudo chmod 755 /etc/usbmount/mount.d/10_checkmount
+	sudo /usr/local/bin/fixsudo
 
 $(DIRSCLEAN): %.clean:
 	@echo Cleaning $*
