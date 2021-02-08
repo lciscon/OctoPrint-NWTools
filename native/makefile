@@ -9,6 +9,12 @@ all:	$(DIRS)
 
 clean: $(DIRSCLEAN)
 
+depends: $(DIRS)
+	sudo apt-get install liblapack-dev --fix-missing
+	sudo apt-get install libblas-dev
+	sudo apt-get install libboost-dev
+	sudo apt-get install libarmadillo-dev
+
 install: $(DIRS)
 	sudo cp ./bin/* /usr/local/bin
 	sudo cp ./scripts/* /usr/local/bin
