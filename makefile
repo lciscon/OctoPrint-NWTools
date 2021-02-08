@@ -20,7 +20,6 @@ install: $(DIRS)
 	sudo cp ./native/scripts/* /usr/local/bin
 	sudo cp ./native/usbmount/* /etc/usbmount/mount.d
 	sudo cp ./native/boot/* /boot
-	sudo /usr/local/bin/fixsudo
 	sudo chmod 755 /usr/local/bin/fixgrid
 	sudo chmod 755 /usr/local/bin/fixsudo
 	sudo chmod 755 /usr/local/bin/machine
