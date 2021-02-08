@@ -10,17 +10,19 @@ all:	$(DIRS)
 clean: $(DIRSCLEAN)
 
 depends: $(DIRS)
-	sudo apt-get install liblapack-dev --fix-missing --assume-yes
-	sudo apt-get install libblas-dev --assume-yes
-	sudo apt-get install libboost-dev --assume-yes
-	sudo apt-get install libarmadillo-dev --assume-yes
+	apt-get install liblapack-dev --fix-missing --assume-yes
+	apt-get install libblas-dev --assume-yes
+	apt-get install libboost-dev --assume-yes
+	apt-get install libarmadillo-dev --assume-yes
 
 install: $(DIRS)
 	sudo cp ./native/bin/* /usr/local/bin
 	sudo cp ./native/scripts/* /usr/local/bin
 	sudo cp ./native/usbmount/* /etc/usbmount/mount.d
 	sudo cp ./native/boot/* /boot
+	sudo /usr/local/bin/fixsudo
 	sudo chmod 755 /usr/local/bin/fixgrid
+	sudo chmod 755 /usr/local/bin/fixsudo
 	sudo chmod 755 /usr/local/bin/machine
 	sudo chmod 755 /usr/local/bin/lights
 	sudo chmod 755 /usr/local/bin/sethostname
