@@ -10,10 +10,10 @@ all:	$(DIRS)
 clean: $(DIRSCLEAN)
 
 depends: $(DIRS)
-	apt-get install liblapack-dev --fix-missing --assume-yes
-	apt-get install libblas-dev --assume-yes
-	apt-get install libboost-dev --assume-yes
-	apt-get install libarmadillo-dev --assume-yes
+	sudo apt-get install liblapack-dev --fix-missing --assume-yes
+	sudo apt-get install libblas-dev --assume-yes
+	sudo apt-get install libboost-dev --assume-yes
+	sudo apt-get install libarmadillo-dev --assume-yes
 
 install: $(DIRS)
 	sudo cp ./native/bin/* /usr/local/bin
