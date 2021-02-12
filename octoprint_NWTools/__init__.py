@@ -303,6 +303,7 @@ class NwtoolsPlugin(octoprint.plugin.SettingsPlugin,
 # can be overwritten via __plugin_xyz__ control properties. See the documentation for that.
 __plugin_name__ = "Northworks Tools"
 __plugin_implementation__ = NwtoolsPlugin()
+__plugin_pythoncompat__ = ">=2.7,<4"
 
 def __plugin_check__():
     return True
