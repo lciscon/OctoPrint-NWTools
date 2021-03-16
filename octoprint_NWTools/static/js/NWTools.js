@@ -215,14 +215,6 @@ $(function() {
 			self.startedAction = 0;  //make sure to clear out any actions I started
 
 			NWToolsAlerts.errorAlert(data.text);
-
-/*
-			var messageType = "notice";
-			var messageData = {message:data.text, title:"Error"};
-
-			self.actionTriggerTemplate(messageType);
-			self.showActionTriggerDialog(messageData, null);
-*/
 		} else if (data.action == "gridsave") {
 			//the grid was saved.  run the fixgrid command and reopen the connection
 //			self._postCommand("fixgrid", {});
@@ -270,19 +262,6 @@ $(function() {
 					}
 
 					NWToolsAlerts.bedLevelDoneAlert(messageData);
-
-/*
-					messageData.title = "Notice";
-
-					if ((Math.abs(curz[1]) < .1) && (Math.abs(curz[2]) < .1)) {
-						messageData.message = "Bed is level!";
-					} else {
-						messageData.message = "Adjust the screws and then re-level: Center: " + frontstr + " Right: " + backstr;
-					}
-
-					self.actionTriggerTemplate(messageType);
-					self.showActionTriggerDialog(messageData, null);
-*/
 					return;
 			  	}
 	  	  	});
@@ -438,21 +417,6 @@ LC3*/
 	          }
 		  });
 
-/*
-		  NWToolsAlerts.preheatAlert().then(result => {
-            // if user clicks yes
-            if (result.isConfirmed) {
-            } else {
-				// if user clicks no
-				self.cancelPreheat();
-			}
-		  });
-/
-		    self.tempCallback = callback;
-	    	messageData.title = "Preheating...";
-	    	self.actionTriggerTemplate(messageType);
-	    	self.showActionTriggerDialog(messageData, self.cancelPreheat);
-*/
 	    	//begin hotend preheat
 	      sendPrinterCommand('M42');
 	      sendPrinterCommand('M140 S' + bedTemp);
@@ -530,13 +494,8 @@ LC3*/
 
 
 	self.loadFilamentPreheated = function() {
-//            var messageType = "loading";
-//            var messageData = {message:"", title:"Load Filament"};
-
-            sendPrinterCommand('G91');
-            self.turnOnExtruder(1);
-//            self.actionTriggerTemplate(messageType);
-//            self.showActionTriggerDialog(messageData, self.loadFilamentComplete);
+        sendPrinterCommand('G91');
+        self.turnOnExtruder(1);
 		NWToolsAlerts.loadFilamentAlert().then(result => {
 		  // if user clicks yes
 		  if (result.value) {
@@ -565,9 +524,6 @@ LC3*/
     };
 
    self.unloadFilamentPreheated = function() {
-//        var messageType = "unloading";
-//        var messageData = {message:"", title:"Unload Filament"};
-
     	sendPrinterCommand('G91');
     	//move forward a bit to remove blobs
         sendPrinterCommand('G1 E5 F100');
@@ -579,9 +535,6 @@ LC3*/
 			  self.unloadFilamentComplete();
 		  }
 		});
-
-//        self.actionTriggerTemplate(messageType);
-//        self.showActionTriggerDialog(messageData, self.unloadFilamentComplete);
 	};
 
 	//this will be called when they press the unloadFilament button
@@ -600,18 +553,9 @@ LC3*/
 	self.rebootController = function() {
 
 		NWToolsAlerts.rebootAlert();
-/*
-		var messageType = "notice";
-		var messageData = {message:"Rebooting...", title:"Notice"};
-
-		self.actionTriggerTemplate(messageType);
-		self.showActionTriggerDialog(messageData, null);
-*/
-
 		self._postCommand("reboot_controller", {}, function(response) {
 			self.reconnectSerial();
 			NWToolsAlerts.closeAlert();
-//	  		self.hideActionTriggerDialog();
 	    });
 	};
 
@@ -655,15 +599,6 @@ LC3*/
 			  self.resetDefaultsGo();
 		  }
 	    });
-
-		  /*
-		  		var messageType = "notice2"; //startprobe
-		  		var messageData = {message:"This will reset the settings to the defaults.", title:"Warning"};
-
-		  		self.actionTriggerTemplate(messageType);
-		  		self.showActionTriggerDialog(messageData, self.resetDefaultsGo, null);
-		  */
-
 	};
 
 
@@ -726,46 +661,19 @@ LC3*/
 	};
 
 	self.updateFirmware = function() {
-		NWToolsAlerts.firmStartAlert();
+	  NWToolsAlerts.firmStartAlert();
 
-/*
-  	  var messageType = "firmstart";
-  	  var messageData = {message:"", title:""};
-
-  	  messageData.title = "Notice";
-  	  messageData.message = "Firmware";
-  	  self.actionTriggerTemplate(messageType);
-  	  self.showActionTriggerDialog(messageData, null);
-*/
   	  self._postCommand("firmware_exists", {}, function(response) {
   		  console.log('File Exists value: ' + response.file_exists);
 
   		  if (response.file_exists == 0) {
 			  NWToolsAlerts.firmErrorAlert();
-/*
-  			  messageType = "firmfile";
-  		      messageData = {message:"", title:""};
-
-  			  messageData.title = "Error";
-  			  messageData.message = "Firmware";
-  			  self.actionTriggerTemplate(messageType);
-  			  self.showActionTriggerDialog(messageData, null);
-*/
   			  return;
   		  }
 
   		  self._postCommand("update_firmware", {}, function(response) {
   			  if (response.success) {
 				  NWToolsAlerts.firmDoneAlert();
-/*
-  				  messageType = "firmdone";
-  			      messageData = {message:"", title:""};
-
-  				  messageData.title = "Notice";
-  				  messageData.message = "Firmware";
-  				  self.actionTriggerTemplate(messageType);
-  				  self.showActionTriggerDialog(messageData, null);
-*/
   				  return;
   			  }
   		  });
@@ -802,16 +710,6 @@ LC3*/
 
 	self.levelBedHeated = function() {
 		NWToolsAlerts.levelBedAlert();
-
-/*
-		var messageType = "notice";
-		var messageData = {message:"Leveling Bed", title:"Notice"};
-
-		self.actionTriggerTemplate(messageType);
-		self.showActionTriggerDialog(messageData, null);
-*/
-//	  		self.hideActionTriggerDialog();
-
 		self.resetCalibration();
   		sendPrinterCommand('M400');
   	    sendPrinterCommand('G91');
@@ -823,6 +721,16 @@ LC3*/
   	  	sendPrinterCommand('G33');
 		self.coolDown(0);
     };
+
+/*
+	self.levelBedAlert2 = function() {
+	  NWToolsAlerts.levelBedAlert();
+
+  	  self._postCommand("firmware_exists", {}, function(response) {
+		  NWToolsAlerts.levelBedAlert();
+  	  });
+    };
+*/
 
     self.levelBed = function() {
   	     self.preheat(0, 1, self.levelBedHeated);
@@ -838,9 +746,6 @@ LC3*/
     };
 
     self.calibrateSensor = function() {
-//      var messageType = "calibrating";
-//      var messageData = {message:"", title:""};
-
       self.releaseHead1();
       self.releaseHead2();
       sendPrinterCommand('M510');
@@ -851,12 +756,6 @@ LC3*/
 			  self.calibrateDone();
 		  }
 	  });
-
-/*
-      messageData.title = "Calibrating...";
-      self.actionTriggerTemplate(messageType);
-      self.showActionTriggerDialog(messageData, self.calibrateDone);
-*/
     };
 
 
