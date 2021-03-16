@@ -87,6 +87,7 @@ class NwtoolsPlugin(octoprint.plugin.SettingsPlugin,
 			fixgrid=[],
 			mountctl=[],
 			umountctl=[],
+			show_notice=[],
 		)
 
 	def on_api_get(self, request):
@@ -110,6 +111,9 @@ class NwtoolsPlugin(octoprint.plugin.SettingsPlugin,
 			self._exec_cmd("machine restart")
 			time.sleep(3)
 			return jsonify(dict(success="true"))
+
+		elif command == "show_notice":
+			self._plugin_manager.send_plugin_message(self._identifier, dict(action="notice", text=data))
 
 		elif command == "lights_on":
 			self._exec_cmd("lights on")

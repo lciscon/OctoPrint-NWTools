@@ -27,6 +27,7 @@ const NWToolsAlerts = {
     });
   },
   preheatAlert: () => {
+	NWToolsAlerts.sendRemoteNotice("Preheating...");
     return swal({
       title: "Notice",
       text:
@@ -117,7 +118,7 @@ const NWToolsAlerts = {
 	  type: "error"
 	});
   },
-  bedLevelDoneAlert: message => {
+  noticeAlert: message => {
 	return swal({
 	  title: `Notice`,
 	  text: message,
@@ -135,6 +136,18 @@ const NWToolsAlerts = {
       reverseButtons: false,
       type: "info"
     });
+  },
+  sendRemoteNotice: message => {
+	  self._postCommand("show_notice", {message: message});
+  },
+  remoteNoticeAlert: message => {
+	if (!Swal.isVisible()) {
+		return swal({
+		  title: `Notice`,
+		  text: message,
+		  type: "info"
+		});
+	}
   },
   closeAlert: () => {
 	if (Swal.isVisible()) {

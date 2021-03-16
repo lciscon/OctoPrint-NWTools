@@ -114,53 +114,6 @@ $(function() {
         self.tool1_YOffset["key"]("tool1_YOffset");
 		self.tool1_YOffset["showtest"](false);
 
-/* LC3
-    	self.actionTriggerTemplate = ko.observable(undefined);
-	    self.actionTriggerCallback = function () {
-	    };
-
-
-	    self.showActionTriggerDialog2 = function (data, callback, callback2) {
-      		var actionTriggerDialog = $("#action_trigger_dialog");
-      		var actionTriggerDialogAck = $(".action_trigger_dialog_acknowledge", actionTriggerDialog);
-			var actionTriggerDialogAck2 = $(".action_trigger_dialog_acknowledge2", actionTriggerDialog);
-
-      		$(".action_trigger_title", actionTriggerDialog).text(data.title);
-      		$(".action_trigger_dialog_message", actionTriggerDialog).text(data.message);
-      		actionTriggerDialogAck.unbind("click");
-			actionTriggerDialogAck2.unbind("click");
-		    self.actionTriggerCallback = callback;
-			self.actionTriggerCallback2 = callback2;
-
-      		actionTriggerDialogAck.bind("click", function (e) {
-     		   e.preventDefault();
-    		   $("#action_trigger_dialog").modal("hide");
-               if (self.actionTriggerCallback !== null) {
-                    self.actionTriggerCallback();
-               }
-      		});
-
-			actionTriggerDialogAck2.bind("click", function (e) {
-     		   e.preventDefault();
-    		   $("#action_trigger_dialog").modal("hide");
-               if (self.actionTriggerCallback2 !== null) {
-                    self.actionTriggerCallback2();
-               }
-      		});
-
-      		actionTriggerDialog.modal({
-     		   show: 'true',
-    		    backdrop:'static',
-   		     keyboard: false
-      		});
-
-    	};
-
-		self.showActionTriggerDialog = function (data, callback) {
-			self.showActionTriggerDialog2(data, callback, null);
-		};
-		LC3 */
-
 	function sleep (time) {
 	    	return new Promise((resolve) => setTimeout(resolve, time));
 	}
@@ -215,6 +168,10 @@ $(function() {
 			self.startedAction = 0;  //make sure to clear out any actions I started
 
 			NWToolsAlerts.errorAlert(data.text);
+		} else if (data.action == "notice") {
+			NWToolsAlerts.remoteNoticeAlert(messageData);
+		} else if (data.action == "closealert") {
+			NWToolsAlerts.closeAlert();
 		} else if (data.action == "gridsave") {
 			//the grid was saved.  run the fixgrid command and reopen the connection
 //			self._postCommand("fixgrid", {});
@@ -261,7 +218,7 @@ $(function() {
 						messageData = "Adjust the screws and then re-level: Center: " + frontstr + " Right: " + backstr;
 					}
 
-					NWToolsAlerts.bedLevelDoneAlert(messageData);
+					NWToolsAlerts.noticeAlert(messageData);
 					return;
 			  	}
 	  	  	});
@@ -308,17 +265,6 @@ $(function() {
 	   OctoPrint.control.sendGcode(cmdstr);
 //       self.control.sendCustomCommand({ command: cmdstr });
    	};
-
-/*LC3
-	self.hideActionTriggerDialog = function () {
-           var actionTriggerDialog = $("#action_trigger_dialog");
-           actionTriggerDialog.modal({
-              show: 'false'
-           });
-           $("#action_trigger_dialog").modal("hide");
-//           self.showControls();
-   	};
-LC3*/
 
 	self.extrusionRunning = false;
 	self.extrusionDirection = 1;
@@ -721,16 +667,6 @@ LC3*/
   	  	sendPrinterCommand('G33');
 		self.coolDown(0);
     };
-
-/*
-	self.levelBedAlert2 = function() {
-	  NWToolsAlerts.levelBedAlert();
-
-  	  self._postCommand("firmware_exists", {}, function(response) {
-		  NWToolsAlerts.levelBedAlert();
-  	  });
-    };
-*/
 
     self.levelBed = function() {
   	     self.preheat(0, 1, self.levelBedHeated);
