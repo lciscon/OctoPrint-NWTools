@@ -137,8 +137,8 @@ const NWToolsAlerts = {
     });
   },
   closeAlert: () => {
-	if (Swal.isVisible()) {
-	  Swal.close();
-	}
+//	if (Swal.isVisible()) {
+//	  Swal.close();
+//	}
   },
 };
