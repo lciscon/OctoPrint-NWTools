@@ -171,7 +171,7 @@ $(function() {
 		} else if (data.action == "notice") {
 			NWToolsAlerts.remoteNoticeAlert(data.text);
 		} else if (data.action == "closenotice") {
-			NWToolsAlerts.closeAlert();
+//			NWToolsAlerts.closeAlert();
 		} else if (data.action == "gridsave") {
 			//the grid was saved.  run the fixgrid command and reopen the connection
 //			self._postCommand("fixgrid", {});
