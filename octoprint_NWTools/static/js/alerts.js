@@ -27,7 +27,6 @@ const NWToolsAlerts = {
     });
   },
   preheatAlert: () => {
-	NWToolsAlerts.sendRemoteNotice("Preheating...");
     return swal({
       title: "Notice",
       text:
@@ -136,9 +135,6 @@ const NWToolsAlerts = {
       reverseButtons: false,
       type: "info"
     });
-  },
-  sendRemoteNotice: message => {
-	  self._postCommand("show_notice", {message: message});
   },
   remoteNoticeAlert: message => {
 	if (!Swal.isVisible()) {

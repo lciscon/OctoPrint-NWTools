@@ -266,6 +266,10 @@ $(function() {
 //       self.control.sendCustomCommand({ command: cmdstr });
    	};
 
+	function sendRemoteNotice (message) {
+		self._postCommand("show_notice", {message: message});
+   	};
+
 	self.extrusionRunning = false;
 	self.extrusionDirection = 1;
 
@@ -353,6 +357,7 @@ $(function() {
 
 		  console.log('Starting heatup! ');
 
+		  sendRemoteNotice("Preheating...");
 		  NWToolsAlerts.preheatAlert().then(result => {
 			  // if user clicks yes
 	          if (result.value) {
@@ -656,6 +661,7 @@ $(function() {
 
 	self.levelBedHeated = function() {
 		NWToolsAlerts.levelBedAlert();
+		sendRemoteNotice("Leveling Bed...");
 		self.resetCalibration();
   		sendPrinterCommand('M400');
   	    sendPrinterCommand('G91');
