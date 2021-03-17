@@ -180,7 +180,7 @@ $(function() {
 				NWToolsAlerts.noticeAlert(data.text);
 			}
 		} else if (data.action == "closenotice") {
-/*			
+/*
 			if (self.remoteNoticeVisible) {
 				NWToolsAlerts.closeAlert();
 				self.remoteNoticeVisible = false;
@@ -281,6 +281,8 @@ $(function() {
    	};
 
 	function sendRemoteNotice (message) {
+		//if I am sending a notice, then there can't be a remote notice visible locally!
+		self.remoteNoticeVisible = false;
 		self._postCommand("show_notice", {message: message});
    	};
 
@@ -517,10 +519,11 @@ $(function() {
     };
 
 	self.rebootController = function() {
-
+		sendRemoteNotice("Rebooting Controller...");
 		NWToolsAlerts.rebootAlert();
 		self._postCommand("reboot_controller", {}, function(response) {
 			self.reconnectSerial();
+			closeRemoteNotice();
 			NWToolsAlerts.closeAlert();
 	    });
 	};
