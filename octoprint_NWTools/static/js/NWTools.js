@@ -359,7 +359,7 @@ $(function() {
 		console.log('Cancelling preheat... ');
 		self.targetTemp = 0;
 		self.targetTemp2 = 0;
-		closeRemoteAlert();
+		self.closeRemoteAlert();
 	}
 
 	self.preheat = function (toolnumber, material, callback) {
