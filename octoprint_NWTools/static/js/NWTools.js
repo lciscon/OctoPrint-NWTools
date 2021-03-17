@@ -180,12 +180,10 @@ $(function() {
 				NWToolsAlerts.noticeAlert(data.text);
 			}
 		} else if (data.action == "closenotice") {
-/*
 			if (self.remoteNoticeVisible) {
 				NWToolsAlerts.closeAlert();
 				self.remoteNoticeVisible = false;
 			}
-*/
 		} else if (data.action == "gridsave") {
 			//the grid was saved.  run the fixgrid command and reopen the connection
 //			self._postCommand("fixgrid", {});
@@ -340,7 +338,7 @@ $(function() {
 	        setTimeout(self.tempTimer, 1000);
 	    } else {
 	        console.log('Finished heatup! ');
-			closeRemoteNotice();
+			//dont call closeRemoteNotcie() here...not needed and it causes timing issues
 			NWToolsAlerts.closeAlert();
 			if ((self.targetTemp > 0) || (self.targetTemp2 > 0)) {
 				if (self.tempCallback) {
@@ -455,6 +453,7 @@ $(function() {
 	};
 
 	self.loadFilamentComplete = function() {
+		closeRemoteNotice();
 	    self.turnOffExtruder();
 //            sendPrinterCommand('G90'); //switch back to absolute mode
             sendPrinterCommand('M104 S0'); //turn off heater
@@ -464,6 +463,7 @@ $(function() {
 	self.loadFilamentPreheated = function() {
         sendPrinterCommand('G91');
         self.turnOnExtruder(1);
+		sendRemoteNotice("Loading Filament...");
 		NWToolsAlerts.loadFilamentAlert().then(result => {
 		  // if user clicks yes
 		  if (result.value) {
@@ -486,7 +486,8 @@ $(function() {
 	};
 
     self.unloadFilamentComplete = function() {
-    self.turnOffExtruder();
+		closeRemoteNotice();
+    	self.turnOffExtruder();
 //            sendPrinterCommand('G90');
         sendPrinterCommand('M104 S0');
     };
@@ -497,6 +498,7 @@ $(function() {
         sendPrinterCommand('G1 E5 F100');
         self.turnOnExtruder(-1);
 
+		sendRemoteNotice("Unloading Filament...");
 		NWToolsAlerts.unloadFilamentAlert().then(result => {
 		  // if user clicks yes
 		  if (result.value) {
@@ -583,6 +585,7 @@ $(function() {
 	};
 
 	self.autoCalibrateHeated = function () {
+
       self.autoCalibrateRun();
       self.lockHead1();
 	};
@@ -652,6 +655,9 @@ $(function() {
 	self.calibrateBedHeated = function () {
       self.resetCalibration();
       self.autoCalibrateRun();
+
+	  NWToolsAlerts.calibrateBedAlert();
+	  sendRemoteNotice("Calibrating Bed...");
 
       sendPrinterCommand('G91');
       sendPrinterCommand('G0 Z2 F300');

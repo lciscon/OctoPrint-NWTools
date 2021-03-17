@@ -101,6 +101,15 @@ const NWToolsAlerts = {
       type: "info"
     });
   },
+  calibrateBedAlert: () => {
+    return swal({
+      title: "Notice",
+      text:
+        "Calibrating Bed...",
+	  confirmButtonText: "Ok",
+      type: "info"
+    });
+  },
   calibratingAlert: () => {
     return swal({
       title: "Notice",
