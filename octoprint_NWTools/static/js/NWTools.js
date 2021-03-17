@@ -205,7 +205,7 @@ $(function() {
 			self.remoteNoticeVisible = false;
 			NWToolsAlerts.noticeAlert("Grid Calibration Complete!");
 		} else if (data.action == "probecomplete") {
-			self.closeRemoteAlert();
+//			self.closeRemoteAlert(); BUGBUG
 		} else if (data.action == "levelcomplete") {
 			self._postCommand("get_leveling", {}, function(response) {
 			  	if (response.levels) {
@@ -592,8 +592,8 @@ $(function() {
 	};
 
 	self.autoCalibrateHeated = function () {
-		self.sendRemoteAlert("Probing...");
-		NWToolsAlerts.probingAlert();
+//		self.sendRemoteAlert("Probing..."); BUGBUG
+//		NWToolsAlerts.probingAlert();
 
         self.autoCalibrateRun();
         self.lockHead1();
@@ -624,8 +624,8 @@ $(function() {
 	};
 
 	self.autoCalibrate2Heated = function () {
-		NWToolsAlerts.probingAlert();
-		self.sendRemoteAlert("Probing...");
+//		NWToolsAlerts.probingAlert();  BUGBUG
+//		self.sendRemoteAlert("Probing...");
 
       self.autoCalibrate2Run();
       self.lockHead2();
