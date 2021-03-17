@@ -201,8 +201,9 @@ $(function() {
 				} finally {
 					self.startedAction = 0;
 				}
-				self.closeRemoteAlert();
 			}
+			self.remoteNoticeVisible = false;
+			NWToolsAlerts.noticeAlert("Grid Calibration Complete!");
 		} else if (data.action == "probecomplete") {
 			self.closeRemoteAlert();
 		} else if (data.action == "levelcomplete") {
@@ -230,6 +231,7 @@ $(function() {
 						messageData = "Adjust the screws and then re-level: Center: " + frontstr + " Right: " + backstr;
 					}
 
+					self.remoteNoticeVisible = false;
 					NWToolsAlerts.noticeAlert(messageData);
 					return;
 			  	}
