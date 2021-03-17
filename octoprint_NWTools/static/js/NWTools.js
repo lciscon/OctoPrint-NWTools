@@ -170,7 +170,7 @@ $(function() {
 			NWToolsAlerts.errorAlert(data.text);
 		} else if (data.action == "notice") {
 			NWToolsAlerts.remoteNoticeAlert(data.text);
-		} else if (data.action == "closealert") {
+		} else if (data.action == "closenotice") {
 			NWToolsAlerts.closeAlert();
 		} else if (data.action == "gridsave") {
 			//the grid was saved.  run the fixgrid command and reopen the connection
@@ -268,6 +268,10 @@ $(function() {
 
 	function sendRemoteNotice (message) {
 		self._postCommand("show_notice", {message: message});
+   	};
+
+	function closeRemoteNotice (message) {
+		self._postCommand("close_notice", {});
    	};
 
 	self.extrusionRunning = false;

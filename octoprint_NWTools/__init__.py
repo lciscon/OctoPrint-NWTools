@@ -88,6 +88,7 @@ class NwtoolsPlugin(octoprint.plugin.SettingsPlugin,
 			mountctl=[],
 			umountctl=[],
 			show_notice=[],
+			close_notice=[],
 		)
 
 	def on_api_get(self, request):
@@ -114,6 +115,9 @@ class NwtoolsPlugin(octoprint.plugin.SettingsPlugin,
 
 		elif command == "show_notice":
 			self._plugin_manager.send_plugin_message(self._identifier, dict(action="notice", text=data.message))
+
+		elif command == "close_notice":
+			self._plugin_manager.send_plugin_message(self._identifier, dict(action="closenotice"))
 
 		elif command == "lights_on":
 			self._exec_cmd("lights on")
