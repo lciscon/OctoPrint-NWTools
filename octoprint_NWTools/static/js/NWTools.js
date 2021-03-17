@@ -15,6 +15,8 @@ $(function() {
 
 		self.startedAction = 0;
 
+		self.remoteNoticeVisible = false;
+
 //        self.actual = ko.observable(-0.1);
 //        self.target = ko.observable(2);
 //        self.newTarget = ko.observable(3);
@@ -169,9 +171,19 @@ $(function() {
 
 			NWToolsAlerts.errorAlert(data.text);
 		} else if (data.action == "notice") {
-			NWToolsAlerts.remoteNoticeAlert(data.text);
+			if (NWToolsAlerts.alertVisible()) {
+				if (self.remoteNoticeVisible) {
+					NWToolsAlerts.noticeAlert(data.text);
+				}
+			} else {
+				self.remoteNoticeVisible = true;
+				NWToolsAlerts.noticeAlert(data.text);
+			}
 		} else if (data.action == "closenotice") {
-//			NWToolsAlerts.closeAlert();
+			if (self.remoteNoticeVisible) {
+				NWToolsAlerts.closeAlert();
+				self.remoteNoticeVisible = false;
+			}
 		} else if (data.action == "gridsave") {
 			//the grid was saved.  run the fixgrid command and reopen the connection
 //			self._postCommand("fixgrid", {});

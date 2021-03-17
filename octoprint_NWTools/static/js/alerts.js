@@ -136,14 +136,8 @@ const NWToolsAlerts = {
       type: "info"
     });
   },
-  remoteNoticeAlert: message => {
-	if (!Swal.isVisible()) {
-		return swal({
-		  title: `Notice`,
-		  text: message,
-		  type: "info"
-		});
-	}
+  alertVisible: () => {
+	return(Swal.isVisible());
   },
   closeAlert: () => {
 	if (Swal.isVisible()) {
