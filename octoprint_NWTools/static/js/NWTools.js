@@ -278,17 +278,17 @@ $(function() {
 //       self.control.sendCustomCommand({ command: cmdstr });
    	};
 
-	function sendRemoteAlert (message) {
+	self.sendRemoteAlert = function(message) {
 		//if I am sending a notice, then there can't be a remote notice visible locally!
 		self.remoteNoticeVisible = false;
 		self._postCommand("show_notice", {message: message});
    	};
 
-	function closeRemoteAlert (message) {
+	self.closeRemoteAlert = function() {
 		self._postCommand("close_notice", {});
    	};
 
-	function closeAlert () {
+	self.closeAlert = function() {
 		self.remoteNoticeVisible = false;
 		NWToolsAlerts.closeAlert();
    	};
@@ -377,7 +377,7 @@ $(function() {
 
 		  console.log('Starting heatup! ');
 
-		  sendRemoteAlert("Preheating...");
+		  self.sendRemoteAlert("Preheating...");
 		  NWToolsAlerts.preheatAlert().then(result => {
 			  // if user clicks yes
 	          if (result.value) {
