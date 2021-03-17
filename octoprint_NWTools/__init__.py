@@ -113,7 +113,7 @@ class NwtoolsPlugin(octoprint.plugin.SettingsPlugin,
 			return jsonify(dict(success="true"))
 
 		elif command == "show_notice":
-			self._plugin_manager.send_plugin_message(self._identifier, dict(action="notice", text=data))
+			self._plugin_manager.send_plugin_message(self._identifier, dict(action="notice", text=data.message))
 
 		elif command == "lights_on":
 			self._exec_cmd("lights on")

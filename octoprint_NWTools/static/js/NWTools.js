@@ -320,8 +320,8 @@ $(function() {
 	        setTimeout(self.tempTimer, 1000);
 	    } else {
 	        console.log('Finished heatup! ');
+			closeRemoteNotice();
 			NWToolsAlerts.closeAlert();
-			//self.hideActionTriggerDialog();
 			if ((self.targetTemp > 0) || (self.targetTemp2 > 0)) {
 				if (self.tempCallback) {
 				   	self.tempCallback();
@@ -334,13 +334,10 @@ $(function() {
 		console.log('Cancelling preheat... ');
 		self.targetTemp = 0;
 		self.targetTemp2 = 0;
-//		NWToolsAlerts.closeAlert();
-//		self.hideActionTriggerDialog();
+		closeRemoteNotice();
 	}
 
 	self.preheat = function (toolnumber, material, callback) {
-//			var messageType = "preheating";
-//	    	var messageData = {message:"", title:""};
 	      var tipTemp = 0;
 	      var bedTemp = 0;
 
