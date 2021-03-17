@@ -169,7 +169,7 @@ $(function() {
 
 			NWToolsAlerts.errorAlert(data.text);
 		} else if (data.action == "notice") {
-			NWToolsAlerts.remoteNoticeAlert(messageData);
+			NWToolsAlerts.remoteNoticeAlert(data.text);
 		} else if (data.action == "closealert") {
 			NWToolsAlerts.closeAlert();
 		} else if (data.action == "gridsave") {
