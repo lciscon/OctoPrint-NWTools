@@ -592,11 +592,11 @@ $(function() {
 	};
 
 	self.autoCalibrateHeated = function () {
-		NWToolsAlerts.probingAlert();
 		self.sendRemoteAlert("Probing...");
+		NWToolsAlerts.probingAlert();
 
-      self.autoCalibrateRun();
-      self.lockHead1();
+        self.autoCalibrateRun();
+        self.lockHead1();
 	};
 
 	self.autoCalibrateGo = function() {
