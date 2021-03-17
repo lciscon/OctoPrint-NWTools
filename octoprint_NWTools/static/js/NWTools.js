@@ -180,9 +180,9 @@ $(function() {
 				NWToolsAlerts.noticeAlert(data.text);
 			}
 		} else if (data.action == "closenotice") {
-//			if (self.remoteNoticeVisible) {  BUGBUG HACKHACK FIXFIX
-//				self.closeAlert();
-//			}
+			if (self.remoteNoticeVisible) {
+				self.closeAlert();
+			}
 		} else if (data.action == "gridsave") {
 			//the grid was saved.  run the fixgrid command and reopen the connection
 //			self._postCommand("fixgrid", {});
@@ -209,8 +209,6 @@ $(function() {
 			self._postCommand("get_leveling", {}, function(response) {
 			  	if (response.levels) {
 				  	curz = response.levels;
-//					var messageType = "notice";
-//					var messageData = {message:"", title:""};
 					var messageData
 					var frontstr;
 					var backstr;
@@ -290,7 +288,7 @@ $(function() {
 		self._postCommand("close_notice", {});
    	};
 
-	function closeAlert (message) {
+	function closeAlert () {
 		self.remoteNoticeVisible = false;
 		NWToolsAlerts.closeAlert();
    	};
@@ -665,11 +663,10 @@ $(function() {
     };
 
 	self.calibrateBedHeated = function () {
+	  NWToolsAlerts.calibrateBedAlert();
+  	  self.sendRemoteAlert("Calibrating Bed...");
       self.resetCalibration();
       self.autoCalibrateRun();
-
-	  NWToolsAlerts.calibrateBedAlert();
-	  self.sendRemoteAlert("Calibrating Bed...");
 
       sendPrinterCommand('G91');
       sendPrinterCommand('G0 Z2 F300');
