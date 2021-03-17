@@ -180,10 +180,12 @@ $(function() {
 				NWToolsAlerts.noticeAlert(data.text);
 			}
 		} else if (data.action == "closenotice") {
+/*			
 			if (self.remoteNoticeVisible) {
 				NWToolsAlerts.closeAlert();
 				self.remoteNoticeVisible = false;
 			}
+*/
 		} else if (data.action == "gridsave") {
 			//the grid was saved.  run the fixgrid command and reopen the connection
 //			self._postCommand("fixgrid", {});
