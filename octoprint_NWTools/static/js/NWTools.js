@@ -181,8 +181,7 @@ $(function() {
 			}
 		} else if (data.action == "closenotice") {
 			if (self.remoteNoticeVisible) {
-				NWToolsAlerts.closeAlert();
-				self.remoteNoticeVisible = false;
+				self.closeAlert();
 			}
 		} else if (data.action == "gridsave") {
 			//the grid was saved.  run the fixgrid command and reopen the connection
@@ -202,7 +201,10 @@ $(function() {
 				} finally {
 					self.startedAction = 0;
 				}
+				self.closeRemoteAlert();
 			}
+		} else if (data.action == "probecomplete") {
+			self.closeRemoteAlert();
 		} else if (data.action == "levelcomplete") {
 			self._postCommand("get_leveling", {}, function(response) {
 			  	if (response.levels) {
@@ -278,14 +280,19 @@ $(function() {
 //       self.control.sendCustomCommand({ command: cmdstr });
    	};
 
-	function sendRemoteNotice (message) {
+	function sendRemoteAlert (message) {
 		//if I am sending a notice, then there can't be a remote notice visible locally!
 		self.remoteNoticeVisible = false;
 		self._postCommand("show_notice", {message: message});
    	};
 
-	function closeRemoteNotice (message) {
+	function closeRemoteAlert (message) {
 		self._postCommand("close_notice", {});
+   	};
+
+	function closeAlert (message) {
+		self.remoteNoticeVisible = false;
+		NWToolsAlerts.closeAlert();
    	};
 
 	self.extrusionRunning = false;
@@ -339,7 +346,7 @@ $(function() {
 	    } else {
 	        console.log('Finished heatup! ');
 			//dont call closeRemoteNotcie() here...not needed and it causes timing issues
-			NWToolsAlerts.closeAlert();
+			self.closeAlert();
 			if ((self.targetTemp > 0) || (self.targetTemp2 > 0)) {
 				if (self.tempCallback) {
 				   	self.tempCallback();
@@ -352,7 +359,7 @@ $(function() {
 		console.log('Cancelling preheat... ');
 		self.targetTemp = 0;
 		self.targetTemp2 = 0;
-		closeRemoteNotice();
+		closeRemoteAlert();
 	}
 
 	self.preheat = function (toolnumber, material, callback) {
@@ -372,7 +379,7 @@ $(function() {
 
 		  console.log('Starting heatup! ');
 
-		  sendRemoteNotice("Preheating...");
+		  sendRemoteAlert("Preheating...");
 		  NWToolsAlerts.preheatAlert().then(result => {
 			  // if user clicks yes
 	          if (result.value) {
@@ -453,17 +460,17 @@ $(function() {
 	};
 
 	self.loadFilamentComplete = function() {
-		closeRemoteNotice();
+		self.closeRemoteAlert();
 	    self.turnOffExtruder();
 //            sendPrinterCommand('G90'); //switch back to absolute mode
-            sendPrinterCommand('M104 S0'); //turn off heater
+        sendPrinterCommand('M104 S0'); //turn off heater
 	};
 
 
 	self.loadFilamentPreheated = function() {
         sendPrinterCommand('G91');
         self.turnOnExtruder(1);
-		sendRemoteNotice("Loading Filament...");
+		self.sendRemoteAlert("Loading Filament...");
 		NWToolsAlerts.loadFilamentAlert().then(result => {
 		  // if user clicks yes
 		  if (result.value) {
@@ -486,7 +493,7 @@ $(function() {
 	};
 
     self.unloadFilamentComplete = function() {
-		closeRemoteNotice();
+		self.closeRemoteAlert();
     	self.turnOffExtruder();
 //            sendPrinterCommand('G90');
         sendPrinterCommand('M104 S0');
@@ -498,7 +505,7 @@ $(function() {
         sendPrinterCommand('G1 E5 F100');
         self.turnOnExtruder(-1);
 
-		sendRemoteNotice("Unloading Filament...");
+		self.sendRemoteAlert("Unloading Filament...");
 		NWToolsAlerts.unloadFilamentAlert().then(result => {
 		  // if user clicks yes
 		  if (result.value) {
@@ -521,12 +528,12 @@ $(function() {
     };
 
 	self.rebootController = function() {
-		sendRemoteNotice("Rebooting Controller...");
+		self.sendRemoteAlert("Rebooting Controller...");
 		NWToolsAlerts.rebootAlert();
 		self._postCommand("reboot_controller", {}, function(response) {
 			self.reconnectSerial();
-			closeRemoteNotice();
-			NWToolsAlerts.closeAlert();
+			self.closeRemoteAlert();
+			self.closeAlert();
 	    });
 	};
 
@@ -585,6 +592,8 @@ $(function() {
 	};
 
 	self.autoCalibrateHeated = function () {
+		NWToolsAlerts.probingAlert();
+		self.sendRemoteAlert("Probing...");
 
       self.autoCalibrateRun();
       self.lockHead1();
@@ -615,6 +624,9 @@ $(function() {
 	};
 
 	self.autoCalibrate2Heated = function () {
+		NWToolsAlerts.probingAlert();
+		self.sendRemoteAlert("Probing...");
+
       self.autoCalibrate2Run();
       self.lockHead2();
 	};
@@ -657,7 +669,7 @@ $(function() {
       self.autoCalibrateRun();
 
 	  NWToolsAlerts.calibrateBedAlert();
-	  sendRemoteNotice("Calibrating Bed...");
+	  self.sendRemoteAlert("Calibrating Bed...");
 
       sendPrinterCommand('G91');
       sendPrinterCommand('G0 Z2 F300');
@@ -685,7 +697,7 @@ $(function() {
 
 	self.levelBedHeated = function() {
 		NWToolsAlerts.levelBedAlert();
-		sendRemoteNotice("Leveling Bed...");
+		self.sendRemoteAlert("Leveling Bed...");
 		self.resetCalibration();
   		sendPrinterCommand('M400');
   	    sendPrinterCommand('G91');

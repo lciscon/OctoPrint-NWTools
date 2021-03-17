@@ -110,6 +110,15 @@ const NWToolsAlerts = {
       type: "info"
     });
   },
+  probingAlert: () => {
+    return swal({
+      title: "Notice",
+      text:
+        "Probing...",
+	  confirmButtonText: "Ok",
+      type: "info"
+    });
+  },
   calibratingAlert: () => {
     return swal({
       title: "Notice",
