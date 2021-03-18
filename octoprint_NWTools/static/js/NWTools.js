@@ -16,6 +16,7 @@ $(function() {
 		self.startedAction = 0;
 
 		self.remoteNoticeVisible = false;
+		self.probing = false;
 
 //        self.actual = ko.observable(-0.1);
 //        self.target = ko.observable(2);
@@ -204,8 +205,11 @@ $(function() {
 			}
 			self.remoteNoticeVisible = false;
 			NWToolsAlerts.noticeAlert("Grid Calibration Complete!");
-//		} else if (data.action == "probecomplete") {
-//			self.closeRemoteAlert(); 
+		} else if (data.action == "probecomplete") {
+//			if (self.probing) {
+//				self.closeRemoteAlert();
+//		  	    self.closeAlert();
+//			}
 		} else if (data.action == "levelcomplete") {
 			self._postCommand("get_leveling", {}, function(response) {
 			  	if (response.levels) {
@@ -592,14 +596,13 @@ $(function() {
 	};
 
 	self.autoCalibrateHeated = function () {
-		self.sendRemoteAlert("Probing...");
-		NWToolsAlerts.probingAlert();
+//		self.sendRemoteAlert("Probing...");
+//		NWToolsAlerts.probingAlert();
+		self.probing = true;
 
         self.autoCalibrateRun();
         self.lockHead1();
 
-		self.closeRemoteAlert();
-		self.closeAlert();
 	};
 
 	self.autoCalibrateGo = function() {
@@ -627,13 +630,12 @@ $(function() {
 	};
 
 	self.autoCalibrate2Heated = function () {
-		NWToolsAlerts.probingAlert();
-		self.sendRemoteAlert("Probing...");
+//		NWToolsAlerts.probingAlert();
+//		self.sendRemoteAlert("Probing...");
+		self.probing = true;
 
       self.autoCalibrate2Run();
       self.lockHead2();
-	  self.closeRemoteAlert();
-	  self.closeAlert();
 	};
 
 	self.autoCalibrate2Go = function() {
