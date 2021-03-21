@@ -195,27 +195,16 @@ $(function() {
 			}
 //			self.remoteNoticeVisible = false;
 			NWToolsAlerts.noticeAlert("Grid Calibration Complete!");
-		} else if (data.action == "gridsave") {
-			//the grid was saved.  run the fixgrid command and reopen the connection
-//			self._postCommand("fixgrid", {});
-//			self.reconnectSerial();
 		} else if (data.action == "gridcomplete") {
 			if (self.startedAction == 1) {
-					//the grid scan is done.  save the grid.
-//				try {
-					sendPrinterCommand('M374'); //save the bed - triggers an action command that is used to fix the grid
-					sendPrinterCommand('M400');
-			        sendPrinterCommand('G0 Z2 F300');
-					sendPrinterCommand('M400');
-			  	  	sendPrinterCommand('M500'); //save changes
-					self._postCommand("fixgrid", {});
-//					self.reconnectSerial();
-//				} finally {
-//					self.startedAction = 0;
-//				}
+				//the grid scan is done.  save the grid.
+				sendPrinterCommand('M374'); //save the bed - triggers an action command that is used to fix the grid
+				sendPrinterCommand('M400');
+		        sendPrinterCommand('G0 Z2 F300');
+				sendPrinterCommand('M400');
+		  	  	sendPrinterCommand('M500'); //save changes
+				self._postCommand("fixgrid", {});
 			}
-//			self.remoteNoticeVisible = false;
-//			NWToolsAlerts.noticeAlert("Grid Calibration Complete!");
 		} else if (data.action == "probecomplete") {
 //			if (self.probing) {
 //				self.closeRemoteAlert();
@@ -241,7 +230,10 @@ $(function() {
 					}
 
 					if ((Math.abs(curz[1]) < .1) && (Math.abs(curz[2]) < .1)) {
-						messageData = "Bed is level!";
+						messageData = "Bed is level!.  Running Calibration...";
+						if (self.startedAction == 1) {
+							self.calibrateBedHeated();
+						}
 					} else {
 						messageData = "Adjust the screws and then re-level: Center: " + frontstr + " Right: " + backstr;
 					}
@@ -683,23 +675,17 @@ $(function() {
     };
 
 	self.calibrateBedHeated = function () {
-	  NWToolsAlerts.calibrateBedAlert();
-  	  self.sendRemoteAlert("Calibrating Bed...");
+//	  NWToolsAlerts.calibrateBedAlert();
+// 	  self.sendRemoteAlert("Calibrating Bed...");
       self.resetCalibration();
       self.autoCalibrateRun();
 
+	  self.startedAction = 1;
       sendPrinterCommand('G91');
       sendPrinterCommand('G0 Z2 F300');
       sendPrinterCommand('G90');
       sendPrinterCommand('M400');
-	  self.startedAction = 1;
 	  sendPrinterCommand('G32');  //grid probe
-//      sendPrinterCommand('M400');
-//      sendPrinterCommand('G0 Z2 F300');
-//      sendPrinterCommand('M400');
-//  	sendPrinterCommand('M500'); //save changes
-//      sendPrinterCommand('M374'); //save the bed - triggers an action command that is used to fix the grid
-//      sendPrinterCommand('M400');
 	  self.coolDown(0);
 
     };
@@ -716,6 +702,8 @@ $(function() {
 		NWToolsAlerts.levelBedAlert();
 		self.sendRemoteAlert("Leveling Bed...");
 		self.resetCalibration();
+
+		self.startedAction = 1;
   		sendPrinterCommand('M400');
   	    sendPrinterCommand('G91');
   	    sendPrinterCommand('G0 Z10 F300');
