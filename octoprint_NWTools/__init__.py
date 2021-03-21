@@ -139,7 +139,7 @@ class NwtoolsPlugin(octoprint.plugin.SettingsPlugin,
 
 		elif command == "fixgrid":
 			self._exec_cmd("fixgrid")
-
+			self._plugin_manager.send_plugin_message(self._identifier, dict(action="gridfixed"))
 
 	def _check_for_firmware(self):
 		r = self._exec_cmd("checkfirm")
