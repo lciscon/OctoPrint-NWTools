@@ -18,10 +18,6 @@ $(function() {
 		self.remoteNoticeVisible = false;
 		self.probing = false;
 
-//        self.actual = ko.observable(-0.1);
-//        self.target = ko.observable(2);
-//        self.newTarget = ko.observable(3);
-
 		self.isErrorOrClosed = ko.observable(undefined);
         self.isOperational = ko.observable(undefined);
         self.isPrinting = ko.observable(undefined);
