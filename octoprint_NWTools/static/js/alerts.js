@@ -128,10 +128,17 @@ const NWToolsAlerts = {
       type: "info"
     });
   },
-  errorAlert: errorNumber => {
+  errorNumberAlert: errorNumber => {
 	return swal({
 	  title: `Error ${errorNumber} detected`,
 	  text: `An error occurred on your printer.`,
+	  type: "error"
+	});
+  },
+  errorAlert: message => {
+	return swal({
+	  title: `Error`,
+	  text: message,
 	  type: "error"
 	});
   },
