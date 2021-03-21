@@ -187,11 +187,13 @@ $(function() {
 		} else if (data.action == "gridfixed") {
 			//fixgrid has completed
 			if (self.startedAction == 1) {
-				self.reconnectSerial();
-			} finally {
-				self.startedAction = 0;
+				try {
+					self.reconnectSerial();
+				} finally {
+					self.startedAction = 0;
+				}
 			}
-			self.remoteNoticeVisible = false;
+//			self.remoteNoticeVisible = false;
 			NWToolsAlerts.noticeAlert("Grid Calibration Complete!");
 		} else if (data.action == "gridsave") {
 			//the grid was saved.  run the fixgrid command and reopen the connection
