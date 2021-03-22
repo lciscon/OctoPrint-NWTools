@@ -44,6 +44,7 @@ const NWToolsAlerts = {
       text:
         "Preheating...",
 	  confirmButtonText: "Proceed",
+	  showConfirmButton: false,
       showCancelButton: true,
   	  cancelButtonText: "Cancel",
       reverseButtons: false,

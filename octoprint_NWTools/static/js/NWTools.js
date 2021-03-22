@@ -233,9 +233,10 @@ $(function() {
 						}
 					} else {
 						messageData = "Adjust the screws and then re-level: Center: " + frontstr + " Right: " + backstr;
+						self.startedAction = 0;
 					}
 
-					self.remoteNoticeVisible = false;
+//					self.remoteNoticeVisible = false;
 					NWToolsAlerts.noticeAlert(messageData);
 					return;
 			  	}
