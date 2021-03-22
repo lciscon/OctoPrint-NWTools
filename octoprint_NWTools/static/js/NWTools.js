@@ -708,7 +708,7 @@ $(function() {
   	    sendPrinterCommand('G28');
 		sendPrinterCommand('M400');
   	  	sendPrinterCommand('G33');
-		self.coolDown(0);
+//		self.coolDown(0);  Do not cool down, since we now run the bed calibration next
     };
 
     self.levelBed = function() {
