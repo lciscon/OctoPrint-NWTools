@@ -595,8 +595,10 @@ $(function() {
 	};
 
 	self.autoCalibrateHeated = function () {
-//		self.sendRemoteAlert("Probing...");
 //		NWToolsAlerts.probingAlert();
+//		self.sendRemoteAlert("Probing...");
+		NWToolsAlerts.closeAlert();
+		self.closeRemoteAlert();
 		self.probing = true;
 
         self.autoCalibrateRun();
@@ -604,18 +606,20 @@ $(function() {
 
 	};
 
-	self.autoCalibrateGo = function() {
-	    self.preheat(0, 1, self.autoCalibrateHeated);
-	};
+//	self.autoCalibrateGo = function() {
+//	    self.preheat(0, 1, self.autoCalibrateHeated);
+//	};
 
 	self.autoCalibrate = function() {
 		NWToolsAlerts.probeTestAlert().then(result => {
           // if user clicks yes
 		  if (result.value) {
-			  self.autoCalibrateGo();
+			  self.preheat(0, 1, self.autoCalibrateHeated);
+//			  self.autoCalibrateGo();
 		  }
 	  });
 	};
+
 
 	self.autoCalibrate2Run = function () {
 		sendPrinterCommand('M400');
@@ -631,21 +635,24 @@ $(function() {
 	self.autoCalibrate2Heated = function () {
 //		NWToolsAlerts.probingAlert();
 //		self.sendRemoteAlert("Probing...");
+		NWToolsAlerts.closeAlert();
+		self.closeRemoteAlert();
 		self.probing = true;
 
       self.autoCalibrate2Run();
       self.lockHead2();
 	};
 
-	self.autoCalibrate2Go = function() {
-	    self.preheat(1, 1, self.autoCalibrate2Heated);
-	};
+//	self.autoCalibrate2Go = function() {
+//	    self.preheat(1, 1, self.autoCalibrate2Heated);
+//	};
 
 	self.autoCalibrate2 = function() {
 		NWToolsAlerts.probeTestAlert().then(result => {
 		  // if user clicks yes
 			if (result.value) {
-				self.autoCalibrate2Go();
+				self.preheat(1, 1, self.autoCalibrate2Heated);
+//				self.autoCalibrate2Go();
 			}
 	  });
 	};
