@@ -98,13 +98,12 @@ class NwtoolsPlugin(octoprint.plugin.SettingsPlugin,
 		if command == "firmware_exists":
 			retval = self._exec_cmd("checkfirm")
 #			retval = self._check_for_firmware()
-			if (retval is None) {
+			if (retval is None) :
 				self._logger.info("Firmware file not found! ")
 				return jsonify(dict(file_exists=str(0)))
-			} else {
+			else:
 				self._logger.info("Checking for firmware file returns " + str(retval))
 				return jsonify(dict(file_exists=str(retval)))
-			}
 
 		elif command == "update_firmware":
 			self._logger.info("Updating Firmware")
