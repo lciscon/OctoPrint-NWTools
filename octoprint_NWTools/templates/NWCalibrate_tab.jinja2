@@ -1,10 +1,5 @@
 
 <div class="row-fluid">
-<div class="span4">
-<h1>Firmware</h1>
-<button class="btn btn-primary" data-bind="enable: $root.isOperational() && !$root.isPrinting(), click: updateFirmware" style="width:80%">{{ _('Update<br/>Firmware') }}</button>
-&nbsp;
-</div>
 <div class="span7">
 <h1>Sensor Setup</h1>
 <button class="btn btn-primary" data-bind="enable: $root.isOperational() && !$root.isPrinting(), click: calibrateSensor" style="width:30%">{{ _('Calibrate<br/>Sensors') }}</button>
@@ -12,6 +7,11 @@
 <button class="btn btn-primary" data-bind="enable: $root.isOperational() && !$root.isPrinting(), click: autoCalibrate" style="width:30%">{{ _('Test<br/>Sensor 0') }}</button>
 &nbsp;
 <button class="btn btn-primary" data-bind="enable: $root.isOperational() && !$root.isPrinting(), click: autoCalibrate2" style="width:30%">{{ _('Test<br/>Sensor 1') }}</button>
+&nbsp;
+</div>
+<div class="span4">
+<h1>Firmware</h1>
+<button class="btn btn-primary" data-bind="enable: $root.isOperational() && !$root.isPrinting(), click: updateFirmware" style="width:80%">{{ _('Update<br/>Firmware') }}</button>
 &nbsp;
 </div>
 </div>
