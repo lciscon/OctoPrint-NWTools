@@ -96,13 +96,20 @@ class NwtoolsPlugin(octoprint.plugin.SettingsPlugin,
 
 	def on_api_command(self, command, data):
 		if command == "firmware_exists":
-			retval = self._check_for_firmware()
-			self._logger.info("Checking for firmware file " + str(retval))
-			return jsonify(dict(file_exists=str(retval)))
+			retval = self._exec_cmd("checkfirm")
+#			retval = self._check_for_firmware()
+			if (retval is None) {
+				self._logger.info("Firmware file not found! ")
+				return jsonify(dict(file_exists=str(0)))
+			} else {
+				self._logger.info("Checking for firmware file returns " + str(retval))
+				return jsonify(dict(file_exists=str(retval)))
+			}
 
 		elif command == "update_firmware":
 			self._logger.info("Updating Firmware")
-			return jsonify(dict(success=str(self._update_firmware())))
+			r = self._exec_cmd("updatefirm")
+#			return jsonify(dict(success=str(self._update_firmware())))
 
 		elif command == "get_leveling":
 			self._logger.info("Getting leveling data")
@@ -141,13 +148,13 @@ class NwtoolsPlugin(octoprint.plugin.SettingsPlugin,
 			self._exec_cmd("fixgrid")
 			self._plugin_manager.send_plugin_message(self._identifier, dict(action="gridfixed"))
 
-	def _check_for_firmware(self):
-		r = self._exec_cmd("checkfirm")
-		return r
+#	def _check_for_firmware(self):
+#		r = self._exec_cmd("checkfirm")
+#		return r
 
-	def _update_firmware(self):
-		r = self._exec_cmd("updatefirm")
-		return r
+#	def _update_firmware(self):
+#		r = self._exec_cmd("updatefirm")
+#		return r
 
 	##~~ AssetPlugin mixin
 
@@ -299,7 +306,7 @@ class NwtoolsPlugin(octoprint.plugin.SettingsPlugin,
 		except Exception as e:
 			output = "Error while executing command: {}" + str(e)
 			self._logger.warn(output)
-			return (None,)
+			return None
 
 #		self._logger.info("Command %s returned: %s" % (cmd_line, r))
 		return(r)
