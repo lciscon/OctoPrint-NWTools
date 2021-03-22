@@ -712,11 +712,21 @@ $(function() {
     };
 
     self.levelBed = function() {
-  	     self.preheat(0, 1, self.levelBedHeated);
+		NWToolsAlerts.calibrateTestAlert().then(result => {
+		  // if user clicks yes
+			if (result.value) {
+				self.preheat(0, 1, self.levelBedHeated);
+			}
+	  });
     };
 
     self.levelBed2 = function() {
-  	     self.preheat(0, 2, self.levelBedHeated);
+		NWToolsAlerts.calibrateTestAlert().then(result => {
+		  // if user clicks yes
+			if (result.value) {
+				self.preheat(0, 2, self.levelBedHeated);
+			}
+	  });
     };
 
 

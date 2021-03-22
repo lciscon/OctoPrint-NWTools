@@ -26,6 +26,18 @@ const NWToolsAlerts = {
       type: "info"
     });
   },
+  calibrateTestAlert: () => {
+    return swal({
+      title: "Notice",
+      text:
+        "Running bed calibration. Make sure the bed is clear.",
+      confirmButtonText: "Proceed",
+      showCancelButton: true,
+	  cancelButtonText: "Cancel",
+      reverseButtons: false,
+      type: "info"
+    });
+  },
   preheatAlert: () => {
     return swal({
       title: "Notice",
@@ -123,7 +135,7 @@ const NWToolsAlerts = {
     return swal({
       title: "Notice",
       text:
-        "Calibrating...",
+        "Calibrating Sensors...",
 	  confirmButtonText: "Ok",
       type: "info"
     });
