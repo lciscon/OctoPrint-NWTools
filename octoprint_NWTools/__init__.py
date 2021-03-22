@@ -108,7 +108,7 @@ class NwtoolsPlugin(octoprint.plugin.SettingsPlugin,
 		elif command == "update_firmware":
 			self._logger.info("Updating Firmware")
 			r = self._exec_cmd("updatefirm")
-			return jsonify(dict(success=str(r))
+			return jsonify(dict(success=str(r)))
 #			return jsonify(dict(success=str(self._update_firmware())))
 
 		elif command == "get_leveling":
