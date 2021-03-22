@@ -50,6 +50,18 @@ const NWToolsAlerts = {
       type: "info"
     });
   },
+  resetAlert: () => {
+    return swal({
+      title: "Notice",
+      text:
+        "This will clear your calibration settings.",
+	  confirmButtonText: "Proceed",
+      showCancelButton: true,
+  	  cancelButtonText: "Cancel",
+      reverseButtons: false,
+      type: "info"
+    });
+  },
   rebootAlert: () => {
     return swal({
       title: "Notice",

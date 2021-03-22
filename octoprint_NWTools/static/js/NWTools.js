@@ -760,6 +760,19 @@ $(function() {
       sendPrinterCommand('M561');
   	};
 
+	self.resetCalibrationPrompt = function() {
+		NWToolsAlerts.resetAlert().then(result => {
+			// if user clicks yes
+			if (result.value) {
+				self.resetCalibration();
+			}
+			// if user clicks no
+			else if (result.dismiss === Swal.DismissReason.cancel) {
+			}
+		});
+	};
+
+
 	self.filterCalibration = function() {
 		self._postCommand("fixgrid", {});
 		self.reconnectSerial();
