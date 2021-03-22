@@ -184,6 +184,7 @@ $(function() {
 			//fixgrid has completed
 			if (self.startedAction == 1) {
 				try {
+					sleep(2);
 					self.reconnectSerial();
 				} finally {
 					self.startedAction = 0;
@@ -776,7 +777,6 @@ $(function() {
 
 	self.filterCalibration = function() {
 		self._postCommand("fixgrid", {});
-		self.reconnectSerial();
   	};
 
 //---------
