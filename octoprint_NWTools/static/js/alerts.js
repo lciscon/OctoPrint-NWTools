@@ -99,7 +99,7 @@ const NWToolsAlerts = {
     return swal({
       title: "Notice",
       text:
-        "Firmware updated!",
+        "Firmware updated! Make sure to power cycle the machine.",
 	  confirmButtonText: "Ok",
       type: "info"
     });
