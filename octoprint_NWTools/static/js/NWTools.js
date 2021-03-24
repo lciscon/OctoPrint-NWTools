@@ -399,8 +399,8 @@ $(function() {
 	      sendPrinterCommand('M42');
 	      sendPrinterCommand('M140 S' + bedTemp);
 //		  sendPrinterCommand('M190 S' + bedTemp);
-	      sendPrinterCommand('T' + toolnumber);
-	      sendPrinterCommand('M104 S' + tipTemp);
+//	      sendPrinterCommand('T' + toolnumber);
+	      sendPrinterCommand('M104 T' + toolnumber + ' S' + tipTemp);
 //		  sendPrinterCommand('M109 S' + tipTemp);
 
 	      if (toolnumber == 0) {
@@ -426,8 +426,8 @@ $(function() {
 	self.coolDown = function(toolnumber) {
 		sendPrinterCommand('M42');
 		sendPrinterCommand('M140 S0');
-		sendPrinterCommand('T' + toolnumber);
-		sendPrinterCommand('M104 S0');
+//		sendPrinterCommand('T' + toolnumber);
+		sendPrinterCommand('M104 T'+toolnumber+' S0');
 	};
 
   	self.lockHead1 = function() {
