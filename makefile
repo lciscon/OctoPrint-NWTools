@@ -24,6 +24,7 @@ install: $(DIRS)
 	sudo chmod 755 /usr/local/bin/fixsudo
 	sudo chmod 755 /usr/local/bin/machine
 	sudo chmod 755 /usr/local/bin/lights
+	sudo chmod 755 /usr/local/bin/cabinet
 	sudo chmod 755 /usr/local/bin/sethostname
 	sudo chmod 755 /usr/local/bin/netcmd
 	sudo chmod 755 /usr/local/bin/setwifi
