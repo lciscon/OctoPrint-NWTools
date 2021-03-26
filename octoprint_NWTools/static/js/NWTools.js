@@ -180,6 +180,18 @@ $(function() {
 			if (self.remoteNoticeVisible) {
 				self.closeAlert();
 			}
+		} else if (data.action == "gridcomplete") {
+			if (self.startedAction == 1) {
+				//the grid scan is done.  save the grid.
+				sendPrinterCommand('M374'); //save the bed - triggers an action command that is used to fix the grid
+				sendPrinterCommand('M400');
+		        sendPrinterCommand('G0 Z2 F300');
+				sendPrinterCommand('M400');
+		  	  	sendPrinterCommand('M500'); //save changes
+				self._postCommand("fixgrid", {});
+			}
+		} else if (data.action == "gridsave") {
+			
 		} else if (data.action == "gridfixed") {
 			//fixgrid has completed
 			if (self.startedAction == 1) {
@@ -192,16 +204,6 @@ $(function() {
 			}
 //			self.remoteNoticeVisible = false;
 			NWToolsAlerts.noticeAlert("Grid Calibration Complete!");
-		} else if (data.action == "gridcomplete") {
-			if (self.startedAction == 1) {
-				//the grid scan is done.  save the grid.
-				sendPrinterCommand('M374'); //save the bed - triggers an action command that is used to fix the grid
-				sendPrinterCommand('M400');
-		        sendPrinterCommand('G0 Z2 F300');
-				sendPrinterCommand('M400');
-		  	  	sendPrinterCommand('M500'); //save changes
-				self._postCommand("fixgrid", {});
-			}
 		} else if (data.action == "probecomplete") {
 //			if (self.probing) {
 //				self.closeRemoteAlert();
@@ -681,8 +683,6 @@ $(function() {
     };
 
 	self.calibrateBedHeated = function () {
-//	  NWToolsAlerts.calibrateBedAlert();
-// 	  self.sendRemoteAlert("Calibrating Bed...");
       self.resetCalibration();
       self.autoCalibrateRun();
 
@@ -693,7 +693,6 @@ $(function() {
       sendPrinterCommand('M400');
 	  sendPrinterCommand('G32');  //grid probe
 	  self.coolDown(0);
-
     };
 
     self.calibrateBed = function() {

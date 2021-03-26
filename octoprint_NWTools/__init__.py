@@ -203,7 +203,7 @@ class NwtoolsPlugin(octoprint.plugin.SettingsPlugin,
 		else:
 			action, parameter = parts
 
-		if action == "error" or action == "gridsaved" or action == "gridcomplete" or action == "levelcomplete" or action == "probecomplete":
+		if action == "error" or action == "gridsaved" or action == "gridfixed" or action == "gridcomplete" or action == "levelcomplete" or action == "probecomplete":
 			self._plugin_manager.send_plugin_message(self._identifier, dict(action=action, text=parameter))
 			return
 		else:
