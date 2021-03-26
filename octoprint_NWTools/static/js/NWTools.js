@@ -191,7 +191,7 @@ $(function() {
 				self._postCommand("fixgrid", {});
 			}
 		} else if (data.action == "gridsave") {
-			
+
 		} else if (data.action == "gridfixed") {
 			//fixgrid has completed
 			if (self.startedAction == 1) {
