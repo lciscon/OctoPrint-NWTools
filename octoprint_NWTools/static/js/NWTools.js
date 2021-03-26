@@ -538,7 +538,7 @@ $(function() {
 		self.sendRemoteAlert("Rebooting Controller...");
 		NWToolsAlerts.rebootAlert();
 		self._postCommand("reboot_controller", {}, function(response) {
-			sleep(2);
+			sleep(4);
 			self.reconnectSerial();
 			self.closeRemoteAlert();
 			self.closeAlert();
