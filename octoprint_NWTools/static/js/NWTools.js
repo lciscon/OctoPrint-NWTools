@@ -691,7 +691,7 @@ $(function() {
       sendPrinterCommand('G0 Z2 F300');
       sendPrinterCommand('G90');
       sendPrinterCommand('M400');
-	  sendPrinterCommand('G32');  //grid probe
+	  sendPrinterCommand('G32 V0');  //grid probe
 	  self.coolDown(0);
     };
 
@@ -716,7 +716,7 @@ $(function() {
   	    sendPrinterCommand('M400');
   	    sendPrinterCommand('G28');
 		sendPrinterCommand('M400');
-  	  	sendPrinterCommand('G33');
+  	  	sendPrinterCommand('G33 V0');
 //		self.coolDown(0);  Do not cool down, since we now run the bed calibration next
     };
 
