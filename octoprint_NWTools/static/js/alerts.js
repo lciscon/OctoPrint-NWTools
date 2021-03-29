@@ -18,7 +18,7 @@ const NWToolsAlerts = {
     return swal({
       title: "Notice",
       text:
-        "Running probe test. Make sure the bed is clear.",
+        "Running probe test.  Make sure the print surface is clean.",
       confirmButtonText: "Proceed",
       showCancelButton: true,
 	  cancelButtonText: "Cancel",
@@ -30,7 +30,7 @@ const NWToolsAlerts = {
     return swal({
       title: "Notice",
       text:
-        "Running bed calibration. Make sure the bed is clear.",
+        "Running bed calibration. Make sure the print surface is clean.",
       confirmButtonText: "Proceed",
       showCancelButton: true,
 	  cancelButtonText: "Cancel",

@@ -189,6 +189,7 @@ $(function() {
 				sendPrinterCommand('M400');
 		  	  	sendPrinterCommand('M500'); //save changes
 				self._postCommand("fixgrid", {});
+				NWToolsAlerts.noticeAlert("Rebooting Controller...");
 			}
 		} else if (data.action == "gridsave") {
 
@@ -234,7 +235,7 @@ $(function() {
 							self.calibrateBedHeated();
 						}
 					} else {
-						messageData = "Adjust the screws and then re-level: Center: " + frontstr + " Right: " + backstr;
+						messageData = "Adjust the screws and then re-run calibration: Center: " + frontstr + " Right: " + backstr;
 						self.startedAction = 0;
 					}
 
