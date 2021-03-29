@@ -188,8 +188,8 @@ $(function() {
 		        sendPrinterCommand('G0 Z2 F300');
 				sendPrinterCommand('M400');
 		  	  	sendPrinterCommand('M500'); //save changes
+				NWToolsAlerts.noticeAlert("Saving Grid and Rebooting Controller...");
 				self._postCommand("fixgrid", {});
-				NWToolsAlerts.noticeAlert("Rebooting Controller...");
 			}
 		} else if (data.action == "gridsave") {
 
