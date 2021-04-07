@@ -15,9 +15,8 @@ $(function() {
 
 		self.startedAction = 0;
 
-//        self.actual = ko.observable(-0.1);
-//        self.target = ko.observable(2);
-//        self.newTarget = ko.observable(3);
+		self.remoteNoticeVisible = false;
+		self.probing = false;
 
 		self.isErrorOrClosed = ko.observable(undefined);
         self.isOperational = ko.observable(undefined);
@@ -114,53 +113,6 @@ $(function() {
         self.tool1_YOffset["key"]("tool1_YOffset");
 		self.tool1_YOffset["showtest"](false);
 
-/* LC3
-    	self.actionTriggerTemplate = ko.observable(undefined);
-	    self.actionTriggerCallback = function () {
-	    };
-
-
-	    self.showActionTriggerDialog2 = function (data, callback, callback2) {
-      		var actionTriggerDialog = $("#action_trigger_dialog");
-      		var actionTriggerDialogAck = $(".action_trigger_dialog_acknowledge", actionTriggerDialog);
-			var actionTriggerDialogAck2 = $(".action_trigger_dialog_acknowledge2", actionTriggerDialog);
-
-      		$(".action_trigger_title", actionTriggerDialog).text(data.title);
-      		$(".action_trigger_dialog_message", actionTriggerDialog).text(data.message);
-      		actionTriggerDialogAck.unbind("click");
-			actionTriggerDialogAck2.unbind("click");
-		    self.actionTriggerCallback = callback;
-			self.actionTriggerCallback2 = callback2;
-
-      		actionTriggerDialogAck.bind("click", function (e) {
-     		   e.preventDefault();
-    		   $("#action_trigger_dialog").modal("hide");
-               if (self.actionTriggerCallback !== null) {
-                    self.actionTriggerCallback();
-               }
-      		});
-
-			actionTriggerDialogAck2.bind("click", function (e) {
-     		   e.preventDefault();
-    		   $("#action_trigger_dialog").modal("hide");
-               if (self.actionTriggerCallback2 !== null) {
-                    self.actionTriggerCallback2();
-               }
-      		});
-
-      		actionTriggerDialog.modal({
-     		   show: 'true',
-    		    backdrop:'static',
-   		     keyboard: false
-      		});
-
-    	};
-
-		self.showActionTriggerDialog = function (data, callback) {
-			self.showActionTriggerDialog2(data, callback, null);
-		};
-		LC3 */
-
 	function sleep (time) {
 	    	return new Promise((resolve) => setTimeout(resolve, time));
 	}
@@ -215,39 +167,53 @@ $(function() {
 			self.startedAction = 0;  //make sure to clear out any actions I started
 
 			NWToolsAlerts.errorAlert(data.text);
-
-/*
-			var messageType = "notice";
-			var messageData = {message:data.text, title:"Error"};
-
-			self.actionTriggerTemplate(messageType);
-			self.showActionTriggerDialog(messageData, null);
-*/
-		} else if (data.action == "gridsave") {
-			//the grid was saved.  run the fixgrid command and reopen the connection
-//			self._postCommand("fixgrid", {});
-//			self.reconnectSerial();
+		} else if (data.action == "notice") {
+			if (NWToolsAlerts.alertVisible()) {
+				if (self.remoteNoticeVisible) {
+					NWToolsAlerts.noticeAlert(data.text);
+				}
+			} else {
+				self.remoteNoticeVisible = true;
+				NWToolsAlerts.noticeAlert(data.text);
+			}
+		} else if (data.action == "closenotice") {
+			if (self.remoteNoticeVisible) {
+				self.closeAlert();
+			}
 		} else if (data.action == "gridcomplete") {
 			if (self.startedAction == 1) {
-					//the grid scan is done.  save the grid.
+				//the grid scan is done.  save the grid.
+				sendPrinterCommand('M374'); //save the bed - triggers an action command that is used to fix the grid
+				sendPrinterCommand('M400');
+		        sendPrinterCommand('G0 Z2 F300');
+				sendPrinterCommand('M400');
+		  	  	sendPrinterCommand('M500'); //save changes
+				NWToolsAlerts.noticeAlert("Saving Grid and Rebooting Controller...");
+				self._postCommand("fixgrid", {});
+			}
+		} else if (data.action == "gridsave") {
+
+		} else if (data.action == "gridfixed") {
+			//fixgrid has completed
+			if (self.startedAction == 1) {
 				try {
-					sendPrinterCommand('M374'); //save the bed - triggers an action command that is used to fix the grid
-					sendPrinterCommand('M400');
-			        sendPrinterCommand('G0 Z2 F300');
-					sendPrinterCommand('M400');
-			  	  	sendPrinterCommand('M500'); //save changes
-					self._postCommand("fixgrid", {});
+					sleep(2);
 					self.reconnectSerial();
 				} finally {
 					self.startedAction = 0;
 				}
 			}
+//			self.remoteNoticeVisible = false;
+			NWToolsAlerts.noticeAlert("Grid Calibration Complete!");
+		} else if (data.action == "probecomplete") {
+//			if (self.probing) {
+//				self.closeRemoteAlert();
+//		  	    self.closeAlert();
+//			}
 		} else if (data.action == "levelcomplete") {
 			self._postCommand("get_leveling", {}, function(response) {
 			  	if (response.levels) {
 				  	curz = response.levels;
-//					var messageType = "notice";
-//					var messageData = {message:"", title:""};
 					var messageData
 					var frontstr;
 					var backstr;
@@ -264,25 +230,17 @@ $(function() {
 					}
 
 					if ((Math.abs(curz[1]) < .1) && (Math.abs(curz[2]) < .1)) {
-						messageData = "Bed is level!";
+						messageData = "Bed is level!.  Running Calibration...";
+						if (self.startedAction == 1) {
+							self.calibrateBedHeated();
+						}
 					} else {
-						messageData = "Adjust the screws and then re-level: Center: " + frontstr + " Right: " + backstr;
+						messageData = "Adjust the screws and then re-run calibration: Center: " + frontstr + " Right: " + backstr;
+						self.startedAction = 0;
 					}
 
-					NWToolsAlerts.bedLevelDoneAlert(messageData);
-
-/*
-					messageData.title = "Notice";
-
-					if ((Math.abs(curz[1]) < .1) && (Math.abs(curz[2]) < .1)) {
-						messageData.message = "Bed is level!";
-					} else {
-						messageData.message = "Adjust the screws and then re-level: Center: " + frontstr + " Right: " + backstr;
-					}
-
-					self.actionTriggerTemplate(messageType);
-					self.showActionTriggerDialog(messageData, null);
-*/
+//					self.remoteNoticeVisible = false;
+					NWToolsAlerts.noticeAlert(messageData);
 					return;
 			  	}
 	  	  	});
@@ -330,16 +288,20 @@ $(function() {
 //       self.control.sendCustomCommand({ command: cmdstr });
    	};
 
-/*LC3
-	self.hideActionTriggerDialog = function () {
-           var actionTriggerDialog = $("#action_trigger_dialog");
-           actionTriggerDialog.modal({
-              show: 'false'
-           });
-           $("#action_trigger_dialog").modal("hide");
-//           self.showControls();
+	self.sendRemoteAlert = function(message) {
+		//if I am sending a notice, then there can't be a remote notice visible locally!
+		self.remoteNoticeVisible = false;
+		self._postCommand("show_notice", {message: message});
    	};
-LC3*/
+
+	self.closeRemoteAlert = function() {
+		self._postCommand("close_notice", {});
+   	};
+
+	self.closeAlert = function() {
+		self.remoteNoticeVisible = false;
+		NWToolsAlerts.closeAlert();
+   	};
 
 	self.extrusionRunning = false;
 	self.extrusionDirection = 1;
@@ -391,8 +353,8 @@ LC3*/
 	        setTimeout(self.tempTimer, 1000);
 	    } else {
 	        console.log('Finished heatup! ');
-			NWToolsAlerts.closeAlert();
-			//self.hideActionTriggerDialog();
+			//dont call closeRemoteNotcie() here...not needed and it causes timing issues
+			self.closeAlert();
 			if ((self.targetTemp > 0) || (self.targetTemp2 > 0)) {
 				if (self.tempCallback) {
 				   	self.tempCallback();
@@ -405,13 +367,10 @@ LC3*/
 		console.log('Cancelling preheat... ');
 		self.targetTemp = 0;
 		self.targetTemp2 = 0;
-//		NWToolsAlerts.closeAlert();
-//		self.hideActionTriggerDialog();
+		self.closeRemoteAlert();
 	}
 
 	self.preheat = function (toolnumber, material, callback) {
-//			var messageType = "preheating";
-//	    	var messageData = {message:"", title:""};
 	      var tipTemp = 0;
 	      var bedTemp = 0;
 
@@ -428,6 +387,7 @@ LC3*/
 
 		  console.log('Starting heatup! ');
 
+		  self.sendRemoteAlert("Preheating...");
 		  NWToolsAlerts.preheatAlert().then(result => {
 			  // if user clicks yes
 	          if (result.value) {
@@ -438,27 +398,12 @@ LC3*/
 	          }
 		  });
 
-/*
-		  NWToolsAlerts.preheatAlert().then(result => {
-            // if user clicks yes
-            if (result.isConfirmed) {
-            } else {
-				// if user clicks no
-				self.cancelPreheat();
-			}
-		  });
-/
-		    self.tempCallback = callback;
-	    	messageData.title = "Preheating...";
-	    	self.actionTriggerTemplate(messageType);
-	    	self.showActionTriggerDialog(messageData, self.cancelPreheat);
-*/
 	    	//begin hotend preheat
 	      sendPrinterCommand('M42');
 	      sendPrinterCommand('M140 S' + bedTemp);
 //		  sendPrinterCommand('M190 S' + bedTemp);
-	      sendPrinterCommand('T' + toolnumber);
-	      sendPrinterCommand('M104 S' + tipTemp);
+//	      sendPrinterCommand('T' + toolnumber);
+	      sendPrinterCommand('M104 T' + toolnumber + ' S' + tipTemp);
 //		  sendPrinterCommand('M109 S' + tipTemp);
 
 	      if (toolnumber == 0) {
@@ -484,8 +429,8 @@ LC3*/
 	self.coolDown = function(toolnumber) {
 		sendPrinterCommand('M42');
 		sendPrinterCommand('M140 S0');
-		sendPrinterCommand('T' + toolnumber);
-		sendPrinterCommand('M104 S0');
+//		sendPrinterCommand('T' + toolnumber);
+		sendPrinterCommand('M104 T'+toolnumber+' S0');
 	};
 
   	self.lockHead1 = function() {
@@ -523,20 +468,17 @@ LC3*/
 	};
 
 	self.loadFilamentComplete = function() {
+		self.closeRemoteAlert();
 	    self.turnOffExtruder();
 //            sendPrinterCommand('G90'); //switch back to absolute mode
-            sendPrinterCommand('M104 S0'); //turn off heater
+        sendPrinterCommand('M104 S0'); //turn off heater
 	};
 
 
 	self.loadFilamentPreheated = function() {
-//            var messageType = "loading";
-//            var messageData = {message:"", title:"Load Filament"};
-
-            sendPrinterCommand('G91');
-            self.turnOnExtruder(1);
-//            self.actionTriggerTemplate(messageType);
-//            self.showActionTriggerDialog(messageData, self.loadFilamentComplete);
+        sendPrinterCommand('G91');
+        self.turnOnExtruder(1);
+		self.sendRemoteAlert("Loading Filament...");
 		NWToolsAlerts.loadFilamentAlert().then(result => {
 		  // if user clicks yes
 		  if (result.value) {
@@ -559,29 +501,25 @@ LC3*/
 	};
 
     self.unloadFilamentComplete = function() {
-    self.turnOffExtruder();
+		self.closeRemoteAlert();
+    	self.turnOffExtruder();
 //            sendPrinterCommand('G90');
         sendPrinterCommand('M104 S0');
     };
 
    self.unloadFilamentPreheated = function() {
-//        var messageType = "unloading";
-//        var messageData = {message:"", title:"Unload Filament"};
-
     	sendPrinterCommand('G91');
     	//move forward a bit to remove blobs
         sendPrinterCommand('G1 E5 F100');
         self.turnOnExtruder(-1);
 
+		self.sendRemoteAlert("Unloading Filament...");
 		NWToolsAlerts.unloadFilamentAlert().then(result => {
 		  // if user clicks yes
 		  if (result.value) {
 			  self.unloadFilamentComplete();
 		  }
 		});
-
-//        self.actionTriggerTemplate(messageType);
-//        self.showActionTriggerDialog(messageData, self.unloadFilamentComplete);
 	};
 
 	//this will be called when they press the unloadFilament button
@@ -598,20 +536,13 @@ LC3*/
     };
 
 	self.rebootController = function() {
-
+		self.sendRemoteAlert("Rebooting Controller...");
 		NWToolsAlerts.rebootAlert();
-/*
-		var messageType = "notice";
-		var messageData = {message:"Rebooting...", title:"Notice"};
-
-		self.actionTriggerTemplate(messageType);
-		self.showActionTriggerDialog(messageData, null);
-*/
-
 		self._postCommand("reboot_controller", {}, function(response) {
+			sleep(4);
 			self.reconnectSerial();
-			NWToolsAlerts.closeAlert();
-//	  		self.hideActionTriggerDialog();
+			self.closeRemoteAlert();
+			self.closeAlert();
 	    });
 	};
 
@@ -655,15 +586,6 @@ LC3*/
 			  self.resetDefaultsGo();
 		  }
 	    });
-
-		  /*
-		  		var messageType = "notice2"; //startprobe
-		  		var messageData = {message:"This will reset the settings to the defaults.", title:"Warning"};
-
-		  		self.actionTriggerTemplate(messageType);
-		  		self.showActionTriggerDialog(messageData, self.resetDefaultsGo, null);
-		  */
-
 	};
 
 
@@ -679,22 +601,31 @@ LC3*/
 	};
 
 	self.autoCalibrateHeated = function () {
-      self.autoCalibrateRun();
-      self.lockHead1();
+//		NWToolsAlerts.probingAlert();
+//		self.sendRemoteAlert("Probing...");
+		NWToolsAlerts.closeAlert();
+		self.closeRemoteAlert();
+		self.probing = true;
+
+        self.autoCalibrateRun();
+        self.lockHead1();
+
 	};
 
-	self.autoCalibrateGo = function() {
-	    self.preheat(0, 1, self.autoCalibrateHeated);
-	};
+//	self.autoCalibrateGo = function() {
+//	    self.preheat(0, 1, self.autoCalibrateHeated);
+//	};
 
 	self.autoCalibrate = function() {
 		NWToolsAlerts.probeTestAlert().then(result => {
           // if user clicks yes
 		  if (result.value) {
-			  self.autoCalibrateGo();
+			  self.preheat(0, 1, self.autoCalibrateHeated);
+//			  self.autoCalibrateGo();
 		  }
 	  });
 	};
+
 
 	self.autoCalibrate2Run = function () {
 		sendPrinterCommand('M400');
@@ -708,64 +639,44 @@ LC3*/
 	};
 
 	self.autoCalibrate2Heated = function () {
+//		NWToolsAlerts.probingAlert();
+//		self.sendRemoteAlert("Probing...");
+		NWToolsAlerts.closeAlert();
+		self.closeRemoteAlert();
+		self.probing = true;
+
       self.autoCalibrate2Run();
       self.lockHead2();
 	};
 
-	self.autoCalibrate2Go = function() {
-	    self.preheat(1, 1, self.autoCalibrate2Heated);
-	};
+//	self.autoCalibrate2Go = function() {
+//	    self.preheat(1, 1, self.autoCalibrate2Heated);
+//	};
 
 	self.autoCalibrate2 = function() {
 		NWToolsAlerts.probeTestAlert().then(result => {
 		  // if user clicks yes
 			if (result.value) {
-				self.autoCalibrate2Go();
+				self.preheat(1, 1, self.autoCalibrate2Heated);
+//				self.autoCalibrate2Go();
 			}
 	  });
 	};
 
 	self.updateFirmware = function() {
-		NWToolsAlerts.firmStartAlert();
+	  NWToolsAlerts.firmStartAlert();
 
-/*
-  	  var messageType = "firmstart";
-  	  var messageData = {message:"", title:""};
-
-  	  messageData.title = "Notice";
-  	  messageData.message = "Firmware";
-  	  self.actionTriggerTemplate(messageType);
-  	  self.showActionTriggerDialog(messageData, null);
-*/
   	  self._postCommand("firmware_exists", {}, function(response) {
   		  console.log('File Exists value: ' + response.file_exists);
 
   		  if (response.file_exists == 0) {
 			  NWToolsAlerts.firmErrorAlert();
-/*
-  			  messageType = "firmfile";
-  		      messageData = {message:"", title:""};
-
-  			  messageData.title = "Error";
-  			  messageData.message = "Firmware";
-  			  self.actionTriggerTemplate(messageType);
-  			  self.showActionTriggerDialog(messageData, null);
-*/
   			  return;
   		  }
 
   		  self._postCommand("update_firmware", {}, function(response) {
   			  if (response.success) {
 				  NWToolsAlerts.firmDoneAlert();
-/*
-  				  messageType = "firmdone";
-  			      messageData = {message:"", title:""};
-
-  				  messageData.title = "Notice";
-  				  messageData.message = "Firmware";
-  				  self.actionTriggerTemplate(messageType);
-  				  self.showActionTriggerDialog(messageData, null);
-*/
   				  return;
   			  }
   		  });
@@ -776,20 +687,13 @@ LC3*/
       self.resetCalibration();
       self.autoCalibrateRun();
 
+	  self.startedAction = 1;
       sendPrinterCommand('G91');
       sendPrinterCommand('G0 Z2 F300');
       sendPrinterCommand('G90');
       sendPrinterCommand('M400');
-	  self.startedAction = 1;
-	  sendPrinterCommand('G32');  //grid probe
-//      sendPrinterCommand('M400');
-//      sendPrinterCommand('G0 Z2 F300');
-//      sendPrinterCommand('M400');
-//  	sendPrinterCommand('M500'); //save changes
-//      sendPrinterCommand('M374'); //save the bed - triggers an action command that is used to fix the grid
-//      sendPrinterCommand('M400');
+	  sendPrinterCommand('G32 V0');  //grid probe
 	  self.coolDown(0);
-
     };
 
     self.calibrateBed = function() {
@@ -802,17 +706,10 @@ LC3*/
 
 	self.levelBedHeated = function() {
 		NWToolsAlerts.levelBedAlert();
-
-/*
-		var messageType = "notice";
-		var messageData = {message:"Leveling Bed", title:"Notice"};
-
-		self.actionTriggerTemplate(messageType);
-		self.showActionTriggerDialog(messageData, null);
-*/
-//	  		self.hideActionTriggerDialog();
-
+		self.sendRemoteAlert("Leveling Bed...");
 		self.resetCalibration();
+
+		self.startedAction = 1;
   		sendPrinterCommand('M400');
   	    sendPrinterCommand('G91');
   	    sendPrinterCommand('G0 Z10 F300');
@@ -820,16 +717,26 @@ LC3*/
   	    sendPrinterCommand('M400');
   	    sendPrinterCommand('G28');
 		sendPrinterCommand('M400');
-  	  	sendPrinterCommand('G33');
-		self.coolDown(0);
+  	  	sendPrinterCommand('G33 V0');
+//		self.coolDown(0);  Do not cool down, since we now run the bed calibration next
     };
 
     self.levelBed = function() {
-  	     self.preheat(0, 1, self.levelBedHeated);
+		NWToolsAlerts.calibrateTestAlert().then(result => {
+		  // if user clicks yes
+			if (result.value) {
+				self.preheat(0, 1, self.levelBedHeated);
+			}
+	  });
     };
 
     self.levelBed2 = function() {
-  	     self.preheat(0, 2, self.levelBedHeated);
+		NWToolsAlerts.calibrateTestAlert().then(result => {
+		  // if user clicks yes
+			if (result.value) {
+				self.preheat(0, 2, self.levelBedHeated);
+			}
+	  });
     };
 
 
@@ -838,9 +745,6 @@ LC3*/
     };
 
     self.calibrateSensor = function() {
-//      var messageType = "calibrating";
-//      var messageData = {message:"", title:""};
-
       self.releaseHead1();
       self.releaseHead2();
       sendPrinterCommand('M510');
@@ -851,12 +755,6 @@ LC3*/
 			  self.calibrateDone();
 		  }
 	  });
-
-/*
-      messageData.title = "Calibrating...";
-      self.actionTriggerTemplate(messageType);
-      self.showActionTriggerDialog(messageData, self.calibrateDone);
-*/
     };
 
 
@@ -865,9 +763,21 @@ LC3*/
       sendPrinterCommand('M561');
   	};
 
+	self.resetCalibrationPrompt = function() {
+		NWToolsAlerts.resetAlert().then(result => {
+			// if user clicks yes
+			if (result.value) {
+				self.resetCalibration();
+			}
+			// if user clicks no
+			else if (result.dismiss === Swal.DismissReason.cancel) {
+			}
+		});
+	};
+
+
 	self.filterCalibration = function() {
 		self._postCommand("fixgrid", {});
-		self.reconnectSerial();
   	};
 
 //---------

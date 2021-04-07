@@ -18,7 +18,19 @@ const NWToolsAlerts = {
     return swal({
       title: "Notice",
       text:
-        "Running probe test. Make sure the bed is clear.",
+        "Running probe test.  Make sure the print surface and nozzle are clean.",
+      confirmButtonText: "Proceed",
+      showCancelButton: true,
+	  cancelButtonText: "Cancel",
+      reverseButtons: false,
+      type: "info"
+    });
+  },
+  calibrateTestAlert: () => {
+    return swal({
+      title: "Notice",
+      text:
+        "Running bed calibration. Make sure the print surface and nozzle are clean.",
       confirmButtonText: "Proceed",
       showCancelButton: true,
 	  cancelButtonText: "Cancel",
@@ -31,6 +43,19 @@ const NWToolsAlerts = {
       title: "Notice",
       text:
         "Preheating...",
+	  confirmButtonText: "Proceed",
+	  showConfirmButton: false,
+      showCancelButton: true,
+  	  cancelButtonText: "Cancel",
+      reverseButtons: false,
+      type: "info"
+    });
+  },
+  resetAlert: () => {
+    return swal({
+      title: "Notice",
+      text:
+        "This will clear your calibration settings.",
 	  confirmButtonText: "Proceed",
       showCancelButton: true,
   	  cancelButtonText: "Cancel",
@@ -87,7 +112,7 @@ const NWToolsAlerts = {
     return swal({
       title: "Notice",
       text:
-        "Firmware updated!",
+        "Firmware updated! Make sure to power cycle the machine.",
 	  confirmButtonText: "Ok",
       type: "info"
     });
@@ -101,23 +126,48 @@ const NWToolsAlerts = {
       type: "info"
     });
   },
-  calibratingAlert: () => {
+  calibrateBedAlert: () => {
     return swal({
       title: "Notice",
       text:
-        "Calibrating...",
+        "Calibrating Bed...",
 	  confirmButtonText: "Ok",
       type: "info"
     });
   },
-  errorAlert: errorNumber => {
+  probingAlert: () => {
+    return swal({
+      title: "Notice",
+      text:
+        "Probing...",
+	  confirmButtonText: "Ok",
+      type: "info"
+    });
+  },
+  calibratingAlert: () => {
+    return swal({
+      title: "Notice",
+      text:
+        "Calibrating Sensors...",
+	  confirmButtonText: "Ok",
+      type: "info"
+    });
+  },
+  errorNumberAlert: errorNumber => {
 	return swal({
 	  title: `Error ${errorNumber} detected`,
 	  text: `An error occurred on your printer.`,
 	  type: "error"
 	});
   },
-  bedLevelDoneAlert: message => {
+  errorAlert: message => {
+	return swal({
+	  title: `Error`,
+	  text: message,
+	  type: "error"
+	});
+  },
+  noticeAlert: message => {
 	return swal({
 	  title: `Notice`,
 	  text: message,
@@ -135,6 +185,9 @@ const NWToolsAlerts = {
       reverseButtons: false,
       type: "info"
     });
+  },
+  alertVisible: () => {
+	return(Swal.isVisible());
   },
   closeAlert: () => {
 	if (Swal.isVisible()) {

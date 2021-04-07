@@ -9,9 +9,7 @@ if [ ! -z "$DESTPATH" ]; then
 	sudo cp /tmp/cartesian.grid  $DESTPATH
 	sleep 1
 	umountctl
-	machine off
-	sleep 2
-	machine on
+	machine restart
 	echo 1
 	exit
 else
