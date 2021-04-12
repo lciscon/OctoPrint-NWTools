@@ -994,7 +994,7 @@ $(function() {
 	self.reconnectSerial = function () {
 		console.log('Reconnecting to controller');
 
-		var payload = {command: "disconnect"};
+		var payload = {command: "connect"};
 
 	    $.ajax({
 	        url: API_BASEURL + "connection",
