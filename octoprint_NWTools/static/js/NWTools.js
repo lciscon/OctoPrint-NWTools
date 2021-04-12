@@ -991,11 +991,10 @@ $(function() {
 	    $.ajax(params);
 	};
 
-
 	self.reconnectSerial = function () {
 		console.log('Reconnecting to controller');
 
-		var payload = {command: "connect"};
+		var payload = {command: "disconnect"};
 
 	    $.ajax({
 	        url: API_BASEURL + "connection",
@@ -1006,6 +1005,19 @@ $(function() {
 			success: function(response) {
 	        },
 	    });
+
+		var payload2 = {command: "connect"};
+
+	    $.ajax({
+	        url: API_BASEURL + "connection",
+	        type: "POST",
+	        dataType: "json",
+			data: JSON.stringify(payload2),
+			contentType: "application/json; charset=UTF-8",
+			success: function(response) {
+	        },
+	    });
+
 	};
 
 
