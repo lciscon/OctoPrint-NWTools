@@ -684,10 +684,16 @@ $(function() {
     };
 
 	self.calibrateBedHeated = function () {
-      self.resetCalibration();
-      self.autoCalibrateRun();
-
+//      self.resetCalibration();  done in level bed routine now
+//      self.autoCalibrateRun();
 	  self.startedAction = 1;
+
+	  sendPrinterCommand('M400');
+	  sendPrinterCommand('G91');
+	  sendPrinterCommand('G0 Z2 F300');
+	  sendPrinterCommand('G90');
+	  sendPrinterCommand('M400');
+	  sendPrinterCommand('G30.1 Q V0');
       sendPrinterCommand('G91');
       sendPrinterCommand('G0 Z2 F300');
       sendPrinterCommand('G90');
@@ -696,6 +702,7 @@ $(function() {
 	  self.coolDown(0);
     };
 
+/*
     self.calibrateBed = function() {
        self.preheat(0, 1, self.calibrateBedHeated);
     };
@@ -703,6 +710,7 @@ $(function() {
     self.calibrateBed2 = function() {
        self.preheat(0, 2, self.calibrateBedHeated);
     };
+*/
 
 	self.levelBedHeated = function() {
 		NWToolsAlerts.levelBedAlert();
