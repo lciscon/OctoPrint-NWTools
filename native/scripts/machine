@@ -2,10 +2,14 @@
 
 if [ $1 = "on" ]; then
 gpio -g write 4 0
+# toggle the reset pin
+jreset
 elif [ $1 = "restart" ]; then
 gpio -g write 4 1
 sleep 15
 gpio -g write 4 0
+# toggle the reset pin
+jreset
 else
 gpio -g write 4 1
 fi
