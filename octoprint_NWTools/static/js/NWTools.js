@@ -407,7 +407,7 @@ $(function() {
 //		  sendPrinterCommand('M109 S' + tipTemp);
 
 	      if (toolnumber == 0) {
-		          self.targetTemp = tipTemp;
+		      self.targetTemp = tipTemp;
 	          self.targetTemp2 = 0;
 	      } else {
 	          self.targetTemp = 0;
@@ -489,6 +489,7 @@ $(function() {
 
 	// this will be called when they press the loadFilament button
 	self.loadFilament = function(toolnumber) {
+		sendPrinterCommand('T' + toolnumber);
 	    self.preheat(toolnumber, 0, self.loadFilamentPreheated);
 	};
 
