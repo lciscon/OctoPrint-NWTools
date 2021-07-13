@@ -499,6 +499,7 @@ $(function() {
 
 	self.loadFilament2 = function() {
 	    self.loadFilament(1);
+		sendPrinterCommand('T0'); //HACKHACK set the default mode back to T0
 	};
 
     self.unloadFilamentComplete = function() {
