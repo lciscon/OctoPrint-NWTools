@@ -499,7 +499,7 @@ $(function() {
 		if (self.isPaused) {
 			self.loadFilamentPreheated();
 		} else {
-	    	self.preheat(toolnumber, 1, self.loadFilamentPreheated);
+	    	self.preheat(toolnumber, 0, self.loadFilamentPreheated);
 		}
 	};
 
