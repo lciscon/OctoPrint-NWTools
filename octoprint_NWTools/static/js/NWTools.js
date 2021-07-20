@@ -8,6 +8,7 @@ $(function() {
         self.system = parameters[2];
         self.loginState = parameters[3];
         self.printerProfiles = parameters[4];
+		self.printerState = parameters[5];
 
 	    self.targetTemp = 0;
 	    self.currentTemp = 0;
@@ -472,7 +473,7 @@ $(function() {
 	    self.turnOffExtruder();
 //            sendPrinterCommand('G90'); //switch back to absolute mode
 
-		if (!self.isPaused) {
+		if (!self.printerState.isPaused()) {
 			sendPrinterCommand('M104 S0'); //turn off heater
 		}
 	};
@@ -496,7 +497,7 @@ $(function() {
 		sendPrinterCommand('T' + toolnumber);
 
 		//if there is a paused print, then don't change the temperatures
-		if (self.isPaused) {
+		if (self.printerState.isPaused()) {
 			self.loadFilamentPreheated();
 		} else {
 	    	self.preheat(toolnumber, 0, self.loadFilamentPreheated);
@@ -516,7 +517,7 @@ $(function() {
     	self.turnOffExtruder();
 //            sendPrinterCommand('G90');
 
-		if (!self.isPaused) {
+		if (!self.printerState.isPaused()) {
         	sendPrinterCommand('M104 S0');
 		}
     };
@@ -540,7 +541,7 @@ $(function() {
 	self.unloadFilament = function(toolnumber) {
 
 		//if there is a paused print, then don't change the temperatures
-		if (self.isPaused) {
+		if (self.printerState.isPaused()) {
 			self.unloadFilamentPreheated();
 		} else {
 			self.preheat(toolnumber, 0, self.unloadFilamentPreheated);
@@ -1060,7 +1061,7 @@ $(function() {
         // This is a list of dependencies to inject into the plugin, the order which you request
         // here is the order in which the dependencies will be injected into your view model upon
         // instantiation via the parameters argument
-        ["settingsViewModel", "controlViewModel", "systemViewModel", "loginStateViewModel", "printerProfilesViewModel"],
+        ["settingsViewModel", "controlViewModel", "systemViewModel", "loginStateViewModel", "printerProfilesViewModel", "printerStateViewModel"],
 
         // Finally, this is the list of selectors for all elements we want this view model to be bound to.
         ["#tab_plugin_NWTools", "#tab_plugin_NWTools_2"]
