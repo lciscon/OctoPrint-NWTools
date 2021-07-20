@@ -494,7 +494,13 @@ $(function() {
 	// this will be called when they press the loadFilament button
 	self.loadFilament = function(toolnumber) {
 		sendPrinterCommand('T' + toolnumber);
-	    self.preheat(toolnumber, 0, self.loadFilamentPreheated);
+
+		//if there is a paused print, then don't change the temperatures
+		if (self.isPaused) {
+			self.loadFilamentPreheated();
+		} else {
+	    	self.preheat(toolnumber, 1, self.loadFilamentPreheated);
+		}
 	};
 
 	self.loadFilament1 = function() {
@@ -532,7 +538,13 @@ $(function() {
 
 	//this will be called when they press the unloadFilament button
 	self.unloadFilament = function(toolnumber) {
-	    self.preheat(toolnumber, 0, self.unloadFilamentPreheated);
+
+		//if there is a paused print, then don't change the temperatures
+		if (self.isPaused) {
+			self.unloadFilamentPreheated();
+		} else {
+			self.preheat(toolnumber, 0, self.unloadFilamentPreheated);
+		}
 	};
 
     self.unloadFilament1 = function() {
