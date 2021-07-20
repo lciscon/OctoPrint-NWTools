@@ -8,6 +8,7 @@ $(function() {
         self.system = parameters[2];
         self.loginState = parameters[3];
         self.printerProfiles = parameters[4];
+		self.printerState = parameters[5];
 
 	    self.targetTemp = 0;
 	    self.currentTemp = 0;
@@ -138,12 +139,12 @@ $(function() {
 
 	self.fromResponse = function (data) {
 //            console.log('MSL: got reply2 ' + data.tool0.actual);
-	          self.currentTemp = parseFloat(data.tool0.actual);
-	          if (data.tool1) {
+	        self.currentTemp = parseFloat(data.tool0.actual);
+	        if (data.tool1) {
 		            self.currentTemp2 = parseFloat(data.tool1.actual);
             } else {
 		            self.currentTemp2 = self.targetTemp2;
-	          }
+	        }
         };
 
 	self.requestData = function() {
@@ -471,11 +472,15 @@ $(function() {
 		self.closeRemoteAlert();
 	    self.turnOffExtruder();
 //            sendPrinterCommand('G90'); //switch back to absolute mode
-        sendPrinterCommand('M104 S0'); //turn off heater
+
+		if (!self.printerState.isPaused()) {
+			sendPrinterCommand('M104 S0'); //turn off heater
+		}
 	};
 
 
 	self.loadFilamentPreheated = function() {
+
         sendPrinterCommand('G91');
         self.turnOnExtruder(1);
 		self.sendRemoteAlert("Loading Filament...");
@@ -490,7 +495,13 @@ $(function() {
 	// this will be called when they press the loadFilament button
 	self.loadFilament = function(toolnumber) {
 		sendPrinterCommand('T' + toolnumber);
-	    self.preheat(toolnumber, 0, self.loadFilamentPreheated);
+
+		//if there is a paused print, then don't change the temperatures
+		if (self.printerState.isPaused()) {
+			self.loadFilamentPreheated();
+		} else {
+	    	self.preheat(toolnumber, 0, self.loadFilamentPreheated);
+		}
 	};
 
 	self.loadFilament1 = function() {
@@ -505,7 +516,10 @@ $(function() {
 		self.closeRemoteAlert();
     	self.turnOffExtruder();
 //            sendPrinterCommand('G90');
-        sendPrinterCommand('M104 S0');
+
+		if (!self.printerState.isPaused()) {
+        	sendPrinterCommand('M104 S0');
+		}
     };
 
    self.unloadFilamentPreheated = function() {
@@ -525,7 +539,13 @@ $(function() {
 
 	//this will be called when they press the unloadFilament button
 	self.unloadFilament = function(toolnumber) {
-	    self.preheat(toolnumber, 0, self.unloadFilamentPreheated);
+
+		//if there is a paused print, then don't change the temperatures
+		if (self.printerState.isPaused()) {
+			self.unloadFilamentPreheated();
+		} else {
+			self.preheat(toolnumber, 0, self.unloadFilamentPreheated);
+		}
 	};
 
     self.unloadFilament1 = function() {
@@ -1041,7 +1061,7 @@ $(function() {
         // This is a list of dependencies to inject into the plugin, the order which you request
         // here is the order in which the dependencies will be injected into your view model upon
         // instantiation via the parameters argument
-        ["settingsViewModel", "controlViewModel", "systemViewModel", "loginStateViewModel", "printerProfilesViewModel"],
+        ["settingsViewModel", "controlViewModel", "systemViewModel", "loginStateViewModel", "printerProfilesViewModel", "printerStateViewModel"],
 
         // Finally, this is the list of selectors for all elements we want this view model to be bound to.
         ["#tab_plugin_NWTools", "#tab_plugin_NWTools_2"]
