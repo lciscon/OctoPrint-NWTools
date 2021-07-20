@@ -138,12 +138,12 @@ $(function() {
 
 	self.fromResponse = function (data) {
 //            console.log('MSL: got reply2 ' + data.tool0.actual);
-	          self.currentTemp = parseFloat(data.tool0.actual);
-	          if (data.tool1) {
+	        self.currentTemp = parseFloat(data.tool0.actual);
+	        if (data.tool1) {
 		            self.currentTemp2 = parseFloat(data.tool1.actual);
             } else {
 		            self.currentTemp2 = self.targetTemp2;
-	          }
+	        }
         };
 
 	self.requestData = function() {
@@ -471,11 +471,15 @@ $(function() {
 		self.closeRemoteAlert();
 	    self.turnOffExtruder();
 //            sendPrinterCommand('G90'); //switch back to absolute mode
-        sendPrinterCommand('M104 S0'); //turn off heater
+
+		if (!self.isPaused) {
+			sendPrinterCommand('M104 S0'); //turn off heater
+		}
 	};
 
 
 	self.loadFilamentPreheated = function() {
+
         sendPrinterCommand('G91');
         self.turnOnExtruder(1);
 		self.sendRemoteAlert("Loading Filament...");
@@ -505,7 +509,10 @@ $(function() {
 		self.closeRemoteAlert();
     	self.turnOffExtruder();
 //            sendPrinterCommand('G90');
-        sendPrinterCommand('M104 S0');
+
+		if (!self.isPaused) {
+        	sendPrinterCommand('M104 S0');
+		}
     };
 
    self.unloadFilamentPreheated = function() {
