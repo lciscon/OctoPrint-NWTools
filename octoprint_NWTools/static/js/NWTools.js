@@ -559,6 +559,7 @@ $(function() {
 	self.rebootController = function() {
 		self.sendRemoteAlert("Rebooting Controller...");
 		NWToolsAlerts.rebootAlert();
+		self.disconnectSerial();
 		self._postCommand("reboot_controller", {}, function(response) {
 			sleep(4);
 			self.reconnectSerial();
@@ -1018,6 +1019,23 @@ $(function() {
 	    }
 
 	    $.ajax(params);
+	};
+
+	self.disconnectSerial = function () {
+		console.log('Disconnect from controller');
+
+		var payload = {command: "disconnect"};
+
+	    $.ajax({
+	        url: API_BASEURL + "connection",
+	        type: "POST",
+	        dataType: "json",
+			data: JSON.stringify(payload),
+			contentType: "application/json; charset=UTF-8",
+			success: function(response) {
+	        },
+	    });
+
 	};
 
 	self.reconnectSerial = function () {
