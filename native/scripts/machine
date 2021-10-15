@@ -5,9 +5,11 @@ gpio -g write 4 0
 # toggle the reset pin
 jreset
 elif [ $1 = "restart" ]; then
+if [ ! -f "/boot/juicyboard.txt" ]; then
 gpio -g write 4 1
 sleep 15
 gpio -g write 4 0
+fi
 # toggle the reset pin
 jreset
 else

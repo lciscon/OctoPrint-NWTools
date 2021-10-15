@@ -115,7 +115,7 @@ class NwtoolsPlugin(octoprint.plugin.SettingsPlugin,
 			self._logger.info("Getting leveling data")
 			return jsonify(dict(levels=self._bedlevels))
 
-		elif command == "reboot_controller":
+		elif command == "reboot_controller":			
 			self._exec_cmd("machine restart")
 			time.sleep(3)
 			return jsonify(dict(success="true"))
