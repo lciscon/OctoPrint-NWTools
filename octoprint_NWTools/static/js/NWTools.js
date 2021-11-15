@@ -610,6 +610,18 @@ $(function() {
 	    });
 	};
 
+	self.testCAM = function() {
+		sendPrinterCommand('M676');
+	};
+
+	self.forwardCAM = function() {
+		sendPrinterCommand('M518 E5');
+	};
+
+	self.backCAM = function() {
+		sendPrinterCommand('M518 E-5');
+	};
+
 
 	self.autoCalibrateRun = function () {
 		sendPrinterCommand('M400');
