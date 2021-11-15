@@ -62,15 +62,14 @@
     <table id="calibrate-table" class="table table-bordered table-hover" style="margin-bottom: 0px; margin-top: 0px">
 		<tr>
 			<th class="calibrate_tool" style="width:30%"></th>
-			<th class="calibrate_current" style="width:15%"></th>
-			<th class="calibrate_target" style="width:30%; text-align:right">
+			<th class="calibrate_target" style="width:20%; text-align:right">
 			<button class="btn btn-primary" data-bind="enable: $root.isOperational() && !$root.isPrinting(), click: testCAM" style="width:50%">{{ _('Test<br/>CAM') }}</button>
 			</th>
-			<th class="calibrate_target" style="width:30%; text-align:right">
-			<button class="btn btn-primary" data-bind="enable: $root.isOperational() && !$root.isPrinting(), click: forwardCAM" style="width:50%">{{ _('>><br/>CAM') }}</button>
-			</th>
-			<th class="calibrate_target" style="width:30%; text-align:right">
+			<th class="calibrate_target" style="width:20%; text-align:right">
 			<button class="btn btn-primary" data-bind="enable: $root.isOperational() && !$root.isPrinting(), click: backCAM" style="width:50%">{{ _('<<<br/>CAM') }}</button>
+			</th>
+			<th class="calibrate_target" style="width:20%; text-align:right">
+			<button class="btn btn-primary" data-bind="enable: $root.isOperational() && !$root.isPrinting(), click: forwardCAM" style="width:50%">{{ _('>><br/>CAM') }}</button>
 			</th>
 			<th class="calibrate_target" style="width:30%; text-align:right">
 			<button class="btn btn-primary" data-bind="enable: $root.isOperational() && !$root.isPrinting(), click: filterCalibration" style="width:50%">{{ _('Filter<br/>Calibration') }}</button>
