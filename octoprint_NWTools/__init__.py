@@ -115,7 +115,7 @@ class NwtoolsPlugin(octoprint.plugin.SettingsPlugin,
 			self._logger.info("Getting leveling data")
 			return jsonify(dict(levels=self._bedlevels))
 
-		elif command == "reboot_controller":			
+		elif command == "reboot_controller":
 			self._exec_cmd("machine restart")
 			time.sleep(3)
 			return jsonify(dict(success="true"))
@@ -162,8 +162,8 @@ class NwtoolsPlugin(octoprint.plugin.SettingsPlugin,
 		# Define your plugin's asset files to automatically include in the
 		# core UI here.
 		return dict(
-			js=["js/NWTools.js", "js/alerts.js"],
-			css=["css/NWTools.css"],
+			js=["js/NWTools.js", "js/alerts.js", "js/sweetalert2.min.js"],
+			css=["css/NWTools.css", "css/sweetalert2.min.css"],
 			less=["less/NWTools.less"]
 		)
 
