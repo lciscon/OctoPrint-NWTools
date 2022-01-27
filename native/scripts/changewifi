@@ -4,7 +4,6 @@ if setwifi $1 $2; then
 	sudo wpa_cli -i wlan0 reconfigure
 	sudo systemctl daemon-reload
 	sudo systemctl restart dhcpcd
-	sleep 3
 	echo 1
 	exit
 fi
