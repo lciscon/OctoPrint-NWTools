@@ -35,7 +35,7 @@
             <th class="calibrate_target" style="width:30%">{{ _('Target') }}</th>
             <th class="calibrate_test" style="width:25%"></th>
         </tr>
-		<tr data-bind="template: { name: 'calrow-template', data: tool0_ZOffset }, visible: true"></tr>
+		<tr data-bind="template: { name: 'calrow-template', data: tool0_ZOffset}, attr: {max: 0, min: -10.0}, visible: true"></tr>
 		<tr data-bind="template: { name: 'calrow-template', data: tool0_Raised }, visible: true"></tr>
 		<tr data-bind="template: { name: 'calrow-template', data: tool0_Locked }, visible: true"></tr>
 	</table>
@@ -50,7 +50,7 @@
 			<th class="calibrate_target" style="width:30%">{{ _('Target') }}</th>
 			<th class="calibrate_test" style="width:25%"></th>
 		</tr>
-		<tr data-bind="template: { name: 'calrow-template', data: tool1_ZOffset }, visible: true"></tr>
+		<tr data-bind="template: { name: 'calrow-template', data: tool1_ZOffset}, attr: {max: 0, min: -10.0}, visible: true"></tr>
 		<tr data-bind="template: { name: 'calrow-template', data: tool1_Raised }, visible: true"></tr>
 		<tr data-bind="template: { name: 'calrow-template', data: tool1_Locked }, visible: true"></tr>
 		<tr data-bind="template: { name: 'calrow-template', data: tool1_XOffset }, visible: true"></tr>
