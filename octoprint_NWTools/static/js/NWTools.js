@@ -960,6 +960,31 @@ $(function() {
       }
   };
 
+  self.incrementTargetNeg = function(item) {
+    var value = item.newTarget();
+	console.debug('Incrementing value: ' + value);
+
+      if (value === undefined || (typeof(value) === "string" && value.trim() === "")) {
+          value = item.target();
+      }
+	  console.debug('New value: ' + value);
+
+      try {
+          value = parseFloat(value);
+		  console.debug('New value2: ' + value);
+
+          if (value > 0.0) return;
+		  value = value + 0.025;
+		  value = Number((value).toFixed(3));
+          item.newTarget(value);
+		  console.debug('New target: ' + item.newTarget());
+
+//          self.autosendTarget(item);
+      } catch (ex) {
+          // do nothing
+      }
+  };
+
   self.decrementTarget = function(item) {
       var value = item.newTarget();
       if (value === undefined || (typeof(value) === "string" && value.trim() === "")) {
