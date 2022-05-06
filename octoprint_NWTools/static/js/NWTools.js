@@ -973,7 +973,7 @@ $(function() {
           value = parseFloat(value);
 		  console.debug('New value2: ' + value);
 
-          if (value > 0.0) return;
+          if (value >= 0.0) return;
 		  value = value + 0.025;
 		  value = Number((value).toFixed(3));
           item.newTarget(value);
