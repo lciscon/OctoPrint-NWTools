@@ -234,6 +234,8 @@ $(function() {
 						messageData = "Bed is level!.  Running Calibration...";
 						if (self.startedAction == 1) {
 							self.calibrateBedHeated();
+						} else {
+							console.log('Not running calibrate because I didn't start it...');
 						}
 					} else {
 						messageData = "Adjust the screws and then re-run calibration: Center: " + frontstr + " Right: " + backstr;
@@ -716,6 +718,8 @@ $(function() {
 	self.calibrateBedHeated = function () {
 //      self.resetCalibration();  done in level bed routine now
 //      self.autoCalibrateRun();
+	  console.log('Calibrating bed...');
+
 	  self.startedAction = 1;
 
 	  sendPrinterCommand('M400');
