@@ -234,8 +234,6 @@ $(function() {
 						messageData = "Bed is level!.  Running Calibration...";
 						if (self.startedAction == 1) {
 							self.calibrateBedHeated();
-						} else {
-							console.log('Not running calibrate because I did not start it...');
 						}
 					} else {
 						messageData = "Adjust the screws and then re-run calibration: Center: " + frontstr + " Right: " + backstr;
