@@ -34,6 +34,7 @@ install: $(DIRS)
 	sudo chmod 755 /usr/local/bin/mountctl
 	sudo chmod 755 /usr/local/bin/umountctl
 	sudo chmod 755 /usr/local/bin/umountctl
+	sudo chmod 755 /usr/local/bin/movefiles
 	sudo chmod 755 /usr/local/bin/changewifi
 	sudo chmod 755 /etc/usbmount/mount.d/10_checkmount
 

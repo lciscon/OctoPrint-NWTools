@@ -141,6 +141,9 @@ class NwtoolsPlugin(octoprint.plugin.SettingsPlugin,
 		elif command == "mountctl":
 			self._exec_cmd("mountctl")
 
+		elif command == "move_files":
+			self._exec_cmd("movefiles")
+
 		elif command == "umountctl":
 			self._exec_cmd("umountctl")
 

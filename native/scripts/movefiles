@@ -1,0 +1,17 @@
+#!/bin/bash
+
+DESTPATH=$(mountctl)
+
+if [ ! -z "$DESTPATH" ]; then
+	echo moving files to SD >> /tmp/err.log
+	sudo rm ${DESTPATH}/*.gcode
+	sudo cp /home/pi/.octoprint/uploads/*.gcode  $DESTPATH
+	sleep 1
+	sudo rm /home/pi/.octoprint/uploads/*.gcode
+	echo 1
+	exit
+else
+	echo mountctl failed >> /tmp/err.log
+	echo 0
+	exit 1
+fi

@@ -583,6 +583,10 @@ $(function() {
 	    sendPrinterCommand('M282');
 	};
 
+	self.moveFiles = function() {
+	  self._postCommand("move_files", {});
+	};
+
 	self.cabinetOff = function() {
 	  self._postCommand("cabinet_off", {});
       sendPrinterCommand('M283');
