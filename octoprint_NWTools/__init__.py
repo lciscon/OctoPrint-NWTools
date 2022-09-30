@@ -84,6 +84,7 @@ class NwtoolsPlugin(octoprint.plugin.SettingsPlugin,
 			lights_off=[],
 			cabinet_on=[],
 			cabinet_off=[],
+			move_files=[],
 			fixgrid=[],
 			mountctl=[],
 			umountctl=[],
@@ -143,6 +144,8 @@ class NwtoolsPlugin(octoprint.plugin.SettingsPlugin,
 
 		elif command == "move_files":
 			self._exec_cmd("movefiles")
+			time.sleep(3)
+			return jsonify(dict(success="true"))
 
 		elif command == "umountctl":
 			self._exec_cmd("umountctl")

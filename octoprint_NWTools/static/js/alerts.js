@@ -72,6 +72,15 @@ const NWToolsAlerts = {
       type: "info"
     });
   },
+  movefilesAlert: () => {
+    return swal({
+      title: "Notice",
+      text:
+        "Moving files...",
+	  confirmButtonText: "Ok",
+      type: "info"
+    });
+  },
   firmStartAlert: () => {
     return swal({
       title: "Notice",

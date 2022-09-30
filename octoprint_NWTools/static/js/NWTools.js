@@ -584,7 +584,13 @@ $(function() {
 	};
 
 	self.moveFiles = function() {
-	  self._postCommand("move_files", {});
+		self.sendRemoteAlert("Moving files to SD...");
+		NWToolsAlerts.movefilesAlert();
+		self._postCommand("move_files", {}, function(response) {
+			sleep(4);
+			self.closeRemoteAlert();
+			self.closeAlert();
+	    });
 	};
 
 	self.cabinetOff = function() {
