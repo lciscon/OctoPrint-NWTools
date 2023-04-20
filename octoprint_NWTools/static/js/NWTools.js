@@ -891,14 +891,14 @@ $(function() {
 		  vdiff = value - item.target();
 		  console.log('vdiff ' + vdiff);
 		  sendPrinterCommand('G91');
-		  sendPrinterCommand('G0 Z' + vdiff);
+		  sendPrinterCommand('G0 Z' - vdiff);
 		  sendPrinterCommand('G90');
 	  } else if (item.key() === "tool1_ZOffset") {
 		  sendPrinterCommand('M670 Q' + value);
 		  vdiff = value - item.target();
 		  console.log('vdiff ' + vdiff);
 		  sendPrinterCommand('G91');
-		  sendPrinterCommand('G0 Z' + vdiff);
+		  sendPrinterCommand('G0 Z' - vdiff);
 		  sendPrinterCommand('G90');
 	  } else if (item.key() === "tool0_Raised") {
 		  sendPrinterCommand('M673 A' + value);
